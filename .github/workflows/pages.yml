@@ -37,24 +37,19 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Configurar GitHub Pages
-        id: pages
         uses: actions/configure-pages@v5
 
       - name: Construir documentación
-        run: |
-          mkdocs build \
-            --strict \
-            --site-dir site
-        env:
-          ENABLED: true
+        run: mkdocs build --strict --site-dir site
 
       - name: Comprobar sitio generado
         run: |
           test -f site/index.html
-          echo "Contenido generado:"
+          test -f site/assets/css/custom.css
+          echo "Sitio generado correctamente"
           find site -maxdepth 2 -type f | sort | head -50
 
-      - name: Subir artefacto de GitHub Pages
+      - name: Subir artefacto
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./site
