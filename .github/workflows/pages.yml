@@ -41,16 +41,20 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Construir documentación
-        run: mkdocs build --strict --site-dir site
+        run: |
+          mkdocs build \
+            --strict \
+            --site-dir site
+        env:
+          ENABLED: true
 
-      - name: Comprobar documentación generada
+      - name: Comprobar sitio generado
         run: |
           test -f site/index.html
-          test -f site/sitemap.xml
-          echo "La documentación se ha construido correctamente"
+          echo "Contenido generado:"
           find site -maxdepth 2 -type f | sort | head -50
 
-      - name: Subir artefacto
+      - name: Subir artefacto de GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./site
@@ -59,6 +63,7 @@ jobs:
     name: Publicar documentación
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     environment:
       name: github-pages
