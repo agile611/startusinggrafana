@@ -1,0 +1,478 @@
+/* =========================================================
+   Estilos corporativos Agile611
+   Curso de Splunk
+   ========================================================= */
+
+
+/* =========================================================
+   Variables de Material for MkDocs
+   ========================================================= */
+
+:root {
+  --md-primary-fg-color: #057eb5;
+  --md-primary-fg-color--light: #057eb5;
+  --md-primary-fg-color--dark: #045f89;
+
+  --md-accent-fg-color: #057eb5;
+  --md-accent-fg-color--transparent: rgba(5, 126, 181, 0.12);
+
+  --md-default-bg-color: #ffffff;
+  --md-default-fg-color: #242424;
+  --md-default-fg-color--light: #f5f5f5;
+
+  --md-code-bg-color: #f5f5f5;
+  --md-code-fg-color: #242424;
+
+  --md-footer-bg-color: #057eb5;
+  --md-footer-fg-color: #ffffff;
+
+  --md-typeset-color: #242424;
+  --md-typeset-a-color: #057eb5;
+
+  --md-shadow-z1: 0 0 0 rgba(0, 0, 0, 0);
+  --md-shadow-z2: 0 0 0 rgba(0, 0, 0, 0);
+  --md-shadow-z3: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+
+/* =========================================================
+   Estilos generales
+   ========================================================= */
+
+html {
+  font-family: "Nunito", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #242424;
+}
+
+.md-main {
+  background: #ffffff;
+}
+
+.md-content {
+  min-width: 0;
+  background: #ffffff;
+  color: #242424;
+}
+
+
+/* =========================================================
+   Header principal
+   ========================================================= */
+
+.md-header {
+  background: #057eb5;
+  color: #ffffff;
+}
+
+.md-header__inner {
+  background: transparent;
+}
+
+.md-header__title,
+.md-header__topic,
+.md-header__button {
+  color: #ffffff !important;
+}
+
+.md-header__button:hover,
+.md-header__button:focus {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   Pestañas superiores
+   ========================================================= */
+
+/*
+ * Las pestañas se mantienen en una sola línea.
+ * Si no caben, se permite desplazamiento horizontal.
+ */
+
+.md-tabs {
+  overflow: hidden;
+  background: #057eb5;
+  color: #ffffff;
+}
+
+.md-tabs__list {
+  display: flex;
+  flex-wrap: nowrap !important;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: thin;
+}
+
+.md-tabs__item {
+  flex: 0 0 auto !important;
+  white-space: nowrap;
+}
+
+.md-tabs__link {
+  display: block;
+  white-space: nowrap;
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+.md-tabs__link:hover,
+.md-tabs__link:focus,
+.md-tabs__link--active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+
+/* =========================================================
+   Buscador
+   ========================================================= */
+
+.md-search__form {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.md-search__form:hover,
+.md-search__form:focus-within {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.md-search__input,
+.md-search__input::placeholder,
+.md-search__icon {
+  color: #ffffff !important;
+}
+
+.md-search__input::placeholder {
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   Navegación lateral izquierda
+   ========================================================= */
+
+/*
+ * No se establece width en .md-sidebar--primary.
+ * Material for MkDocs controla su anchura mediante su cuadrícula.
+ */
+
+.md-sidebar--primary {
+  background: #f5f5f5;
+}
+
+.md-sidebar--primary .md-sidebar__scrollwrap {
+  background: #f5f5f5 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/*
+ * No se establece width: 100% en el título.
+ * Así conserva exactamente la anchura nativa de la columna.
+ */
+
+.md-sidebar--primary .md-nav__title {
+  box-sizing: border-box;
+  margin: 0 !important;
+
+  background: #057eb5 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.md-sidebar--primary .md-nav__title span {
+  color: #ffffff !important;
+}
+
+.md-sidebar--primary .md-nav__link {
+  box-sizing: border-box;
+  background: transparent !important;
+  color: #242424 !important;
+}
+
+.md-sidebar--primary .md-nav__link:hover,
+.md-sidebar--primary .md-nav__link:focus,
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link {
+  background: transparent !important;
+  color: #057eb5 !important;
+  box-shadow: none !important;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   Tabla de contenidos derecha
+   ========================================================= */
+
+/*
+ * No se establece width, position ni z-index.
+ * La columna derecha conserva la cuadrícula nativa.
+ */
+
+.md-sidebar--secondary {
+  background: #f5f5f5;
+}
+
+.md-sidebar--secondary .md-sidebar__scrollwrap {
+  background: #f5f5f5 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+.md-sidebar--secondary .md-nav__title {
+  box-sizing: border-box;
+  margin: 0 !important;
+
+  background: #057eb5 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.md-sidebar--secondary .md-nav__title span {
+  color: #ffffff !important;
+}
+
+.md-sidebar--secondary .md-nav__link {
+  box-sizing: border-box;
+  background: transparent !important;
+  color: #242424 !important;
+}
+
+.md-sidebar--secondary .md-nav__link:hover,
+.md-sidebar--secondary .md-nav__link:focus,
+.md-sidebar--secondary .md-nav__link--active {
+  background: transparent !important;
+  color: #057eb5 !important;
+  box-shadow: none !important;
+  font-weight: 700;
+}
+
+.md-typeset .headerlink {
+  color: #057eb5 !important;
+}
+
+
+/* =========================================================
+   Contenido Markdown
+   ========================================================= */
+
+.md-typeset {
+  color: #242424;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  color: #242424 !important;
+  font-weight: 700;
+}
+
+.md-typeset p,
+.md-typeset li,
+.md-typeset strong,
+.md-typeset em {
+  color: #242424;
+}
+
+.md-typeset a {
+  color: #057eb5;
+}
+
+.md-typeset a:hover,
+.md-typeset a:focus {
+  color: #045f89;
+}
+
+.md-typeset a:visited {
+  color: #057eb5;
+}
+
+
+/* =========================================================
+   Código
+   ========================================================= */
+
+.md-typeset code {
+  background: #f5f5f5;
+  color: #242424;
+}
+
+.md-typeset pre,
+.highlight {
+  background: #f5f5f5;
+  color: #242424;
+}
+
+
+/* =========================================================
+   Admonitions
+   ========================================================= */
+
+.admonition {
+  --md-admonition-bg-color: #f5f5f5;
+
+  background-color: #f5f5f5 !important;
+  color: #242424 !important;
+}
+
+.admonition p,
+.admonition li,
+.admonition strong,
+.admonition em {
+  color: #242424 !important;
+}
+
+
+/* =========================================================
+   Tablas
+   ========================================================= */
+
+.md-typeset__table {
+  background: transparent !important;
+}
+
+.md-typeset table {
+  width: 100%;
+  border: 1px solid #499497;
+  border-collapse: collapse;
+  background: #f5f5f5 !important;
+}
+
+.md-typeset table th,
+.md-typeset table td {
+  border: 1px solid #499497;
+  background: #f5f5f5 !important;
+  color: #242424 !important;
+}
+
+.md-typeset table th {
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   Citas
+   ========================================================= */
+
+.md-typeset blockquote {
+  border-left-color: #057eb5;
+  color: #242424 !important;
+}
+
+.md-typeset blockquote p,
+.md-typeset blockquote strong,
+.md-typeset blockquote em {
+  color: #242424 !important;
+}
+
+
+/* =========================================================
+   Pie de página
+   ========================================================= */
+
+.md-footer {
+  background: #057eb5;
+  color: #ffffff;
+}
+
+.md-footer-meta {
+  background: #045f89;
+}
+
+.md-footer,
+.md-footer-meta,
+.md-footer__link,
+.md-footer__title,
+.md-footer__direction {
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   Diseño responsive
+   ========================================================= */
+
+@media screen and (max-width: 76.24em) {
+  .md-sidebar--primary,
+  .md-sidebar--secondary {
+    background: #f5f5f5;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--secondary .md-sidebar__scrollwrap {
+    background: #f5f5f5 !important;
+  }
+}
+
+
+/* =========================================================
+   Modo oscuro del sistema
+   ========================================================= */
+
+/*
+ * Se mantiene deliberadamente el diseño claro.
+ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --md-default-bg-color: #ffffff;
+    --md-default-fg-color: #242424;
+    --md-default-fg-color--light: #f5f5f5;
+
+    --md-typeset-color: #242424;
+    --md-code-bg-color: #f5f5f5;
+    --md-code-fg-color: #242424;
+
+    --md-footer-bg-color: #057eb5;
+    --md-footer-fg-color: #ffffff;
+  }
+
+  body,
+  .md-main,
+  .md-content {
+    background: #ffffff;
+    color: #242424;
+  }
+
+  .md-sidebar--primary,
+  .md-sidebar--secondary,
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--secondary .md-sidebar__scrollwrap {
+    background: #f5f5f5 !important;
+  }
+
+  .md-typeset h1,
+  .md-typeset h2,
+  .md-typeset h3,
+  .md-typeset h4,
+  .md-typeset h5,
+  .md-typeset h6,
+  .md-typeset p,
+  .md-typeset li,
+  .md-typeset strong,
+  .md-typeset em {
+    color: #242424 !important;
+  }
+
+  .md-typeset code,
+  .md-typeset pre,
+  .highlight {
+    background: #f5f5f5 !important;
+    color: #242424 !important;
+  }
+}
