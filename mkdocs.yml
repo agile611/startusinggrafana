@@ -92,7 +92,7 @@ nav:
   - Requisitos previos: requisitos-previos.md
   - Entorno de laboratorio: entorno-laboratorio.md
 
-  - Bloque 1 - Fundamentos de telemetría:
+  - Fundamentos de telemetría:
       - Introducción: 01-fundamentos-telemetria/index.md
       - Conceptos de telemetría: 01-fundamentos-telemetria/telemetria.md
       - Modelo push y pull: 01-fundamentos-telemetria/modelo-push-pull.md
@@ -103,7 +103,7 @@ nav:
       - Grafana y fuentes de datos: 01-fundamentos-telemetria/grafana-fuentes-datos.md
       - Laboratorio: 01-fundamentos-telemetria/laboratorio.md
 
-  - Bloque 2 - Grafana:
+  - Grafana:
       - Introducción: 02-grafana/index.md
       - Requisitos del sistema: 02-grafana/requisitos-sistema.md
       - Instalación en Ubuntu: 02-grafana/instalacion-ubuntu.md
@@ -114,7 +114,7 @@ nav:
       - Tiempo relativo y desplazamiento: 02-grafana/tiempo-relativo.md
       - Laboratorio: 02-grafana/laboratorio.md
 
-  - Bloque 3 - Prometheus y fuentes de datos:
+  - Prometheus y fuentes de datos:
       - Introducción: 03-prometheus-fuentes-datos/index.md
       - Arquitectura de Prometheus: 03-prometheus-fuentes-datos/arquitectura-prometheus.md
       - Instalación de Prometheus: 03-prometheus-fuentes-datos/instalacion-prometheus.md
@@ -125,7 +125,7 @@ nav:
       - Añadir fuente de datos: 03-prometheus-fuentes-datos/anadir-fuente-datos.md
       - Laboratorio: 03-prometheus-fuentes-datos/laboratorio.md
 
-  - Bloque 4 - Dashboards y visualización:
+  - Dashboards y visualización:
       - Introducción: 04-dashboards-visualizacion/index.md
       - Conceptos de dashboards: 04-dashboards-visualizacion/conceptos-dashboards.md
       - Panel Time series: 04-dashboards-visualizacion/panel-time-series.md
@@ -141,7 +141,7 @@ nav:
       - Manipulación de paneles: 04-dashboards-visualizacion/manipulacion-paneles.md
       - Laboratorio: 04-dashboards-visualizacion/laboratorio.md
 
-  - Bloque 5 - Anotaciones y alertas:
+  - Anotaciones y alertas:
       - Introducción: 05-anotaciones-alertas/index.md
       - Anotaciones: 05-anotaciones-alertas/anotaciones.md
       - Alertas: 05-anotaciones-alertas/alertas.md
@@ -155,7 +155,7 @@ nav:
       - Otras notificaciones: 05-anotaciones-alertas/otras-notificaciones.md
       - Laboratorio: 05-anotaciones-alertas/laboratorio.md
 
-  - Bloque 6 - Proyecto final:
+  - Proyecto final:
       - Introducción: 06-proyecto-final/index.md
       - Escenario: 06-proyecto-final/escenario.md
       - Requisitos: 06-proyecto-final/requisitos.md
