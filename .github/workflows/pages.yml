@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 permissions:
@@ -27,17 +28,27 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
           cache: pip
 
       - name: Instalar dependencias
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
 
       - name: Configurar GitHub Pages
+        id: pages
         uses: actions/configure-pages@v5
 
       - name: Construir documentación
-        run: mkdocs build --strict
+        run: mkdocs build --strict --site-dir site
+
+      - name: Comprobar documentación generada
+        run: |
+          test -f site/index.html
+          test -f site/sitemap.xml
+          echo "La documentación se ha construido correctamente"
+          find site -maxdepth 2 -type f | sort | head -50
 
       - name: Subir artefacto
         uses: actions/upload-pages-artifact@v3
