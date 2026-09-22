@@ -94,15 +94,15 @@ nav:
   - Entorno de laboratorio: entorno-laboratorio.md
 
   - Fundamentos de telemetría:
-      - Introducción: 01-fundamentos-telemetria/index.md
-      - Conceptos de telemetría: 01-fundamentos-telemetria/telemetria.md
-      - Modelo push y pull: 01-fundamentos-telemetria/modelo-push-pull.md
-      - Series temporales: 01-fundamentos-telemetria/series-temporales.md
-      - Muestreo: 01-fundamentos-telemetria/muestreo.md
-      - Retención de datos: 01-fundamentos-telemetria/retencion-datos.md
-      - Downsampling: 01-fundamentos-telemetria/downsampling.md
-      - Grafana y fuentes de datos: 01-fundamentos-telemetria/grafana-fuentes-datos.md
-      - Laboratorio: 01-fundamentos-telemetria/laboratorio.md
+      - Introducción: 01-fundamentos-telemetria/01-index.md
+      - Conceptos de telemetría: 01-fundamentos-telemetria/02-telemetria.md
+      - Modelo push y pull: 01-fundamentos-telemetria/03-modelo-push-pull.md
+      - Series temporales: 01-fundamentos-telemetria/04-series-temporales.md
+      - Muestreo: 01-fundamentos-telemetria/05-muestreo.md
+      - Retención de datos: 01-fundamentos-telemetria/06-retencion-datos.md
+      - Downsampling: 01-fundamentos-telemetria/07-downsampling.md
+      - Grafana y fuentes de datos: 01-fundamentos-telemetria/08-grafana-fuentes-datos.md
+      - Laboratorio: 01-fundamentos-telemetria/09-laboratorio.md
 
   - Grafana:
       - Introducción: 02-grafana/index.md
