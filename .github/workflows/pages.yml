@@ -56,7 +56,14 @@ jobs:
           test -f site/assets/css/custom.css
           test -f site/assets/js/custom.js
 
+          grep -R "custom.css" site/*.html site/**/*.html
+          ! grep -R "assets/css/style.css" site/*.html site/**/*.html
+
           echo "Sitio generado correctamente."
+          echo
+          echo "Referencia CSS encontrada:"
+          grep -R "custom.css" site/*.html site/**/*.html | head -20
+
           echo
           echo "Archivos principales:"
           find site -maxdepth 3 -type f | sort | head -100
