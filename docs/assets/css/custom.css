@@ -452,3 +452,51 @@ body {
 [data-md-color-scheme="slate"] .md-sidebar--secondary .md-sidebar__scrollwrap {
   background: #f5f5f5 !important;
 }
+
+/* =========================================
+   Bloques de código
+   ========================================= */
+
+.md-typeset pre {
+  background-color: #f4f4f4;
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Código dentro de los bloques */
+.md-typeset pre > code {
+  display: block;
+  background-color: transparent;
+  color: #242424;
+  font-family: "Roboto Mono", "Ubuntu Mono", monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+
+/* Código en línea, por ejemplo: `systemctl status` */
+.md-typeset :not(pre) > code {
+  background-color: #f1f1f1;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  color: #c7254e;
+  font-size: 0.85em;
+  padding: 0.1rem 0.35rem;
+}
+
+/* Evita que el código en bloques herede el estilo del código en línea */
+.md-typeset pre code {
+  border: 0;
+}
+
+/* Botón de copiar */
+.md-clipboard {
+  color: #777777;
+}
+
+.md-clipboard:hover {
+  color: #057eb5;
+}
