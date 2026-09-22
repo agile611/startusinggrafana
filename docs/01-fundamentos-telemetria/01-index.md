@@ -1,43 +1,18 @@
 # Fundamentos de telemetría
 
-Este bloque presenta los conceptos necesarios para comprender la monitorización moderna basada en métricas y la visualización de datos mediante Grafana.
+La telemetría permite recopilar información sobre el estado y el comportamiento de sistemas, aplicaciones y servicios.
 
-La telemetría permite recopilar información sobre el estado y el comportamiento de sistemas, aplicaciones y servicios. Estos datos pueden utilizarse para detectar problemas, analizar tendencias, validar cambios y mejorar la operación de una infraestructura.
+Estos datos pueden utilizarse para:
 
-## Objetivos
+- Detectar problemas.
+- Analizar tendencias.
+- Validar cambios.
+- Investigar incidentes.
+- Crear alertas.
+- Mejorar la operación de una infraestructura.
+- Planificar la capacidad futura.
 
-Al finalizar este bloque podrás:
-
-- Explicar qué es la telemetría y diferenciar métricas, logs, trazas y eventos.
-- Diferenciar los modelos de recopilación push y pull.
-- Interpretar una serie temporal mediante sus valores, marcas temporales y etiquetas.
-- Comprender la relación entre muestreo, retención y almacenamiento.
-- Explicar el concepto de downsampling.
-- Identificar el papel de Grafana y de las fuentes de datos.
-- Consultar e interpretar métricas básicas de un sistema Linux.
-
-## Contenidos
-
-1. Conceptos generales de telemetría.
-2. Modelos push y pull.
-3. Series temporales.
-4. Intervalos de muestreo.
-5. Retención de datos.
-6. Downsampling.
-7. Grafana y fuentes de datos.
-
-## Prácticas relacionadas
-
-- Identificación de métricas de un sistema Ubuntu.
-- Interpretación de nombres y etiquetas de métricas.
-- Comparación entre diferentes intervalos de muestreo.
-- Consulta de métricas mediante Prometheus.
-- Visualización de métricas en Grafana.
-- Análisis básico de CPU, memoria, disco y red.
-
-## Resultado esperado
-
-Al finalizar el bloque, podrás seguir el recorrido completo de una métrica:
+En este bloque se estudiará el recorrido completo de una métrica:
 
 ```text
 Sistema monitorizado
@@ -52,92 +27,359 @@ Grafana
         ↓
 Panel visual
 ```
-```
 
 ---
 
-# 3. Guion docente de la sesión
+## Objetivos
 
-## Parte 1 — Introducción y motivación
+Al finalizar este bloque podrás:
 
-**Duración:** 15 minutos.
+- Explicar qué es la telemetría.
+- Diferenciar métricas, logs, trazas y eventos.
+- Diferenciar los modelos de recopilación `push` y `pull`.
+- Interpretar una serie temporal.
+- Identificar el significado de un nombre de métrica y sus etiquetas.
+- Comprender la relación entre muestreo, retención y almacenamiento.
+- Explicar el concepto de *downsampling*.
+- Identificar el papel de Grafana y de las fuentes de datos.
+- Consultar métricas básicas de un sistema Linux.
+- Interpretar consultas sencillas de PromQL.
 
-### Objetivo
+---
 
-Mostrar que la monitorización no consiste simplemente en “mirar gráficos”, sino en recopilar, almacenar, consultar e interpretar datos.
+## 1. ¿Qué es la telemetría?
 
-### Explicación para el alumnado
+La telemetría es el conjunto de técnicas utilizadas para recopilar, transmitir, almacenar y analizar información sobre un sistema.
 
-Puedes comenzar con esta introducción:
+Un sistema monitorizado puede ser:
 
-> Cuando un sistema falla, normalmente no basta con saber que algo ha dejado de funcionar. Necesitamos conocer cuándo empezó el problema, qué componentes están afectados, cómo ha evolucionado y si existe un patrón que permita anticiparlo.
+- Un servidor.
+- Una máquina virtual.
+- Un contenedor.
+- Una aplicación.
+- Una base de datos.
+- Un dispositivo de red.
+- Un servicio web.
 
-Después plantea estas preguntas:
+La telemetría permite responder preguntas como:
 
-- ¿Cómo sabemos si un servidor está saturado?
-- ¿Cómo detectamos que el disco se está llenando?
-- ¿Cómo sabemos si una aplicación responde lentamente?
-- ¿Cómo distinguimos un problema puntual de una tendencia?
-- ¿Qué datos necesitamos para investigar un incidente?
+- ¿Está funcionando el sistema?
+- ¿Cuánta CPU está utilizando?
+- ¿Cuánta memoria queda disponible?
+- ¿Cuánto espacio libre tiene el disco?
+- ¿Cuántas peticiones recibe una aplicación?
+- ¿Cuánto tardan las respuestas?
+- ¿Cuándo comenzó un problema?
+- ¿Qué componente puede estar provocando un error?
 
-### Ejemplo inicial
+> La telemetría convierte el comportamiento de un sistema en datos que pueden analizarse.
 
-Muestra una situación sencilla:
+### Sin telemetría
+
+Sin datos históricos, normalmente solo podemos comprobar el estado actual:
 
 ```text
-A las 10:00 la CPU estaba al 25 %.
-A las 10:05 estaba al 40 %.
-A las 10:10 estaba al 85 %.
-A las 10:15 estaba al 98 %.
+La CPU está al 85 % ahora mismo.
 ```
 
-Pregunta al alumnado:
+No sabemos:
 
-- ¿Qué está ocurriendo?
-- ¿Se trata de un valor aislado o de una tendencia?
-- ¿Qué información adicional necesitaríamos?
-- ¿Qué acción tomaríamos?
+- Cuándo comenzó el incremento.
+- Si es un pico puntual.
+- Si ocurre periódicamente.
+- Si está relacionado con un cambio reciente.
+- Si otros componentes también están afectados.
 
-### Idea clave
+### Con telemetría
 
-Una métrica aislada puede ser útil, pero una secuencia de valores a lo largo del tiempo permite observar:
+Con una serie de datos podemos observar la evolución:
 
-- Tendencias.
-- Picos.
-- Caídas.
-- Comportamientos periódicos.
-- Cambios después de una modificación.
+```text
+Hora     CPU
+10:00    25 %
+10:05    40 %
+10:10    85 %
+10:15    98 %
+```
+
+En este caso se observa una tendencia ascendente que podría indicar una sobrecarga progresiva.
 
 ---
 
-## Parte 2 — Qué es la telemetría
-
-**Duración:** 25 minutos.
-
-### Explicación
-
-La telemetría es la recopilación y transmisión de datos desde un sistema hacia una plataforma capaz de almacenarlos, consultarlos y visualizarlos.
+## 2. Tipos de telemetría
 
 En observabilidad suelen distinguirse cuatro tipos principales de información:
 
 | Tipo | Qué representa | Ejemplo |
 |---|---|---|
-| Métrica | Un valor medible | Uso de CPU del 75 % |
-| Log | Un registro de actividad | Error al conectar con la base de datos |
-| Traza | El recorrido de una petición | Petición HTTP de 250 ms |
-| Evento | Algo que sucede en un momento concreto | Reinicio de un servicio |
+| Métrica | Un valor numérico medible | Uso de CPU del 75 % |
+| Log | Un registro textual | Error de conexión con una base de datos |
+| Traza | El recorrido de una petición | Cliente → API → base de datos |
+| Evento | Una acción puntual | Reinicio de un servicio |
 
-### Ejemplo práctico: una misma incidencia
+---
 
-Supón que una aplicación responde lentamente.
+### 2.1. Métricas
 
-#### Métrica
+Una métrica es un valor numérico que describe el estado o la actividad de un sistema.
+
+Ejemplos:
 
 ```text
-http_request_duration_seconds = 2.4
+Uso de CPU: 73 %
+Memoria disponible: 2,4 GiB
+Espacio libre: 38 GiB
+Peticiones por segundo: 125
+Tiempo de respuesta: 240 ms
 ```
 
-Indica que las peticiones tardan más de lo normal.
+Una métrica puede representarse de forma conceptual así:
+
+```text
+nombre_metrica{etiquetas} valor
+```
+
+Ejemplo:
+
+```text
+cpu_usage_percent{host="ubuntu-01"} 73
+```
+
+Esta línea contiene:
+
+- Nombre de la métrica: `cpu_usage_percent`.
+- Etiqueta `host`: `ubuntu-01`.
+- Valor: `73`.
+- Unidad conceptual: porcentaje.
+
+Las métricas son especialmente útiles para:
+
+- Crear gráficos.
+- Detectar tendencias.
+- Establecer umbrales.
+- Generar alertas.
+- Comparar sistemas.
+
+#### Ejemplos en Ubuntu
+
+Consultar la carga media:
+
+```bash
+uptime
+```
+
+Consultar el uso de memoria:
+
+```bash
+free -h
+```
+
+Consultar el espacio de disco:
+
+```bash
+df -h
+```
+
+Consultar las interfaces de red:
+
+```bash
+ip -br addr
+```
+
+Estos comandos muestran valores puntuales. Una plataforma de monitorización permite recopilar esos valores periódicamente y almacenarlos.
+
+---
+
+### 2.2. Logs
+
+Un log es un registro textual generado por una aplicación, un servicio o el sistema operativo.
+
+Ejemplos:
+
+```text
+Usuario autenticado correctamente
+Conexión aceptada desde 192.168.1.25
+ERROR: no se pudo conectar con la base de datos
+Servicio reiniciado correctamente
+```
+
+Un log puede contener:
+
+- Fecha y hora.
+- Servicio o componente.
+- Nivel de severidad.
+- Mensaje.
+- Identificador de proceso.
+- Información adicional.
+
+#### Niveles habituales
+
+| Nivel | Significado |
+|---|---|
+| `DEBUG` | Información detallada para diagnóstico |
+| `INFO` | Funcionamiento normal |
+| `WARNING` | Situación anómala que no impide continuar |
+| `ERROR` | Error que afecta a una operación |
+| `CRITICAL` | Problema grave |
+
+#### Consultar logs en Ubuntu
+
+Consultar los últimos mensajes:
+
+```bash
+sudo journalctl -n 20 --no-pager
+```
+
+Consultar los logs de Grafana:
+
+```bash
+sudo journalctl -u grafana-server -n 30 --no-pager
+```
+
+Consultar los logs de Prometheus:
+
+```bash
+sudo journalctl -u prometheus -n 30 --no-pager
+```
+
+Consultar los logs de Node Exporter:
+
+```bash
+sudo journalctl -u node-exporter -n 30 --no-pager
+```
+
+Ver los logs en tiempo real:
+
+```bash
+sudo journalctl -f
+```
+
+Para salir:
+
+```text
+Ctrl + C
+```
+
+Filtrar únicamente errores:
+
+```bash
+sudo journalctl -p err -n 30 --no-pager
+```
+
+---
+
+### 2.3. Trazas
+
+Una traza representa el recorrido de una petición a través de diferentes componentes.
+
+Es especialmente útil en aplicaciones distribuidas y arquitecturas basadas en microservicios.
+
+Ejemplo:
+
+```text
+Cliente
+  ↓
+API Gateway
+  ↓
+Servicio de usuarios
+  ↓
+Servicio de pedidos
+  ↓
+Base de datos
+```
+
+Una petición puede producir estos tiempos:
+
+```text
+API Gateway:        20 ms
+Servicio usuarios:  45 ms
+Servicio pedidos: 180 ms
+Base de datos:     150 ms
+```
+
+La traza permite identificar qué parte de la petición está provocando la demora.
+
+Una métrica podría indicar:
+
+```text
+El tiempo medio de respuesta es de 400 ms.
+```
+
+La traza ayuda a responder:
+
+```text
+¿Qué servicio concreto está causando esos 400 ms?
+```
+
+---
+
+### 2.4. Eventos
+
+Un evento representa una acción o cambio ocurrido en un instante concreto.
+
+Ejemplos:
+
+```text
+El servicio Grafana se ha reiniciado.
+Se ha desplegado una nueva versión.
+Se ha agotado el espacio disponible.
+Se ha modificado la configuración.
+Se ha creado un nuevo usuario.
+```
+
+En Ubuntu se pueden consultar algunos eventos mediante:
+
+```bash
+systemctl --failed
+```
+
+```bash
+last reboot
+```
+
+```bash
+systemctl status grafana-server
+```
+
+Los eventos son especialmente útiles para relacionar un cambio con un problema posterior.
+
+Por ejemplo:
+
+```text
+10:00 — Se despliega una nueva versión.
+10:05 — Aumenta el tiempo de respuesta.
+10:10 — Aparecen errores en los logs.
+```
+
+---
+
+## 3. Comparación entre métricas, logs, trazas y eventos
+
+| Tipo | Pregunta principal | Ejemplo |
+|---|---|---|
+| Métrica | ¿Cuánto? | CPU al 75 % |
+| Log | ¿Qué ocurrió? | Error de conexión |
+| Traza | ¿Dónde se produjo la demora? | Base de datos: 800 ms |
+| Evento | ¿Qué cambió? | Reinicio del servicio |
+
+Una investigación completa suele combinar varios tipos de telemetría:
+
+```text
+Métricas + logs + trazas + eventos
+```
+
+### Ejemplo integrado
+
+Supongamos que una aplicación responde lentamente.
+
+#### Métricas
+
+```text
+http_request_duration_seconds 2.4
+node_load1 5.8
+```
+
+Indican que las peticiones tardan más y que la carga del sistema es elevada.
 
 #### Log
 
@@ -145,160 +387,138 @@ Indica que las peticiones tardan más de lo normal.
 ERROR database connection timeout
 ```
 
-Indica que se ha producido un error de conexión.
+Indica un problema de conexión con la base de datos.
 
 #### Traza
 
 ```text
-Cliente → API → Servicio de usuarios → Base de datos
+API Gateway: 20 ms
+Servicio de pedidos: 250 ms
+Base de datos: 2200 ms
 ```
 
-Permite localizar qué parte de la petición es lenta.
+Localiza la mayor parte del retraso en la base de datos.
 
 #### Evento
 
 ```text
-10:35 — Se reinicia el servicio grafana-server
+17:30 — Se reinicia el servicio de base de datos
 ```
 
-Indica una acción concreta ocurrida en un instante.
-
-### Actividad rápida para el alumnado
-
-Clasificar los siguientes elementos:
-
-```text
-1. El disco está ocupado al 82 %.
-2. El servicio nginx se ha reiniciado.
-3. La petición ha tardado 1,8 segundos.
-4. ERROR: no se pudo abrir el fichero de configuración.
-5. La petición pasó por cuatro microservicios.
-```
-
-Solución:
-
-```text
-1. Métrica
-2. Evento
-3. Métrica
-4. Log
-5. Traza
-```
-
-### Mensaje importante
-
-Las métricas responden principalmente a:
-
-- **Cuánto**.
-- **Cuándo**.
-- **Con qué frecuencia**.
-- **Cómo evoluciona**.
-
-Los logs aportan más contexto textual, pero suelen ser más costosos de almacenar y consultar.
+Puede explicar el inicio de la degradación.
 
 ---
 
-## Parte 3 — Modelo push y modelo pull
+## 4. Modelos de recopilación
 
-**Duración:** 25 minutos.
+Existen dos modelos principales para recopilar datos: `pull` y `push`.
 
-### Modelo pull
+---
 
-En el modelo *pull*, el sistema de monitorización consulta periódicamente al componente monitorizado.
+### 4.1. Modelo pull
+
+En el modelo `pull`, el sistema de monitorización consulta periódicamente al componente monitorizado.
 
 ```text
 Prometheus ───── consulta ─────> Exporter
 Prometheus <──── devuelve ────── Exporter
 ```
 
-Ejemplo:
+Por ejemplo, Prometheus puede consultar:
 
 ```text
-Prometheus consulta:
 http://servidor:9100/metrics
 ```
 
-El exporter responde con métricas:
+El exporter devuelve métricas como:
 
 ```text
 node_cpu_seconds_total{cpu="0",mode="idle"} 12345.6
 ```
 
-### Modelo push
+Ventajas:
 
-En el modelo *push*, el componente monitorizado envía los datos hacia el sistema receptor.
+- El sistema de monitorización controla la frecuencia.
+- Es sencillo comprobar si un objetivo responde.
+- La configuración está centralizada.
+- La ausencia de respuesta puede detectarse fácilmente.
+
+Requisitos:
+
+- El endpoint debe ser accesible.
+- El componente monitorizado debe exponer las métricas.
+- La red debe permitir la conexión.
+
+---
+
+### 4.2. Modelo push
+
+En el modelo `push`, el componente monitorizado envía los datos al sistema receptor.
 
 ```text
 Aplicación ───── envía métricas ─────> Recolector
 ```
 
-Se utiliza habitualmente cuando:
+Puede ser adecuado cuando:
 
 - El componente no puede ser consultado directamente.
-- Se trata de trabajos temporales.
+- Se trata de un trabajo temporal.
 - El sistema está detrás de una red restringida.
 - Se utiliza un agente intermediario.
+- El proceso dura poco tiempo y no permanece activo.
 
-### Comparación
+Ventajas:
+
+- El sistema monitorizado decide cuándo enviar datos.
+- Es adecuado para trabajos efímeros.
+- Puede funcionar en redes donde el receptor no puede acceder directamente al origen.
+
+---
+
+### 4.3. Comparación
 
 | Característica | Pull | Push |
 |---|---|---|
 | Quién inicia la comunicación | Sistema de monitorización | Sistema monitorizado |
 | Ejemplo | Prometheus consulta un exporter | Un agente envía métricas |
-| Ventaja | Control centralizado | Adecuado para sistemas efímeros |
-| Riesgo | El endpoint debe ser accesible | El receptor debe aceptar datos |
-| Uso habitual | Servidores y servicios permanentes | Jobs y agentes |
+| Ventaja principal | Control centralizado | Adecuado para trabajos temporales |
+| Riesgo principal | El endpoint debe ser accesible | El receptor debe aceptar datos |
+| Uso habitual | Servidores permanentes | Jobs y agentes |
 
-### Demostración con Prometheus
+En el laboratorio utilizaremos principalmente el modelo `pull`:
 
-Si Prometheus está instalado, muestra su configuración:
-
-```bash
-sudo grep -n "scrape_interval\|job_name\|targets" \
-  /etc/prometheus/prometheus.yml
+```text
+Prometheus → Node Exporter
 ```
-
-Una configuración típica puede contener:
-
-```yaml
-scrape_configs:
-  - job_name: prometheus
-    static_configs:
-      - targets:
-          - localhost:9090
-
-  - job_name: node
-    static_configs:
-      - targets:
-          - localhost:9100
-```
-
-Explica:
-
-- `job_name` identifica el grupo de objetivos.
-- `targets` contiene los endpoints.
-- Prometheus consulta esos objetivos periódicamente.
-
-### Pregunta para el alumnado
-
-> Si Prometheus deja de consultar un exporter, ¿qué tipo de información podríamos observar?
-
-Respuestas esperadas:
-
-- La métrica deja de actualizarse.
-- Puede aparecer una alerta de objetivo caído.
-- El último valor puede permanecer almacenado, pero ya no representa el estado actual.
-- La ausencia de datos también puede ser una señal operativa.
 
 ---
 
-## Parte 4 — Series temporales
-
-**Duración:** 30 minutos.
-
-### Explicación
+## 5. Series temporales
 
 Una serie temporal es una secuencia de valores asociados a instantes concretos.
+
+Ejemplo:
+
+```text
+Hora      CPU
+10:00     20 %
+10:01     25 %
+10:02     95 %
+10:03     30 %
+```
+
+Cada valor tiene:
+
+- Un instante de tiempo.
+- Un valor.
+- Una métrica.
+- Un conjunto de etiquetas.
+
+Una serie temporal puede representarse así:
+
+```text
+nombre_metrica{etiquetas} valor
+```
 
 Ejemplo:
 
@@ -306,21 +526,20 @@ Ejemplo:
 cpu_usage_percent{host="ubuntu-01",cpu="0"} 42.5
 ```
 
-Esta métrica contiene:
+Contiene:
 
 - Nombre: `cpu_usage_percent`.
 - Etiqueta `host`: `ubuntu-01`.
 - Etiqueta `cpu`: `0`.
-- Valor actual: `42.5`.
-- Unidad conceptual: porcentaje.
+- Valor: `42.5`.
 
-Una serie temporal se puede representar como:
+---
 
-```text
-nombre_metrica{etiquetas} valor
-```
+### 5.1. Etiquetas
 
-### Ejemplo con varias series
+Las etiquetas permiten diferenciar y filtrar series temporales.
+
+Estas métricas tienen el mismo nombre, pero representan series diferentes:
 
 ```text
 http_requests_total{method="GET",status="200"} 1500
@@ -328,11 +547,21 @@ http_requests_total{method="GET",status="500"} 12
 http_requests_total{method="POST",status="200"} 430
 ```
 
-Aunque todas utilizan el mismo nombre, las etiquetas generan series diferentes.
+Las etiquetas indican:
 
-### Actividad para el alumnado
+- Método HTTP.
+- Código de respuesta.
+- Equipo.
+- Instancia.
+- Servicio.
+- Punto de montaje.
+- Interfaz de red.
 
-Pide que identifiquen las partes de esta métrica:
+Una métrica con demasiadas combinaciones de etiquetas puede generar una cantidad excesiva de series. Este problema se conoce como **alta cardinalidad**.
+
+---
+
+### 5.2. Ejemplo de métrica de disco
 
 ```text
 node_filesystem_avail_bytes{
@@ -344,25 +573,86 @@ node_filesystem_avail_bytes{
 } 18446744073
 ```
 
-Deben identificar:
+La métrica contiene:
 
-- Nombre de la métrica.
-- Dispositivo.
-- Sistema de ficheros.
-- Instancia.
-- Trabajo.
-- Punto de montaje.
-- Valor.
+| Elemento | Valor |
+|---|---|
+| Nombre | `node_filesystem_avail_bytes` |
+| Dispositivo | `/dev/sda2` |
+| Sistema de ficheros | `ext4` |
+| Instancia | `localhost:9100` |
+| Trabajo | `node` |
+| Punto de montaje | `/` |
+| Valor | `18446744073` |
 
-### Comprobación con Node Exporter
+---
 
-Si Node Exporter está activo:
+### 5.3. Tipos de métricas frecuentes
+
+#### Gauge
+
+Un *gauge* representa un valor que puede subir o bajar.
+
+Ejemplos:
+
+```text
+node_load1
+node_memory_MemAvailable_bytes
+```
+
+#### Counter
+
+Un *counter* representa un valor acumulado que normalmente aumenta.
+
+Ejemplo:
+
+```text
+node_cpu_seconds_total
+```
+
+Para analizar la velocidad de incremento de un contador se utilizan funciones como `rate`.
+
+#### Histograma
+
+Un histograma permite analizar la distribución de valores, como tiempos de respuesta.
+
+#### Summary
+
+Un *summary* calcula determinados cuantiles o estadísticas sobre observaciones.
+
+> Es importante conocer el tipo y la unidad de una métrica antes de interpretarla.
+
+---
+
+## 6. Comprobar métricas con Node Exporter
+
+Node Exporter expone métricas del sistema operativo en un endpoint HTTP.
+
+Endpoint habitual:
+
+```text
+http://127.0.0.1:9100/metrics
+```
+
+Comprobar si responde:
+
+```bash
+curl -I http://127.0.0.1:9100/metrics
+```
+
+La respuesta esperada contiene:
+
+```text
+HTTP/1.1 200 OK
+```
+
+Consultar las primeras líneas:
 
 ```bash
 curl -s http://127.0.0.1:9100/metrics | head -20
 ```
 
-Para localizar métricas de CPU:
+Buscar métricas de CPU:
 
 ```bash
 curl -s http://127.0.0.1:9100/metrics \
@@ -370,7 +660,7 @@ curl -s http://127.0.0.1:9100/metrics \
   | head
 ```
 
-Para localizar métricas de memoria:
+Buscar métricas de memoria:
 
 ```bash
 curl -s http://127.0.0.1:9100/metrics \
@@ -378,7 +668,7 @@ curl -s http://127.0.0.1:9100/metrics \
   | head
 ```
 
-Para localizar métricas de disco:
+Buscar métricas de disco:
 
 ```bash
 curl -s http://127.0.0.1:9100/metrics \
@@ -386,23 +676,27 @@ curl -s http://127.0.0.1:9100/metrics \
   | head
 ```
 
-### Advertencia importante
+Contar las métricas expuestas:
 
-No todas las métricas representan porcentajes.
+```bash
+curl -s http://127.0.0.1:9100/metrics \
+  | grep -v '^#' \
+  | wc -l
+```
 
-Ejemplos:
+### Ejemplos importantes
 
 ```text
 node_cpu_seconds_total
 ```
 
-Es un contador acumulado en segundos.
+Es un contador acumulado expresado en segundos.
 
 ```text
 node_memory_MemAvailable_bytes
 ```
 
-Es una cantidad de memoria disponible expresada en bytes.
+Representa memoria disponible expresada en bytes.
 
 ```text
 node_load1
@@ -412,11 +706,7 @@ Representa la carga media del sistema durante un minuto.
 
 ---
 
-## Parte 5 — Muestreo
-
-**Duración:** 20 minutos.
-
-### Explicación
+## 7. Muestreo
 
 El intervalo de muestreo indica cada cuánto se recopila una métrica.
 
@@ -425,7 +715,7 @@ Ejemplos:
 - Cada 5 segundos.
 - Cada 15 segundos.
 - Cada 30 segundos.
-- Cada 1 minuto.
+- Cada minuto.
 
 Un intervalo corto permite observar cambios rápidos, pero genera más datos.
 
@@ -433,7 +723,7 @@ Un intervalo largo reduce el almacenamiento, pero puede ocultar picos breves.
 
 ### Ejemplo
 
-Supón que la CPU cambia así:
+Supongamos que la CPU cambia así:
 
 ```text
 Hora      CPU
@@ -444,34 +734,26 @@ Hora      CPU
 10:04     28 %
 ```
 
-Si recogemos datos cada minuto, detectamos el pico.
+Si recopilamos un valor cada minuto, detectamos el pico:
 
-Pero si recogemos datos cada cinco minutos, podríamos obtener:
+```text
+10:02     95 %
+```
+
+Si recopilamos un valor cada cinco minutos, podríamos obtener:
 
 ```text
 10:00     28 %
 10:05     30 %
 ```
 
-El pico del 95 % habría desaparecido de la observación.
+El pico habría desaparecido de la observación.
 
-### Actividad
+---
 
-Pide al alumnado que responda:
+### 7.1. Configuración de Prometheus
 
-1. ¿Qué intervalo usarías para monitorizar una CPU?
-2. ¿Qué intervalo usarías para comprobar disponibilidad?
-3. ¿Qué intervalo usarías para observar una cola de mensajes?
-4. ¿Qué problema tiene utilizar siempre un intervalo de un segundo?
-
-Respuestas razonables:
-
-- CPU: entre 5 y 15 segundos.
-- Disponibilidad: entre 15 y 60 segundos.
-- Cola de mensajes: depende de la velocidad de cambio.
-- Un segundo: aumenta el volumen de datos, el coste y la carga de consulta.
-
-### Configuración de ejemplo
+Una configuración habitual puede ser:
 
 ```yaml
 global:
@@ -479,7 +761,10 @@ global:
   evaluation_interval: 15s
 ```
 
-Puedes mostrarla con:
+- `scrape_interval`: frecuencia con la que se consultan los objetivos.
+- `evaluation_interval`: frecuencia con la que se evalúan reglas y alertas.
+
+Consultar la configuración:
 
 ```bash
 sudo grep -n "interval" /etc/prometheus/prometheus.yml
@@ -487,11 +772,7 @@ sudo grep -n "interval" /etc/prometheus/prometheus.yml
 
 ---
 
-## Parte 6 — Retención y downsampling
-
-**Duración:** 20 minutos.
-
-### Retención
+## 8. Retención de datos
 
 La retención indica cuánto tiempo se conservan los datos.
 
@@ -502,22 +783,27 @@ Ejemplos:
 - 90 días.
 - 1 año.
 
-La retención debe equilibrar:
+La política de retención debe equilibrar:
 
 - Necesidad de análisis histórico.
 - Espacio disponible.
 - Rendimiento.
+- Coste.
 - Requisitos legales o de auditoría.
 
-### Pregunta para el alumnado
+Una retención larga con un intervalo muy corto puede generar un volumen importante de datos.
 
-> ¿Necesitamos guardar con resolución de cinco segundos todos los datos de los últimos cinco años?
+La pregunta adecuada no es únicamente:
 
-La respuesta habitual es no.
+> ¿Cuántos datos podemos guardar?
 
-Para los datos recientes puede ser útil una resolución alta. Para los datos antiguos suele bastar con una visión agregada.
+También debemos preguntarnos:
 
-### Downsampling
+> ¿Qué resolución necesitamos conservar para cada periodo?
+
+---
+
+## 9. Downsampling
 
 El *downsampling* consiste en reducir la resolución de los datos históricos.
 
@@ -531,7 +817,7 @@ Datos antiguos:
   Un valor medio cada 5 minutos
 ```
 
-Se pueden calcular:
+Se pueden conservar agregaciones como:
 
 - Media.
 - Mínimo.
@@ -548,34 +834,47 @@ Datos originales:
 10:00:15  22
 10:00:30  25
 10:00:45  30
-10:01:00  28
 ```
 
 Agregación de un minuto:
 
 ```text
-10:00      media: 25
+10:00      media: 24,25
 ```
 
-La agregación ocupa menos espacio, pero ya no conserva cada valor individual.
+La agregación ocupa menos espacio, pero ya no conserva cada valor original.
+
+### Ventajas
+
+- Reduce el espacio de almacenamiento.
+- Mejora el rendimiento de consultas históricas.
+- Permite conservar tendencias durante más tiempo.
+
+### Inconveniente
+
+- Se pierde detalle.
+- Los picos breves pueden desaparecer.
+- Ya no es posible reconstruir exactamente los valores originales.
 
 ---
 
-## Parte 7 — Grafana y las fuentes de datos
+## 10. Grafana y las fuentes de datos
 
-**Duración:** 20 minutos.
+Grafana es una plataforma para consultar, visualizar y analizar datos.
 
-### Explicación
+Grafana normalmente no recopila directamente las métricas. Se conecta a una fuente de datos, ejecuta consultas y presenta los resultados.
 
-Grafana no suele ser el sistema que recopila directamente las métricas. Su función principal es:
+Sus funciones principales son:
 
-- Conectarse a una fuente de datos.
+- Conectarse a fuentes de datos.
 - Ejecutar consultas.
-- Mostrar resultados.
-- Crear paneles.
-- Configurar alertas y dashboards.
+- Mostrar gráficos y tablas.
+- Crear dashboards.
+- Configurar variables.
+- Representar alertas.
+- Facilitar el análisis operativo.
 
-El flujo habitual es:
+El flujo habitual del laboratorio es:
 
 ```text
 Node Exporter
@@ -589,7 +888,32 @@ Grafana
 Panel visual
 ```
 
-### Demostración en Grafana
+---
+
+### 10.1. Comprobar Prometheus
+
+Comprobar que Prometheus está preparado:
+
+```bash
+curl -s http://127.0.0.1:9090/-/ready
+```
+
+Respuesta esperada:
+
+```text
+Prometheus Server is Ready.
+```
+
+Consultar la API de Prometheus:
+
+```bash
+curl -sG http://127.0.0.1:9090/api/v1/query \
+  --data-urlencode 'query=up'
+```
+
+---
+
+### 10.2. Comprobar la fuente de datos en Grafana
 
 En Grafana:
 
@@ -597,8 +921,8 @@ En Grafana:
 2. Abre **Connections**.
 3. Selecciona **Data sources**.
 4. Abre la fuente de datos de Prometheus.
-5. Ejecuta **Save & test**.
-6. Comprueba que la conexión funciona.
+5. Comprueba la URL configurada.
+6. Pulsa **Save & test**.
 
 La URL puede ser:
 
@@ -612,9 +936,11 @@ o:
 http://127.0.0.1:9090
 ```
 
-### Primera consulta PromQL
+---
 
-En **Explore**, selecciona Prometheus y ejecuta:
+## 11. Consultas PromQL básicas
+
+### Comprobar objetivos
 
 ```promql
 up
@@ -634,27 +960,33 @@ up = 0
 
 El objetivo está configurado, pero no responde correctamente.
 
-### Otras consultas
+---
 
-Carga de sistema:
+### Consultar la carga del sistema
 
 ```promql
 node_load1
 ```
 
-Memoria disponible:
+---
+
+### Consultar la memoria disponible
 
 ```promql
 node_memory_MemAvailable_bytes
 ```
 
-Tiempo desde el arranque:
+---
+
+### Consultar el tiempo desde el arranque
 
 ```promql
 node_time_seconds - node_boot_time_seconds
 ```
 
-CPU aproximada utilizada:
+---
+
+### Calcular el uso aproximado de CPU
 
 ```promql
 100 - (
@@ -664,17 +996,28 @@ CPU aproximada utilizada:
 )
 ```
 
-Aclara que esta última consulta utiliza `rate` porque `node_cpu_seconds_total` es un contador acumulado.
+La métrica `node_cpu_seconds_total` es un contador acumulado. Por eso se utiliza `rate` para calcular su velocidad de cambio durante los últimos cinco minutos.
 
 ---
 
-# 4. Práctica guiada para el alumnado
+### Calcular el porcentaje de memoria utilizada
 
-## Práctica 1 — Identificar el estado del sistema
+```promql
+100 * (
+  1 -
+  node_memory_MemAvailable_bytes
+  /
+  node_memory_MemTotal_bytes
+)
+```
 
-**Duración:** 20 minutos.
+---
 
-Cada alumno ejecutará:
+## 12. Práctica guiada
+
+### Práctica 1: identificar el estado del sistema
+
+Ejecuta:
 
 ```bash
 hostname
@@ -684,7 +1027,7 @@ df -h
 ip -br addr
 ```
 
-Debe registrar:
+Completa la tabla:
 
 | Dato | Resultado |
 |---|---|
@@ -696,48 +1039,32 @@ Debe registrar:
 | Espacio libre en `/` | |
 | Dirección IP | |
 
-### Interpretación
+Responde:
 
-El alumnado debe responder:
-
-- ¿Cuánto tiempo lleva encendido el sistema?
-- ¿La carga parece elevada?
-- ¿Cuánta memoria está disponible?
-- ¿Qué porcentaje del disco está ocupado?
-- ¿Qué datos son métricas?
-- ¿Qué datos son información de configuración?
+1. ¿Cuánto tiempo lleva encendido el sistema?
+2. ¿La carga parece elevada?
+3. ¿Cuánta memoria está disponible?
+4. ¿Qué porcentaje del disco está ocupado?
+5. ¿Qué datos son métricas?
+6. ¿Qué datos son información de configuración?
 
 ---
 
-## Práctica 2 — Consultar Node Exporter
+### Práctica 2: consultar Node Exporter
 
-Comprobar el servicio:
+Comprueba el servicio:
 
 ```bash
 systemctl is-active node-exporter
 ```
 
-Comprobar el endpoint:
+Comprueba el endpoint:
 
 ```bash
 curl -I http://127.0.0.1:9100/metrics
 ```
 
-La respuesta esperada:
-
-```text
-HTTP/1.1 200 OK
-```
-
-Contar las métricas expuestas:
-
-```bash
-curl -s http://127.0.0.1:9100/metrics \
-  | grep -v '^#' \
-  | wc -l
-```
-
-Buscar métricas concretas:
+Busca tres métricas:
 
 ```bash
 curl -s http://127.0.0.1:9100/metrics \
@@ -754,9 +1081,7 @@ curl -s http://127.0.0.1:9100/metrics \
   | grep '^node_filesystem_avail_bytes'
 ```
 
-### Entrega
-
-Cada alumno debe seleccionar tres métricas y documentarlas:
+Documenta cada métrica:
 
 ```text
 Nombre:
@@ -769,15 +1094,15 @@ Qué representa:
 
 ---
 
-## Práctica 3 — Consultar Prometheus
+### Práctica 3: consultar Prometheus
 
-Acceder a:
+Accede a:
 
 ```text
 http://localhost:9090
 ```
 
-Ejecutar estas consultas:
+Ejecuta estas consultas:
 
 ```promql
 up
@@ -799,7 +1124,7 @@ node_filesystem_avail_bytes
 count(node_cpu_seconds_total)
 ```
 
-### Preguntas
+Responde:
 
 1. ¿Cuántos objetivos están activos?
 2. ¿Qué valor tiene la carga de un minuto?
@@ -809,30 +1134,33 @@ count(node_cpu_seconds_total)
 
 ---
 
-## Práctica 4 — Crear una visualización en Grafana
+### Práctica 4: crear un dashboard en Grafana
 
-En Grafana:
+Crea un dashboard con los siguientes paneles.
 
-1. Abrir **Dashboards**.
-2. Crear un dashboard nuevo.
-3. Añadir un panel.
-4. Seleccionar Prometheus.
-5. Ejecutar esta consulta:
+#### Panel 1: carga media
+
+Consulta:
 
 ```promql
 node_load1
 ```
 
-6. Seleccionar la visualización **Time series**.
-7. Añadir un título:
+Título:
 
 ```text
 Carga media del sistema
 ```
 
-8. Guardar el dashboard.
+Visualización recomendada:
 
-Crear un segundo panel con:
+```text
+Time series
+```
+
+#### Panel 2: uso de CPU
+
+Consulta:
 
 ```promql
 100 - (
@@ -848,7 +1176,9 @@ Título:
 Uso estimado de CPU
 ```
 
-Crear un tercer panel:
+#### Panel 3: memoria utilizada
+
+Consulta:
 
 ```promql
 100 * (
@@ -865,13 +1195,13 @@ Título:
 Memoria utilizada
 ```
 
+Configura la unidad del panel como porcentaje cuando corresponda.
+
 ---
 
-# 5. Sesión de comprobación para el docente
+## 13. Comprobación del entorno
 
-Antes de la clase, comprueba que todo funciona.
-
-## Comprobar servicios
+Antes de realizar las prácticas, comprueba los servicios:
 
 ```bash
 systemctl is-active prometheus
@@ -885,21 +1215,21 @@ Los tres deberían devolver:
 active
 ```
 
-## Comprobar puertos
+Comprueba los puertos:
 
 ```bash
 sudo ss -tulpn | grep -E ':3000|:9090|:9100'
 ```
 
-Resultado esperado aproximado:
+Deberían aparecer:
 
 ```text
-LISTEN ... :3000 ... grafana
-LISTEN ... :9090 ... prometheus
-LISTEN ... :9100 ... node_exporter
+:3000  Grafana
+:9090  Prometheus
+:9100  Node Exporter
 ```
 
-## Comprobar endpoints
+Comprueba los endpoints:
 
 ```bash
 curl -I http://127.0.0.1:3000
@@ -907,98 +1237,64 @@ curl -I http://127.0.0.1:9090
 curl -I http://127.0.0.1:9100/metrics
 ```
 
-## Comprobar Prometheus
-
-```bash
-curl -s http://127.0.0.1:9090/-/ready
-```
-
-Respuesta esperada:
-
-```text
-Prometheus Server is Ready.
-```
-
-## Comprobar Node Exporter
-
-```bash
-curl -s http://127.0.0.1:9100/metrics | head
-```
-
-Debe devolver líneas similares a:
-
-```text
-# HELP go_gc_duration_seconds A summary of the pause duration...
-# TYPE go_gc_duration_seconds summary
-```
-
-## Comprobar Grafana
-
-```bash
-curl -s -o /dev/null -w "%{http_code}\n" \
-  http://127.0.0.1:3000/login
-```
-
-Respuesta esperada:
-
-```text
-200
-```
-
 ---
 
-# 6. Problemas frecuentes durante la práctica
+## 14. Resolución de problemas
 
-## Node Exporter no responde
+### Node Exporter no responde
 
-Comprobar:
+Comprueba el servicio:
 
 ```bash
 systemctl status node-exporter
 ```
 
-Revisar el puerto:
+Comprueba el puerto:
 
 ```bash
 sudo ss -tulpn | grep 9100
 ```
 
-Consultar logs:
+Consulta los logs:
 
 ```bash
 sudo journalctl -u node-exporter -n 50 --no-pager
 ```
 
-## Prometheus muestra `up = 0`
+---
 
-Comprobar el endpoint desde el servidor Prometheus:
+### Prometheus muestra `up = 0`
+
+Comprueba el endpoint del exporter:
 
 ```bash
 curl -I http://127.0.0.1:9100/metrics
 ```
 
-Revisar la configuración:
+Revisa la configuración:
 
 ```bash
 sudo grep -n -A8 -B2 "node" \
   /etc/prometheus/prometheus.yml
 ```
 
-Validar la configuración:
+Valida el fichero:
 
 ```bash
 promtool check config /etc/prometheus/prometheus.yml
 ```
 
-Reiniciar Prometheus después de modificarla:
+Reinicia Prometheus después de modificar la configuración:
 
 ```bash
 sudo systemctl restart prometheus
 ```
 
-## Grafana no muestra datos
+---
 
-Comprobar:
+### Grafana no muestra datos
+
+Comprueba:
 
 1. Que Prometheus está activo.
 2. Que Node Exporter responde.
@@ -1007,44 +1303,133 @@ Comprobar:
 5. Que el intervalo temporal incluye datos recientes.
 6. Que la consulta no contiene etiquetas incorrectas.
 
-## Los valores parecen demasiado grandes
+---
 
-Explicar las unidades:
+### Los valores parecen demasiado grandes
 
-- Bytes: dividir por $$1024$$ para KiB, $$1024^2$$ para MiB.
-- Segundos acumulados: utilizar `rate`.
-- Contadores: no interpretarlos directamente como valores instantáneos.
-- Porcentajes: comprobar si el valor está entre $$0$$ y $$100$$.
+Comprueba la unidad y el tipo de métrica:
+
+- Los bytes deben convertirse a KiB, MiB o GiB.
+- Los contadores deben analizarse con `rate` o `irate`.
+- Los segundos acumulados no son una duración instantánea.
+- Los porcentajes suelen estar entre $$0$$ y $$100$$.
+- La carga del sistema no es un porcentaje de CPU.
 
 ---
 
-# 7. Actividad de cierre y evaluación
+## 15. Actividad de investigación
 
-## Preguntas de repaso
+### Situación
 
-1. ¿Qué diferencia existe entre una métrica y un log?
-2. ¿Quién inicia la comunicación en el modelo pull?
-3. ¿Qué representa una etiqueta?
-4. ¿Por qué una métrica puede tener varias series temporales?
-5. ¿Qué ocurre si el intervalo de muestreo es demasiado grande?
-6. ¿Qué problema resuelve la retención?
-7. ¿Qué objetivo tiene el downsampling?
-8. ¿Qué función cumple Grafana?
-9. ¿Qué indica `up = 1`?
-10. ¿Por qué se utiliza `rate` con algunas métricas de CPU?
+Un usuario informa:
 
-## Actividad final
+> La aplicación responde lentamente desde hace unos minutos.
 
-Cada alumno debe entregar:
+Investiga el sistema utilizando:
 
-```text
-1. Tres métricas obtenidas desde Node Exporter.
-2. Una explicación de sus etiquetas.
-3. Una consulta PromQL.
-4. Una captura o descripción de un panel de Grafana.
-5. Una conclusión sobre el estado del sistema.
+```bash
+uptime
 ```
 
-### Ejemplo de conclusión
+```bash
+free -h
+```
 
-> El sistema monitorizado está disponible porque la consulta `up` devuelve `1`. La carga media se mantiene estable y la memoria disponible no presenta una reducción significativa. La métrica `node_cpu_seconds_total` es un contador acumulado, por lo que se ha utilizado `rate` para calcular una velocidad de consumo durante los últimos cinco minutos.
+```bash
+df -h
+```
+
+```bash
+systemctl --failed
+```
+
+```bash
+sudo journalctl -p err --since "15 minutes ago" --no-pager
+```
+
+Consulta también Node Exporter:
+
+```bash
+curl -s http://127.0.0.1:9100/metrics \
+  | grep -E '^node_load|^node_memory_MemAvailable_bytes|^node_filesystem_avail_bytes' \
+  | head -20
+```
+
+Completa el informe:
+
+```markdown
+## Incidencia
+
+Descripción:
+
+## Métricas observadas
+
+Carga del sistema:
+Memoria disponible:
+Espacio libre:
+
+## Logs observados
+
+¿Hay errores recientes?
+¿Qué servicios aparecen?
+
+## Eventos observados
+
+¿Se ha reiniciado algún servicio?
+¿Hay unidades fallidas?
+
+## Hipótesis
+
+¿Cuál puede ser la causa del problema?
+
+## Evidencias
+
+¿Qué comandos y resultados apoyan la hipótesis?
+
+## Siguiente comprobación
+
+¿Qué consultarías a continuación?
+```
+
+---
+
+## 16. Preguntas de comprobación
+
+1. ¿Qué es la telemetría?
+2. ¿Qué diferencia existe entre una métrica y un log?
+3. ¿Qué información proporciona una traza?
+4. ¿Qué es un evento?
+5. ¿Quién inicia la comunicación en el modelo `pull`?
+6. ¿Quién inicia la comunicación en el modelo `push`?
+7. ¿Qué representa una etiqueta?
+8. ¿Por qué una métrica puede tener varias series temporales?
+9. ¿Qué ocurre si el intervalo de muestreo es demasiado grande?
+10. ¿Qué problema resuelve la retención?
+11. ¿Qué objetivo tiene el *downsampling*?
+12. ¿Qué función cumple Node Exporter?
+13. ¿Qué función cumple Prometheus?
+14. ¿Qué función cumple Grafana?
+15. ¿Qué indica `up = 1`?
+16. ¿Por qué se utiliza `rate` con `node_cpu_seconds_total`?
+17. ¿Qué puede indicar que una métrica deje de actualizarse?
+18. ¿Por qué conviene combinar métricas, logs, trazas y eventos?
+
+---
+
+## 17. Puntos clave
+
+- La telemetría permite observar y analizar el comportamiento de los sistemas.
+- Las métricas representan valores numéricos.
+- Los logs proporcionan información textual y contextual.
+- Las trazas muestran el recorrido de una petición.
+- Los eventos representan acciones o cambios puntuales.
+- Una métrica aislada ofrece menos información que una serie temporal.
+- Las etiquetas identifican y diferencian series temporales.
+- El modelo `pull` es utilizado habitualmente por Prometheus.
+- Node Exporter expone métricas del sistema operativo.
+- Prometheus recopila y almacena métricas.
+- Grafana consulta y visualiza los datos.
+- El muestreo determina la frecuencia de recopilación.
+- La retención determina cuánto tiempo se conservan los datos.
+- El *downsampling* reduce la resolución de los datos históricos.
+- Una investigación eficaz combina diferentes tipos de telemetría.
