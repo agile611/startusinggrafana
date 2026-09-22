@@ -594,3 +594,41 @@ body {
 [data-md-color-scheme="slate"] .md-sidebar--secondary .md-sidebar__scrollwrap {
   background: #f5f5f5 !important;
 }
+
+/* =========================================================
+   Ajuste final de los bloques de código
+   Texto oscuro y tamaño igual al texto normal
+   ========================================================= */
+
+/* Contenedor exterior del bloque */
+.md-typeset .highlight,
+.md-typeset pre {
+  color: #242424 !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+/* Código interno */
+.md-typeset .highlight pre > code,
+.md-typeset pre > code {
+  color: #242424 !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-family: "Roboto Mono", "Ubuntu Mono", monospace !important;
+
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+/* Todos los elementos coloreados por Pygments */
+.md-typeset .highlight pre > code *,
+.md-typeset pre > code * {
+  color: #242424 !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+
+  white-space: inherit !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
