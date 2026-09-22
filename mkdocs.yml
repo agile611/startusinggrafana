@@ -108,15 +108,15 @@ nav:
       - Laboratorio: 01-fundamentos-telemetria/09-laboratorio.md
 
   - Grafana:
-      - Introducción: 02-grafana/index.md
-      - Requisitos del sistema: 02-grafana/requisitos-sistema.md
-      - Instalación en Ubuntu: 02-grafana/instalacion-ubuntu.md
-      - Acceso a Grafana: 02-grafana/acceso-grafana.md
-      - Configuración inicial: 02-grafana/configuracion-inicial.md
-      - Dashboards, filas y paneles: 02-grafana/dashboards-filas-paneles.md
-      - Selector de rango de tiempo: 02-grafana/selector-rango-tiempo.md
-      - Tiempo relativo y desplazamiento: 02-grafana/tiempo-relativo.md
-      - Laboratorio: 02-grafana/laboratorio.md
+      - Introducción: 02-grafana/01-index.md
+      - Requisitos del sistema: 02-grafana/02-requisitos-sistema.md
+      - Instalación en Ubuntu: 02-grafana/03-instalacion-ubuntu.md
+      - Acceso a Grafana: 02-grafana/04-acceso-grafana.md
+      - Configuración inicial: 02-grafana/05-configuracion-inicial.md
+      - Tiempo relativo: 02-grafana/06-tiempo-relativo.md
+      - Selector de rango de tiempo: 02-grafana/07-selector-rango-tiempo.md
+      - Dashboards, filas y paneles: 02-grafana/08-dashboards-filas-paneles.md
+      - Laboratorio: 02-grafana/09-laboratorio.md
 
   - Prometheus y fuentes de datos:
       - Introducción: 03-prometheus-fuentes-datos/index.md
