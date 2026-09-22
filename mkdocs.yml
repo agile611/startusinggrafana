@@ -6,6 +6,9 @@ site_url: https://agile611.github.io/startusinggrafana/
 repo_name: agile611/startusinggrafana
 repo_url: https://github.com/agile611/startusinggrafana
 
+docs_dir: docs
+site_dir: site
+
 theme:
   name: material
   language: es
