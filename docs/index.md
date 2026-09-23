@@ -4,9 +4,9 @@ Curso práctico de monitorización y visualización con Grafana sobre Ubuntu 24.
 
 ## Navegación
 
-- [Objetivos](objetivos.md)
-- [Requisitos previos](requisitos-previos.md)
-- [Entorno de laboratorio](entorno-laboratorio.md)
+- [Objetivos](00-el-curso/01-objetivos.md)
+- [Requisitos previos](00-el-curso/02-requisitos-previos.md)
+- [Entorno de laboratorio](00-el-curso/03-entorno-laboratorio.md)
 - [Bloque 1 - Fundamentos de telemetría](01-fundamentos-telemetria/01-index.md)
 - [Bloque 2 - Grafana](02-grafana/01-index.md)
 - [Bloque 3 - Prometheus y fuentes de datos](03-prometheus-fuentes-datos/index.md)

@@ -92,9 +92,11 @@ plugins:
 
 nav:
   - Inicio: index.md
-  - Objetivos: objetivos.md
-  - Requisitos previos: requisitos-previos.md
-  - Entorno de laboratorio: entorno-laboratorio.md
+  
+  - Fundamentos de telemetría:
+      - Objetivos: 00-el-curso/01-objetivos.md
+      - Requisitos previos: 00-el-curso/02-requisitos-previos.md
+      - Entorno de laboratorio: 00-el-curso/03-entorno-laboratorio.md
 
   - Fundamentos de telemetría:
       - Introducción: 01-fundamentos-telemetria/01-index.md
