@@ -13,6 +13,7 @@
    - Ambas columnas tienen el mismo estilo
    - Las cabeceras azules ocupan todo el ancho gris
    - Anchuras internas uniformes
+   - Sin enlaces duplicados en la sección activa
    ========================================================= */
 
 
@@ -418,15 +419,10 @@ body,
    Estructura uniforme de ambas columnas laterales
    ========================================================= */
 
-/*
- * Se utiliza exactamente el mismo conjunto de reglas
- * para la navegación izquierda y para el TOC derecho.
- */
-
 .md-sidebar--primary,
 .md-sidebar--secondary {
   display: block;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 
   width: var(--agile-left-width);
   min-width: 0;
@@ -437,8 +433,8 @@ body,
 
   overflow: visible;
 
-  background: var(--agile-sidebar);
-  color: var(--agile-text);
+  background: var(--agile-sidebar) !important;
+  color: var(--agile-text) !important;
 }
 
 .md-sidebar--secondary {
@@ -459,7 +455,7 @@ body,
   margin: 0 !important;
   padding: 0 !important;
 
-  background: var(--agile-sidebar);
+  background: var(--agile-sidebar) !important;
   background-image: none;
   box-shadow: none;
 }
@@ -476,22 +472,14 @@ body,
    Navegaciones internas de ambas columnas
    ========================================================= */
 
-/*
- * Esta parte es la corrección principal del bloque azul
- * de "Tabla de contenidos".
- *
- * En Material for MkDocs el TOC puede conservar una anchura
- * propia si no se fuerza también la anchura de .md-nav.
- */
-
-.md-sidebar--primary > .md-nav,
-.md-sidebar--secondary > .md-nav,
-.md-sidebar--primary .md-sidebar__inner > .md-nav,
-.md-sidebar--secondary .md-sidebar__inner > .md-nav,
-.md-sidebar--primary .md-sidebar__scrollwrap > .md-nav,
-.md-sidebar--secondary .md-sidebar__scrollwrap > .md-nav {
+.md-sidebar--primary .md-nav,
+.md-sidebar--secondary .md-nav,
+.md-sidebar--primary .md-nav__list,
+.md-sidebar--secondary .md-nav__list,
+.md-sidebar--primary .md-nav__item,
+.md-sidebar--secondary .md-nav__item {
   display: block;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 
   width: 100% !important;
   min-width: 0 !important;
@@ -500,18 +488,22 @@ body,
   margin: 0 !important;
   padding: 0 !important;
 
-  background: var(--agile-sidebar);
+  background: var(--agile-sidebar) !important;
 }
 
 
 /* =========================================================
-   Cabeceras azules de las dos columnas
+   Cabeceras azules de ambas columnas
    ========================================================= */
 
-.md-sidebar--primary .md-nav__title,
-.md-sidebar--secondary .md-nav__title {
+.md-sidebar--primary .md-nav--primary > .md-nav__title,
+.md-sidebar--secondary .md-nav--secondary > .md-nav__title {
   display: block !important;
   box-sizing: border-box !important;
+
+  position: static !important;   /* Material lo hace sticky en el TOC */
+  top: auto !important;
+  z-index: auto !important;
 
   width: 100% !important;
   min-width: 100% !important;
@@ -531,19 +523,74 @@ body,
   color: var(--agile-white) !important;
 
   font-size: 0.9rem;
+  font-weight: 700;
   line-height: 1.35;
 
   box-shadow: none !important;
+  cursor: default;
 }
 
-.md-sidebar--primary .md-nav__title span,
-.md-sidebar--secondary .md-nav__title span {
+.md-sidebar--primary .md-nav--primary > .md-nav__title span:not(.md-nav__icon),
+.md-sidebar--secondary .md-nav--secondary > .md-nav__title span:not(.md-nav__icon) {
   display: block;
 
   width: 100%;
   max-width: 100%;
 
   color: var(--agile-white) !important;
+}
+
+/* La flecha del menú móvil no debe verse en escritorio */
+
+.md-sidebar--primary .md-nav--primary > .md-nav__title .md-nav__icon,
+.md-sidebar--secondary .md-nav--secondary > .md-nav__title .md-nav__icon {
+  display: none !important;
+}
+
+
+/* =========================================================
+   Títulos que NO deben verse
+   ========================================================= */
+
+/* Título "Tabla de contenidos" de la columna derecha */
+/* Títulos internos de las secciones anidadas (izquierda) */
+
+@media screen and (min-width: 60em) {
+  .md-sidebar--primary .md-nav__item > .md-nav > .md-nav__title {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   Enlace duplicado de la sección activa (CORRECCIÓN)
+   =========================================================
+
+   Con navigation.tabs, Material muestra en la sección activa:
+
+   li.md-nav__item--active
+   ├── label.md-nav__link        ← enlace de la sección  ("Inicio")
+   └── nav.md-nav
+       └── li.md-nav__item--active
+           └── a.md-nav__link--active   ← página real ("Inicio")
+
+   Ocultamos el enlace de la sección padre siempre que su
+   subnavegación contenga un enlace activo. El selector no
+   depende de las clases --section / --nested ni de la
+   profundidad exacta, por lo que funciona con cualquier
+   combinación de opciones de navegación.
+
+   :not(.md-nav__container) protege el caso de
+   navigation.indexes, donde el enlace activo vive dentro
+   del propio contenedor padre.
+   ========================================================= */
+
+@media screen and (min-width: 60em) {
+  .md-sidebar--primary
+  .md-nav__item--active:has(> .md-nav .md-nav__link--active)
+  > .md-nav__link:not(.md-nav__container) {
+    display: none !important;
+  }
 }
 
 
@@ -553,7 +600,7 @@ body,
 
 .md-sidebar--primary .md-nav__link,
 .md-sidebar--secondary .md-nav__link {
-  display: block !important;
+  display: block;
   box-sizing: border-box !important;
 
   width: 100% !important;
@@ -566,53 +613,40 @@ body,
   background: transparent !important;
   color: var(--agile-text) !important;
 
-  font-size: 0.86rem;
-  line-height: 1.35;
+  font-size: 0.86rem !important;
+  line-height: 1.35 !important;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
   word-break: normal;
+
+  box-shadow: none !important;
 }
+
+/* Contenedor de navigation.indexes: sin padding doble */
+
+.md-sidebar--primary .md-nav__container {
+  display: flex;
+  padding: 0 !important;
+}
+
+.md-sidebar--primary .md-nav__container > .md-nav__link {
+  flex: 1 1 auto;
+}
+
+/* Estados */
 
 .md-sidebar--primary .md-nav__link:hover,
 .md-sidebar--primary .md-nav__link:focus,
 .md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link,
 .md-sidebar--secondary .md-nav__link:hover,
 .md-sidebar--secondary .md-nav__link:focus,
 .md-sidebar--secondary .md-nav__link--active {
   background: transparent !important;
   color: var(--agile-primary) !important;
-  font-weight: 700;
+  font-weight: 700 !important;
 
   box-shadow: none !important;
-}
-
-
-/* =========================================================
-   Niveles anidados de navegación
-   ========================================================= */
-
-.md-sidebar--primary .md-nav__list,
-.md-sidebar--secondary .md-nav__list,
-.md-sidebar--primary .md-nav__item,
-.md-sidebar--secondary .md-nav__item,
-.md-sidebar--primary .md-nav__item > .md-nav,
-.md-sidebar--secondary .md-nav__item > .md-nav {
-  display: block;
-  box-sizing: border-box;
-
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  margin: 0;
-  padding: 0;
-}
-
-.md-sidebar--primary .md-nav__item > .md-nav,
-.md-sidebar--secondary .md-nav__item > .md-nav {
-  background: var(--agile-sidebar);
 }
 
 
@@ -1022,10 +1056,10 @@ body,
 
   .md-sidebar--primary .md-nav__link,
   .md-sidebar--secondary .md-nav__link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.5rem !important;
+    padding-left: 0.5rem !important;
 
-    font-size: 0.78rem;
+    font-size: 0.78rem !important;
   }
 
   .md-tabs__link {
@@ -1177,6 +1211,7 @@ body,
   --md-default-fg-color--light: var(--agile-sidebar);
 
   --md-typeset-color: var(--agile-text);
+  --md-typeset-a-color: var(--agile-primary);
 
   --md-code-bg-color: var(--agile-code-bg);
   --md-code-fg-color: var(--agile-text);
@@ -1186,6 +1221,10 @@ body,
   --md-primary-fg-color--dark: var(--agile-primary-dark);
 
   --md-accent-fg-color: var(--agile-primary);
+  --md-accent-fg-color--transparent: var(--agile-primary-soft);
+
+  --md-footer-bg-color: var(--agile-primary);
+  --md-footer-fg-color: var(--agile-white);
 }
 
 [data-md-color-scheme="slate"] body,
@@ -1204,19 +1243,35 @@ body,
 [data-md-color-scheme="slate"] .md-sidebar--primary .md-sidebar__scrollwrap,
 [data-md-color-scheme="slate"] .md-sidebar--secondary .md-sidebar__scrollwrap,
 [data-md-color-scheme="slate"] .md-sidebar--primary .md-nav,
-[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav {
-  background: var(--agile-sidebar);
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav,
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__list,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__list {
+  background: var(--agile-sidebar) !important;
 }
 
-[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__title,
-[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__title {
-  background: var(--agile-primary);
-  color: var(--agile-white);
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav--primary > .md-nav__title {
+  background: var(--agile-primary) !important;
+  color: var(--agile-white) !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__link,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link {
+  color: var(--agile-text) !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__link:hover,
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__link:focus,
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__link--active,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link:hover,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link:focus,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__link--active {
+  color: var(--agile-primary) !important;
 }
 
 [data-md-color-scheme="slate"] .md-typeset .highlight,
 [data-md-color-scheme="slate"] .md-typeset pre {
   background: var(--agile-code-bg);
+  border-color: var(--agile-code-border);
   color: var(--agile-text);
 }
 
@@ -1226,375 +1281,114 @@ body,
   color: var(--agile-text);
 }
 
-/* =========================================================
-   Correcciones finales de navegación
-   ========================================================= */
-
-
-/* ---------------------------------------------------------
-   1. Eliminar la cabecera duplicada de la sección activa
-   ---------------------------------------------------------
-
-   Material muestra:
-   - El enlace de la sección
-   - La cabecera interna de la sección activa
-
-   Conservamos el enlace y ocultamos únicamente la cabecera
-   interna duplicada.
-   */
-
-@media screen and (min-width: 60em) {
-  .md-sidebar--primary
-  .md-nav__item--active
-  > .md-nav
-  > .md-nav__title {
-    display: none !important;
-  }
+[data-md-color-scheme="slate"] .md-typeset :not(pre) > code {
+  background: var(--agile-inline-bg);
+  border-color: var(--agile-inline-border);
+  color: var(--agile-text);
 }
 
-
-/* ---------------------------------------------------------
-   2. Mantener uniforme el fondo de la navegación izquierda
-   --------------------------------------------------------- */
-
-.md-sidebar--primary,
-.md-sidebar--primary .md-sidebar__inner,
-.md-sidebar--primary .md-sidebar__scrollwrap,
-.md-sidebar--primary .md-nav,
-.md-sidebar--primary .md-nav__list {
-  background: var(--agile-sidebar) !important;
+[data-md-color-scheme="slate"] .md-typeset table,
+[data-md-color-scheme="slate"] .md-typeset table th,
+[data-md-color-scheme="slate"] .md-typeset table td {
+  background: var(--agile-sidebar);
+  color: var(--agile-text);
 }
 
-
-/* ---------------------------------------------------------
-   3. Ocultar el título azul de la columna derecha
-   ---------------------------------------------------------
-
-   Se elimina únicamente el bloque azul que contiene
-   "Tabla de contenidos".
-
-   La columna gris y sus enlaces permanecen visibles.
-   */
-
-.md-sidebar--secondary
-.md-nav__title {
-  display: none !important;
-}
-
-
-/* ---------------------------------------------------------
-   4. Ajustar la columna derecha después de ocultar el título
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary,
-.md-sidebar--secondary .md-sidebar__inner,
-.md-sidebar--secondary .md-sidebar__scrollwrap,
-.md-sidebar--secondary .md-nav,
-.md-sidebar--secondary .md-nav__list {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  background: var(--agile-sidebar) !important;
-}
-
-
-/* ---------------------------------------------------------
-   5. Enlaces del TOC derecho
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary .md-nav__link {
-  display: block !important;
-  box-sizing: border-box !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-  padding: 0.38rem 0.75rem !important;
-
-  background: transparent !important;
-  color: var(--agile-text) !important;
-
-  font-size: 0.86rem !important;
-  line-height: 1.35 !important;
-
-  white-space: normal !important;
-  overflow-wrap: anywhere !important;
-}
-
-
-/* ---------------------------------------------------------
-   6. Estado activo del TOC
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary .md-nav__link--active,
-.md-sidebar--secondary
-.md-nav__item--active
-> .md-nav__link {
-  background: transparent !important;
-  color: var(--agile-primary) !important;
-  font-weight: 700 !important;
-  box-shadow: none !important;
-}
-
-
-/* ---------------------------------------------------------
-   7. Evitar que el mismo elemento activo se pinte dos veces
-   ---------------------------------------------------------
-
-   Material puede marcar simultáneamente el enlace activo
-   y el elemento padre activo. Se elimina la apariencia del
-   enlace padre cuando contiene otra navegación activa.
-   */
-
-.md-sidebar--secondary
-.md-nav__item--active
-> .md-nav
-> .md-nav__item--active
-> .md-nav__link {
-  color: var(--agile-primary) !important;
-  font-weight: 700 !important;
-}
-
-
-/* ---------------------------------------------------------
-   8. Niveles anidados del TOC
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary .md-nav__item,
-.md-sidebar--secondary .md-nav__list,
-.md-sidebar--secondary .md-nav__item > .md-nav {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  box-sizing: border-box !important;
-}
-
-.md-sidebar--secondary .md-nav__item > .md-nav {
-  background: var(--agile-sidebar) !important;
-}
-
-
-/* ---------------------------------------------------------
-   9. Igualar visualmente ambas columnas laterales
-   --------------------------------------------------------- */
-
-.md-sidebar--primary,
-.md-sidebar--secondary {
-  box-sizing: border-box !important;
-
-  background: var(--agile-sidebar) !important;
-  color: var(--agile-text) !important;
-}
-
-.md-sidebar--primary .md-nav__link,
-.md-sidebar--secondary .md-nav__link {
-  box-sizing: border-box !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  color: var(--agile-text) !important;
-}
-
-.md-sidebar--primary .md-nav__link:hover,
-.md-sidebar--primary .md-nav__link:focus,
-.md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link,
-.md-sidebar--secondary .md-nav__link:hover,
-.md-sidebar--secondary .md-nav__link:focus,
-.md-sidebar--secondary .md-nav__link--active,
-.md-sidebar--secondary .md-nav__item--active > .md-nav__link {
-  background: transparent !important;
-  color: var(--agile-primary) !important;
-  font-weight: 700 !important;
-  box-shadow: none !important;
+[data-md-color-scheme="slate"] .admonition {
+  background: var(--agile-sidebar);
+  color: var(--agile-text);
 }
 
 /* =========================================================
-   Corrección definitiva de enlaces duplicados
+   Columnas laterales fijas durante el scroll
+   =========================================================
+
+   Ambas columnas acompañan al contenido central y se quedan
+   pegadas bajo la cabecera. Si su contenido es más alto que
+   la ventana, hacen scroll interno con una barra fina.
+
+   El grid ya usa align-items: start, requisito para que
+   position: sticky funcione dentro de una celda de grid.
    ========================================================= */
 
+:root {
+  --agile-sticky-gap: 0.75rem;
 
-/* ---------------------------------------------------------
-   1. Ocultar el título interno duplicado de la sección activa
-   --------------------------------------------------------- */
+  /* Solo la cabecera: las pestañas se desplazan con la página */
+  --agile-sticky-top: calc(var(--agile-header-height) + var(--agile-sticky-gap));
+
+  /* Si activas navigation.tabs.sticky en mkdocs.yml, usa esta línea en su lugar:
+  --agile-sticky-top: calc(var(--agile-header-height) + var(--agile-tabs-height) + var(--agile-sticky-gap));
+  */
+}
 
 @media screen and (min-width: 60em) {
-  .md-sidebar--primary
-  .md-nav__item--active
-  > .md-nav
-  > .md-nav__title {
-    display: none !important;
+
+  /* Ningún ancestro puede recortar el sticky */
+
+  .md-main,
+  .md-main__inner {
+    overflow: visible !important;
+  }
+
+  /* Las dos columnas se pegan bajo la cabecera */
+
+  .md-sidebar--primary,
+  .md-sidebar--secondary {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: var(--agile-sticky-top) !important;
+
+    align-self: start !important;
+
+    height: auto !important;
+    max-height: calc(100vh - var(--agile-sticky-top) - var(--agile-sticky-gap)) !important;
+
+    overflow: visible !important;
+  }
+
+  /* Scroll interno cuando la navegación es más alta que la ventana */
+
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--secondary .md-sidebar__scrollwrap {
+    position: static !important;
+
+    max-height: calc(100vh - var(--agile-sticky-top) - var(--agile-sticky-gap)) !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap::-webkit-scrollbar,
+  .md-sidebar--secondary .md-sidebar__scrollwrap::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap::-webkit-scrollbar-track,
+  .md-sidebar--secondary .md-sidebar__scrollwrap::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap::-webkit-scrollbar-thumb,
+  .md-sidebar--secondary .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
   }
 }
 
 
-/* ---------------------------------------------------------
-   2. Ocultar el enlace padre cuando contiene otro enlace activo
-   ---------------------------------------------------------
+/* Tablets en el rango 60–76em: la cabecera es más baja (2.8rem) */
 
-   Estructura típica:
-
-   Sección activa
-   ├── Enlace de la sección activa
-   └── Navegación interna
-       └── Página activa
-
-   Si ambos enlaces tienen el mismo texto, se conserva el
-   enlace interno de la página y se oculta únicamente el
-   enlace padre duplicado.
-   */
-
-@media screen and (min-width: 60em) {
-  .md-sidebar--primary
-  .md-nav--primary
-  > .md-nav__list
-  > .md-nav__item--active:has(
-    > .md-nav
-    > .md-nav__list
-    > .md-nav__item--active
-  )
-  > .md-nav__link {
-    display: none !important;
+@media screen and (min-width: 60em) and (max-width: 76.24em) {
+  :root {
+    --agile-sticky-top: calc(2.8rem + var(--agile-sticky-gap));
   }
 }
 
 
-/* ---------------------------------------------------------
-   3. Estilo común para las dos columnas laterales
-   --------------------------------------------------------- */
-
-.md-sidebar--primary,
-.md-sidebar--secondary {
-  background: var(--agile-sidebar) !important;
-  color: var(--agile-text) !important;
-}
-
-
-/* ---------------------------------------------------------
-   4. Eliminar el título "Tabla de contenidos"
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary
-.md-nav--secondary
-> .md-nav__title {
-  display: none !important;
-}
-
-
-/* ---------------------------------------------------------
-   5. Anchura uniforme del TOC derecho
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary,
-.md-sidebar--secondary .md-sidebar__inner,
-.md-sidebar--secondary .md-sidebar__scrollwrap,
-.md-sidebar--secondary .md-nav--secondary,
-.md-sidebar--secondary .md-nav__list {
-  box-sizing: border-box !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  background: var(--agile-sidebar) !important;
-}
-
-
-/* ---------------------------------------------------------
-   6. Enlaces del TOC derecho
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary
-.md-nav--secondary
-.md-nav__link {
-  display: block !important;
-  box-sizing: border-box !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-  padding: 0.38rem 0.75rem !important;
-
-  background: transparent !important;
-  color: var(--agile-text) !important;
-
-  font-size: 0.86rem !important;
-  line-height: 1.35 !important;
-
-  white-space: normal !important;
-  overflow-wrap: anywhere !important;
-}
-
-
-/* ---------------------------------------------------------
-   7. Estado activo del TOC derecho
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary
-.md-nav--secondary
-.md-nav__link--active {
-  background: transparent !important;
-  color: var(--agile-primary) !important;
-  font-weight: 700 !important;
-  box-shadow: none !important;
-}
-
-
-/* ---------------------------------------------------------
-   8. Niveles internos del TOC
-   --------------------------------------------------------- */
-
-.md-sidebar--secondary
-.md-nav--secondary
-.md-nav__item,
-.md-sidebar--secondary
-.md-nav--secondary
-.md-nav__list,
-.md-sidebar--secondary
-.md-nav--secondary
-.md-nav__item
-> .md-nav {
-  box-sizing: border-box !important;
-
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  background: var(--agile-sidebar) !important;
-}
-
-
-/* ---------------------------------------------------------
-   9. Estado activo de la navegación izquierda
-   --------------------------------------------------------- */
-
-.md-sidebar--primary
-.md-nav__link--active,
-.md-sidebar--primary
-.md-nav__item--active
-> .md-nav__link {
-  background: transparent !important;
-  color: var(--agile-primary) !important;
-  font-weight: 700 !important;
-  box-shadow: none !important;
-}
+/* =========================================================
+   Fin del fichero
+   ========================================================= */
