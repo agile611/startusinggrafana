@@ -26,7 +26,6 @@ theme:
     - navigation.expand
     - navigation.top
     - navigation.footer
-    - navigation.indexes
     - toc.follow
     - content.code.copy
     - content.code.annotate
@@ -53,6 +52,8 @@ theme:
   icon:
     logo: material/chart-timeline-variant
     repo: fontawesome/brands/github
+
+  static_templates: []
 
 markdown_extensions:
   - admonition
@@ -90,10 +91,13 @@ plugins:
       lang:
         - es
 
+extra_css:
+  - assets/css/custom.css
+
 nav:
   - Inicio: index.md
-  
-  - Fundamentos de telemetría:
+
+  - Curso y laboratorio:
       - Objetivos: 00-el-curso/01-objetivos.md
       - Requisitos previos: 00-el-curso/02-requisitos-previos.md
       - Entorno de laboratorio: 00-el-curso/03-entorno-laboratorio.md
@@ -195,11 +199,5 @@ nav:
       - Fuentes de datos: resolucion-problemas/fuentes-datos.md
       - Dashboards: resolucion-problemas/dashboards.md
       - Alertas: resolucion-problemas/alertas.md
-
-extra_css:
-  - assets/css/custom.css
-
-extra_javascript:
-  - assets/js/custom.js
 
 copyright: "© Agile611 · Licencia CC BY-NC 4.0 · Guillem Hernández Sola"

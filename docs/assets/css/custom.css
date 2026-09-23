@@ -1,19 +1,23 @@
 /* =========================================================
    Agile611 · Curso de Grafana
-   CSS optimizado para Material for MkDocs y GitHub Pages
+   Material for MkDocs
 
-   Diseño:
-   - Escala compacta
-   - Colores corporativos
-   - Tres columnas centradas
-   - Header y footer a todo lo ancho
-   - Contenido interno alineado al área principal
-   - Esquema claro forzado
+   Layout:
+   - Tres columnas estables
+   - Sin solapamiento
+   - Columna izquierda: navegación
+   - Columna central: contenido
+   - Columna derecha: tabla de contenidos
+
+   Diseño lateral:
+   - Ambas columnas tienen el mismo estilo
+   - Las cabeceras azules ocupan todo el ancho gris
+   - Anchuras internas uniformes
    ========================================================= */
 
 
 /* =========================================================
-   Variables corporativas y de escala
+   Variables corporativas
    ========================================================= */
 
 :root {
@@ -33,28 +37,20 @@
   --agile-inline-bg: #f1f1f1;
   --agile-inline-border: #e1e1e1;
 
-  /* Escala general */
+  /* Tipografía */
   --agile-font-size: 0.95625rem;
   --agile-code-font-size: 0.84375rem;
   --agile-code-line-height: 1.55;
 
-  /* Header */
+  /* Cabecera */
   --agile-header-height: 3.05rem;
   --agile-tabs-height: 2.41875rem;
 
   /* Layout */
-  --agile-page-width-desktop: 80vw;
-  --agile-page-width-medium: 90vw;
-  --agile-page-width-mobile: 100%;
-
-  --agile-content-gap-desktop: 1.2rem;
-  --agile-content-gap-large: 2rem;
-  --agile-content-gap-medium: 1rem;
-  --agile-content-gap-mobile: 0.8rem;
-
-  /* Barras laterales */
-  --agile-primary-sidebar-width: 12rem;
-  --agile-secondary-sidebar-width: 12rem;
+  --agile-page-width: 92vw;
+  --agile-left-width: 13rem;
+  --agile-right-width: 13rem;
+  --agile-gap: 1.25rem;
 }
 
 
@@ -103,146 +99,103 @@ html {
   font-size: 100%;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  background: var(--agile-white);
+  color: var(--agile-text);
+}
+
 body,
 .md-main,
 .md-content,
-.md-content__inner {
-  background: var(--agile-white) !important;
-  color: var(--agile-text) !important;
-}
-
-
-/* =========================================================
-   Layout principal
-   ========================================================= */
-
-/*
-   En escritorio el área principal ocupa el 80 % de la ventana,
-   dejando aproximadamente un 10 % de margen a cada lado.
-*/
-
-.md-grid,
-.md-main {
-  width: var(--agile-page-width-desktop) !important;
-  max-width: none !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
-}
-
-.md-grid {
-  box-sizing: border-box !important;
-}
-
-.md-main__inner {
-  width: 100% !important;
-  max-width: none !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
-}
-
-.md-content {
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
-}
-
 .md-content__inner,
 .md-typeset {
-  width: auto !important;
-  max-width: none !important;
-}
-
-.md-content__inner {
-  margin-right: var(--agile-content-gap-desktop) !important;
-  margin-left: var(--agile-content-gap-desktop) !important;
-}
-
-.md-typeset {
-  max-width: none !important;
+  background: var(--agile-white);
+  color: var(--agile-text);
 }
 
 
 /* =========================================================
-   Header principal
+   Cabecera principal
    ========================================================= */
 
-/*
-   El fondo ocupa todo el ancho de la ventana.
-   El contenido interior se alinea con las tres columnas.
-*/
-
 .md-header {
-  width: 100% !important;
-  max-width: none !important;
-  min-height: var(--agile-header-height) !important;
-  margin: 0 !important;
-  overflow: visible !important;
+  width: 100%;
+  max-width: none;
+  min-height: var(--agile-header-height);
 
-  background: var(--agile-primary) !important;
-  color: var(--agile-white) !important;
+  margin: 0;
+  overflow: visible;
+
+  background: var(--agile-primary);
+  color: var(--agile-white);
 }
 
 .md-header__inner {
-  width: var(--agile-page-width-desktop) !important;
-  max-width: none !important;
-  min-height: var(--agile-header-height) !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
+  width: var(--agile-page-width);
+  max-width: none;
+  min-height: var(--agile-header-height);
 
-  background: transparent !important;
-  box-sizing: border-box !important;
+  margin-right: auto;
+  margin-left: auto;
+
+  background: transparent;
+  box-sizing: border-box;
 }
 
 .md-header__title,
 .md-header__topic,
 .md-header__button,
 .md-header .md-icon {
-  color: var(--agile-white) !important;
+  color: var(--agile-white);
 }
 
 .md-header__title,
 .md-header__topic {
-  font-size: 1.0040625rem !important;
-  line-height: 1.2 !important;
+  font-size: 1.0040625rem;
+  line-height: 1.2;
 }
 
 .md-header__button {
-  padding: 0.396rem !important;
-  font-size: 1.0040625rem !important;
+  padding: 0.396rem;
+  font-size: 1.0040625rem;
 }
 
 .md-header__button .md-icon {
-  font-size: 1.0040625rem !important;
+  font-size: 1.0040625rem;
 }
 
 .md-header__button:hover,
 .md-header__button:focus {
-  background: rgba(255, 255, 255, 0.14) !important;
-  color: var(--agile-white) !important;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--agile-white);
 }
 
 
 /* =========================================================
-   Logo
+   Logotipo
    ========================================================= */
 
 .md-header .md-logo {
-  display: flex !important;
-  align-items: center !important;
+  display: flex;
+  align-items: center;
 
-  margin: 0 !important;
-  padding: 0.2rem 0.55rem !important;
+  margin: 0;
+  padding: 0.2rem 0.55rem;
 }
 
 .md-header .md-logo img,
 .md-header .md-logo svg {
-  display: block !important;
+  display: block;
 
-  width: auto !important;
-  height: 2.55rem !important;
-  max-height: 2.55rem !important;
+  width: auto;
+  height: 2.55rem;
+  max-height: 2.55rem;
 
-  object-fit: contain !important;
+  object-fit: contain;
 }
 
 
@@ -251,17 +204,18 @@ body,
    ========================================================= */
 
 .md-tabs {
-  width: 100% !important;
-  max-width: none !important;
-  min-height: var(--agile-tabs-height) !important;
-  height: var(--agile-tabs-height) !important;
-  margin: 0 !important;
+  width: 100%;
+  max-width: none;
+  min-height: var(--agile-tabs-height);
+  height: var(--agile-tabs-height);
 
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  margin: 0;
 
-  background: var(--agile-primary) !important;
-  color: var(--agile-white) !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  background: var(--agile-primary);
+  color: var(--agile-white);
 
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.55) transparent;
@@ -281,65 +235,66 @@ body,
 }
 
 .md-tabs__container {
-  width: var(--agile-page-width-desktop) !important;
-  max-width: none !important;
-  height: var(--agile-tabs-height) !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
+  width: var(--agile-page-width);
+  max-width: none;
+  height: var(--agile-tabs-height);
 
-  overflow: visible !important;
-  box-sizing: border-box !important;
+  margin-right: auto;
+  margin-left: auto;
+
+  overflow: visible;
+  box-sizing: border-box;
 }
 
 .md-tabs__list {
-  display: flex !important;
-  align-items: stretch !important;
-  justify-content: flex-start !important;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
 
-  width: max-content !important;
-  min-width: 100% !important;
-  max-width: none !important;
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
 
-  height: var(--agile-tabs-height) !important;
-  min-height: var(--agile-tabs-height) !important;
+  height: var(--agile-tabs-height);
+  min-height: var(--agile-tabs-height);
 
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 
-  white-space: nowrap !important;
+  white-space: nowrap;
 }
 
 .md-tabs__item {
-  flex: 0 0 auto !important;
+  flex: 0 0 auto;
 
-  height: var(--agile-tabs-height) !important;
-  white-space: nowrap !important;
+  height: var(--agile-tabs-height);
+  white-space: nowrap;
 }
 
 .md-tabs__link {
-  display: flex !important;
-  align-items: center !important;
+  display: flex;
+  align-items: center;
 
-  height: var(--agile-tabs-height) !important;
-  box-sizing: border-box !important;
+  height: var(--agile-tabs-height);
+  box-sizing: border-box;
 
-  margin: 0 !important;
-  padding: 0 0.55rem !important;
+  margin: 0;
+  padding: 0 0.55rem;
 
-  color: var(--agile-white) !important;
-  font-size: 0.921375rem !important;
-  line-height: 1 !important;
+  color: var(--agile-white);
+  font-size: 0.921375rem;
+  line-height: 1;
 
-  white-space: nowrap !important;
-  opacity: 1 !important;
+  white-space: nowrap;
+  opacity: 1;
 }
 
 .md-tabs__link:hover,
 .md-tabs__link:focus,
 .md-tabs__link--active {
-  background: rgba(255, 255, 255, 0.14) !important;
-  color: var(--agile-white) !important;
-  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--agile-white);
+  opacity: 1;
 }
 
 
@@ -348,25 +303,25 @@ body,
    ========================================================= */
 
 .md-search__form {
-  min-height: 2.025rem !important;
-  background: rgba(255, 255, 255, 0.15) !important;
+  min-height: 2.025rem;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .md-search__form:hover,
 .md-search__form:focus-within {
-  background: rgba(255, 255, 255, 0.24) !important;
+  background: rgba(255, 255, 255, 0.24);
 }
 
 .md-search__input,
 .md-search__input::placeholder,
 .md-search__icon {
-  color: var(--agile-white) !important;
+  color: var(--agile-white);
 }
 
 .md-search__input,
 .md-search__input::placeholder {
-  font-size: 0.945rem !important;
-  line-height: 1.2 !important;
+  font-size: 0.945rem;
+  line-height: 1.2;
 }
 
 .md-search__input::placeholder {
@@ -375,111 +330,254 @@ body,
 
 
 /* =========================================================
-   Navegación lateral izquierda
+   Layout principal de tres columnas
    ========================================================= */
 
-.md-sidebar--primary {
-  background: var(--agile-sidebar) !important;
+@media screen and (min-width: 76em) {
+  .md-grid,
+  .md-main {
+    width: var(--agile-page-width);
+    max-width: none;
+
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .md-main__inner {
+    display: grid;
+
+    grid-template-columns:
+      var(--agile-left-width)
+      minmax(0, 1fr)
+      var(--agile-right-width);
+
+    grid-template-areas:
+      "primary content secondary";
+
+    gap: var(--agile-gap);
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 1.25rem 0;
+
+    align-items: start;
+  }
+
+  /* Columna izquierda */
+
+  .md-main__inner > .md-sidebar--primary {
+    grid-area: primary;
+
+    display: block;
+    position: static;
+
+    width: var(--agile-left-width);
+    min-width: 0;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Contenido central */
+
+  .md-main__inner > .md-content {
+    grid-area: content;
+
+    display: block;
+
+    width: auto;
+    min-width: 0;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Columna derecha */
+
+  .md-main__inner > .md-sidebar--secondary {
+    grid-area: secondary;
+
+    display: block;
+    position: static;
+
+    width: var(--agile-right-width);
+    min-width: 0;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+  }
 }
 
-.md-sidebar--primary .md-sidebar__scrollwrap {
-  background: var(--agile-sidebar) !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
 
-.md-sidebar--primary .md-nav__title {
+/* =========================================================
+   Estructura uniforme de ambas columnas laterales
+   ========================================================= */
+
+/*
+ * Se utiliza exactamente el mismo conjunto de reglas
+ * para la navegación izquierda y para el TOC derecho.
+ */
+
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  display: block;
   box-sizing: border-box;
 
+  width: var(--agile-left-width);
+  min-width: 0;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: visible;
+
+  background: var(--agile-sidebar);
+  color: var(--agile-text);
+}
+
+.md-sidebar--secondary {
+  width: var(--agile-right-width);
+}
+
+.md-sidebar--primary .md-sidebar__inner,
+.md-sidebar--secondary .md-sidebar__inner,
+.md-sidebar--primary .md-sidebar__scrollwrap,
+.md-sidebar--secondary .md-sidebar__scrollwrap {
+  display: block;
+  box-sizing: border-box;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
   margin: 0 !important;
-  padding: 0.61875rem 0.7875rem !important;
+  padding: 0 !important;
+
+  background: var(--agile-sidebar);
+  background-image: none;
+  box-shadow: none;
+}
+
+.md-sidebar--primary .md-sidebar__scrollwrap,
+.md-sidebar--secondary .md-sidebar__scrollwrap {
+  position: static;
+  max-height: none;
+  overflow: visible;
+}
+
+
+/* =========================================================
+   Navegaciones internas de ambas columnas
+   ========================================================= */
+
+/*
+ * Esta parte es la corrección principal del bloque azul
+ * de "Tabla de contenidos".
+ *
+ * En Material for MkDocs el TOC puede conservar una anchura
+ * propia si no se fuerza también la anchura de .md-nav.
+ */
+
+.md-sidebar--primary > .md-nav,
+.md-sidebar--secondary > .md-nav,
+.md-sidebar--primary .md-sidebar__inner > .md-nav,
+.md-sidebar--secondary .md-sidebar__inner > .md-nav,
+.md-sidebar--primary .md-sidebar__scrollwrap > .md-nav,
+.md-sidebar--secondary .md-sidebar__scrollwrap > .md-nav {
+  display: block;
+  box-sizing: border-box;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: var(--agile-sidebar);
+}
+
+
+/* =========================================================
+   Cabeceras azules de las dos columnas
+   ========================================================= */
+
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--secondary .md-nav__title {
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+  min-height: 0;
+
+  margin: 0 !important;
+  padding: 0.65rem 0.75rem !important;
+
+  overflow: hidden;
+  white-space: normal;
 
   background: var(--agile-primary) !important;
   background-image: none !important;
   color: var(--agile-white) !important;
 
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.45 !important;
+  font-size: 0.9rem;
+  line-height: 1.35;
 
   box-shadow: none !important;
 }
 
-.md-sidebar--primary .md-nav__title span {
+.md-sidebar--primary .md-nav__title span,
+.md-sidebar--secondary .md-nav__title span {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
   color: var(--agile-white) !important;
 }
 
-.md-sidebar--primary .md-nav__link {
-  box-sizing: border-box;
+
+/* =========================================================
+   Enlaces de las dos columnas
+   ========================================================= */
+
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--secondary .md-nav__link {
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
 
   margin: 0 !important;
-  padding: 0.36rem 0.7875rem !important;
+  padding: 0.38rem 0.75rem !important;
 
   background: transparent !important;
   color: var(--agile-text) !important;
 
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.45 !important;
+  font-size: 0.86rem;
+  line-height: 1.35;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .md-sidebar--primary .md-nav__link:hover,
 .md-sidebar--primary .md-nav__link:focus,
 .md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link {
-  background: transparent !important;
-  color: var(--agile-primary) !important;
-  font-weight: 700;
-
-  box-shadow: none !important;
-}
-
-
-/* =========================================================
-   Tabla de contenidos derecha
-   ========================================================= */
-
-.md-sidebar--secondary {
-  background: var(--agile-sidebar) !important;
-}
-
-.md-sidebar--secondary .md-sidebar__scrollwrap {
-  background: var(--agile-sidebar) !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-
-.md-sidebar--secondary .md-nav__title {
-  box-sizing: border-box;
-
-  margin: 0 !important;
-  padding: 0.61875rem 0.7875rem !important;
-
-  background: var(--agile-primary) !important;
-  background-image: none !important;
-  color: var(--agile-white) !important;
-
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.45 !important;
-
-  box-shadow: none !important;
-}
-
-.md-sidebar--secondary .md-nav__title span {
-  color: var(--agile-white) !important;
-}
-
-.md-sidebar--secondary .md-nav__link {
-  box-sizing: border-box;
-
-  margin: 0 !important;
-  padding: 0.36rem 0.7875rem !important;
-
-  background: transparent !important;
-  color: var(--agile-text) !important;
-
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.45 !important;
-}
-
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
 .md-sidebar--secondary .md-nav__link:hover,
 .md-sidebar--secondary .md-nav__link:focus,
 .md-sidebar--secondary .md-nav__link--active {
@@ -490,19 +588,58 @@ body,
   box-shadow: none !important;
 }
 
-.md-typeset .headerlink {
-  color: var(--agile-primary) !important;
+
+/* =========================================================
+   Niveles anidados de navegación
+   ========================================================= */
+
+.md-sidebar--primary .md-nav__list,
+.md-sidebar--secondary .md-nav__list,
+.md-sidebar--primary .md-nav__item,
+.md-sidebar--secondary .md-nav__item,
+.md-sidebar--primary .md-nav__item > .md-nav,
+.md-sidebar--secondary .md-nav__item > .md-nav {
+  display: block;
+  box-sizing: border-box;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0;
+  padding: 0;
+}
+
+.md-sidebar--primary .md-nav__item > .md-nav,
+.md-sidebar--secondary .md-nav__item > .md-nav {
+  background: var(--agile-sidebar);
 }
 
 
 /* =========================================================
-   Texto principal
+   Contenido central
    ========================================================= */
 
+.md-content,
+.md-content__inner,
 .md-typeset {
-  color: var(--agile-text) !important;
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  min-width: 0;
+  max-width: none;
+}
+
+.md-content__inner {
+  width: 100%;
+
+  margin: 0;
+  padding: 0 0.5rem;
+}
+
+.md-typeset {
+  width: 100%;
+
+  color: var(--agile-text);
+  font-size: var(--agile-font-size);
+  line-height: 1.55;
 }
 
 .md-typeset p,
@@ -510,24 +647,24 @@ body,
 .md-typeset td,
 .md-typeset th,
 .md-typeset blockquote {
-  color: var(--agile-text) !important;
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  color: var(--agile-text);
+  font-size: var(--agile-font-size);
+  line-height: 1.55;
 }
 
 .md-typeset strong,
 .md-typeset em {
-  color: var(--agile-text) !important;
+  color: var(--agile-text);
 }
 
 .md-typeset a,
 .md-typeset a:visited {
-  color: var(--agile-primary) !important;
+  color: var(--agile-primary);
 }
 
 .md-typeset a:hover,
 .md-typeset a:focus {
-  color: var(--agile-primary-dark) !important;
+  color: var(--agile-primary-dark);
 }
 
 
@@ -541,30 +678,34 @@ body,
 .md-typeset h4,
 .md-typeset h5,
 .md-typeset h6 {
-  color: var(--agile-text) !important;
+  color: var(--agile-text);
   font-weight: 700;
 }
 
 .md-typeset h1 {
-  font-size: 1.85625rem !important;
-  line-height: 1.25 !important;
+  font-size: 1.85625rem;
+  line-height: 1.25;
 }
 
 .md-typeset h2 {
-  font-size: 1.4625rem !important;
-  line-height: 1.3 !important;
+  font-size: 1.4625rem;
+  line-height: 1.3;
 }
 
 .md-typeset h3 {
-  font-size: 1.2375rem !important;
-  line-height: 1.35 !important;
+  font-size: 1.2375rem;
+  line-height: 1.35;
 }
 
 .md-typeset h4,
 .md-typeset h5,
 .md-typeset h6 {
-  font-size: 1.06875rem !important;
-  line-height: 1.4 !important;
+  font-size: 1.06875rem;
+  line-height: 1.4;
+}
+
+.md-typeset .headerlink {
+  color: var(--agile-primary);
 }
 
 
@@ -573,27 +714,27 @@ body,
    ========================================================= */
 
 .md-typeset :not(pre) > code {
-  display: inline !important;
+  display: inline;
   box-sizing: border-box;
 
-  padding: 0.09rem 0.3375rem !important;
+  padding: 0.09rem 0.3375rem;
 
-  background: var(--agile-inline-bg) !important;
-  border: 1px solid var(--agile-inline-border) !important;
+  background: var(--agile-inline-bg);
+  border: 1px solid var(--agile-inline-border);
   border-radius: 4px;
 
-  color: var(--agile-text) !important;
+  color: var(--agile-text);
 
   font-family:
     "Roboto Mono",
     "Ubuntu Mono",
     Consolas,
-    monospace !important;
+    monospace;
 
-  font-size: var(--agile-code-font-size) !important;
-  line-height: inherit !important;
+  font-size: var(--agile-code-font-size);
+  line-height: inherit;
 
-  white-space: normal !important;
+  white-space: normal;
 }
 
 
@@ -602,92 +743,99 @@ body,
    ========================================================= */
 
 .md-typeset .highlight {
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100%;
+  max-width: 100%;
 
-  margin: 0.9rem 0 !important;
-  padding: 0 !important;
+  margin: 0.9rem 0;
+  padding: 0;
 
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  background: var(--agile-code-bg) !important;
-  border: 1px solid var(--agile-code-border) !important;
-  border-radius: 6px !important;
+  background: var(--agile-code-bg);
+  border: 1px solid var(--agile-code-border);
+  border-radius: 6px;
 
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .md-typeset .highlight pre,
 .md-typeset pre {
-  box-sizing: border-box !important;
+  box-sizing: border-box;
 
-  width: 100% !important;
-  max-width: 100% !important;
+  width: 100%;
+  max-width: 100%;
 
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  background: var(--agile-code-bg) !important;
-  border: 0 !important;
-  border-radius: 6px !important;
+  background: var(--agile-code-bg);
+  border: 0;
+  border-radius: 6px;
 
-  box-shadow: none !important;
+  box-shadow: none;
 
-  color: var(--agile-text) !important;
-  font-size: var(--agile-code-font-size) !important;
-  line-height: var(--agile-code-line-height) !important;
-}
-
-.md-typeset .highlight pre > code,
-.md-typeset pre > code {
-  display: block !important;
-  box-sizing: border-box !important;
-
-  width: max-content !important;
-  min-width: 100% !important;
-  max-width: none !important;
-
-  margin: 0 !important;
-  padding: 0.7875rem 1.06875rem !important;
-
-  overflow: visible !important;
-
-  background: transparent !important;
-  color: var(--agile-text) !important;
+  color: var(--agile-text);
 
   font-family:
     "Roboto Mono",
     "Ubuntu Mono",
     Consolas,
-    monospace !important;
+    monospace;
 
-  font-size: var(--agile-code-font-size) !important;
-  line-height: var(--agile-code-line-height) !important;
+  font-size: var(--agile-code-font-size);
+  line-height: var(--agile-code-line-height);
+}
 
-  white-space: pre !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
+.md-typeset .highlight pre > code,
+.md-typeset pre > code {
+  display: block;
+  box-sizing: border-box;
+
+  width: max-content;
+  min-width: 100%;
+  max-width: none;
+
+  margin: 0;
+  padding: 0.7875rem 1.06875rem;
+
+  overflow: visible;
+
+  background: transparent;
+  color: var(--agile-text);
+
+  font-family:
+    "Roboto Mono",
+    "Ubuntu Mono",
+    Consolas,
+    monospace;
+
+  font-size: var(--agile-code-font-size);
+  line-height: var(--agile-code-line-height);
+
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .md-typeset .highlight pre > code *,
 .md-typeset pre > code * {
-  box-sizing: border-box !important;
+  box-sizing: border-box;
 
-  background: transparent !important;
-  border: 0 !important;
-  color: var(--agile-text) !important;
+  background: transparent;
+  border: 0;
+  color: var(--agile-text);
 
-  font-family: inherit !important;
-  font-size: inherit !important;
-  line-height: inherit !important;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 
-  white-space: inherit !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
+  white-space: inherit;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 
@@ -696,13 +844,13 @@ body,
    ========================================================= */
 
 .md-clipboard {
-  color: #777777 !important;
+  color: #777777;
 }
 
 .md-clipboard:hover,
 .md-clipboard:focus {
-  background: var(--agile-primary-soft) !important;
-  color: var(--agile-primary) !important;
+  background: var(--agile-primary-soft);
+  color: var(--agile-primary);
 }
 
 
@@ -711,20 +859,20 @@ body,
    ========================================================= */
 
 .admonition {
-  background: var(--agile-sidebar) !important;
-  color: var(--agile-text) !important;
+  background: var(--agile-sidebar);
+  color: var(--agile-text);
 
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  font-size: var(--agile-font-size);
+  line-height: 1.55;
 }
 
 .admonition p,
 .admonition li,
 .admonition strong,
 .admonition em {
-  color: var(--agile-text) !important;
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  color: var(--agile-text);
+  font-size: var(--agile-font-size);
+  line-height: 1.55;
 }
 
 
@@ -734,22 +882,24 @@ body,
 
 .md-typeset table {
   width: 100%;
+  max-width: 100%;
 
-  border: 1px solid #499497 !important;
+  border: 1px solid #499497;
   border-collapse: collapse;
 
-  background: var(--agile-sidebar) !important;
-  font-size: var(--agile-font-size) !important;
+  background: var(--agile-sidebar);
+  font-size: var(--agile-font-size);
 }
 
 .md-typeset table th,
 .md-typeset table td {
-  border: 1px solid #499497 !important;
-  background: var(--agile-sidebar) !important;
-  color: var(--agile-text) !important;
+  border: 1px solid #499497;
 
-  font-size: var(--agile-font-size) !important;
-  line-height: 1.55 !important;
+  background: var(--agile-sidebar);
+  color: var(--agile-text);
+
+  font-size: var(--agile-font-size);
+  line-height: 1.55;
 }
 
 .md-typeset table th {
@@ -762,8 +912,8 @@ body,
    ========================================================= */
 
 .md-typeset blockquote {
-  border-left-color: var(--agile-primary) !important;
-  color: var(--agile-text) !important;
+  border-left-color: var(--agile-primary);
+  color: var(--agile-text);
 }
 
 
@@ -771,42 +921,38 @@ body,
    Footer
    ========================================================= */
 
-/*
-   El fondo ocupa todo el ancho.
-   El contenido interior se alinea con las columnas.
-*/
-
 .md-footer {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 
-  background: var(--agile-primary) !important;
-  color: var(--agile-white) !important;
+  background: var(--agile-primary);
+  color: var(--agile-white);
 
-  font-size: 1.0040625rem !important;
-  line-height: 1.55 !important;
+  font-size: 1.0040625rem;
+  line-height: 1.55;
 }
 
 .md-footer__inner,
 .md-footer-meta__inner {
-  width: var(--agile-page-width-desktop) !important;
-  max-width: none !important;
-  margin-right: auto !important;
-  margin-left: auto !important;
+  width: var(--agile-page-width);
+  max-width: none;
 
-  box-sizing: border-box !important;
+  margin-right: auto;
+  margin-left: auto;
+
+  box-sizing: border-box;
 }
 
 .md-footer-meta {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 
-  background: var(--agile-primary-dark) !important;
+  background: var(--agile-primary-dark);
 
-  font-size: 1.0040625rem !important;
-  line-height: 1.55 !important;
+  font-size: 1.0040625rem;
+  line-height: 1.55;
 }
 
 .md-footer,
@@ -816,31 +962,14 @@ body,
 .md-footer__direction,
 .md-footer-meta__inner,
 .md-footer .md-icon {
-  color: var(--agile-white) !important;
+  color: var(--agile-white);
 }
 
 .md-footer__link,
 .md-footer__title,
 .md-footer__direction,
 .md-footer .md-icon {
-  font-size: 1.0040625rem !important;
-}
-
-
-/* =========================================================
-   Sidebar en pantallas grandes
-   ========================================================= */
-
-@media screen and (min-width: 76.25em) {
-  .md-sidebar--primary {
-    width: var(--agile-primary-sidebar-width) !important;
-    flex: 0 0 var(--agile-primary-sidebar-width) !important;
-  }
-
-  .md-sidebar--secondary {
-    width: var(--agile-secondary-sidebar-width) !important;
-    flex: 0 0 var(--agile-secondary-sidebar-width) !important;
-  }
+  font-size: 1.0040625rem;
 }
 
 
@@ -850,15 +979,15 @@ body,
 
 @media screen and (min-width: 100em) {
   .md-content__inner {
-    margin-right: var(--agile-content-gap-large) !important;
-    margin-left: var(--agile-content-gap-large) !important;
+    padding-right: 2rem;
+    padding-left: 2rem;
   }
 
   .md-tabs__link {
-    padding-right: 0.65rem !important;
-    padding-left: 0.65rem !important;
+    padding-right: 0.65rem;
+    padding-left: 0.65rem;
 
-    font-size: 0.86rem !important;
+    font-size: 0.86rem;
   }
 }
 
@@ -867,36 +996,43 @@ body,
    Pantallas medianas
    ========================================================= */
 
-@media screen and (min-width: 60em) and (max-width: 76.24em) {
+@media screen and (min-width: 60em) and (max-width: 75.99em) {
+  :root {
+    --agile-page-width: 96vw;
+    --agile-left-width: 11rem;
+    --agile-right-width: 11rem;
+    --agile-gap: 0.75rem;
+  }
+
   .md-grid,
   .md-main {
-    width: var(--agile-page-width-medium) !important;
+    width: var(--agile-page-width);
   }
 
   .md-header__inner,
   .md-tabs__container,
   .md-footer__inner,
   .md-footer-meta__inner {
-    width: var(--agile-page-width-medium) !important;
+    width: var(--agile-page-width);
   }
 
-  .md-content__inner {
-    margin-right: var(--agile-content-gap-medium) !important;
-    margin-left: var(--agile-content-gap-medium) !important;
+  .md-typeset {
+    font-size: 0.9rem;
+  }
+
+  .md-sidebar--primary .md-nav__link,
+  .md-sidebar--secondary .md-nav__link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+
+    font-size: 0.78rem;
   }
 
   .md-tabs__link {
-    padding-right: 0.45rem !important;
-    padding-left: 0.45rem !important;
+    padding-right: 0.45rem;
+    padding-left: 0.45rem;
 
-    font-size: 0.78rem !important;
-  }
-
-  .md-header,
-  .md-tabs,
-  .md-footer {
-    width: 100% !important;
-    margin: 0 !important;
+    font-size: 0.78rem;
   }
 }
 
@@ -907,48 +1043,48 @@ body,
 
 @media screen and (max-width: 76.24em) {
   .md-header {
-    min-height: 2.8rem !important;
+    min-height: 2.8rem;
   }
 
   .md-header__inner {
-    min-height: 2.8rem !important;
+    min-height: 2.8rem;
   }
 
   .md-header .md-logo {
-    padding: 0.15rem 0.45rem !important;
+    padding: 0.15rem 0.45rem;
   }
 
   .md-header .md-logo img,
   .md-header .md-logo svg {
-    height: 2.3rem !important;
-    max-height: 2.3rem !important;
+    height: 2.3rem;
+    max-height: 2.3rem;
   }
 
   .md-tabs,
   .md-tabs__list,
   .md-tabs__item,
   .md-tabs__link {
-    height: 2.25rem !important;
-    min-height: 2.25rem !important;
+    height: 2.25rem;
+    min-height: 2.25rem;
   }
 
   .md-tabs__link {
-    padding-right: 0.63rem !important;
-    padding-left: 0.63rem !important;
+    padding-right: 0.63rem;
+    padding-left: 0.63rem;
 
-    font-size: 0.81rem !important;
+    font-size: 0.81rem;
   }
 
   .md-typeset h1 {
-    font-size: 1.6875rem !important;
+    font-size: 1.6875rem;
   }
 
   .md-typeset h2 {
-    font-size: 1.35rem !important;
+    font-size: 1.35rem;
   }
 
   .md-typeset h3 {
-    font-size: 1.125rem !important;
+    font-size: 1.125rem;
   }
 }
 
@@ -960,42 +1096,71 @@ body,
 @media screen and (max-width: 59.99em) {
   .md-grid,
   .md-main {
-    width: var(--agile-page-width-mobile) !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
+    width: 100%;
+    max-width: none;
+
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .md-main__inner {
+    display: block;
+
+    width: 100%;
+    margin: 0;
+    padding: 0.75rem 0;
+  }
+
+  .md-sidebar--primary,
+  .md-sidebar--secondary {
+    display: none;
+  }
+
+  .md-content {
+    display: block;
+
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  .md-content__inner {
+    width: 100%;
+
+    margin: 0;
+    padding: 0 0.8rem;
   }
 
   .md-header__inner,
   .md-tabs__container,
   .md-footer__inner,
   .md-footer-meta__inner {
-    width: var(--agile-page-width-mobile) !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
+    width: 100%;
+
+    margin-right: 0;
+    margin-left: 0;
   }
 
-  .md-content__inner {
-    margin-right: var(--agile-content-gap-mobile) !important;
-    margin-left: var(--agile-content-gap-mobile) !important;
+  .md-tabs {
+    overflow-x: auto;
+  }
+
+  .md-tabs__list {
+    width: max-content;
+    min-width: 100%;
   }
 
   .md-tabs__link {
-    padding-right: 0.45rem !important;
-    padding-left: 0.45rem !important;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
 
-    font-size: 0.78rem !important;
-  }
-
-  .md-header,
-  .md-tabs,
-  .md-footer {
-    width: 100% !important;
-    margin: 0 !important;
+    font-size: 0.78rem;
   }
 
   .md-footer-meta {
-    width: 100% !important;
-    margin: 0 !important;
+    width: 100%;
   }
 }
 
@@ -1026,102 +1191,121 @@ body,
 [data-md-color-scheme="slate"] body,
 [data-md-color-scheme="slate"] .md-main,
 [data-md-color-scheme="slate"] .md-content,
-[data-md-color-scheme="slate"] .md-content__inner {
-  background: var(--agile-white) !important;
-  color: var(--agile-text) !important;
-}
-
-[data-md-color-scheme="slate"] .md-typeset,
-[data-md-color-scheme="slate"] .md-typeset p,
-[data-md-color-scheme="slate"] .md-typeset li,
-[data-md-color-scheme="slate"] .md-typeset td,
-[data-md-color-scheme="slate"] .md-typeset th,
-[data-md-color-scheme="slate"] .md-typeset h1,
-[data-md-color-scheme="slate"] .md-typeset h2,
-[data-md-color-scheme="slate"] .md-typeset h3,
-[data-md-color-scheme="slate"] .md-typeset h4,
-[data-md-color-scheme="slate"] .md-typeset h5,
-[data-md-color-scheme="slate"] .md-typeset h6 {
-  color: var(--agile-text) !important;
+[data-md-color-scheme="slate"] .md-content__inner,
+[data-md-color-scheme="slate"] .md-typeset {
+  background: var(--agile-white);
+  color: var(--agile-text);
 }
 
 [data-md-color-scheme="slate"] .md-sidebar--primary,
 [data-md-color-scheme="slate"] .md-sidebar--secondary,
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-sidebar__inner,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-sidebar__inner,
 [data-md-color-scheme="slate"] .md-sidebar--primary .md-sidebar__scrollwrap,
-[data-md-color-scheme="slate"] .md-sidebar--secondary .md-sidebar__scrollwrap {
-  background: var(--agile-sidebar) !important;
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-sidebar__scrollwrap,
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav {
+  background: var(--agile-sidebar);
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .md-nav__title,
+[data-md-color-scheme="slate"] .md-sidebar--secondary .md-nav__title {
+  background: var(--agile-primary);
+  color: var(--agile-white);
 }
 
 [data-md-color-scheme="slate"] .md-typeset .highlight,
 [data-md-color-scheme="slate"] .md-typeset pre {
-  background: var(--agile-code-bg) !important;
-  color: var(--agile-text) !important;
+  background: var(--agile-code-bg);
+  color: var(--agile-text);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .highlight pre > code,
+[data-md-color-scheme="slate"] .md-typeset pre > code {
+  background: transparent;
+  color: var(--agile-text);
 }
 
 /* =========================================================
-   Uniformidad de las columnas laterales
+   Correcciones finales de navegación
    ========================================================= */
 
-/*
-   Todos los elementos internos de las barras laterales deben
-   ocupar exactamente el ancho de su columna padre.
-*/
+
+/* ---------------------------------------------------------
+   1. Eliminar la cabecera duplicada de la sección activa
+   ---------------------------------------------------------
+
+   Material muestra:
+   - El enlace de la sección
+   - La cabecera interna de la sección activa
+
+   Conservamos el enlace y ocultamos únicamente la cabecera
+   interna duplicada.
+   */
+
+@media screen and (min-width: 60em) {
+  .md-sidebar--primary
+  .md-nav__item--active
+  > .md-nav
+  > .md-nav__title {
+    display: none !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   2. Mantener uniforme el fondo de la navegación izquierda
+   --------------------------------------------------------- */
 
 .md-sidebar--primary,
-.md-sidebar--secondary {
-  box-sizing: border-box !important;
-
-  width: 12rem !important;
-  min-width: 12rem !important;
-  max-width: 12rem !important;
-
-  flex: 0 0 12rem !important;
-
-  overflow: hidden !important;
-}
-
 .md-sidebar--primary .md-sidebar__inner,
-.md-sidebar--secondary .md-sidebar__inner,
 .md-sidebar--primary .md-sidebar__scrollwrap,
-.md-sidebar--secondary .md-sidebar__scrollwrap,
 .md-sidebar--primary .md-nav,
-.md-sidebar--secondary .md-nav {
-  box-sizing: border-box !important;
+.md-sidebar--primary .md-nav__list {
+  background: var(--agile-sidebar) !important;
+}
 
+
+/* ---------------------------------------------------------
+   3. Ocultar el título azul de la columna derecha
+   ---------------------------------------------------------
+
+   Se elimina únicamente el bloque azul que contiene
+   "Tabla de contenidos".
+
+   La columna gris y sus enlaces permanecen visibles.
+   */
+
+.md-sidebar--secondary
+.md-nav__title {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   4. Ajustar la columna derecha después de ocultar el título
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary,
+.md-sidebar--secondary .md-sidebar__inner,
+.md-sidebar--secondary .md-sidebar__scrollwrap,
+.md-sidebar--secondary .md-nav,
+.md-sidebar--secondary .md-nav__list {
   width: 100% !important;
   min-width: 0 !important;
   max-width: 100% !important;
 
   margin: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding: 0 !important;
+
+  background: var(--agile-sidebar) !important;
 }
 
-/*
-   La cabecera de cada navegación debe tener exactamente
-   la misma anchura que el resto de la columna.
-*/
 
-.md-sidebar--primary .md-nav__title,
-.md-sidebar--secondary .md-nav__title {
-  display: block !important;
-  box-sizing: border-box !important;
+/* ---------------------------------------------------------
+   5. Enlaces del TOC derecho
+   --------------------------------------------------------- */
 
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-  padding: 0.61875rem 0.7875rem !important;
-
-  overflow: hidden !important;
-}
-
-/*
-   Los enlaces tampoco deben crear una anchura diferente.
-*/
-
-.md-sidebar--primary .md-nav__link,
 .md-sidebar--secondary .md-nav__link {
   display: block !important;
   box-sizing: border-box !important;
@@ -1131,33 +1315,286 @@ body,
   max-width: 100% !important;
 
   margin: 0 !important;
+  padding: 0.38rem 0.75rem !important;
+
+  background: transparent !important;
+  color: var(--agile-text) !important;
+
+  font-size: 0.86rem !important;
+  line-height: 1.35 !important;
+
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
 }
 
-/*
-   Evita que los niveles anidados sobresalgan de la columna.
-*/
 
-.md-sidebar--primary .md-nav__list,
+/* ---------------------------------------------------------
+   6. Estado activo del TOC
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary .md-nav__link--active,
+.md-sidebar--secondary
+.md-nav__item--active
+> .md-nav__link {
+  background: transparent !important;
+  color: var(--agile-primary) !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   7. Evitar que el mismo elemento activo se pinte dos veces
+   ---------------------------------------------------------
+
+   Material puede marcar simultáneamente el enlace activo
+   y el elemento padre activo. Se elimina la apariencia del
+   enlace padre cuando contiene otra navegación activa.
+   */
+
+.md-sidebar--secondary
+.md-nav__item--active
+> .md-nav
+> .md-nav__item--active
+> .md-nav__link {
+  color: var(--agile-primary) !important;
+  font-weight: 700 !important;
+}
+
+
+/* ---------------------------------------------------------
+   8. Niveles anidados del TOC
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary .md-nav__item,
 .md-sidebar--secondary .md-nav__list,
-.md-sidebar--primary .md-nav__item,
-.md-sidebar--secondary .md-nav__item {
+.md-sidebar--secondary .md-nav__item > .md-nav {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  box-sizing: border-box !important;
+}
+
+.md-sidebar--secondary .md-nav__item > .md-nav {
+  background: var(--agile-sidebar) !important;
+}
+
+
+/* ---------------------------------------------------------
+   9. Igualar visualmente ambas columnas laterales
+   --------------------------------------------------------- */
+
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  box-sizing: border-box !important;
+
+  background: var(--agile-sidebar) !important;
+  color: var(--agile-text) !important;
+}
+
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--secondary .md-nav__link {
   box-sizing: border-box !important;
 
   width: 100% !important;
   min-width: 0 !important;
   max-width: 100% !important;
+
+  color: var(--agile-text) !important;
 }
 
-/*
-   El texto puede partirse sin modificar la anchura
-   de la columna.
-*/
+.md-sidebar--primary .md-nav__link:hover,
+.md-sidebar--primary .md-nav__link:focus,
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--secondary .md-nav__link:hover,
+.md-sidebar--secondary .md-nav__link:focus,
+.md-sidebar--secondary .md-nav__link--active,
+.md-sidebar--secondary .md-nav__item--active > .md-nav__link {
+  background: transparent !important;
+  color: var(--agile-primary) !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
 
-.md-sidebar--primary .md-nav__link,
-.md-sidebar--secondary .md-nav__link,
-.md-sidebar--primary .md-nav__title,
-.md-sidebar--secondary .md-nav__title {
+/* =========================================================
+   Corrección definitiva de enlaces duplicados
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. Ocultar el título interno duplicado de la sección activa
+   --------------------------------------------------------- */
+
+@media screen and (min-width: 60em) {
+  .md-sidebar--primary
+  .md-nav__item--active
+  > .md-nav
+  > .md-nav__title {
+    display: none !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   2. Ocultar el enlace padre cuando contiene otro enlace activo
+   ---------------------------------------------------------
+
+   Estructura típica:
+
+   Sección activa
+   ├── Enlace de la sección activa
+   └── Navegación interna
+       └── Página activa
+
+   Si ambos enlaces tienen el mismo texto, se conserva el
+   enlace interno de la página y se oculta únicamente el
+   enlace padre duplicado.
+   */
+
+@media screen and (min-width: 60em) {
+  .md-sidebar--primary
+  .md-nav--primary
+  > .md-nav__list
+  > .md-nav__item--active:has(
+    > .md-nav
+    > .md-nav__list
+    > .md-nav__item--active
+  )
+  > .md-nav__link {
+    display: none !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   3. Estilo común para las dos columnas laterales
+   --------------------------------------------------------- */
+
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  background: var(--agile-sidebar) !important;
+  color: var(--agile-text) !important;
+}
+
+
+/* ---------------------------------------------------------
+   4. Eliminar el título "Tabla de contenidos"
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary
+.md-nav--secondary
+> .md-nav__title {
+  display: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   5. Anchura uniforme del TOC derecho
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary,
+.md-sidebar--secondary .md-sidebar__inner,
+.md-sidebar--secondary .md-sidebar__scrollwrap,
+.md-sidebar--secondary .md-nav--secondary,
+.md-sidebar--secondary .md-nav__list {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: var(--agile-sidebar) !important;
+}
+
+
+/* ---------------------------------------------------------
+   6. Enlaces del TOC derecho
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary
+.md-nav--secondary
+.md-nav__link {
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0.38rem 0.75rem !important;
+
+  background: transparent !important;
+  color: var(--agile-text) !important;
+
+  font-size: 0.86rem !important;
+  line-height: 1.35 !important;
+
   white-space: normal !important;
   overflow-wrap: anywhere !important;
-  word-break: normal !important;
+}
+
+
+/* ---------------------------------------------------------
+   7. Estado activo del TOC derecho
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary
+.md-nav--secondary
+.md-nav__link--active {
+  background: transparent !important;
+  color: var(--agile-primary) !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   8. Niveles internos del TOC
+   --------------------------------------------------------- */
+
+.md-sidebar--secondary
+.md-nav--secondary
+.md-nav__item,
+.md-sidebar--secondary
+.md-nav--secondary
+.md-nav__list,
+.md-sidebar--secondary
+.md-nav--secondary
+.md-nav__item
+> .md-nav {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: var(--agile-sidebar) !important;
+}
+
+
+/* ---------------------------------------------------------
+   9. Estado activo de la navegación izquierda
+   --------------------------------------------------------- */
+
+.md-sidebar--primary
+.md-nav__link--active,
+.md-sidebar--primary
+.md-nav__item--active
+> .md-nav__link {
+  background: transparent !important;
+  color: var(--agile-primary) !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
 }
