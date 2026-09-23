@@ -1057,3 +1057,107 @@ body,
   background: var(--agile-code-bg) !important;
   color: var(--agile-text) !important;
 }
+
+/* =========================================================
+   Uniformidad de las columnas laterales
+   ========================================================= */
+
+/*
+   Todos los elementos internos de las barras laterales deben
+   ocupar exactamente el ancho de su columna padre.
+*/
+
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  box-sizing: border-box !important;
+
+  width: 12rem !important;
+  min-width: 12rem !important;
+  max-width: 12rem !important;
+
+  flex: 0 0 12rem !important;
+
+  overflow: hidden !important;
+}
+
+.md-sidebar--primary .md-sidebar__inner,
+.md-sidebar--secondary .md-sidebar__inner,
+.md-sidebar--primary .md-sidebar__scrollwrap,
+.md-sidebar--secondary .md-sidebar__scrollwrap,
+.md-sidebar--primary .md-nav,
+.md-sidebar--secondary .md-nav {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/*
+   La cabecera de cada navegación debe tener exactamente
+   la misma anchura que el resto de la columna.
+*/
+
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--secondary .md-nav__title {
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0.61875rem 0.7875rem !important;
+
+  overflow: hidden !important;
+}
+
+/*
+   Los enlaces tampoco deben crear una anchura diferente.
+*/
+
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--secondary .md-nav__link {
+  display: block !important;
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+/*
+   Evita que los niveles anidados sobresalgan de la columna.
+*/
+
+.md-sidebar--primary .md-nav__list,
+.md-sidebar--secondary .md-nav__list,
+.md-sidebar--primary .md-nav__item,
+.md-sidebar--secondary .md-nav__item {
+  box-sizing: border-box !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+/*
+   El texto puede partirse sin modificar la anchura
+   de la columna.
+*/
+
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--secondary .md-nav__link,
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--secondary .md-nav__title {
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
