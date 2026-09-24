@@ -153,7 +153,7 @@ nav:
       - Laboratorio integrador: 04-dashboards-visualizacion/14-laboratorio.md
 
   - Anotaciones y alertas:
-      - Introducción: 05-anotaciones-alertas/index.md
+      - Introducción: 05-anotaciones-alertas/01-index.md
       - Anotaciones: 05-anotaciones-alertas/anotaciones.md
       - Alertas: 05-anotaciones-alertas/alertas.md
       - Reglas de alerta: 05-anotaciones-alertas/reglas-alerta.md
@@ -167,7 +167,7 @@ nav:
       - Laboratorio: 05-anotaciones-alertas/laboratorio.md
 
   - Proyecto final:
-      - Introducción: 06-proyecto-final/index.md
+      - Introducción: 06-proyecto-final/01-index.md
       - Escenario: 06-proyecto-final/escenario.md
       - Requisitos: 06-proyecto-final/requisitos.md
       - Tareas: 06-proyecto-final/tareas.md
