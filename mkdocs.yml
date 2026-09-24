@@ -125,15 +125,16 @@ nav:
       - Laboratorio: 02-grafana/09-laboratorio.md
 
   - Prometheus y fuentes de datos:
-      - Introducción: 03-prometheus-fuentes-datos/index.md
-      - Arquitectura de Prometheus: 03-prometheus-fuentes-datos/arquitectura-prometheus.md
-      - Instalación de Prometheus: 03-prometheus-fuentes-datos/instalacion-prometheus.md
-      - Interfaz web: 03-prometheus-fuentes-datos/interfaz-web-prometheus.md
-      - Instalación de Node Exporter: 03-prometheus-fuentes-datos/instalacion-node-exporter.md
-      - Configuración de scraping: 03-prometheus-fuentes-datos/configuracion-scrape.md
-      - Consultas PromQL: 03-prometheus-fuentes-datos/consultas-promql.md
-      - Añadir fuente de datos: 03-prometheus-fuentes-datos/anadir-fuente-datos.md
-      - Laboratorio: 03-prometheus-fuentes-datos/laboratorio.md
+      - Introducción: 03-prometheus-fuentes-datos/01-index.md
+      - Entorno de laboratorio: 03-prometheus-fuentes-datos/02-entorno-laboratorio.md
+      - Arquitectura de Prometheus: 03-prometheus-fuentes-datos/03-arquitectura-prometheus.md
+      - Instalación de Prometheus: 03-prometheus-fuentes-datos/04-instalacion-prometheus.md
+      - Interfaz web de Prometheus: 03-prometheus-fuentes-datos/05-interfaz-web-prometheus.md
+      - Instalación de Node Exporter: 03-prometheus-fuentes-datos/06-instalacion-node-exporter.md
+      - Configuración del scraping: 03-prometheus-fuentes-datos/07-configuracion-scrape.md
+      - Consultas PromQL: 03-prometheus-fuentes-datos/08-consultas-promql.md
+      - Añadir fuente de datos: 03-prometheus-fuentes-datos/09-anadir-fuente-datos.md
+      - Laboratorio práctico: 03-prometheus-fuentes-datos/10-laboratorio.md
 
   - Dashboards y visualización:
       - Introducción: 04-dashboards-visualizacion/index.md
