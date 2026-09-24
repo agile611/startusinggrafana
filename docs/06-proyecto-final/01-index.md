@@ -36,7 +36,7 @@ Documentar la solución
 
 El proyecto debe realizarse únicamente en un entorno de laboratorio autorizado. No se deben detener servicios ni generar carga sobre sistemas de producción.
 
-**Objetivos**
+## Objetivos
 
 Al finalizar este bloque, el alumno podrá:
 
@@ -62,7 +62,7 @@ Al finalizar este bloque, el alumno podrá:
 - Elaborar una memoria final del proyecto.
 - Presentar una solución ordenada, reproducible y mantenible.
 
-**Contenidos**
+## Contenidos
 
 El proyecto se divide en las siguientes áreas:
 
@@ -90,7 +90,7 @@ El proyecto se divide en las siguientes áreas:
 - Diagnóstico de errores.
 - Documentación y entrega.
 
-**Escenario del proyecto**
+## Escenario del proyecto
 
 Una organización ficticia desea implantar una plataforma básica de observabilidad para supervisar sus servidores.
 
@@ -129,7 +129,7 @@ Grafana
         +--> Anotaciones
 ```
 
-**Resultado final esperado**
+## Resultado final esperado
 
 El alumno deberá entregar una solución que incluya:
 
@@ -145,7 +145,7 @@ El alumno deberá entregar una solución que incluya:
 - Evidencias de las pruebas.
 - Una memoria técnica.
 
-**Prácticas relacionadas**
+## Prácticas relacionadas
 
 Las prácticas del proyecto deben realizarse en el orden siguiente:
 
@@ -169,7 +169,7 @@ La secuencia recomendada es:
 11-criterios-evaluacion.md
 ```
 
-**Requisitos técnicos**
+## Requisitos técnicos
 
 Antes de comenzar, el alumno debe disponer de:
 
@@ -213,7 +213,7 @@ URL de Prometheus:
 Contacto de laboratorio:
 ```
 
-**Reglas de seguridad**
+## Reglas de seguridad
 
 El proyecto se ejecutará en un entorno controlado.
 
@@ -240,7 +240,7 @@ Las credenciales no deben aparecer en:
 
 Las notificaciones deben utilizar contactos de laboratorio.
 
-**Estructura de directorios recomendada**
+## Estructura de directorios recomendada
 
 Crear una estructura de trabajo:
 
@@ -294,9 +294,13 @@ Resultado final:
 EOF
 ```
 
-**Sesión 1: comprobar el entorno**
+## Sesión 1: comprobar el entorno
 
-Objetivo: verificar que todos los componentes necesarios están disponibles.
+### Objetivo
+
+Verificar que todos los componentes necesarios están disponibles.
+
+### Comprobación de servicios
 
 Comprobar Node Exporter:
 
@@ -342,7 +346,7 @@ node_memory_MemTotal_bytes
 node_filesystem_size_bytes
 ```
 
-Registrar:
+### Registro
 
 ```text
 Node Exporter:
@@ -358,7 +362,7 @@ Conectividad:
 Observaciones:
 ```
 
-Resultado esperado:
+### Resultado esperado
 
 ```text
 Los servicios están activos.
@@ -367,11 +371,13 @@ Prometheus está disponible.
 Grafana puede abrirse desde el navegador.
 ```
 
-**Sesión 2: comprobar la fuente de datos**
+## Sesión 2: comprobar la fuente de datos
 
-Objetivo: confirmar que Grafana puede consultar Prometheus.
+### Objetivo
 
-Pasos:
+Confirmar que Grafana puede consultar Prometheus.
+
+### Procedimiento
 
 1. Acceder a Grafana.
 2. Abrir la sección de fuentes de datos.
@@ -380,7 +386,7 @@ Pasos:
 5. Confirmar que la fuente funciona.
 6. Registrar el resultado.
 
-Datos de la fuente:
+### Datos de la fuente
 
 ```text
 Nombre:
@@ -396,6 +402,8 @@ Fecha de comprobación:
 Observaciones:
 ```
 
+### Diagnóstico
+
 Si la prueba falla, revisar:
 
 - URL de Prometheus.
@@ -406,9 +414,11 @@ Si la prueba falla, revisar:
 - Logs de Grafana.
 - Logs de Prometheus.
 
-**Sesión 3: validar consultas PromQL**
+## Sesión 3: validar consultas PromQL
 
-Objetivo: comprobar que las métricas necesarias están disponibles.
+### Objetivo
+
+Comprobar que las métricas necesarias están disponibles.
 
 Abrir:
 
@@ -416,13 +426,13 @@ Abrir:
 Explore → Prometheus
 ```
 
-Probar la disponibilidad:
+### Disponibilidad general
 
 ```promql
 up
 ```
 
-Probar Node Exporter:
+### Disponibilidad de Node Exporter
 
 ```promql
 up{job="node_exporter"}
@@ -435,7 +445,7 @@ Interpretar los valores:
 0 = objetivo no disponible
 ```
 
-Probar la CPU:
+### CPU utilizada
 
 ```promql
 100 - (
@@ -445,7 +455,7 @@ Probar la CPU:
 )
 ```
 
-Probar la memoria utilizada:
+### Memoria utilizada
 
 ```promql
 100 * (
@@ -456,7 +466,7 @@ Probar la memoria utilizada:
 )
 ```
 
-Probar el almacenamiento utilizado:
+### Almacenamiento utilizado
 
 ```promql
 100 * (
@@ -473,7 +483,7 @@ Probar el almacenamiento utilizado:
 )
 ```
 
-Guardar las consultas:
+### Guardar las consultas
 
 ```bash
 cat > ~/proyecto-final-grafana/evidencias/promql/consultas.txt <<'EOF'
@@ -511,7 +521,7 @@ Almacenamiento:
 EOF
 ```
 
-Registrar:
+### Registro
 
 ```text
 Consulta:
@@ -527,9 +537,11 @@ Unidad:
 Observaciones:
 ```
 
-**Sesión 4: crear el primer dashboard**
+## Sesión 4: crear el primer dashboard
 
-Objetivo: construir un dashboard básico con las métricas principales.
+### Objetivo
+
+Construir un dashboard básico con las métricas principales.
 
 Crear un dashboard llamado:
 
@@ -537,7 +549,7 @@ Crear un dashboard llamado:
 Proyecto final - Primer dashboard
 ```
 
-Añadir un panel de disponibilidad:
+### Panel de disponibilidad
 
 ```promql
 up{job="node_exporter"}
@@ -556,7 +568,7 @@ Unidad:
 none
 ```
 
-Añadir un panel de CPU:
+### Panel de CPU
 
 ```promql
 100 - (
@@ -579,7 +591,7 @@ Unidad:
 Percent (0-100)
 ```
 
-Añadir un panel de memoria:
+### Panel de memoria
 
 ```promql
 100 * (
@@ -603,7 +615,7 @@ Unidad:
 Percent (0-100)
 ```
 
-Añadir un panel de almacenamiento:
+### Panel de almacenamiento
 
 ```promql
 100 * (
@@ -633,6 +645,8 @@ Unidad:
 Percent (0-100)
 ```
 
+### Registro
+
 Guardar el dashboard y registrar:
 
 ```text
@@ -649,9 +663,13 @@ Intervalo de actualización:
 Observaciones:
 ```
 
-**Sesión 5: crear un dashboard operativo**
+## Sesión 5: crear un dashboard operativo
 
-Objetivo: transformar el primer dashboard en una vista útil para operaciones.
+### Objetivo
+
+Transformar el primer dashboard en una vista útil para operaciones.
+
+### Configuración general
 
 Renombrar el dashboard como:
 
@@ -666,6 +684,8 @@ Dashboard operativo para supervisar disponibilidad,
 CPU, memoria y almacenamiento de los servidores de laboratorio.
 ```
 
+### Títulos de los paneles
+
 Configurar los paneles con títulos claros:
 
 ```text
@@ -675,7 +695,7 @@ Memoria utilizada por instancia
 Almacenamiento utilizado por sistema de ficheros
 ```
 
-Configurar umbrales visuales:
+### Umbrales visuales
 
 ```text
 CPU:
@@ -694,6 +714,8 @@ Almacenamiento:
 80-100 = rojo
 ```
 
+### Revisión
+
 Revisar:
 
 - Títulos.
@@ -705,7 +727,7 @@ Revisar:
 - Enlaces.
 - Legibilidad.
 
-Registrar:
+### Registro
 
 ```text
 Panel mejorado:
@@ -717,9 +739,11 @@ Motivo:
 Resultado:
 ```
 
-**Sesión 6: añadir variables al dashboard**
+## Sesión 6: añadir variables al dashboard
 
-Objetivo: permitir seleccionar una instancia desde el dashboard.
+### Objetivo
+
+Permitir seleccionar una instancia desde el dashboard.
 
 Crear una variable llamada:
 
@@ -727,7 +751,7 @@ Crear una variable llamada:
 instance
 ```
 
-Consulta de la variable:
+### Consulta de la variable
 
 ```promql
 label_values(up{job="node_exporter"}, instance)
@@ -735,7 +759,7 @@ label_values(up{job="node_exporter"}, instance)
 
 Si la función no está disponible en la versión utilizada, consultar las etiquetas mediante el mecanismo equivalente del datasource.
 
-Aplicar la variable a las consultas:
+### Consulta de CPU con variable
 
 ```promql
 100 - (
@@ -748,7 +772,7 @@ Aplicar la variable a las consultas:
 )
 ```
 
-Memoria:
+### Consulta de memoria con variable
 
 ```promql
 100 * (
@@ -763,7 +787,7 @@ Memoria:
 )
 ```
 
-Disponibilidad:
+### Consulta de disponibilidad con variable
 
 ```promql
 up{
@@ -772,7 +796,7 @@ up{
 }
 ```
 
-Probar:
+### Pruebas
 
 1. Seleccionar una instancia.
 2. Comprobar que cambian los paneles.
@@ -780,7 +804,7 @@ Probar:
 4. Comprobar que se muestran todas.
 5. Revisar que no aparecen series inesperadas.
 
-Registrar:
+### Registro
 
 ```text
 Variable:
@@ -794,9 +818,13 @@ Filtro aplicado:
 Resultado:
 ```
 
-**Sesión 7: crear una alerta de disponibilidad**
+## Sesión 7: crear una alerta de disponibilidad
 
-Objetivo: detectar que Node Exporter deja de responder.
+### Objetivo
+
+Detectar que Node Exporter deja de responder.
+
+### Configuración
 
 Nombre:
 
@@ -826,7 +854,7 @@ Duración:
 1 minuto
 ```
 
-Etiquetas:
+### Etiquetas
 
 ```text
 alertname = NodeExporterDown-Laboratory
@@ -837,7 +865,7 @@ environment = laboratory
 resource = availability
 ```
 
-Anotaciones:
+### Anotaciones
 
 ```text
 summary = Node Exporter no disponible en {{ $labels.instance }}
@@ -850,7 +878,7 @@ runbook_url = https://example.com/runbooks/node-exporter-down
 
 Guardar la regla y comprobar que empieza en estado `Normal`.
 
-Registrar:
+### Registro
 
 ```text
 Nombre:
@@ -868,9 +896,13 @@ Anotaciones:
 Estado inicial:
 ```
 
-**Sesión 8: crear una alerta de CPU**
+## Sesión 8: crear una alerta de CPU
 
-Objetivo: detectar un uso sostenido de CPU superior al 90 %.
+### Objetivo
+
+Detectar un uso sostenido de CPU superior al 90 %.
+
+### Configuración
 
 Nombre:
 
@@ -904,7 +936,7 @@ Duración:
 5 minutos
 ```
 
-Etiquetas:
+### Etiquetas
 
 ```text
 alertname = HighCPUUsage-Laboratory
@@ -915,7 +947,7 @@ environment = laboratory
 resource = cpu
 ```
 
-Anotaciones:
+### Anotaciones
 
 ```text
 summary = CPU elevada en {{ $labels.instance }}
@@ -926,16 +958,17 @@ supera el 90 % durante cinco minutos.
 runbook_url = https://example.com/runbooks/high-cpu
 ```
 
-Explicar en la documentación por qué se utiliza una duración de cinco minutos:
+### Justificación de la duración
 
-```text
-La duración evita generar una alerta por un pico breve
-que no representa necesariamente un problema sostenido.
-```
+La duración evita generar una alerta por un pico breve que no representa necesariamente un problema sostenido.
 
-**Sesión 9: crear una alerta de memoria**
+## Sesión 9: crear una alerta de memoria
 
-Objetivo: detectar un uso de memoria superior al 90 %.
+### Objetivo
+
+Detectar un uso de memoria superior al 90 %.
+
+### Configuración
 
 Nombre:
 
@@ -970,7 +1003,7 @@ Duración:
 5 minutos
 ```
 
-Etiquetas:
+### Etiquetas
 
 ```text
 alertname = HighMemoryUsage-Laboratory
@@ -981,7 +1014,7 @@ environment = laboratory
 resource = memory
 ```
 
-Anotaciones:
+### Anotaciones
 
 ```text
 summary = Memoria elevada en {{ $labels.instance }}
@@ -992,9 +1025,13 @@ supera el 90 % durante cinco minutos.
 runbook_url = https://example.com/runbooks/high-memory
 ```
 
-**Sesión 10: crear una alerta de almacenamiento**
+## Sesión 10: crear una alerta de almacenamiento
 
-Objetivo: detectar un uso elevado del sistema de ficheros raíz.
+### Objetivo
+
+Detectar un uso elevado del sistema de ficheros raíz.
+
+### Configuración
 
 Nombre:
 
@@ -1035,7 +1072,7 @@ Duración:
 10 minutos
 ```
 
-Etiquetas:
+### Etiquetas
 
 ```text
 alertname = FilesystemUsageHigh-Laboratory
@@ -1047,7 +1084,7 @@ resource = filesystem
 mountpoint = /
 ```
 
-Anotaciones:
+### Anotaciones
 
 ```text
 summary = Almacenamiento elevado en {{ $labels.instance }}
@@ -1058,11 +1095,13 @@ description = El sistema de ficheros raíz de
 runbook_url = https://example.com/runbooks/filesystem-full
 ```
 
-**Sesión 11: crear anotaciones operativas**
+## Sesión 11: crear anotaciones operativas
 
-Objetivo: registrar eventos que puedan explicar cambios en las métricas.
+### Objetivo
 
-Crear una anotación de inicio:
+Registrar eventos que puedan explicar cambios en las métricas.
+
+### Anotación de inicio
 
 ```text
 Título:
@@ -1080,7 +1119,7 @@ environment = laboratory
 team = training
 ```
 
-Crear una anotación de despliegue:
+### Anotación de despliegue
 
 ```text
 Título:
@@ -1099,7 +1138,7 @@ environment = laboratory
 service = demo-app
 ```
 
-Crear una anotación de prueba de carga:
+### Anotación de prueba de carga
 
 ```text
 Título:
@@ -1116,7 +1155,7 @@ event = load-test
 environment = laboratory
 ```
 
-Crear una anotación de mantenimiento:
+### Anotación de mantenimiento
 
 ```text
 Título:
@@ -1137,13 +1176,15 @@ service = node_exporter
 
 Comprobar que las anotaciones aparecen en el dashboard.
 
-**Sesión 12: crear un contacto de notificación**
+## Sesión 12: crear un contacto de notificación
 
-Objetivo: configurar un destino de laboratorio.
+### Objetivo
+
+Configurar un destino de laboratorio.
 
 Utilizar un correo, webhook o canal colaborativo autorizado.
 
-Ejemplo:
+### Ejemplo
 
 ```text
 Nombre:
@@ -1156,7 +1197,7 @@ Finalidad:
 Recibir las alertas del proyecto final
 ```
 
-Pasos:
+### Procedimiento
 
 1. Acceder a la configuración de alertas.
 2. Crear un contacto.
@@ -1168,7 +1209,7 @@ Pasos:
 
 No incluir credenciales en el informe.
 
-Registrar:
+### Registro
 
 ```text
 Nombre del contacto:
@@ -1186,9 +1227,13 @@ Tiempo aproximado de entrega:
 Observaciones:
 ```
 
-**Sesión 13: crear una política de notificación**
+## Sesión 13: crear una política de notificación
 
-Objetivo: enviar las alertas del entorno de laboratorio al contacto creado.
+### Objetivo
+
+Enviar las alertas del entorno de laboratorio al contacto creado.
+
+### Configuración
 
 Coincidencia:
 
@@ -1227,7 +1272,7 @@ Crear la ruta y guardar.
 
 Probar con una alerta de laboratorio.
 
-Registrar:
+### Registro
 
 ```text
 Coincidencia:
@@ -1245,9 +1290,13 @@ repeat_interval:
 Resultado:
 ```
 
-**Sesión 14: probar el ciclo de disponibilidad**
+## Sesión 14: probar el ciclo de disponibilidad
 
-Objetivo: comprobar la activación, notificación y recuperación de una alerta.
+### Objetivo
+
+Comprobar la activación, notificación y recuperación de una alerta.
+
+### Preparación
 
 Crear primero una anotación:
 
@@ -1265,6 +1314,8 @@ Comprobar el estado inicial:
 ```text
 Normal
 ```
+
+### Detener Node Exporter
 
 Detener Node Exporter únicamente en la máquina de laboratorio:
 
@@ -1284,7 +1335,7 @@ Pending
 Alerting
 ```
 
-Registrar:
+### Registro de la activación
 
 ```text
 Hora de detención:
@@ -1300,7 +1351,7 @@ Instancia afectada:
 Contacto utilizado:
 ```
 
-Volver a iniciar Node Exporter:
+### Recuperar el servicio
 
 ```bash
 sudo systemctl start node_exporter
@@ -1327,9 +1378,11 @@ Duración total:
 Resultado:
 ```
 
-**Sesión 15: probar la alerta de CPU**
+## Sesión 15: probar la alerta de CPU
 
-Objetivo: observar el comportamiento de una alerta con periodo de duración.
+### Objetivo
+
+Observar el comportamiento de una alerta con periodo de duración.
 
 Crear una anotación:
 
@@ -1366,7 +1419,7 @@ Duración:
 
 Una carga de solo 60 segundos puede no activar la alerta. Esto permite comprobar que la duración evita alertas por picos breves.
 
-Registrar:
+### Registro
 
 ```text
 Valor máximo observado:
@@ -1384,9 +1437,11 @@ Explicación:
 
 Si el instructor autoriza una prueba de activación completa, utilizar una duración compatible con el periodo configurado.
 
-**Sesión 16: probar una alerta de memoria**
+## Sesión 16: probar una alerta de memoria
 
-Objetivo: validar la regla de memoria sin poner en riesgo el sistema.
+### Objetivo
+
+Validar la regla de memoria sin poner en riesgo el sistema.
 
 Antes de generar carga, registrar:
 
@@ -1418,9 +1473,11 @@ Recuperación:
 
 Si no es seguro generar la condición, documentar la prueba de consulta y explicar cómo se activaría en un entorno controlado.
 
-**Sesión 17: probar un silenciamiento**
+## Sesión 17: probar un silenciamiento
 
-Objetivo: verificar que una alerta puede seguir evaluándose sin enviar notificaciones durante una actividad conocida.
+### Objetivo
+
+Verificar que una alerta puede seguir evaluándose sin enviar notificaciones durante una actividad conocida.
 
 Crear una anotación:
 
@@ -1431,6 +1488,8 @@ Inicio de mantenimiento de laboratorio
 Descripción:
 Se detendrá Node Exporter para validar un silenciamiento temporal.
 ```
+
+### Crear el silencio
 
 Crear un silencio con estas coincidencias:
 
@@ -1454,7 +1513,7 @@ Mantenimiento autorizado del laboratorio.
 Prueba de silenciamiento asociada al proyecto final.
 ```
 
-Detener Node Exporter:
+### Activar la alerta
 
 ```bash
 sudo systemctl stop node_exporter
@@ -1469,13 +1528,13 @@ El silencio está activo.
 La notificación queda suprimida.
 ```
 
-Volver a iniciar Node Exporter:
+### Recuperar el servicio
 
 ```bash
 sudo systemctl start node_exporter
 ```
 
-Registrar:
+### Registro
 
 ```text
 Silencio creado:
@@ -1497,9 +1556,11 @@ Hora de recuperación:
 Resultado:
 ```
 
-**Sesión 18: comprobar una alerta sin coincidencia**
+## Sesión 18: comprobar una alerta sin coincidencia
 
-Objetivo: investigar qué ocurre cuando una alerta no encuentra una política específica.
+### Objetivo
+
+Investigar qué ocurre cuando una alerta no encuentra una política específica.
 
 Utilizar una alerta con estas etiquetas:
 
@@ -1510,7 +1571,7 @@ severity = warning
 environment = laboratory
 ```
 
-Pasos:
+### Procedimiento
 
 1. Revisar las políticas existentes.
 2. Confirmar que no existe una ruta para `team=unknown`.
@@ -1521,7 +1582,7 @@ Pasos:
 7. Repetir la prueba.
 8. Comparar ambos resultados.
 
-Registrar:
+### Registro
 
 ```text
 Contacto inicial:
@@ -1537,16 +1598,16 @@ Diferencia observada:
 Conclusión:
 ```
 
-**Sesión 19: diagnosticar una alerta que no se activa**
+## Sesión 19: diagnosticar una alerta que no se activa
 
-Situación:
+### Situación
 
 ```text
 El dashboard muestra CPU elevada,
 pero la alerta permanece en Normal.
 ```
 
-Procedimiento:
+### Procedimiento
 
 1. Ejecutar la consulta en Explore.
 2. Comprobar el valor actual.
@@ -1559,7 +1620,7 @@ Procedimiento:
 9. Comprobar si existe un error de consulta.
 10. Registrar la causa.
 
-Posibles causas:
+### Posibles causas
 
 ```text
 El valor no supera realmente el umbral.
@@ -1571,7 +1632,7 @@ La consulta no devuelve datos.
 La unidad del umbral es incorrecta.
 ```
 
-Plantilla:
+### Plantilla
 
 ```text
 Regla:
@@ -1593,14 +1654,16 @@ Corrección:
 Resultado:
 ```
 
-**Sesión 20: diagnosticar una alerta sin notificación**
+## Sesión 20: diagnosticar una alerta sin notificación
 
-Situación:
+### Situación
 
 ```text
 La alerta aparece como Alerting,
 pero el contacto no recibe ningún mensaje.
 ```
+
+### Comprobaciones
 
 Revisar:
 
@@ -1614,7 +1677,7 @@ Revisar:
 - Logs de Grafana.
 - Estado de la integración externa.
 
-Posibles causas:
+### Posibles causas
 
 ```text
 La alerta no coincide con la política.
@@ -1626,7 +1689,7 @@ El canal externo rechaza la petición.
 La alerta se envía a otro contacto.
 ```
 
-Registrar:
+### Registro
 
 ```text
 Alerta:
@@ -1648,11 +1711,13 @@ Corrección:
 Resultado:
 ```
 
-**Sesión 21: reconstruir una línea temporal**
+## Sesión 21: reconstruir una línea temporal
 
-Objetivo: relacionar anotaciones, métricas, alertas y acciones.
+### Objetivo
 
-Ejemplo esperado:
+Relacionar anotaciones, métricas, alertas y acciones.
+
+### Ejemplo esperado
 
 ```text
 18:00 - Inicio de prueba de carga
@@ -1666,7 +1731,7 @@ Ejemplo esperado:
 18:17 - La alerta se recupera
 ```
 
-Completar la línea temporal real:
+### Registro de la línea temporal
 
 ```text
 Hora:
@@ -1682,7 +1747,7 @@ Notificación:
 Acción realizada:
 ```
 
-Conclusión:
+### Conclusión
 
 ```text
 La anotación permitió relacionar el aumento de la métrica
@@ -1690,7 +1755,7 @@ con una actividad conocida. La duración de la alerta evitó
 notificar un cambio breve o confirmó que el problema era sostenido.
 ```
 
-**Sesión 22: revisar el historial de alertas**
+## Sesión 22: revisar el historial de alertas
 
 Para cada regla, registrar:
 
@@ -1732,7 +1797,7 @@ Comparar:
 ¿La consulta necesita mejoras?
 ```
 
-**Sesión 23: preparar las evidencias**
+## Sesión 23: preparar las evidencias
 
 Guardar capturas con nombres ordenados:
 
@@ -1768,15 +1833,15 @@ Antes de guardar las capturas:
 - Ocultar URLs privadas.
 - Revisar que los datos pertenecen al laboratorio.
 
-**Sesión 24: realizar la limpieza final**
+## Sesión 24: realizar la limpieza final
 
-Comprobar que Node Exporter está funcionando:
+### Comprobación de Node Exporter
 
 ```bash
 sudo systemctl status node_exporter
 ```
 
-Comprobar la métrica:
+### Comprobación de la métrica
 
 ```promql
 up{job="node_exporter"}
@@ -1787,6 +1852,8 @@ El resultado esperado es:
 ```text
 1
 ```
+
+### Revisión
 
 Revisar:
 
@@ -1802,7 +1869,7 @@ Revisar:
 
 Eliminar únicamente los elementos que no deban conservarse para la evaluación.
 
-Registrar:
+### Registro
 
 ```text
 Node Exporter:
@@ -1822,7 +1889,7 @@ Entorno limpio:
 Validación del instructor:
 ```
 
-**Entregables**
+## Entregables
 
 El alumno deberá entregar:
 
@@ -1839,7 +1906,7 @@ El alumno deberá entregar:
 - Memoria técnica.
 - Conclusiones personales.
 
-La estructura recomendada es:
+### Estructura recomendada
 
 ```text
 entrega-proyecto-final/
@@ -1859,6 +1926,8 @@ entrega-proyecto-final/
 │   └── memoria-tecnica.md
 └── README.md
 ```
+
+### Contenido del README
 
 El fichero `README.md` debe incluir:
 
@@ -1884,9 +1953,9 @@ Limitaciones:
 Resultado final:
 ```
 
-**Plantilla de memoria técnica**
+## Plantilla de memoria técnica
 
-```text
+```markdown
 # Memoria técnica - Proyecto final
 
 ## Identificación
@@ -1948,7 +2017,7 @@ Medidas aplicadas para proteger el entorno y las credenciales.
 Valoración final y mejoras propuestas.
 ```
 
-**Criterios de evaluación**
+## Criterios de evaluación
 
 | Criterio | Puntuación |
 |---|---:|
@@ -1963,7 +2032,9 @@ Valoración final y mejoras propuestas.
 | Memoria técnica y presentación | 1 |
 | **Total** | **10** |
 
-La solución debe cumplir estos criterios de calidad:
+### Criterios de calidad
+
+La solución debe cumplir estos criterios:
 
 - Las consultas devuelven datos válidos.
 - Los paneles tienen títulos claros.
@@ -1979,7 +2050,7 @@ La solución debe cumplir estos criterios de calidad:
 - No se utilizan credenciales reales en la entrega.
 - El entorno queda limpio al finalizar.
 
-**Puntos clave**
+## Puntos clave
 
 - El proyecto final integra todos los contenidos del curso.
 - Las consultas deben validarse antes de crear reglas.
@@ -1999,7 +2070,7 @@ La solución debe cumplir estos criterios de calidad:
 - La memoria técnica debe explicar las decisiones adoptadas.
 - Un proyecto reproducible es más valioso que una configuración que solo funciona una vez.
 
-**Preguntas de comprobación**
+## Preguntas de comprobación
 
 1. ¿Qué componentes forman la arquitectura del proyecto?
 2. ¿Por qué se deben validar las consultas antes de crear alertas?
@@ -2022,7 +2093,7 @@ La solución debe cumplir estos criterios de calidad:
 19. ¿Cómo relacionarías una anotación de despliegue con una alerta de latencia?
 20. ¿Qué mejoras aplicarías a la solución después de completar el proyecto?
 
-**Resultado esperado**
+## Resultado esperado
 
 El proyecto se considera completado cuando el alumno demuestra el siguiente flujo:
 
