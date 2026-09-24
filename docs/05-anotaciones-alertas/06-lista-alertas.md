@@ -45,7 +45,7 @@ La ubicación y el nombre exacto de algunas opciones pueden variar según la ver
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -70,7 +70,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Una plataforma monitorizada puede tener decenas o cientos de reglas de alerta.
 
@@ -88,7 +88,7 @@ HighApplicationLatency  No data
 
 Esta información permite identificar rápidamente qué situaciones requieren atención.
 
-## Ejemplo operativo
+### Ejemplo operativo
 
 Supongamos que un servidor presenta un uso elevado de CPU.
 
@@ -117,11 +117,11 @@ El operador puede abrir el detalle para consultar:
 
 ---
 
-# Regla e instancia de alerta
+## Regla e instancia de alerta
 
 Estos conceptos son importantes para interpretar correctamente la lista.
 
-## Regla de alerta
+### Regla de alerta
 
 Una regla define la condición que Grafana evalúa.
 
@@ -133,7 +133,7 @@ HighCPUUsage
 
 La regla puede aplicarse a varias instancias.
 
-## Instancia de alerta
+### Instancia de alerta
 
 Una instancia representa una evaluación concreta de una regla y un conjunto de etiquetas.
 
@@ -162,7 +162,7 @@ La instancia identifica el recurso concreto que presenta el problema.
 
 ---
 
-# Acceder a la lista de alertas
+## Acceder a la lista de alertas
 
 El procedimiento habitual es:
 
@@ -189,7 +189,7 @@ Es importante distinguir entre la vista que muestra las reglas configuradas y la
 
 ---
 
-# Información habitual de la lista
+## Información habitual de la lista
 
 La lista puede mostrar columnas similares a estas:
 
@@ -210,9 +210,9 @@ La disponibilidad exacta de las columnas depende de la versión y de la configur
 
 ---
 
-# Estados de las alertas
+## Estados de las alertas
 
-## Normal
+### Normal
 
 La condición de la regla no se cumple.
 
@@ -224,7 +224,7 @@ Estado: Normal
 
 Una alerta en estado normal no requiere una acción inmediata.
 
-## Pending
+### Pending
 
 La condición se cumple, pero aún no ha transcurrido la duración configurada.
 
@@ -237,7 +237,7 @@ Estado: Pending
 
 Este estado permite observar si el problema es sostenido o solo un pico temporal.
 
-## Alerting o Firing
+### Alerting o Firing
 
 La condición se ha mantenido durante el periodo configurado.
 
@@ -249,7 +249,7 @@ Estado: Alerting
 
 Esta alerta requiere revisión según su severidad y el procedimiento operativo correspondiente.
 
-## No data
+### No data
 
 La regla no recibe datos suficientes para evaluarse.
 
@@ -262,7 +262,7 @@ Posibles causas:
 - Hay un filtro incorrecto.
 - La fuente de datos no responde.
 
-## Error
+### Error
 
 La regla no puede evaluarse correctamente.
 
@@ -274,7 +274,7 @@ Posibles causas:
 - Problema de permisos.
 - Consulta incompatible.
 
-## Normalizada o resuelta
+### Normalizada o resuelta
 
 La condición que generó la alerta ha dejado de cumplirse.
 
@@ -288,11 +288,11 @@ El nombre exacto del estado puede variar según la versión.
 
 ---
 
-# Filtrar la lista de alertas
+## Filtrar la lista de alertas
 
 Los filtros ayudan a reducir el número de resultados mostrados.
 
-## Filtrar por estado
+### Filtrar por estado
 
 Ejemplos:
 
@@ -304,7 +304,7 @@ No data
 Error
 ```
 
-### Uso
+#### Uso
 
 Filtrar por `Alerting` permite concentrarse en las alertas activas.
 
@@ -312,7 +312,7 @@ Filtrar por `Pending` ayuda a observar problemas que todavía no han superado la
 
 Filtrar por `No data` permite investigar pérdidas de visibilidad.
 
-## Filtrar por severidad
+### Filtrar por severidad
 
 Ejemplos:
 
@@ -322,7 +322,7 @@ severity = warning
 severity = info
 ```
 
-## Filtrar por equipo
+### Filtrar por equipo
 
 Ejemplos:
 
@@ -332,7 +332,7 @@ team = application
 team = database
 ```
 
-## Filtrar por servicio
+### Filtrar por servicio
 
 Ejemplos:
 
@@ -342,7 +342,7 @@ service = prometheus
 service = node_exporter
 ```
 
-## Filtrar por entorno
+### Filtrar por entorno
 
 Ejemplos:
 
@@ -352,7 +352,7 @@ environment = staging
 environment = production
 ```
 
-## Filtrar por instancia
+### Filtrar por instancia
 
 Ejemplo:
 
@@ -364,11 +364,11 @@ Los nombres de los filtros dependen de las etiquetas utilizadas en las reglas.
 
 ---
 
-# Convenciones de etiquetas
+## Convenciones de etiquetas
 
 Para que los filtros funcionen correctamente, las reglas deben utilizar nombres consistentes.
 
-## Etiquetas recomendadas
+### Etiquetas recomendadas
 
 ```text
 alertname
@@ -381,7 +381,7 @@ resource
 region
 ```
 
-## Ejemplo
+### Ejemplo
 
 ```text
 alertname = HighCPUUsage
@@ -393,7 +393,7 @@ resource = cpu
 instance = server-01:9100
 ```
 
-## Problema de nombres inconsistentes
+### Problema de nombres inconsistentes
 
 Estas etiquetas podrían representar conceptos parecidos:
 
@@ -415,7 +415,7 @@ y utilizarla en todas las reglas.
 
 ---
 
-# Buscar alertas
+## Buscar alertas
 
 La búsqueda permite localizar una regla concreta por su nombre o por otros datos visibles.
 
@@ -436,7 +436,7 @@ La búsqueda puede ayudar a encontrar:
 - Alertas asociadas a un servicio.
 - Reglas de un equipo.
 
-## Convención de nombres
+### Convención de nombres
 
 Utilizar nombres consistentes facilita la búsqueda.
 
@@ -462,7 +462,7 @@ Servidor
 
 ---
 
-# Consultar el detalle de una alerta
+## Consultar el detalle de una alerta
 
 Al abrir una alerta, normalmente se puede consultar:
 
@@ -481,7 +481,7 @@ Al abrir una alerta, normalmente se puede consultar:
 - Contacto o política relacionada.
 - Silenciamientos coincidentes.
 
-## Información que debe comprobarse
+### Información que debe comprobarse
 
 Ante una alerta activa, revisar:
 
@@ -500,11 +500,11 @@ Se envió una notificación?
 
 ---
 
-# Historial de estados
+## Historial de estados
 
 El historial permite conocer cómo ha cambiado una alerta.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 10:00 - Normal
@@ -521,7 +521,7 @@ Esta secuencia proporciona información sobre:
 - Momento de recuperación.
 - Frecuencia de repetición.
 
-## Interpretación
+### Interpretación
 
 ```text
 Normal → Pending
@@ -541,7 +541,7 @@ Alerting → Normal
 
 La condición dejó de cumplirse.
 
-## Utilidad operativa
+### Utilidad operativa
 
 El historial ayuda a:
 
@@ -554,7 +554,7 @@ El historial ayuda a:
 
 ---
 
-# Alertas inestables
+## Alertas inestables
 
 Una alerta puede cambiar repetidamente entre estados.
 
@@ -577,7 +577,7 @@ Este comportamiento puede indicar:
 - Consulta mal diseñada.
 - Datos incompletos.
 
-## Análisis recomendado
+### Análisis recomendado
 
 1. Revisar la serie temporal.
 2. Revisar el umbral.
@@ -589,7 +589,7 @@ Este comportamiento puede indicar:
 
 ---
 
-# Alertas silenciadas
+## Alertas silenciadas
 
 Una alerta puede estar activa, pero tener sus notificaciones silenciadas.
 
@@ -600,7 +600,7 @@ La regla puede seguir evaluándose,
 pero la notificación puede no enviarse.
 ```
 
-## Comprobar un silencio
+### Comprobar un silencio
 
 Revisar:
 
@@ -612,7 +612,7 @@ Revisar:
 - Alcance.
 - Regla afectada.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Alerta: HighCPUUsage
@@ -626,7 +626,7 @@ La alerta debe seguir siendo visible para evitar que el silencio oculte completa
 
 ---
 
-# Alertas notificadas y no notificadas
+## Alertas notificadas y no notificadas
 
 El estado de una alerta y el envío de una notificación son conceptos diferentes.
 
@@ -651,7 +651,7 @@ Por eso, al investigar una alerta, no basta con comprobar su estado. También ha
 
 ---
 
-# Ejemplo de lista de alertas
+## Ejemplo de lista de alertas
 
 Una vista simplificada podría ser:
 
@@ -665,7 +665,7 @@ No data     NodeExporterDown       server-03:9100  critical    systems
 Alerting    HighLatency            api-01          critical    application
 ```
 
-## Interpretación
+### Interpretación
 
 ```text
 HighCPUUsage:
@@ -686,13 +686,13 @@ Problema crítico en la aplicación api-01.
 
 ---
 
-# Ejemplo de sesión 1: revisar alertas activas
+## Ejemplo de sesión 1: revisar alertas activas
 
-## Objetivo
+### Objetivo
 
 Localizar todas las alertas activas y clasificarlas.
 
-## Pasos
+### Pasos
 
 1. Acceder a Grafana.
 2. Abrir la lista de alertas.
@@ -705,7 +705,7 @@ Localizar todas las alertas activas y clasificarlas.
 9. Consultar el historial.
 10. Registrar los resultados.
 
-## Plantilla de registro
+### Plantilla de registro
 
 ```text
 Nombre:
@@ -733,25 +733,25 @@ Notificación enviada:
 Acción recomendada:
 ```
 
-## Resultado esperado
+### Resultado esperado
 
 El alumno debe poder identificar qué alertas requieren atención inmediata y cuáles pertenecen a otros equipos.
 
 ---
 
-# Ejemplo de sesión 2: filtrar por severidad
+## Ejemplo de sesión 2: filtrar por severidad
 
-## Objetivo
+### Objetivo
 
 Encontrar únicamente las alertas críticas.
 
-## Etiqueta utilizada
+### Etiqueta utilizada
 
 ```text
 severity = critical
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir la lista de alertas.
 2. Aplicar el filtro de severidad.
@@ -763,7 +763,7 @@ severity = critical
 8. Revisar el runbook.
 9. Documentar la acción que debe realizarse.
 
-## Registro
+### Registro
 
 ```text
 Número de alertas críticas:
@@ -781,13 +781,13 @@ Servicios afectados:
 
 ---
 
-# Ejemplo de sesión 3: investigar una alerta de CPU
+## Ejemplo de sesión 3: investigar una alerta de CPU
 
-## Objetivo
+### Objetivo
 
 Analizar una alerta activa de uso elevado de CPU.
 
-## Regla de referencia
+### Regla de referencia
 
 ```text
 Nombre: HighCPUUsage
@@ -795,7 +795,7 @@ Condición: CPU mayor que 90 %
 Duración: 5 minutos
 ```
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -805,7 +805,7 @@ Duración: 5 minutos
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Filtrar por `HighCPUUsage`.
 2. Abrir la instancia activa.
@@ -818,7 +818,7 @@ Duración: 5 minutos
 9. Consultar el runbook.
 10. Registrar la conclusión.
 
-## Preguntas de análisis
+### Preguntas de análisis
 
 ```text
 ¿La CPU sigue elevada?
@@ -838,20 +838,20 @@ Duración: 5 minutos
 
 ---
 
-# Ejemplo de sesión 4: investigar una alerta `Pending`
+## Ejemplo de sesión 4: investigar una alerta `Pending`
 
-## Objetivo
+### Objetivo
 
 Comprender por qué una alerta todavía no está activa.
 
-## Configuración
+### Configuración
 
 ```text
 Condición: CPU > 90 %
 Duración: 5 minutos
 ```
 
-## Secuencia
+### Secuencia
 
 ```text
 10:00 - CPU = 92 % → Pending
@@ -859,7 +859,7 @@ Duración: 5 minutos
 10:02 - CPU = 89 % → Normal
 ```
 
-## Pasos
+### Pasos
 
 1. Localizar la alerta pendiente.
 2. Consultar el tiempo transcurrido.
@@ -869,25 +869,25 @@ Duración: 5 minutos
 6. Determinar si la alerta se activará o volverá a normal.
 7. Registrar la observación.
 
-## Resultado esperado
+### Resultado esperado
 
 El alumno debe comprender que `Pending` no equivale todavía a una alerta activa.
 
 ---
 
-# Ejemplo de sesión 5: investigar una alerta `No data`
+## Ejemplo de sesión 5: investigar una alerta `No data`
 
-## Objetivo
+### Objetivo
 
 Diagnosticar una alerta que no recibe datos.
 
-## Consulta
+### Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Pasos
+### Pasos
 
 1. Filtrar las alertas por `No data`.
 2. Abrir la alerta.
@@ -900,7 +900,7 @@ up{job="node_exporter"}
 9. Revisar la configuración ante ausencia de datos.
 10. Documentar la causa.
 
-## Posibles causas
+### Posibles causas
 
 ```text
 Node Exporter detenido.
@@ -911,7 +911,7 @@ La fuente de datos no responde.
 La serie ha desaparecido.
 ```
 
-## Registro
+### Registro
 
 ```text
 Nombre de la alerta:
@@ -933,19 +933,19 @@ Resultado posterior:
 
 ---
 
-# Ejemplo de sesión 6: revisar alertas por equipo
+## Ejemplo de sesión 6: revisar alertas por equipo
 
-## Objetivo
+### Objetivo
 
 Consultar únicamente las alertas asignadas al equipo de sistemas.
 
-## Etiqueta
+### Etiqueta
 
 ```text
 team = systems
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir la lista de alertas.
 2. Aplicar el filtro `team=systems`.
@@ -956,7 +956,7 @@ team = systems
 7. Identificar reglas sin runbook.
 8. Registrar las mejoras necesarias.
 
-## Tabla de análisis
+### Tabla de análisis
 
 | Alerta | Estado | Severidad | Servicio | Runbook | Acción |
 |---|---|---|---|---|---|
@@ -966,13 +966,13 @@ team = systems
 
 ---
 
-# Ejemplo de sesión 7: comparar una alerta con sus anotaciones
+## Ejemplo de sesión 7: comparar una alerta con sus anotaciones
 
-## Objetivo
+### Objetivo
 
 Relacionar el estado de una alerta con eventos operativos.
 
-## Escenario
+### Escenario
 
 ```text
 10:00 - Despliegue de una nueva versión
@@ -982,7 +982,7 @@ Relacionar el estado de una alerta con eventos operativos.
 10:15 - Alerta resuelta
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir la alerta de latencia.
 2. Revisar su hora de activación.
@@ -993,19 +993,19 @@ Relacionar el estado de una alerta con eventos operativos.
 7. Formular una hipótesis.
 8. Documentar qué evidencias la respaldan.
 
-## Conclusión esperada
+### Conclusión esperada
 
 La lista de alertas muestra el estado actual y el historial de la regla. Las anotaciones aportan contexto sobre los cambios ocurridos en el sistema.
 
 ---
 
-# Ejemplo de sesión 8: analizar una alerta repetitiva
+## Ejemplo de sesión 8: analizar una alerta repetitiva
 
-## Objetivo
+### Objetivo
 
 Detectar una regla que genera alertas con demasiada frecuencia.
 
-## Historial
+### Historial
 
 ```text
 09:00 - Normal
@@ -1016,7 +1016,7 @@ Detectar una regla que genera alertas con demasiada frecuencia.
 09:19 - Alerting
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir el historial de la alerta.
 2. Medir la frecuencia de activación.
@@ -1027,7 +1027,7 @@ Detectar una regla que genera alertas con demasiada frecuencia.
 7. Evaluar si el problema es real o ruido.
 8. Proponer un ajuste.
 
-## Posibles ajustes
+### Posibles ajustes
 
 ```text
 Aumentar la duración.
@@ -1042,13 +1042,13 @@ Los ajustes deben probarse antes de aplicarse en producción.
 
 ---
 
-# Ejemplo de sesión 9: revisar alertas silenciadas
+## Ejemplo de sesión 9: revisar alertas silenciadas
 
-## Objetivo
+### Objetivo
 
 Identificar alertas activas que no están generando notificaciones.
 
-## Pasos
+### Pasos
 
 1. Abrir la lista de alertas.
 2. Buscar alertas en estado `Alerting`.
@@ -1060,7 +1060,7 @@ Identificar alertas activas que no están generando notificaciones.
 8. Confirmar si el silencio sigue siendo necesario.
 9. Documentar silencios que deben eliminarse o modificarse.
 
-## Registro
+### Registro
 
 ```text
 Alerta:
@@ -1084,13 +1084,13 @@ Acción:
 
 ---
 
-# Ejemplo de sesión 10: construir un informe operativo
+## Ejemplo de sesión 10: construir un informe operativo
 
-## Objetivo
+### Objetivo
 
 Preparar un resumen de las alertas encontradas durante una sesión.
 
-## Resumen
+### Resumen
 
 ```text
 Fecha:
@@ -1114,7 +1114,7 @@ Alertas No data:
 Alertas con Error:
 ```
 
-## Detalle de alertas activas
+### Detalle de alertas activas
 
 | Nombre | Instancia | Severidad | Inicio | Causa probable | Acción |
 |---|---|---|---|---|---|
@@ -1122,7 +1122,7 @@ Alertas con Error:
 | | | | | | |
 | | | | | | |
 
-## Conclusiones
+### Conclusiones
 
 ```text
 Alertas que requieren intervención:
@@ -1140,13 +1140,13 @@ Acciones recomendadas:
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Utilizar etiquetas consistentes
+### Utilizar etiquetas consistentes
 
 Los filtros solo son útiles si las etiquetas siguen una convención común.
 
-## Revisar primero las alertas críticas
+### Revisar primero las alertas críticas
 
 Un orden recomendado es:
 
@@ -1161,11 +1161,11 @@ Un orden recomendado es:
 
 El orden puede adaptarse al procedimiento operativo.
 
-## No ignorar `No data`
+### No ignorar `No data`
 
 Una alerta sin datos puede indicar una pérdida de visibilidad.
 
-## Revisar el detalle, no solo el nombre
+### Revisar el detalle, no solo el nombre
 
 El nombre de una alerta no siempre explica:
 
@@ -1175,7 +1175,7 @@ El nombre de una alerta no siempre explica:
 - Qué consulta se utilizó.
 - Qué política se aplicó.
 
-## Revisar la antigüedad
+### Revisar la antigüedad
 
 Una alerta activa desde hace mucho tiempo puede indicar:
 
@@ -1185,19 +1185,19 @@ Una alerta activa desde hace mucho tiempo puede indicar:
 - Una notificación fallida.
 - Un procedimiento inexistente.
 
-## Buscar alertas repetitivas
+### Buscar alertas repetitivas
 
 Las alertas que cambian constantemente de estado deben revisarse.
 
-## No resolver alertas sin investigar
+### No resolver alertas sin investigar
 
 Cambiar el estado visual o eliminar una regla no soluciona necesariamente el problema.
 
-## Mantener los nombres claros
+### Mantener los nombres claros
 
 Los nombres deben facilitar la búsqueda y la lectura.
 
-## Revisar los silenciamientos
+### Revisar los silenciamientos
 
 Todo silencio debe tener:
 
@@ -1206,19 +1206,19 @@ Todo silencio debe tener:
 - Alcance.
 - Fecha de finalización.
 
-## Documentar las acciones
+### Documentar las acciones
 
 Una alerta investigada debe dejar un registro suficiente para que otra persona comprenda lo ocurrido.
 
-## Mantener los runbooks actualizados
+### Mantener los runbooks actualizados
 
 Un enlace roto en una alerta activa retrasa la respuesta.
 
 ---
 
-# Errores frecuentes
+## Errores frecuentes
 
-## No aparecen alertas esperadas
+### No aparecen alertas esperadas
 
 Comprobar:
 
@@ -1230,7 +1230,7 @@ Comprobar:
 - Organización o espacio de trabajo.
 - Vista seleccionada.
 
-## Aparecen demasiadas alertas
+### Aparecen demasiadas alertas
 
 Comprobar:
 
@@ -1240,7 +1240,7 @@ Comprobar:
 - Falta de agrupación.
 - Nombres inconsistentes.
 
-## No se identifica la instancia
+### No se identifica la instancia
 
 Comprobar:
 
@@ -1250,7 +1250,7 @@ Comprobar:
 - Series multidimensionales.
 - Filtros aplicados.
 
-## La alerta está activa, pero no llega el aviso
+### La alerta está activa, pero no llega el aviso
 
 Comprobar:
 
@@ -1262,7 +1262,7 @@ Comprobar:
 - Intervalo de repetición.
 - Errores de entrega.
 
-## Una alerta permanece activa mucho tiempo
+### Una alerta permanece activa mucho tiempo
 
 Comprobar:
 
@@ -1274,7 +1274,7 @@ Comprobar:
 - Runbook.
 - Silenciamientos.
 
-## Una alerta cambia demasiado rápido
+### Una alerta cambia demasiado rápido
 
 Comprobar:
 
@@ -1285,17 +1285,17 @@ Comprobar:
 - Intervalo de evaluación.
 - Eventos externos.
 
-## Se confunde una regla con una instancia
+### Se confunde una regla con una instancia
 
 Una regla puede tener varias instancias. La investigación debe centrarse en la instancia concreta afectada.
 
-## Se elimina una alerta en lugar de solucionar el problema
+### Se elimina una alerta en lugar de solucionar el problema
 
 Eliminar la regla solo elimina la detección. No corrige la causa del problema.
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -1400,13 +1400,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Revisar el estado de un conjunto de alertas y elaborar un informe operativo.
 
-## Requisitos
+### Requisitos
 
 - Grafana funcionando.
 - Varias reglas de alerta creadas.
@@ -1418,7 +1418,7 @@ Revisar el estado de un conjunto de alertas y elaborar un informe operativo.
 
 ---
 
-## Tarea 1: revisar la vista general
+### Tarea 1: revisar la vista general
 
 Abrir la lista de alertas y registrar:
 
@@ -1438,7 +1438,7 @@ Número de alertas con Error:
 
 ---
 
-## Tarea 2: filtrar alertas activas
+### Tarea 2: filtrar alertas activas
 
 Aplicar el filtro:
 
@@ -1468,7 +1468,7 @@ Umbral:
 
 ---
 
-## Tarea 3: revisar alertas pendientes
+### Tarea 3: revisar alertas pendientes
 
 Aplicar el filtro:
 
@@ -1485,7 +1485,7 @@ Determinar:
 
 ---
 
-## Tarea 4: investigar una alerta `No data`
+### Tarea 4: investigar una alerta `No data`
 
 Seleccionar una alerta sin datos y comprobar:
 
@@ -1499,7 +1499,7 @@ Seleccionar una alerta sin datos y comprobar:
 
 ---
 
-## Tarea 5: revisar las alertas silenciadas
+### Tarea 5: revisar las alertas silenciadas
 
 Identificar:
 
@@ -1512,7 +1512,7 @@ Identificar:
 
 ---
 
-## Tarea 6: elaborar el informe
+### Tarea 6: elaborar el informe
 
 Completar:
 
@@ -1546,7 +1546,7 @@ Conclusiones:
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -1570,7 +1570,7 @@ Conclusiones:
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - La lista de alertas proporciona una vista centralizada del estado de las reglas.
 - Una regla define la condición; una instancia identifica el recurso afectado.
@@ -1600,7 +1600,7 @@ Conclusiones:
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Para qué sirve la lista de alertas?
 2. ¿Qué diferencia existe entre una regla y una instancia de alerta?
@@ -1630,7 +1630,7 @@ Conclusiones:
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de consultar y analizar la lista de alertas de Grafana.
 

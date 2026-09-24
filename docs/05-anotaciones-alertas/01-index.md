@@ -32,7 +32,7 @@ Una alerta no sustituye al análisis técnico. Su función es avisar de que una 
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar este bloque, el alumno podrá:
 
@@ -55,7 +55,7 @@ Al finalizar este bloque, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 La monitorización permite observar el estado de un sistema, pero observar no siempre es suficiente.
 
@@ -73,7 +73,7 @@ La latencia p95 supera el límite establecido.
 
 Una regla de alerta transforma una condición técnica en una señal operativa.
 
-## Ejemplo conceptual
+### Ejemplo conceptual
 
 ```text
 Uso de CPU
@@ -108,9 +108,9 @@ Una alerta mal diseñada puede generar ruido, fatiga y pérdida de confianza. Un
 
 ---
 
-# Conceptos fundamentales
+## Conceptos fundamentales
 
-## Métrica
+### Métrica
 
 Una métrica es un valor que describe el estado o comportamiento de un sistema.
 
@@ -132,7 +132,7 @@ node_memory_MemAvailable_bytes
 node_filesystem_avail_bytes
 ```
 
-## Consulta
+### Consulta
 
 Una consulta obtiene y procesa datos de una fuente como Prometheus.
 
@@ -148,7 +148,7 @@ Ejemplo:
 
 Esta consulta calcula el porcentaje de CPU utilizada por instancia.
 
-## Condición
+### Condición
 
 Una condición compara el resultado de una consulta con un criterio.
 
@@ -158,7 +158,7 @@ Ejemplo:
 CPU mayor que 90 %
 ```
 
-## Regla de alerta
+### Regla de alerta
 
 Una regla combina:
 
@@ -170,7 +170,7 @@ Una regla combina:
 - Comportamiento ante errores.
 - Comportamiento ante ausencia de datos.
 
-## Estado de alerta
+### Estado de alerta
 
 Indica la situación actual de una regla.
 
@@ -186,7 +186,7 @@ Error
 
 Los nombres exactos pueden variar según la versión de Grafana y el tipo de regla.
 
-## Notificación
+### Notificación
 
 Es el mensaje o evento enviado cuando una alerta cumple las condiciones definidas.
 
@@ -198,7 +198,7 @@ Ejemplos:
 - Sistema de incidencias.
 - Integración externa.
 
-## Anotación
+### Anotación
 
 Una anotación registra un evento en una línea temporal.
 
@@ -214,7 +214,7 @@ Resolución de una incidencia.
 
 ---
 
-# Diferencia entre alerta y anotación
+## Diferencia entre alerta y anotación
 
 | Elemento | Finalidad |
 |---|---|
@@ -224,7 +224,7 @@ Resolución de una incidencia.
 | Notificación | Comunicar la alerta |
 | Anotación | Registrar un evento |
 
-## Ejemplo
+### Ejemplo
 
 ```text
 CPU = 93 %
@@ -258,7 +258,7 @@ Es una anotación.
 
 ---
 
-# Estructura del bloque
+## Estructura del bloque
 
 Los contenidos se organizan de la siguiente forma:
 
@@ -302,7 +302,7 @@ Los contenidos se organizan de la siguiente forma:
 
 ---
 
-# Flujo de trabajo recomendado
+## Flujo de trabajo recomendado
 
 Una implementación de alertas puede seguir este proceso:
 
@@ -327,13 +327,13 @@ No se debe crear una alerta directamente sobre una consulta que no haya sido val
 
 ---
 
-# Ejemplo de regla de alerta
+## Ejemplo de regla de alerta
 
-## Objetivo
+### Objetivo
 
 Detectar un uso elevado de CPU.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -343,19 +343,19 @@ Detectar un uso elevado de CPU.
 )
 ```
 
-## Condición
+### Condición
 
 ```text
 El valor es mayor que 90
 ```
 
-## Duración
+### Duración
 
 ```text
 5 minutos
 ```
 
-## Etiquetas
+### Etiquetas
 
 ```text
 severity = warning
@@ -363,7 +363,7 @@ team = systems
 alertname = HighCPUUsage
 ```
 
-## Anotaciones
+### Anotaciones
 
 ```text
 summary = Uso de CPU elevado en {{ $labels.instance }}
@@ -378,9 +378,9 @@ La sintaxis disponible para plantillas puede depender de la versión y del conte
 
 ---
 
-# Estados de una alerta
+## Estados de una alerta
 
-## Normal
+### Normal
 
 La condición no se cumple.
 
@@ -392,7 +392,7 @@ Umbral = 90 %
 Estado = Normal
 ```
 
-## Pending
+### Pending
 
 La condición se cumple, pero todavía no ha transcurrido la duración configurada.
 
@@ -405,7 +405,7 @@ Tiempo transcurrido = 2 minutos
 Estado = Pending
 ```
 
-## Alerting o Firing
+### Alerting o Firing
 
 La condición se ha mantenido durante el tiempo requerido.
 
@@ -418,7 +418,7 @@ Tiempo transcurrido = 6 minutos
 Estado = Alerting
 ```
 
-## No data
+### No data
 
 Grafana no recibe datos suficientes para evaluar la regla.
 
@@ -431,7 +431,7 @@ Posibles causas:
 - Hay un problema de conectividad.
 - La fuente de datos no responde.
 
-## Error
+### Error
 
 La consulta o la evaluación produce un error.
 
@@ -445,9 +445,9 @@ Posibles causas:
 
 ---
 
-# Etiquetas y anotaciones
+## Etiquetas y anotaciones
 
-## Etiquetas
+### Etiquetas
 
 Las etiquetas permiten clasificar y enrutar alertas.
 
@@ -460,7 +460,7 @@ environment = laboratory
 service = web
 ```
 
-## Anotaciones
+### Anotaciones
 
 Las anotaciones proporcionan contexto legible.
 
@@ -475,7 +475,7 @@ ha superado el umbral configurado.
 runbook_url = https://example.com/runbooks/cpu
 ```
 
-## Diferencia
+### Diferencia
 
 ```text
 Etiqueta:
@@ -491,7 +491,7 @@ Las anotaciones son útiles para comprender y actuar.
 
 ---
 
-# Severidad de las alertas
+## Severidad de las alertas
 
 Se puede utilizar una etiqueta para clasificar la severidad:
 
@@ -501,7 +501,7 @@ severity = warning
 severity = critical
 ```
 
-## Ejemplo
+### Ejemplo
 
 | Severidad | Significado |
 |---|---|
@@ -515,7 +515,7 @@ No se debe marcar todo como `critical`. Si todo es crítico, nada destaca; es la
 
 ---
 
-# Contactos de notificación
+## Contactos de notificación
 
 Un contacto define dónde se entrega una notificación.
 
@@ -549,7 +549,7 @@ Antes de probar una notificación, comprobar:
 
 ---
 
-# Políticas de notificación
+## Políticas de notificación
 
 Una política decide qué ocurre con una alerta después de generarse.
 
@@ -564,7 +564,7 @@ Puede determinar:
 - Nivel de severidad.
 - Equipo destinatario.
 
-## Ejemplo conceptual
+### Ejemplo conceptual
 
 ```text
 Si severity=critical
@@ -581,7 +581,7 @@ Las etiquetas de las alertas deben coincidir con las condiciones de las polític
 
 ---
 
-# Silenciamientos
+## Silenciamientos
 
 Un silenciamiento evita temporalmente que una alerta genere notificaciones.
 
@@ -596,7 +596,7 @@ Puede utilizarse durante:
 
 Un silencio no necesariamente detiene la evaluación de la alerta. Normalmente evita o reduce el envío de notificaciones.
 
-## Buen silenciamiento
+### Buen silenciamiento
 
 ```text
 Motivo: mantenimiento programado
@@ -606,7 +606,7 @@ Fin: 23:00
 Responsable: equipo de sistemas
 ```
 
-## Mal silenciamiento
+### Mal silenciamiento
 
 ```text
 Motivo: temporal
@@ -625,7 +625,7 @@ Todo silencio debe tener:
 
 ---
 
-# Prácticas relacionadas
+## Prácticas relacionadas
 
 Las prácticas de este bloque se encuentran en:
 
@@ -633,7 +633,7 @@ Las prácticas de este bloque se encuentran en:
 05-anotaciones-alertas/
 ```
 
-## Práctica 1: explorar alertas
+### Práctica 1: explorar alertas
 
 Archivo:
 
@@ -649,7 +649,7 @@ Actividades:
 - Identificar alertas activas.
 - Diferenciar `Pending` y `Alerting`.
 
-## Práctica 2: crear anotaciones
+### Práctica 2: crear anotaciones
 
 Archivo:
 
@@ -665,7 +665,7 @@ Actividades:
 - Registrar el inicio de una prueba.
 - Revisar la anotación en un Time series.
 
-## Práctica 3: crear una regla
+### Práctica 3: crear una regla
 
 Archivo:
 
@@ -682,7 +682,7 @@ Actividades:
 - Añadir anotaciones.
 - Guardar la regla.
 
-## Práctica 4: configurar condiciones
+### Práctica 4: configurar condiciones
 
 Archivo:
 
@@ -698,7 +698,7 @@ Actividades:
 - Probar ausencia de datos.
 - Revisar errores de evaluación.
 
-## Práctica 5: configurar contactos
+### Práctica 5: configurar contactos
 
 Archivos:
 
@@ -716,7 +716,7 @@ Actividades:
 - Revisar la entrega.
 - Diagnosticar un fallo.
 
-## Práctica 6: crear políticas
+### Práctica 6: crear políticas
 
 Archivo:
 
@@ -732,7 +732,7 @@ Actividades:
 - Configurar repetición.
 - Probar rutas diferentes.
 
-## Práctica 7: silenciar alertas
+### Práctica 7: silenciar alertas
 
 Archivo:
 
@@ -748,7 +748,7 @@ Actividades:
 - Definir una finalización.
 - Comprobar la recuperación de las notificaciones.
 
-## Práctica 8: laboratorio integrador
+### Práctica 8: laboratorio integrador
 
 Archivo:
 
@@ -767,15 +767,15 @@ Actividades:
 
 ---
 
-# Ejemplos de sesión
+## Ejemplos de sesión
 
-## Sesión 1: identificar métricas para alertas
+### Sesión 1: identificar métricas para alertas
 
-### Objetivo
+#### Objetivo
 
 Localizar métricas adecuadas para crear reglas.
 
-### Consultas
+#### Consultas
 
 Disponibilidad:
 
@@ -827,7 +827,7 @@ Uso del sistema de ficheros:
 )
 ```
 
-### Actividades
+#### Actividades
 
 1. Ejecuta cada consulta en Explore.
 2. Comprueba si devuelve datos.
@@ -838,31 +838,31 @@ Uso del sistema de ficheros:
 
 ---
 
-## Sesión 2: crear una alerta de disponibilidad
+### Sesión 2: crear una alerta de disponibilidad
 
-### Objetivo
+#### Objetivo
 
 Detectar que un objetivo deja de estar disponible.
 
-### Consulta
+#### Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### Condición
+#### Condición
 
 ```text
 El valor es igual a 0
 ```
 
-### Duración
+#### Duración
 
 ```text
 1 minuto
 ```
 
-### Etiquetas
+#### Etiquetas
 
 ```text
 severity = critical
@@ -870,7 +870,7 @@ team = systems
 service = node-exporter
 ```
 
-### Anotaciones
+#### Anotaciones
 
 ```text
 summary = Objetivo no disponible
@@ -881,7 +881,7 @@ no está respondiendo a Prometheus.
 runbook_url = https://example.com/runbooks/target-down
 ```
 
-### Actividades
+#### Actividades
 
 1. Crea la regla.
 2. Guarda la regla.
@@ -904,13 +904,13 @@ sudo systemctl start node_exporter
 
 ---
 
-## Sesión 3: crear una alerta de CPU
+### Sesión 3: crear una alerta de CPU
 
-### Objetivo
+#### Objetivo
 
 Detectar un consumo sostenido de CPU.
 
-### Consulta
+#### Consulta
 
 ```promql
 100 - (
@@ -920,19 +920,19 @@ Detectar un consumo sostenido de CPU.
 )
 ```
 
-### Condición
+#### Condición
 
 ```text
 Valor mayor que 90
 ```
 
-### Duración
+#### Duración
 
 ```text
 5 minutos
 ```
 
-### Etiquetas
+#### Etiquetas
 
 ```text
 severity = warning
@@ -940,7 +940,7 @@ team = systems
 resource = cpu
 ```
 
-### Anotaciones
+#### Anotaciones
 
 ```text
 summary = CPU elevada en {{ $labels.instance }}
@@ -951,7 +951,7 @@ supera el 90 % durante el periodo configurado.
 runbook_url = https://example.com/runbooks/high-cpu
 ```
 
-### Actividades
+#### Actividades
 
 1. Crea la regla.
 2. Genera carga controlada.
@@ -963,13 +963,13 @@ runbook_url = https://example.com/runbooks/high-cpu
 
 ---
 
-## Sesión 4: crear una alerta de almacenamiento
+### Sesión 4: crear una alerta de almacenamiento
 
-### Objetivo
+#### Objetivo
 
 Detectar un sistema de ficheros con ocupación elevada.
 
-### Consulta
+#### Consulta
 
 ```promql
 100 * (
@@ -986,13 +986,13 @@ Detectar un sistema de ficheros con ocupación elevada.
 )
 ```
 
-### Condición
+#### Condición
 
 ```text
 Valor mayor que 80
 ```
 
-### Etiquetas
+#### Etiquetas
 
 ```text
 severity = warning
@@ -1001,7 +1001,7 @@ resource = filesystem
 mountpoint = /
 ```
 
-### Anotaciones
+#### Anotaciones
 
 ```text
 summary = Sistema de ficheros con ocupación elevada
@@ -1010,7 +1010,7 @@ description = El sistema de ficheros {{ $labels.mountpoint }}
 de {{ $labels.instance }} supera el 80 % de uso.
 ```
 
-### Actividades
+#### Actividades
 
 1. Crea la regla.
 2. Comprueba la unidad.
@@ -1020,19 +1020,19 @@ de {{ $labels.instance }} supera el 80 % de uso.
 
 ---
 
-## Sesión 5: crear una anotación manual
+### Sesión 5: crear una anotación manual
 
-### Objetivo
+#### Objetivo
 
 Registrar un evento visible sobre un gráfico.
 
-### Evento
+#### Evento
 
 ```text
 Inicio de prueba de carga de CPU
 ```
 
-### Pasos
+#### Pasos
 
 1. Abrir un panel Time series.
 2. Seleccionar la opción de añadir anotación.
@@ -1057,7 +1057,7 @@ componente = cpu
 Fin de prueba de carga de CPU
 ```
 
-### Actividades
+#### Actividades
 
 1. Compara la posición de las anotaciones con la gráfica.
 2. Explica qué relación existe entre el evento y el incremento de CPU.
@@ -1065,20 +1065,20 @@ Fin de prueba de carga de CPU
 
 ---
 
-## Sesión 6: configurar un contacto de correo
+### Sesión 6: configurar un contacto de correo
 
-### Objetivo
+#### Objetivo
 
 Crear un contacto de notificación para pruebas.
 
-### Requisitos
+#### Requisitos
 
 - Cuenta de correo autorizada.
 - Configuración SMTP disponible.
 - Dirección de destino válida.
 - Permisos administrativos.
 
-### Pasos
+#### Pasos
 
 1. Acceder a los contactos de notificación.
 2. Crear un contacto.
@@ -1090,7 +1090,7 @@ Crear un contacto de notificación para pruebas.
 8. Revisar la carpeta de correo no deseado.
 9. Revisar los logs si no llega.
 
-### Actividades
+#### Actividades
 
 Documentar:
 
@@ -1114,20 +1114,20 @@ No incluir contraseñas SMTP en el dashboard, en capturas ni en el repositorio.
 
 ---
 
-## Sesión 7: configurar un webhook
+### Sesión 7: configurar un webhook
 
-### Objetivo
+#### Objetivo
 
 Enviar una notificación a un endpoint de laboratorio.
 
-### Requisitos
+#### Requisitos
 
 - Endpoint autorizado.
 - URL válida.
 - Método de autenticación definido.
 - Entorno de pruebas.
 
-### Pasos
+#### Pasos
 
 1. Crear un contacto de tipo webhook.
 2. Introducir la URL.
@@ -1138,7 +1138,7 @@ Enviar una notificación a un endpoint de laboratorio.
 7. Activar una alerta de laboratorio.
 8. Comprobar la recepción.
 
-### Actividades
+#### Actividades
 
 1. Registra el código de respuesta.
 2. Registra el cuerpo recibido.
@@ -1148,13 +1148,13 @@ Enviar una notificación a un endpoint de laboratorio.
 
 ---
 
-## Sesión 8: enrutar alertas por severidad
+### Sesión 8: enrutar alertas por severidad
 
-### Objetivo
+#### Objetivo
 
 Enviar alertas según su nivel de severidad.
 
-### Etiquetas
+#### Etiquetas
 
 Alerta de advertencia:
 
@@ -1168,7 +1168,7 @@ Alerta crítica:
 severity = critical
 ```
 
-### Políticas
+#### Políticas
 
 ```text
 warning:
@@ -1178,7 +1178,7 @@ critical:
   contacto = equipo-guardia
 ```
 
-### Actividades
+#### Actividades
 
 1. Crea dos contactos de laboratorio.
 2. Crea una ruta para `warning`.
@@ -1189,19 +1189,19 @@ critical:
 
 ---
 
-## Sesión 9: agrupar alertas
+### Sesión 9: agrupar alertas
 
-### Objetivo
+#### Objetivo
 
 Evitar recibir una notificación individual por cada instancia cuando varias presentan el mismo problema.
 
-### Escenario
+#### Escenario
 
 ```text
 Tres servidores presentan CPU elevada.
 ```
 
-### Agrupación posible
+#### Agrupación posible
 
 Agrupar por:
 
@@ -1210,7 +1210,7 @@ alertname
 team
 ```
 
-### Actividades
+#### Actividades
 
 1. Crear varias alertas con la misma etiqueta `alertname`.
 2. Configurar la agrupación.
@@ -1221,37 +1221,37 @@ team
 
 ---
 
-## Sesión 10: crear un silencio temporal
+### Sesión 10: crear un silencio temporal
 
-### Objetivo
+#### Objetivo
 
 Silenciar una alerta durante una prueba autorizada.
 
-### Escenario
+#### Escenario
 
 ```text
 Se realizará mantenimiento sobre server-01.
 ```
 
-### Coincidencias
+#### Coincidencias
 
 ```text
 instance = server-01:9100
 ```
 
-### Motivo
+#### Motivo
 
 ```text
 Mantenimiento programado del laboratorio
 ```
 
-### Duración
+#### Duración
 
 ```text
 30 minutos
 ```
 
-### Actividades
+#### Actividades
 
 1. Crear el silencio.
 2. Añadir el motivo.
@@ -1264,9 +1264,9 @@ Mantenimiento programado del laboratorio
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Diseñar alertas accionables
+### Diseñar alertas accionables
 
 Una alerta debe indicar:
 
@@ -1277,7 +1277,7 @@ Una alerta debe indicar:
 - Qué debe revisarse.
 - Dónde encontrar el procedimiento.
 
-## Evitar alertas demasiado sensibles
+### Evitar alertas demasiado sensibles
 
 Una regla que se activa ante cada variación pequeña produce ruido.
 
@@ -1289,7 +1289,7 @@ Utilizar:
 - Agregaciones.
 - Filtros.
 
-## Evitar alertas demasiado tolerantes
+### Evitar alertas demasiado tolerantes
 
 Una regla que tarda demasiado en activarse puede retrasar la respuesta.
 
@@ -1302,7 +1302,7 @@ Almacenamiento: periodos más amplios
 Tareas programadas: según la duración esperada
 ```
 
-## Utilizar etiquetas consistentes
+### Utilizar etiquetas consistentes
 
 Ejemplo:
 
@@ -1324,7 +1324,7 @@ responsible_team
 
 Elegir una convención y mantenerla.
 
-## Escribir anotaciones útiles
+### Escribir anotaciones útiles
 
 Evitar:
 
@@ -1339,7 +1339,7 @@ La CPU de {{ $labels.instance }}
 supera el 90 % durante cinco minutos.
 ```
 
-## Probar las alertas
+### Probar las alertas
 
 Una alerta no está terminada cuando se guarda. Debe probarse.
 
@@ -1352,7 +1352,7 @@ Comprobar:
 - Recuperación.
 - Comportamiento ante ausencia de datos.
 
-## Revisar silenciamientos
+### Revisar silenciamientos
 
 Los silenciamientos deben expirar.
 
@@ -1364,7 +1364,7 @@ Revisar periódicamente:
 - Fechas de finalización.
 - Alcance.
 
-## Proteger los contactos
+### Proteger los contactos
 
 No incluir:
 
@@ -1376,9 +1376,9 @@ No incluir:
 
 ---
 
-# Errores frecuentes
+## Errores frecuentes
 
-## La alerta no se activa
+### La alerta no se activa
 
 Comprobar:
 
@@ -1390,7 +1390,7 @@ Comprobar:
 - La evaluación se ejecuta.
 - No existe un filtro incorrecto.
 
-## La alerta se activa demasiado pronto
+### La alerta se activa demasiado pronto
 
 Comprobar:
 
@@ -1400,7 +1400,7 @@ Comprobar:
 - Ausencia de agregación.
 - Umbral demasiado sensible.
 
-## La notificación no llega
+### La notificación no llega
 
 Comprobar:
 
@@ -1414,7 +1414,7 @@ Comprobar:
 - Agrupación.
 - Logs.
 
-## La alerta aparece como `No data`
+### La alerta aparece como `No data`
 
 Comprobar:
 
@@ -1425,7 +1425,7 @@ Comprobar:
 - Prometheus responde.
 - La política de ausencia de datos está definida.
 
-## La alerta aparece como `Error`
+### La alerta aparece como `Error`
 
 Comprobar:
 
@@ -1437,7 +1437,7 @@ Comprobar:
 - Variables.
 - Transformaciones.
 
-## La política no enruta correctamente
+### La política no enruta correctamente
 
 Comprobar:
 
@@ -1448,7 +1448,7 @@ Comprobar:
 - Ruta predeterminada.
 - Contacto asignado.
 
-## El silencio no funciona
+### El silencio no funciona
 
 Comprobar:
 
@@ -1461,7 +1461,7 @@ Comprobar:
 
 ---
 
-# Seguridad
+## Seguridad
 
 Las alertas y notificaciones pueden contener información sensible.
 
@@ -1477,7 +1477,7 @@ Revisar:
 - Credenciales.
 - Información de infraestructura.
 
-## Recomendaciones
+### Recomendaciones
 
 - Utilizar contactos de prueba.
 - No enviar datos de producción a cuentas personales.
@@ -1491,7 +1491,7 @@ Revisar:
 
 ---
 
-# Evidencias recomendadas
+## Evidencias recomendadas
 
 Conservar:
 
@@ -1582,13 +1582,13 @@ EOF
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear y probar un sistema completo de alertas para un servidor Linux.
 
-## Requisitos
+### Requisitos
 
 - Grafana funcionando.
 - Prometheus configurado.
@@ -1597,9 +1597,9 @@ Crear y probar un sistema completo de alertas para un servidor Linux.
 - Contacto de notificación de laboratorio.
 - Entorno autorizado para detener servicios y generar carga.
 
-## Tareas
+### Tareas
 
-### 1. Crear la regla de disponibilidad
+#### 1. Crear la regla de disponibilidad
 
 Consulta:
 
@@ -1619,7 +1619,7 @@ Duración:
 1 minuto
 ```
 
-### 2. Crear la regla de CPU
+#### 2. Crear la regla de CPU
 
 Consulta:
 
@@ -1643,7 +1643,7 @@ Duración:
 5 minutos
 ```
 
-### 3. Añadir etiquetas
+#### 3. Añadir etiquetas
 
 ```text
 team = systems
@@ -1651,7 +1651,7 @@ environment = laboratory
 severity = warning
 ```
 
-### 4. Añadir anotaciones
+#### 4. Añadir anotaciones
 
 ```text
 summary = Problema detectado en {{ $labels.instance }}
@@ -1661,11 +1661,11 @@ description = La métrica ha superado el umbral configurado.
 environment = laboratory
 ```
 
-### 5. Crear el contacto
+#### 5. Crear el contacto
 
 Utilizar un destinatario de laboratorio.
 
-### 6. Crear la política
+#### 6. Crear la política
 
 Configurar el enrutamiento para las alertas:
 
@@ -1673,7 +1673,7 @@ Configurar el enrutamiento para las alertas:
 team = systems
 ```
 
-### 7. Probar la alerta de disponibilidad
+#### 7. Probar la alerta de disponibilidad
 
 ```bash
 sudo systemctl stop node_exporter
@@ -1687,7 +1687,7 @@ Iniciar de nuevo:
 sudo systemctl start node_exporter
 ```
 
-### 8. Probar la alerta de CPU
+#### 8. Probar la alerta de CPU
 
 ```bash
 stress-ng --cpu 1 --timeout 60s
@@ -1700,7 +1700,7 @@ Observar:
 - Notificación.
 - Resolución.
 
-### 9. Crear una anotación
+#### 9. Crear una anotación
 
 Registrar:
 
@@ -1714,11 +1714,11 @@ y:
 Fin de prueba de carga
 ```
 
-### 10. Crear un silencio
+#### 10. Crear un silencio
 
 Silenciar temporalmente la alerta durante una nueva prueba controlada.
 
-### 11. Documentar
+#### 11. Documentar
 
 Registrar:
 
@@ -1735,7 +1735,7 @@ Registrar:
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -1761,7 +1761,7 @@ Registrar:
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué diferencia existe entre una métrica y una alerta?
 2. ¿Qué diferencia existe entre una alerta y una notificación?
@@ -1791,7 +1791,7 @@ Registrar:
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar este bloque, el alumno debe ser capaz de construir un flujo completo de detección y respuesta:
 

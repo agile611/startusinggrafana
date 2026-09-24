@@ -37,7 +37,7 @@ Una alerta puede seguir apareciendo como activa en Grafana aunque su notificaci�
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -65,7 +65,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Las alertas pueden activarse durante actividades conocidas sin representar una incidencia inesperada.
 
@@ -90,7 +90,7 @@ para las alertas que coincidan con estas etiquetas.
 
 El silencio no elimina la regla ni modifica su consulta.
 
-## Ejemplo
+### Ejemplo
 
 Regla:
 
@@ -125,7 +125,7 @@ pero no se envía su notificación durante ese periodo.
 
 ---
 
-# Qué es un silencio
+## Qué es un silencio
 
 Un silencio es una configuración temporal que impide que las notificaciones se entreguen cuando una alerta coincide con determinadas etiquetas.
 
@@ -138,7 +138,7 @@ Normalmente incluye:
 - Usuario que lo creó.
 - Estado del silencio.
 
-## Ejemplo conceptual
+### Ejemplo conceptual
 
 ```text
 Silencio:
@@ -162,7 +162,7 @@ Durante ese periodo, las alertas que cumplan las coincidencias quedan silenciada
 
 ---
 
-# Qué no hace un silencio
+## Qué no hace un silencio
 
 Un silencio no:
 
@@ -176,7 +176,7 @@ Un silencio no:
 - Impide que la alerta aparezca en la lista.
 - Garantiza que se oculten todos los problemas relacionados.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Regla:
@@ -197,9 +197,9 @@ Por eso es importante no interpretar un silencio como una resolución técnica.
 
 ---
 
-# Diferencias importantes
+## Diferencias importantes
 
-## Silencio frente a regla deshabilitada
+### Silencio frente a regla deshabilitada
 
 | Característica | Silencio | Regla deshabilitada |
 |---|---|---|
@@ -210,13 +210,13 @@ Por eso es importante no interpretar un silencio como una resolución técnica.
 | Tiene duración | Habitualmente sí | Puede permanecer hasta reactivarse |
 | Uso habitual | Mantenimiento o evento conocido | Desactivación temporal de una regla |
 
-## Silencio frente a pausa
+### Silencio frente a pausa
 
 Pausar una regla impide o detiene su evaluación según el mecanismo utilizado.
 
 Un silencio mantiene la evaluación, pero suprime las notificaciones coincidentes.
 
-## Silencio frente a intervalo de silencio
+### Silencio frente a intervalo de silencio
 
 Un silencio suele aplicarse a una coincidencia concreta durante un periodo determinado.
 
@@ -236,9 +236,9 @@ El nombre exacto puede variar según la versión de Grafana.
 
 ---
 
-# Componentes de un silencio
+## Componentes de un silencio
 
-## Coincidencias
+### Coincidencias
 
 Determinan qué alertas quedan silenciadas.
 
@@ -248,7 +248,7 @@ Ejemplo:
 alertname = HighCPUUsage
 ```
 
-## Inicio
+### Inicio
 
 Momento a partir del cual el silencio queda activo.
 
@@ -256,7 +256,7 @@ Momento a partir del cual el silencio queda activo.
 2026-09-24 22:00
 ```
 
-## Fin
+### Fin
 
 Momento a partir del cual el silencio deja de aplicarse.
 
@@ -264,7 +264,7 @@ Momento a partir del cual el silencio deja de aplicarse.
 2026-09-24 22:30
 ```
 
-## Comentario
+### Comentario
 
 Explica el motivo y aporta contexto.
 
@@ -273,11 +273,11 @@ Mantenimiento programado de server-01.
 Cambio autorizado CHG-1042.
 ```
 
-## Creador
+### Creador
 
 Identifica el usuario que configuró el silencio.
 
-## Estado
+### Estado
 
 Un silencio puede estar:
 
@@ -292,11 +292,11 @@ La terminología exacta depende de la versión de Grafana.
 
 ---
 
-# Coincidencias de etiquetas
+## Coincidencias de etiquetas
 
 Las coincidencias son la parte más importante de un silencio.
 
-## Coincidencia por nombre de alerta
+### Coincidencia por nombre de alerta
 
 ```text
 alertname = NodeExporterDown
@@ -304,7 +304,7 @@ alertname = NodeExporterDown
 
 Silencia todas las instancias de esa regla que coincidan con el resto de criterios.
 
-## Coincidencia por instancia
+### Coincidencia por instancia
 
 ```text
 instance = server-01:9100
@@ -312,7 +312,7 @@ instance = server-01:9100
 
 Silencia alertas de una instancia concreta.
 
-## Coincidencias combinadas
+### Coincidencias combinadas
 
 ```text
 alertname = NodeExporterDown
@@ -322,7 +322,7 @@ environment = production
 
 Este silencio es más específico.
 
-## Coincidencia por equipo
+### Coincidencia por equipo
 
 ```text
 team = systems
@@ -330,7 +330,7 @@ team = systems
 
 Puede silenciar muchas alertas del equipo. Debe utilizarse con cuidado.
 
-## Coincidencia por entorno
+### Coincidencia por entorno
 
 ```text
 environment = laboratory
@@ -340,9 +340,9 @@ Puede ser apropiado para una ventana de prácticas, pero peligroso si se utiliza
 
 ---
 
-# Silencios específicos y amplios
+## Silencios específicos y amplios
 
-## Silencio específico
+### Silencio específico
 
 ```text
 alertname = NodeExporterDown
@@ -355,7 +355,7 @@ Ventajas:
 - Afecta a un recurso concreto.
 - Es más fácil de revisar.
 
-## Silencio amplio
+### Silencio amplio
 
 ```text
 team = systems
@@ -372,17 +372,17 @@ Puede afectar a:
 
 Debe utilizarse únicamente cuando el mantenimiento afecta realmente a todo el conjunto.
 
-## Recomendación
+### Recomendación
 
 Utilizar el silencio más específico que cubra el trabajo previsto.
 
 ---
 
-# Silencios con varias etiquetas
+## Silencios con varias etiquetas
 
 Una actividad de mantenimiento puede requerir varias coincidencias.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 environment = production
@@ -392,7 +392,7 @@ team = systems
 
 Esto limita el silencio al servidor concreto del entorno de producción y al equipo correspondiente.
 
-## Ejemplo de mantenimiento de una aplicación
+### Ejemplo de mantenimiento de una aplicación
 
 ```text
 service = payments-api
@@ -401,13 +401,13 @@ environment = production
 
 El silencio puede cubrir varias alertas del servicio, pero no las de otras aplicaciones.
 
-## Precaución
+### Precaución
 
 No añadir etiquetas innecesarias si pueden impedir que el silencio coincida con las alertas esperadas.
 
 ---
 
-# Crear un silencio
+## Crear un silencio
 
 La ubicación exacta puede cambiar según la versión de Grafana.
 
@@ -427,7 +427,7 @@ Procedimiento general:
 12. Comprobar una alerta coincidente.
 13. Documentar el resultado.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Nombre descriptivo:
@@ -448,7 +448,7 @@ Mantenimiento autorizado CHG-1042.
 
 ---
 
-# Comentarios de los silencios
+## Comentarios de los silencios
 
 El comentario debe explicar:
 
@@ -459,7 +459,7 @@ El comentario debe explicar:
 - Qué referencia tiene.
 - Qué equipo es responsable.
 
-## Ejemplo correcto
+### Ejemplo correcto
 
 ```text
 Mantenimiento programado del sistema operativo de server-01.
@@ -467,13 +467,13 @@ Cambio CHG-1042. Responsable: equipo de sistemas.
 Fin previsto: 22:30.
 ```
 
-## Ejemplo insuficiente
+### Ejemplo insuficiente
 
 ```text
 Prueba
 ```
 
-## Otro ejemplo correcto
+### Otro ejemplo correcto
 
 ```text
 Prueba de carga autorizada en laboratorio.
@@ -485,11 +485,11 @@ Un buen comentario evita que otra persona tenga que investigar el motivo del sil
 
 ---
 
-# Duración de un silencio
+## Duración de un silencio
 
 El periodo debe cubrir la actividad prevista, pero no prolongarse innecesariamente.
 
-## Ejemplo
+### Ejemplo
 
 Mantenimiento previsto:
 
@@ -505,7 +505,7 @@ Silencio recomendado:
 
 El margen debe estar justificado.
 
-## Riesgo de un silencio demasiado corto
+### Riesgo de un silencio demasiado corto
 
 La actividad continúa, pero el silencio termina:
 
@@ -515,7 +515,7 @@ La actividad continúa, pero el silencio termina:
 22:33 - Se envía una alerta
 ```
 
-## Riesgo de un silencio demasiado largo
+### Riesgo de un silencio demasiado largo
 
 El problema real puede quedar oculto:
 
@@ -525,15 +525,15 @@ El problema real puede quedar oculto:
 02:00 - La alerta sigue silenciada por error
 ```
 
-## Recomendación
+### Recomendación
 
 Utilizar una duración razonable y revisar el silencio después de la actividad.
 
 ---
 
-# Silencios programados y activos
+## Silencios programados y activos
 
-## Silencio programado
+### Silencio programado
 
 Todavía no ha comenzado.
 
@@ -543,7 +543,7 @@ Hora actual: 21:30
 Estado: programado
 ```
 
-## Silencio activo
+### Silencio activo
 
 El periodo actual se encuentra dentro de la ventana.
 
@@ -554,7 +554,7 @@ Fin: 22:30
 Estado: activo
 ```
 
-## Silencio expirado
+### Silencio expirado
 
 El periodo ha terminado.
 
@@ -568,7 +568,7 @@ Los silencios expirados deben revisarse y conservarse únicamente si son necesar
 
 ---
 
-# Silenciar desde una alerta
+## Silenciar desde una alerta
 
 En algunos flujos, Grafana permite crear un silencio directamente desde la vista de una alerta.
 
@@ -583,13 +583,13 @@ Procedimiento general:
 7. Guardar.
 8. Confirmar que el silencio afecta a la alerta correcta.
 
-## Recomendación
+### Recomendación
 
 Revisar siempre las coincidencias antes de guardar. Una alerta puede tener más etiquetas de las visibles inicialmente.
 
 ---
 
-# Revisar el alcance de un silencio
+## Revisar el alcance de un silencio
 
 Antes de crear un silencio, comprobar:
 
@@ -611,7 +611,7 @@ Antes de crear un silencio, comprobar:
 ¿Afecta a todo un equipo?
 ```
 
-## Ejemplo
+### Ejemplo
 
 Silencio:
 
@@ -632,7 +632,7 @@ Si solo se pretendía silenciar CPU de un servidor, el alcance es demasiado ampl
 
 ---
 
-# Silencios y políticas de notificación
+## Silencios y políticas de notificación
 
 Un silencio actúa sobre las notificaciones después de que la alerta haya sido evaluada y enrutada.
 
@@ -654,7 +654,7 @@ Comprobación de silencio
 Notificación enviada o suprimida
 ```
 
-## Consecuencia
+### Consecuencia
 
 Una alerta puede:
 
@@ -668,7 +668,7 @@ Por eso, al investigar una notificación ausente, hay que revisar también los s
 
 ---
 
-# Silencios y alertas críticas
+## Silencios y alertas críticas
 
 Silenciar una alerta crítica puede ocultar un problema importante.
 
@@ -683,7 +683,7 @@ Antes de crear el silencio:
 7. Revisar si existen alertas alternativas.
 8. Informar al equipo correspondiente.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Silencio:
@@ -707,11 +707,11 @@ No conviene silenciar indiscriminadamente todas las alertas críticas de producc
 
 ---
 
-# Silencios durante mantenimientos
+## Silencios durante mantenimientos
 
-## Procedimiento recomendado
+### Procedimiento recomendado
 
-### Antes del mantenimiento
+#### Antes del mantenimiento
 
 - Confirmar el alcance.
 - Identificar las alertas esperadas.
@@ -720,14 +720,14 @@ No conviene silenciar indiscriminadamente todas las alertas críticas de producc
 - Informar al equipo.
 - Comprobar la hora y la zona horaria.
 
-### Durante el mantenimiento
+#### Durante el mantenimiento
 
 - Supervisar el estado desde Grafana.
 - Confirmar que el silencio está activo.
 - Revisar alertas no relacionadas.
 - Mantener el contacto con el responsable.
 
-### Después del mantenimiento
+#### Después del mantenimiento
 
 - Confirmar la recuperación.
 - Revisar el estado de las reglas.
@@ -738,11 +738,11 @@ No conviene silenciar indiscriminadamente todas las alertas críticas de producc
 
 ---
 
-# Zona horaria
+## Zona horaria
 
 Las horas de inicio y finalización deben interpretarse correctamente.
 
-## Riesgos
+### Riesgos
 
 - Grafana utiliza UTC y el alumno interpreta hora local.
 - El servidor tiene una zona horaria diferente.
@@ -750,7 +750,7 @@ Las horas de inicio y finalización deben interpretarse correctamente.
 - El cambio horario afecta a la ventana.
 - La documentación utiliza un formato ambiguo.
 
-## Recomendaciones
+### Recomendaciones
 
 Utilizar fechas completas:
 
@@ -774,7 +774,7 @@ Comprobar:
 
 ---
 
-# Revisión y eliminación de silencios
+## Revisión y eliminación de silencios
 
 Un silencio debe revisarse cuando:
 
@@ -785,7 +785,7 @@ Un silencio debe revisarse cuando:
 - Se ha sustituido la regla.
 - Ya no es necesario ocultar las notificaciones.
 
-## Eliminar un silencio
+### Eliminar un silencio
 
 Eliminarlo puede hacer que vuelvan a enviarse notificaciones si la alerta continúa activa.
 
@@ -800,11 +800,11 @@ Antes de eliminarlo:
 
 ---
 
-# Silencios expirados
+## Silencios expirados
 
 Los silencios expirados ya no suprimen notificaciones, pero pueden conservarse para auditoría.
 
-## Revisar periódicamente
+### Revisar periódicamente
 
 Buscar:
 
@@ -815,7 +815,7 @@ Buscar:
 - Silencios asociados a cambios cancelados.
 - Silencios duplicados.
 
-## Información útil
+### Información útil
 
 ```text
 Nombre o identificador:
@@ -837,7 +837,7 @@ Cambio asociado:
 
 ---
 
-# Auditoría de silencios
+## Auditoría de silencios
 
 Un silencio debe poder responder a estas preguntas:
 
@@ -859,7 +859,7 @@ Un silencio debe poder responder a estas preguntas:
 ¿Qué ocurrió durante el silencio?
 ```
 
-## Ejemplo de ficha
+### Ejemplo de ficha
 
 ```text
 Silencio:
@@ -889,11 +889,11 @@ Expirado
 
 ---
 
-# Silencios y anotaciones
+## Silencios y anotaciones
 
 Las anotaciones ayudan a relacionar una ventana de mantenimiento con el comportamiento de las métricas.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 22:00 - Inicio del mantenimiento
@@ -907,7 +907,7 @@ El silencio explica por qué no se enviaron notificaciones. La anotación aporta
 
 ---
 
-# Silencios y ausencia de datos
+## Silencios y ausencia de datos
 
 Una alerta de ausencia de datos puede seguir evaluándose durante un silencio.
 
@@ -931,9 +931,9 @@ No se debe asumir que un silencio resuelve la pérdida de datos.
 
 ---
 
-# Ejemplo completo
+## Ejemplo completo
 
-## Escenario
+### Escenario
 
 Se realizará un mantenimiento de sistema en `server-01`.
 
@@ -944,7 +944,7 @@ Durante la actividad:
 - La memoria puede cambiar.
 - La disponibilidad puede verse afectada.
 
-## Silencio
+### Silencio
 
 ```text
 Coincidencias:
@@ -962,14 +962,14 @@ Mantenimiento del sistema operativo de server-01.
 Cambio CHG-1042. Responsable: equipo de sistemas.
 ```
 
-## Resultado esperado
+### Resultado esperado
 
 ```text
 Las alertas de server-01 continúan evaluándose,
 pero no se envían notificaciones durante la ventana.
 ```
 
-## Después
+### Después
 
 1. Confirmar que el servidor está operativo.
 2. Confirmar que Prometheus recibe métricas.
@@ -980,19 +980,19 @@ pero no se envían notificaciones durante la ventana.
 
 ---
 
-# Ejemplo de sesión 1: crear un silencio para una instancia
+## Ejemplo de sesión 1: crear un silencio para una instancia
 
-## Objetivo
+### Objetivo
 
 Silenciar temporalmente las alertas de un servidor concreto durante una práctica.
 
-## Regla de referencia
+### Regla de referencia
 
 ```text
 NodeExporterDown
 ```
 
-## Etiquetas de la alerta
+### Etiquetas de la alerta
 
 ```text
 alertname = NodeExporterDown
@@ -1001,7 +1001,7 @@ environment = laboratory
 team = systems
 ```
 
-## Configuración del silencio
+### Configuración del silencio
 
 ```text
 Coincidencias:
@@ -1018,7 +1018,7 @@ Comentario:
 Práctica de mantenimiento autorizada en laboratorio.
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir **Alerting**.
 2. Acceder a **Silences**.
@@ -1036,7 +1036,7 @@ Práctica de mantenimiento autorizada en laboratorio.
 14. Eliminar o esperar la expiración del silencio.
 15. Confirmar el comportamiento posterior.
 
-## Registro
+### Registro
 
 ```text
 Silencio:
@@ -1062,13 +1062,13 @@ Resultado:
 
 ---
 
-# Ejemplo de sesión 2: comprobar que el silencio es específico
+## Ejemplo de sesión 2: comprobar que el silencio es específico
 
-## Objetivo
+### Objetivo
 
 Verificar que se silencia una instancia sin afectar a otra.
 
-## Preparación
+### Preparación
 
 Crear un silencio:
 
@@ -1082,14 +1082,14 @@ No incluir:
 team = systems
 ```
 
-## Escenario
+### Escenario
 
 ```text
 server-01 → alerta activa
 server-02 → alerta activa
 ```
 
-## Pasos
+### Pasos
 
 1. Crear el silencio para `server-01`.
 2. Activar la misma regla en `server-01`.
@@ -1099,7 +1099,7 @@ server-02 → alerta activa
 6. Confirmar que solo `server-01` está silenciado.
 7. Documentar el resultado.
 
-## Resultado esperado
+### Resultado esperado
 
 ```text
 server-01:
@@ -1111,19 +1111,19 @@ Notificación entregada.
 
 ---
 
-# Ejemplo de sesión 3: comprobar el alcance de un silencio amplio
+## Ejemplo de sesión 3: comprobar el alcance de un silencio amplio
 
-## Objetivo
+### Objetivo
 
 Observar los riesgos de utilizar una coincidencia demasiado general.
 
-## Silencio
+### Silencio
 
 ```text
 team = systems
 ```
 
-## Alertas del equipo
+### Alertas del equipo
 
 ```text
 HighCPUUsage
@@ -1132,7 +1132,7 @@ FilesystemUsageHigh
 NodeExporterDown
 ```
 
-## Pasos
+### Pasos
 
 1. Revisar las alertas etiquetadas con `team=systems`.
 2. Crear el silencio.
@@ -1144,26 +1144,26 @@ NodeExporterDown
 8. Crear un silencio específico para CPU.
 9. Repetir la prueba.
 
-## Conclusión esperada
+### Conclusión esperada
 
 Un silencio basado únicamente en `team=systems` puede afectar a más alertas de las necesarias.
 
 ---
 
-# Ejemplo de sesión 4: comprobar la duración
+## Ejemplo de sesión 4: comprobar la duración
 
-## Objetivo
+### Objetivo
 
 Observar qué ocurre cuando el silencio expira mientras la alerta sigue activa.
 
-## Configuración
+### Configuración
 
 ```text
 Duración:
 2 minutos
 ```
 
-## Pasos
+### Pasos
 
 1. Crear el silencio.
 2. Activar una alerta.
@@ -1175,7 +1175,7 @@ Duración:
 8. Resolver la alerta.
 9. Comprobar la recuperación.
 
-## Registro
+### Registro
 
 ```text
 Hora de activación:
@@ -1197,13 +1197,13 @@ La conducta exacta puede depender de la política, la agrupación y el intervalo
 
 ---
 
-# Ejemplo de sesión 5: probar un silencio programado
+## Ejemplo de sesión 5: probar un silencio programado
 
-## Objetivo
+### Objetivo
 
 Crear un silencio que empiece en el futuro.
 
-## Configuración
+### Configuración
 
 ```text
 Inicio:
@@ -1216,7 +1216,7 @@ Coincidencia:
 instance = server-01:9100
 ```
 
-## Pasos
+### Pasos
 
 1. Crear el silencio.
 2. Confirmar que queda programado.
@@ -1228,7 +1228,7 @@ instance = server-01:9100
 8. Esperar al final.
 9. Revisar el comportamiento posterior.
 
-## Registro
+### Registro
 
 ```text
 Estado antes del inicio:
@@ -1242,13 +1242,13 @@ Resultado:
 
 ---
 
-# Ejemplo de sesión 6: revisar la zona horaria
+## Ejemplo de sesión 6: revisar la zona horaria
 
-## Objetivo
+### Objetivo
 
 Evitar errores de horario al crear un silencio.
 
-## Pasos
+### Pasos
 
 1. Consultar la hora del sistema:
 
@@ -1268,7 +1268,7 @@ timedatectl
 6. Revisar la hora en la lista de silencios.
 7. Documentar la zona horaria utilizada.
 
-## Registro
+### Registro
 
 ```text
 Hora del sistema:
@@ -1288,20 +1288,20 @@ Resultado:
 
 ---
 
-# Ejemplo de sesión 7: investigar una notificación suprimida
+## Ejemplo de sesión 7: investigar una notificación suprimida
 
-## Objetivo
+### Objetivo
 
 Determinar si un silencio impide el envío de una alerta.
 
-## Situación
+### Situación
 
 ```text
 La alerta está en Alerting,
 pero el equipo no recibe notificaciones.
 ```
 
-## Procedimiento
+### Procedimiento
 
 1. Abrir la lista de alertas.
 2. Revisar el estado.
@@ -1315,7 +1315,7 @@ pero el equipo no recibe notificaciones.
 10. Determinar si la ausencia del mensaje es esperada.
 11. Documentar la conclusión.
 
-## Registro
+### Registro
 
 ```text
 Alerta:
@@ -1341,13 +1341,13 @@ Conclusión:
 
 ---
 
-# Ejemplo de sesión 8: eliminar un silencio al finalizar un cambio
+## Ejemplo de sesión 8: eliminar un silencio al finalizar un cambio
 
-## Objetivo
+### Objetivo
 
 Practicar la retirada controlada de un silencio.
 
-## Pasos
+### Pasos
 
 1. Crear un silencio para un mantenimiento.
 2. Activar una alerta durante el mantenimiento.
@@ -1360,7 +1360,7 @@ Practicar la retirada controlada de un silencio.
 9. Confirmar que la notificación vuelve a enviarse.
 10. Documentar la retirada.
 
-## Lista de comprobación
+### Lista de comprobación
 
 ```text
 [ ] El mantenimiento ha finalizado.
@@ -1375,13 +1375,13 @@ Practicar la retirada controlada de un silencio.
 
 ---
 
-# Ejemplo de sesión 9: revisar silencios caducados
+## Ejemplo de sesión 9: revisar silencios caducados
 
-## Objetivo
+### Objetivo
 
 Identificar silencios antiguos o innecesarios.
 
-## Pasos
+### Pasos
 
 1. Abrir la lista de silencios.
 2. Filtrar los silencios expirados.
@@ -1394,7 +1394,7 @@ Identificar silencios antiguos o innecesarios.
 9. Decidir si deben conservarse por auditoría.
 10. Documentar la revisión.
 
-## Tabla
+### Tabla
 
 | Silencio | Estado | Motivo | Alcance | Acción |
 |---|---|---|---|---|
@@ -1404,17 +1404,17 @@ Identificar silencios antiguos o innecesarios.
 
 ---
 
-# Ejemplo de sesión 10: mantenimiento completo
+## Ejemplo de sesión 10: mantenimiento completo
 
-## Objetivo
+### Objetivo
 
 Simular un mantenimiento planificado con silencio y anotación.
 
-## Escenario
+### Escenario
 
 Se realizará el mantenimiento de `server-01` entre las 22:00 y las 22:30.
 
-## Preparación
+### Preparación
 
 Crear un silencio:
 
@@ -1431,7 +1431,7 @@ Responsable: equipo de sistemas.
 Referencia: LAB-1042.
 ```
 
-## Durante el mantenimiento
+### Durante el mantenimiento
 
 1. Confirmar que el silencio está activo.
 2. Detener Node Exporter.
@@ -1440,7 +1440,7 @@ Referencia: LAB-1042.
 5. Revisar que otras instancias siguen notificando.
 6. Registrar los cambios.
 
-## Después
+### Después
 
 1. Iniciar Node Exporter.
 2. Confirmar la recuperación.
@@ -1451,11 +1451,11 @@ Referencia: LAB-1042.
 
 ---
 
-# Silencios recurrentes
+## Silencios recurrentes
 
 Para actividades que se repiten, puede ser preferible utilizar un intervalo de silencio en lugar de crear silencios manuales cada vez.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Todos los domingos
@@ -1465,14 +1465,14 @@ Coincidencia:
 environment = staging
 ```
 
-## Uso adecuado
+### Uso adecuado
 
 - Mantenimientos recurrentes.
 - Ventanas de copias de seguridad conocidas.
 - Procesos programados.
 - Trabajos batch autorizados.
 
-## Riesgos
+### Riesgos
 
 - El calendario puede cambiar.
 - Una actividad puede cancelarse.
@@ -1484,11 +1484,11 @@ Los intervalos recurrentes deben revisarse periódicamente.
 
 ---
 
-# Silencios y mantenimiento de reglas
+## Silencios y mantenimiento de reglas
 
 No se debe crear un silencio para ocultar una regla mal diseñada.
 
-## Situación incorrecta
+### Situación incorrecta
 
 ```text
 La alerta genera demasiados falsos positivos.
@@ -1496,7 +1496,7 @@ Solución aplicada:
 Silenciarla durante semanas.
 ```
 
-## Solución adecuada
+### Solución adecuada
 
 1. Revisar la consulta.
 2. Revisar el umbral.
@@ -1510,7 +1510,7 @@ Un silencio debe ser una medida temporal y justificada, no una solución permane
 
 ---
 
-# Silencios y alertas repetitivas
+## Silencios y alertas repetitivas
 
 Si una alerta se repite constantemente, puede ser tentador silenciarla.
 
@@ -1524,7 +1524,7 @@ Antes de hacerlo:
 - Abrir una incidencia de mejora.
 - Ajustar la regla si corresponde.
 
-## Excepción
+### Excepción
 
 Puede crearse un silencio temporal mientras se corrige la regla, pero debe incluir:
 
@@ -1542,7 +1542,7 @@ Fin previsto:
 
 ---
 
-# Seguridad y permisos
+## Seguridad y permisos
 
 Los silencios pueden ocultar notificaciones importantes.
 
@@ -1555,7 +1555,7 @@ Por eso, deben controlarse los permisos para:
 - Silenciar alertas críticas.
 - Consultar el historial.
 
-## Buenas prácticas
+### Buenas prácticas
 
 - Limitar la creación de silencios.
 - Exigir comentarios.
@@ -1568,7 +1568,7 @@ Por eso, deben controlarse los permisos para:
 
 ---
 
-# Silencios en producción
+## Silencios en producción
 
 Antes de silenciar una alerta de producción:
 
@@ -1583,7 +1583,7 @@ Antes de silenciar una alerta de producción:
 9. Revisar las alertas no relacionadas.
 10. Confirmar la recuperación.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Cambio:
@@ -1608,7 +1608,7 @@ Fin:
 
 ---
 
-# API y automatización
+## API y automatización
 
 Grafana puede permitir la gestión de silencios mediante API según la versión y la configuración.
 
@@ -1620,7 +1620,7 @@ La automatización puede utilizarse para:
 - Auditar silencios.
 - Asociar silencios con cambios autorizados.
 
-## Precauciones
+### Precauciones
 
 - Proteger las credenciales de API.
 - Utilizar permisos mínimos.
@@ -1631,7 +1631,7 @@ La automatización puede utilizarse para:
 - Comprobar que el cambio está aprobado.
 - Probar primero en laboratorio.
 
-## Ejemplo conceptual de datos
+### Ejemplo conceptual de datos
 
 ```json
 {
@@ -1655,9 +1655,9 @@ No incluir tokens reales en comandos, ejemplos o documentación.
 
 ---
 
-# Errores frecuentes
+## Errores frecuentes
 
-## El silencio no afecta a la alerta esperada
+### El silencio no afecta a la alerta esperada
 
 Comprobar:
 
@@ -1670,7 +1670,7 @@ Comprobar:
 - Estado del silencio.
 - Etiquetas reales de la alerta.
 
-## El silencio afecta a demasiadas alertas
+### El silencio afecta a demasiadas alertas
 
 Causa habitual:
 
@@ -1687,7 +1687,7 @@ instance = server-01:9100
 
 Utilizar coincidencias más específicas.
 
-## La alerta sigue apareciendo
+### La alerta sigue apareciendo
 
 Esto puede ser normal. Un silencio no necesariamente detiene la evaluación ni oculta el estado de la alerta.
 
@@ -1698,7 +1698,7 @@ Comprobar si:
 - El silencio coincide.
 - El silencio está dentro de su ventana.
 
-## Se siguen recibiendo notificaciones
+### Se siguen recibiendo notificaciones
 
 Comprobar:
 
@@ -1710,7 +1710,7 @@ Comprobar:
 - Existe una ruta o contacto independiente.
 - La agrupación contiene alertas no silenciadas.
 
-## El silencio no termina cuando se esperaba
+### El silencio no termina cuando se esperaba
 
 Comprobar:
 
@@ -1721,7 +1721,7 @@ Comprobar:
 - Hora del servidor.
 - Hora mostrada en Grafana.
 
-## Se olvidó eliminar el silencio
+### Se olvidó eliminar el silencio
 
 Establecer:
 
@@ -1730,11 +1730,11 @@ Establecer:
 - Revisión posterior.
 - Auditoría periódica.
 
-## Se utiliza un silencio para ocultar ruido permanente
+### Se utiliza un silencio para ocultar ruido permanente
 
 Revisar y corregir la regla en lugar de mantener un silencio indefinido.
 
-## No existe comentario
+### No existe comentario
 
 Añadir:
 
@@ -1743,7 +1743,7 @@ Añadir:
 - Responsable.
 - Fin previsto.
 
-## Se silencia toda producción por error
+### Se silencia toda producción por error
 
 Revisar cuidadosamente:
 
@@ -1759,7 +1759,7 @@ Antes de guardar un silencio amplio, comprobar cuántas alertas coinciden.
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -1887,13 +1887,13 @@ Información confidencial del cambio
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear, probar y revisar un silencio asociado a un mantenimiento de laboratorio.
 
-## Requisitos
+### Requisitos
 
 - Grafana funcionando.
 - Prometheus configurado.
@@ -1905,7 +1905,7 @@ Crear, probar y revisar un silencio asociado a un mantenimiento de laboratorio.
 
 ---
 
-## Tarea 1: revisar la alerta
+### Tarea 1: revisar la alerta
 
 Utilizar:
 
@@ -1940,7 +1940,7 @@ Confirmar que la regla está en estado normal.
 
 ---
 
-## Tarea 2: crear el silencio
+### Tarea 2: crear el silencio
 
 Configurar:
 
@@ -1965,7 +1965,7 @@ Revisar cuidadosamente el alcance antes de guardar.
 
 ---
 
-## Tarea 3: activar la alerta
+### Tarea 3: activar la alerta
 
 Detener el servicio en el entorno de laboratorio:
 
@@ -1986,7 +1986,7 @@ No detener servicios de producción.
 
 ---
 
-## Tarea 4: verificar el silencio
+### Tarea 4: verificar el silencio
 
 Comprobar:
 
@@ -2006,7 +2006,7 @@ Comprobar:
 
 ---
 
-## Tarea 5: recuperar el servicio
+### Tarea 5: recuperar el servicio
 
 Iniciar Node Exporter:
 
@@ -2030,7 +2030,7 @@ Comprobar:
 
 ---
 
-## Tarea 6: revisar el alcance
+### Tarea 6: revisar el alcance
 
 Crear una segunda alerta o utilizar una segunda instancia:
 
@@ -2042,7 +2042,7 @@ Comprobar que el silencio de `server-01` no afecta a `server-02`.
 
 ---
 
-## Tarea 7: documentar
+### Tarea 7: documentar
 
 Completar:
 
@@ -2072,7 +2072,7 @@ Conclusión:
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2097,45 +2097,45 @@ Conclusión:
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Utilizar coincidencias específicas
+### Utilizar coincidencias específicas
 
 Silenciar únicamente las alertas necesarias.
 
-## Definir siempre un final
+### Definir siempre un final
 
 No crear silencios indefinidos durante mantenimientos temporales.
 
-## Añadir un comentario claro
+### Añadir un comentario claro
 
 Incluir motivo, responsable y referencia.
 
-## Revisar la zona horaria
+### Revisar la zona horaria
 
 Utilizar fechas completas y explícitas.
 
-## Comprobar el alcance
+### Comprobar el alcance
 
 Antes de guardar, confirmar qué alertas coinciden.
 
-## Revisar los silencios activos
+### Revisar los silencios activos
 
 Una lista de silencios activa debe poder entenderse rápidamente.
 
-## No utilizar silencios como solución permanente
+### No utilizar silencios como solución permanente
 
 Si una alerta genera ruido, revisar su diseño.
 
-## Proteger las alertas críticas
+### Proteger las alertas críticas
 
 Silenciar únicamente cuando exista una actividad autorizada.
 
-## Informar al equipo
+### Informar al equipo
 
 El equipo de guardia debe saber qué notificaciones están temporalmente suprimidas.
 
-## Revisar después del mantenimiento
+### Revisar después del mantenimiento
 
 Confirmar que:
 
@@ -2145,7 +2145,7 @@ Confirmar que:
 - El silencio ha terminado.
 - Las notificaciones funcionan.
 
-## Mantener auditoría
+### Mantener auditoría
 
 Registrar:
 
@@ -2157,13 +2157,13 @@ Registrar:
 - Coincidencias.
 - Resultado.
 
-## Probar en laboratorio
+### Probar en laboratorio
 
 Antes de utilizar silencios complejos en producción, probar su alcance en un entorno controlado.
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Un silencio suprime temporalmente las notificaciones de alertas coincidentes.
 - Un silencio no elimina la regla.
@@ -2193,7 +2193,7 @@ Antes de utilizar silencios complejos en producción, probar su alcance en un en
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué es un silencio?
 2. ¿Qué diferencia existe entre un silencio y una regla deshabilitada?
@@ -2223,7 +2223,7 @@ Antes de utilizar silencios complejos en producción, probar su alcance en un en
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear, comprobar y revisar silencios de forma controlada.
 

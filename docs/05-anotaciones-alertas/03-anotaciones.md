@@ -35,7 +35,7 @@ Las anotaciones no sustituyen a las métricas ni a las alertas. Las complementan
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -57,11 +57,11 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Una métrica indica lo que está ocurriendo en un sistema. Una anotación indica qué evento operativo ocurrió en un momento determinado.
 
-## Ejemplo sin anotación
+### Ejemplo sin anotación
 
 Una gráfica muestra este comportamiento:
 
@@ -82,7 +82,7 @@ Sin contexto, pueden existir varias explicaciones:
 - Se ejecutó una tarea programada.
 - Se modificó la configuración.
 
-## Ejemplo con anotaciones
+### Ejemplo con anotaciones
 
 ```text
 10:09 - Inicio de despliegue de la versión 2.4.0
@@ -106,7 +106,7 @@ Las anotaciones ayudan a responder:
 
 ---
 
-# Qué es una anotación
+## Qué es una anotación
 
 Una anotación es un evento asociado a un instante o intervalo de tiempo.
 
@@ -120,7 +120,7 @@ Puede contener:
 - Datos procedentes de una consulta.
 - Información adicional del evento.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Texto:
@@ -139,7 +139,7 @@ La anotación se mostrará como una marca sobre la gráfica correspondiente.
 
 ---
 
-# Diferencia entre métrica, alerta y anotación
+## Diferencia entre métrica, alerta y anotación
 
 | Elemento | Función | Ejemplo |
 |---|---|---|
@@ -149,7 +149,7 @@ La anotación se mostrará como una marca sobre la gráfica correspondiente.
 | Notificación | Comunicar una alerta | Enviar un correo |
 | Anotación | Registrar un evento operativo | Inicio de despliegue |
 
-## Ejemplo completo
+### Ejemplo completo
 
 ```text
 Métrica:
@@ -174,9 +174,9 @@ La anotación explica qué estaba ocurriendo en ese momento.
 
 ---
 
-# Tipos de anotaciones
+## Tipos de anotaciones
 
-## Anotaciones manuales
+### Anotaciones manuales
 
 Son creadas directamente por un usuario desde Grafana.
 
@@ -190,7 +190,7 @@ Ejemplos:
 
 Son apropiadas cuando el evento no procede de un sistema automatizado o cuando se necesita añadir contexto durante una investigación.
 
-## Anotaciones automáticas
+### Anotaciones automáticas
 
 Son generadas por una consulta o por una integración externa.
 
@@ -214,7 +214,7 @@ Identificador del commit
 Enlace a la ejecución
 ```
 
-## Anotaciones asociadas a alertas
+### Anotaciones asociadas a alertas
 
 Una alerta puede generar o mostrar información relacionada con un cambio de estado.
 
@@ -230,9 +230,9 @@ La disponibilidad de estas funciones depende de la versión y de la configuraci�
 
 ---
 
-# Componentes de una anotación
+## Componentes de una anotación
 
-## Texto
+### Texto
 
 Debe describir el evento de forma breve y clara.
 
@@ -251,13 +251,13 @@ Evento
 Problema
 ```
 
-## Fecha y hora
+### Fecha y hora
 
 Indica cuándo ocurrió el evento.
 
 Es importante utilizar una zona horaria conocida y coherente con la configuración del equipo.
 
-## Etiquetas
+### Etiquetas
 
 Clasifican la anotación.
 
@@ -270,7 +270,7 @@ entorno = laboratorio
 version = 2.4.0
 ```
 
-## Duración
+### Duración
 
 Algunos eventos tienen un instante concreto.
 
@@ -288,7 +288,7 @@ Mantenimiento de 22:00 a 23:00
 
 Cuando la interfaz o la integración lo permite, se puede registrar un inicio y un final.
 
-## Referencias
+### Referencias
 
 Una anotación puede incluir información adicional:
 
@@ -301,7 +301,7 @@ No se deben incluir credenciales ni tokens en las URLs.
 
 ---
 
-# Crear una anotación manual
+## Crear una anotación manual
 
 El procedimiento exacto puede variar según la versión de Grafana y el tipo de panel.
 
@@ -319,7 +319,7 @@ El flujo habitual es:
 
 En algunas instalaciones también es posible añadir anotaciones desde una opción general del dashboard o desde una vista temporal.
 
-## Datos de ejemplo
+### Datos de ejemplo
 
 ```text
 Texto:
@@ -335,7 +335,7 @@ Después de guardar, la anotación debe aparecer como una marca o línea vertica
 
 ---
 
-# Consultar anotaciones
+## Consultar anotaciones
 
 Las anotaciones pueden visualizarse sobre un panel temporal.
 
@@ -349,7 +349,7 @@ Para analizarlas correctamente:
 6. Repetir la consulta utilizando otros rangos.
 7. Filtrar por tipo de evento si existe esa posibilidad.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 10:00 - CPU normal
@@ -363,11 +363,11 @@ La anotación permite establecer una relación temporal entre la prueba y el inc
 
 ---
 
-# Etiquetas de anotaciones
+## Etiquetas de anotaciones
 
 Las etiquetas permiten clasificar los eventos y facilitar su búsqueda.
 
-## Ejemplo de etiquetas
+### Ejemplo de etiquetas
 
 ```text
 tipo = despliegue
@@ -376,9 +376,9 @@ entorno = laboratorio
 version = 2.4.0
 ```
 
-## Categorías recomendadas
+### Categorías recomendadas
 
-### Tipo de evento
+#### Tipo de evento
 
 ```text
 tipo = despliegue
@@ -389,7 +389,7 @@ tipo = cambio-configuracion
 tipo = reinicio
 ```
 
-### Entorno
+#### Entorno
 
 ```text
 entorno = desarrollo
@@ -398,7 +398,7 @@ entorno = preproduccion
 entorno = produccion
 ```
 
-### Servicio
+#### Servicio
 
 ```text
 servicio = api
@@ -407,7 +407,7 @@ servicio = node-exporter
 servicio = frontend
 ```
 
-### Equipo
+#### Equipo
 
 ```text
 equipo = sistemas
@@ -415,7 +415,7 @@ equipo = desarrollo
 equipo = operaciones
 ```
 
-## Buenas prácticas
+### Buenas prácticas
 
 - Utilizar nombres consistentes.
 - Evitar acentos en los nombres técnicos si la herramienta los procesa automáticamente.
@@ -426,9 +426,9 @@ equipo = operaciones
 
 ---
 
-# Ejemplos de anotaciones
+## Ejemplos de anotaciones
 
-## Despliegue
+### Despliegue
 
 ```text
 Texto:
@@ -441,7 +441,7 @@ entorno=produccion
 version=2.4.0
 ```
 
-## Mantenimiento
+### Mantenimiento
 
 ```text
 Texto:
@@ -453,7 +453,7 @@ servicio=base-datos
 entorno=produccion
 ```
 
-## Prueba de carga
+### Prueba de carga
 
 ```text
 Texto:
@@ -466,7 +466,7 @@ endpoint=orders
 entorno=laboratorio
 ```
 
-## Reinicio
+### Reinicio
 
 ```text
 Texto:
@@ -478,7 +478,7 @@ servicio=node-exporter
 entorno=laboratorio
 ```
 
-## Resolución de incidencia
+### Resolución de incidencia
 
 ```text
 Texto:
@@ -490,7 +490,7 @@ estado=resuelto
 servicio=prometheus
 ```
 
-## Cambio de configuración
+### Cambio de configuración
 
 ```text
 Texto:
@@ -504,11 +504,11 @@ entorno=laboratorio
 
 ---
 
-# Relación entre anotaciones y métricas
+## Relación entre anotaciones y métricas
 
 Las anotaciones permiten comparar eventos operativos con series temporales.
 
-## Ejemplo: despliegue y errores
+### Ejemplo: despliegue y errores
 
 Consulta de tasa de errores:
 
@@ -541,7 +541,7 @@ sum(
 
 Si se crea una anotación en el momento del despliegue, se puede comprobar si el porcentaje de errores cambió inmediatamente después.
 
-## Método de análisis
+### Método de análisis
 
 ```text
 1. Seleccionar el rango temporal.
@@ -557,7 +557,7 @@ Una coincidencia temporal no demuestra por sí sola una relación causal. Es una
 
 ---
 
-# Relación entre anotaciones y alertas
+## Relación entre anotaciones y alertas
 
 Una alerta responde a:
 
@@ -571,7 +571,7 @@ Una anotación responde a:
 ¿Qué evento operativo ocurrió en ese momento?
 ```
 
-## Ejemplo
+### Ejemplo
 
 ```text
 14:00 - Despliegue de la versión 3.1.0
@@ -583,7 +583,7 @@ Una anotación responde a:
 
 Las anotaciones ayudan a reconstruir la secuencia de una incidencia.
 
-## Línea temporal de una incidencia
+### Línea temporal de una incidencia
 
 ```text
 14:00  Despliegue iniciado
@@ -605,7 +605,7 @@ Esta línea temporal es útil para:
 
 ---
 
-# Anotaciones automáticas mediante consultas
+## Anotaciones automáticas mediante consultas
 
 Grafana puede utilizar una consulta de anotaciones para encontrar eventos en una fuente de datos compatible.
 
@@ -623,7 +623,7 @@ El procedimiento general consiste en:
 
 La sintaxis exacta depende de la fuente de datos.
 
-## Ejemplo conceptual con SQL
+### Ejemplo conceptual con SQL
 
 Supóngase una tabla:
 
@@ -668,7 +668,7 @@ Los nombres de las columnas y el formato esperado pueden variar según la versi�
 
 ---
 
-# Ejemplo conceptual con una API de despliegues
+## Ejemplo conceptual con una API de despliegues
 
 Una plataforma de despliegue puede enviar un evento con esta información:
 
@@ -701,11 +701,11 @@ No se deben enviar contraseñas, tokens ni información privada dentro de la ano
 
 ---
 
-# Anotaciones durante una incidencia
+## Anotaciones durante una incidencia
 
 Durante una investigación, las anotaciones ayudan a construir una línea temporal.
 
-## Eventos recomendados
+### Eventos recomendados
 
 ```text
 Incidencia detectada
@@ -718,7 +718,7 @@ Métrica normalizada
 Incidencia resuelta
 ```
 
-## Ejemplo
+### Ejemplo
 
 ```text
 09:15 - Alerta de latencia elevada
@@ -729,26 +729,26 @@ Incidencia resuelta
 09:40 - Incidencia cerrada
 ```
 
-## Recomendación
+### Recomendación
 
 Las anotaciones deben registrarse en el momento del evento o poco después. Las anotaciones creadas muchas horas más tarde pueden perder precisión.
 
 ---
 
-# Ejemplo de sesión 1: crear una anotación manual
+## Ejemplo de sesión 1: crear una anotación manual
 
-## Objetivo
+### Objetivo
 
 Crear una anotación sobre el inicio de una prueba de carga.
 
-## Requisitos
+### Requisitos
 
 - Grafana funcionando.
 - Un dashboard con un panel Time series.
 - Una métrica de CPU disponible.
 - Permisos para crear anotaciones.
 
-## Consulta del panel
+### Consulta del panel
 
 ```promql
 100 - (
@@ -758,7 +758,7 @@ Crear una anotación sobre el inicio de una prueba de carga.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir Grafana.
 2. Abrir un dashboard de laboratorio.
@@ -782,19 +782,19 @@ entorno=laboratorio
 8. Guardar la anotación.
 9. Comprobar que aparece sobre el panel.
 
-## Resultado esperado
+### Resultado esperado
 
 Debe aparecer una marca en la línea temporal con el texto y las etiquetas configuradas.
 
 ---
 
-# Ejemplo de sesión 2: relacionar una anotación con una métrica
+## Ejemplo de sesión 2: relacionar una anotación con una métrica
 
-## Objetivo
+### Objetivo
 
 Observar el efecto de una prueba sobre el uso de CPU.
 
-## Pasos
+### Pasos
 
 1. Abrir el panel de CPU.
 2. Seleccionar un rango temporal de 15 minutos.
@@ -827,7 +827,7 @@ entorno=laboratorio
 
 8. Comparar la gráfica antes, durante y después de la prueba.
 
-## Registro
+### Registro
 
 ```text
 Hora de inicio:
@@ -845,7 +845,7 @@ Relación observada:
 Observaciones:
 ```
 
-## Preguntas de análisis
+### Preguntas de análisis
 
 - ¿La métrica aumentó después de la primera anotación?
 - ¿Cuánto tiempo tardó en reflejarse el cambio?
@@ -855,19 +855,19 @@ Observaciones:
 
 ---
 
-# Ejemplo de sesión 3: documentar un despliegue
+## Ejemplo de sesión 3: documentar un despliegue
 
-## Objetivo
+### Objetivo
 
 Registrar un despliegue y analizar sus efectos.
 
-## Evento
+### Evento
 
 ```text
 Despliegue de la versión 2.4.0 de la API
 ```
 
-## Etiquetas
+### Etiquetas
 
 ```text
 tipo=despliegue
@@ -876,7 +876,7 @@ version=2.4.0
 entorno=laboratorio
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir el dashboard de la aplicación.
 2. Seleccionar un rango de 30 minutos.
@@ -897,19 +897,19 @@ Fin del despliegue de la versión 2.4.0
 7. Comparar las métricas antes y después.
 8. Documentar cualquier variación.
 
-## Resultado esperado
+### Resultado esperado
 
 El alumno debe poder identificar si las métricas presentan cambios coincidentes con el despliegue.
 
 ---
 
-# Ejemplo de sesión 4: documentar un mantenimiento
+## Ejemplo de sesión 4: documentar un mantenimiento
 
-## Objetivo
+### Objetivo
 
 Registrar el inicio y el final de una ventana de mantenimiento.
 
-## Inicio
+### Inicio
 
 ```text
 Inicio de mantenimiento de Prometheus
@@ -924,7 +924,7 @@ entorno=laboratorio
 fase=inicio
 ```
 
-## Final
+### Final
 
 ```text
 Fin de mantenimiento de Prometheus
@@ -939,7 +939,7 @@ entorno=laboratorio
 fase=fin
 ```
 
-## Pasos
+### Pasos
 
 1. Crear la anotación de inicio.
 2. Ejecutar el mantenimiento autorizado.
@@ -948,7 +948,7 @@ fase=fin
 5. Crear la anotación de finalización.
 6. Comparar la disponibilidad antes y después.
 
-## Actividad
+### Actividad
 
 Crear una tabla:
 
@@ -961,13 +961,13 @@ Crear una tabla:
 
 ---
 
-# Ejemplo de sesión 5: relacionar una alerta con anotaciones
+## Ejemplo de sesión 5: relacionar una alerta con anotaciones
 
-## Objetivo
+### Objetivo
 
 Comprender cómo una anotación ayuda a interpretar una alerta.
 
-## Regla
+### Regla
 
 ```text
 Nombre: HighCPUUsage
@@ -975,7 +975,7 @@ Condición: CPU mayor que 90 %
 Duración: 5 minutos
 ```
 
-## Secuencia
+### Secuencia
 
 ```text
 10:00 - Inicio de prueba de carga
@@ -986,7 +986,7 @@ Duración: 5 minutos
 10:10 - Alerta resuelta
 ```
 
-## Pasos
+### Pasos
 
 1. Crear la regla de CPU.
 2. Crear la anotación de inicio.
@@ -997,7 +997,7 @@ Duración: 5 minutos
 7. Esperar la resolución.
 8. Comparar la línea temporal completa.
 
-## Actividad
+### Actividad
 
 Explicar por escrito:
 
@@ -1015,13 +1015,13 @@ Explicar por escrito:
 
 ---
 
-# Ejemplo de sesión 6: filtrar anotaciones por etiquetas
+## Ejemplo de sesión 6: filtrar anotaciones por etiquetas
 
-## Objetivo
+### Objetivo
 
 Consultar únicamente anotaciones de un tipo concreto.
 
-## Anotaciones de ejemplo
+### Anotaciones de ejemplo
 
 ```text
 tipo=despliegue
@@ -1030,7 +1030,7 @@ tipo=prueba
 tipo=incidente
 ```
 
-## Pasos
+### Pasos
 
 1. Crear varias anotaciones.
 2. Utilizar etiquetas diferentes.
@@ -1050,7 +1050,7 @@ tipo=incidente
 
 7. Comparar los resultados.
 
-## Actividad
+### Actividad
 
 Completar:
 
@@ -1068,13 +1068,13 @@ Observaciones:
 
 ---
 
-# Ejemplo de sesión 7: crear anotaciones desde una tabla de eventos
+## Ejemplo de sesión 7: crear anotaciones desde una tabla de eventos
 
-## Objetivo
+### Objetivo
 
 Utilizar una fuente de datos de eventos para mostrar anotaciones automáticas.
 
-## Tabla de ejemplo
+### Tabla de ejemplo
 
 ```sql
 CREATE TABLE events (
@@ -1086,7 +1086,7 @@ CREATE TABLE events (
 );
 ```
 
-## Datos de ejemplo
+### Datos de ejemplo
 
 ```sql
 INSERT INTO events (
@@ -1106,7 +1106,7 @@ VALUES
 );
 ```
 
-## Consulta
+### Consulta
 
 ```sql
 SELECT
@@ -1120,7 +1120,7 @@ WHERE environment = 'laboratory'
 ORDER BY event_time;
 ```
 
-## Actividades
+### Actividades
 
 1. Crear la tabla.
 2. Insertar un evento.
@@ -1135,17 +1135,17 @@ La sintaxis puede necesitar ajustes según el motor SQL y el conector de Grafana
 
 ---
 
-# Ejemplo de sesión 8: construir la línea temporal de una incidencia
+## Ejemplo de sesión 8: construir la línea temporal de una incidencia
 
-## Objetivo
+### Objetivo
 
 Documentar una incidencia desde la detección hasta la resolución.
 
-## Escenario
+### Escenario
 
 La latencia de una aplicación aumenta y activa una alerta.
 
-## Anotaciones
+### Anotaciones
 
 ```text
 Incidencia detectada
@@ -1171,7 +1171,7 @@ Latencia normalizada
 Incidencia resuelta
 ```
 
-## Etiquetas
+### Etiquetas
 
 ```text
 tipo=incidente
@@ -1180,7 +1180,7 @@ entorno=laboratorio
 incidencia=INC-001
 ```
 
-## Actividades
+### Actividades
 
 1. Crear el panel de latencia.
 2. Crear una alerta de latencia.
@@ -1191,7 +1191,7 @@ incidencia=INC-001
 7. Analizar el intervalo completo.
 8. Calcular aproximadamente el tiempo de respuesta.
 
-## Registro
+### Registro
 
 ```text
 Hora de detección:
@@ -1211,9 +1211,9 @@ Tiempo total de la incidencia:
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Escribir textos claros
+### Escribir textos claros
 
 Preferir:
 
@@ -1229,7 +1229,7 @@ Deploy
 
 El texto debe ser comprensible para cualquier persona que consulte el dashboard.
 
-## Registrar el contexto mínimo necesario
+### Registrar el contexto mínimo necesario
 
 Una anotación debería indicar:
 
@@ -1239,7 +1239,7 @@ Una anotación debería indicar:
 - Qué versión o cambio se aplicó.
 - Quién o qué sistema generó el evento, cuando sea relevante.
 
-## Utilizar etiquetas consistentes
+### Utilizar etiquetas consistentes
 
 Mantener una convención:
 
@@ -1252,7 +1252,7 @@ equipo
 estado
 ```
 
-## Separar inicio y final
+### Separar inicio y final
 
 Para eventos largos, crear anotaciones diferentes:
 
@@ -1263,7 +1263,7 @@ Fin de mantenimiento
 
 Esto permite conocer la duración aproximada del evento.
 
-## Registrar cambios importantes
+### Registrar cambios importantes
 
 No es necesario anotar cada acción menor. Priorizar:
 
@@ -1275,15 +1275,15 @@ No es necesario anotar cada acción menor. Priorizar:
 - Pruebas.
 - Cambios de infraestructura.
 
-## Utilizar anotaciones durante las investigaciones
+### Utilizar anotaciones durante las investigaciones
 
 Registrar los pasos importantes facilita reconstruir posteriormente la incidencia.
 
-## Mantener una zona horaria coherente
+### Mantener una zona horaria coherente
 
 Una diferencia de zona horaria puede provocar conclusiones incorrectas sobre la relación entre un evento y una métrica.
 
-## Proteger la información sensible
+### Proteger la información sensible
 
 No incluir:
 
@@ -1295,15 +1295,15 @@ No incluir:
 - URLs con credenciales.
 - Mensajes completos que contengan secretos.
 
-## Evitar anotaciones ambiguas
+### Evitar anotaciones ambiguas
 
 Una anotación debe seguir siendo útil varias semanas después.
 
 ---
 
-# Errores frecuentes
+## Errores frecuentes
 
-## La anotación no aparece
+### La anotación no aparece
 
 Comprobar:
 
@@ -1315,7 +1315,7 @@ Comprobar:
 - La fuente de datos.
 - La hora y zona horaria.
 
-## La anotación aparece en un momento incorrecto
+### La anotación aparece en un momento incorrecto
 
 Posibles causas:
 
@@ -1325,7 +1325,7 @@ Posibles causas:
 - Conversión entre UTC y hora local.
 - Marca temporal mal calculada.
 
-## Se muestran demasiadas anotaciones
+### Se muestran demasiadas anotaciones
 
 Comprobar:
 
@@ -1336,7 +1336,7 @@ Comprobar:
 - Eventos duplicados.
 - Integraciones que reintentan el envío.
 
-## Las etiquetas no filtran correctamente
+### Las etiquetas no filtran correctamente
 
 Comprobar:
 
@@ -1347,7 +1347,7 @@ Comprobar:
 - Convención utilizada por otros equipos.
 - Etiquetas duplicadas.
 
-## Existen anotaciones duplicadas
+### Existen anotaciones duplicadas
 
 Posibles causas:
 
@@ -1356,7 +1356,7 @@ Posibles causas:
 - No existe un identificador único.
 - Se ha creado una anotación manual y otra automática para el mismo evento.
 
-## El texto no aporta información
+### El texto no aporta información
 
 Evitar:
 
@@ -1370,7 +1370,7 @@ Preferir:
 Actualización del límite de conexiones de la API de 100 a 200
 ```
 
-## Las anotaciones no coinciden con las métricas
+### Las anotaciones no coinciden con las métricas
 
 Comprobar:
 
@@ -1384,7 +1384,7 @@ Comprobar:
 
 ---
 
-# Seguridad y privacidad
+## Seguridad y privacidad
 
 Las anotaciones pueden ser visibles para varias personas y permanecer almacenadas durante mucho tiempo.
 
@@ -1401,13 +1401,13 @@ Detalles de vulnerabilidades
 URLs con autenticación
 ```
 
-## Ejemplo incorrecto
+### Ejemplo incorrecto
 
 ```text
 Despliegue realizado con token=abc123...
 ```
 
-## Ejemplo correcto
+### Ejemplo correcto
 
 ```text
 Despliegue de la versión 2.4.0 realizado por el sistema de automatización
@@ -1417,7 +1417,7 @@ Si se necesita enlazar información privada, utilizar un sistema con control de 
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear un directorio para las evidencias:
 
@@ -1488,13 +1488,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear una línea temporal de eventos y relacionarla con las métricas de un servidor de laboratorio.
 
-## Requisitos
+### Requisitos
 
 - Grafana funcionando.
 - Un dashboard con métricas de CPU.
@@ -1503,7 +1503,7 @@ Crear una línea temporal de eventos y relacionarla con las métricas de un serv
 - Un entorno de laboratorio.
 - Una herramienta para generar carga controlada.
 
-## Tarea 1: preparar el panel
+### Tarea 1: preparar el panel
 
 Utilizar la consulta:
 
@@ -1523,7 +1523,7 @@ Unidad: porcentaje
 Rango temporal: últimos 30 minutos
 ```
 
-## Tarea 2: crear la anotación inicial
+### Tarea 2: crear la anotación inicial
 
 Texto:
 
@@ -1540,7 +1540,7 @@ entorno=laboratorio
 fase=inicio
 ```
 
-## Tarea 3: ejecutar la prueba
+### Tarea 3: ejecutar la prueba
 
 ```bash
 stress-ng --cpu 1 --timeout 60s
@@ -1548,7 +1548,7 @@ stress-ng --cpu 1 --timeout 60s
 
 Utilizar este comando únicamente en un entorno autorizado.
 
-## Tarea 4: crear la anotación final
+### Tarea 4: crear la anotación final
 
 Texto:
 
@@ -1565,7 +1565,7 @@ entorno=laboratorio
 fase=fin
 ```
 
-## Tarea 5: analizar la gráfica
+### Tarea 5: analizar la gráfica
 
 Responder:
 
@@ -1581,7 +1581,7 @@ Responder:
 ¿Las anotaciones aparecen en los momentos correctos?
 ```
 
-## Tarea 6: documentar un cambio
+### Tarea 6: documentar un cambio
 
 Crear otra anotación:
 
@@ -1597,7 +1597,7 @@ componente=alerting
 entorno=laboratorio
 ```
 
-## Tarea 7: construir una línea temporal
+### Tarea 7: construir una línea temporal
 
 Completar:
 
@@ -1611,7 +1611,7 @@ Completar:
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -1633,7 +1633,7 @@ Completar:
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Una anotación registra un evento sobre una línea temporal.
 - Las anotaciones aportan contexto a las métricas.
@@ -1658,7 +1658,7 @@ Completar:
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué es una anotación en Grafana?
 2. ¿Qué diferencia existe entre una métrica y una anotación?
@@ -1683,7 +1683,7 @@ Completar:
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear y utilizar anotaciones para enriquecer un dashboard de monitorización.
 
