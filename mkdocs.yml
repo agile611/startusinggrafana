@@ -137,20 +137,20 @@ nav:
       - Laboratorio práctico: 03-prometheus-fuentes-datos/10-laboratorio.md
 
   - Dashboards y visualización:
-      - Introducción: 04-dashboards-visualizacion/index.md
-      - Conceptos de dashboards: 04-dashboards-visualizacion/conceptos-dashboards.md
-      - Panel Time series: 04-dashboards-visualizacion/panel-time-series.md
-      - Panel Stat: 04-dashboards-visualizacion/panel-stat.md
-      - Panel Gauge: 04-dashboards-visualizacion/panel-gauge.md
-      - Panel Bar gauge: 04-dashboards-visualizacion/panel-bar-gauge.md
-      - Panel Heatmap: 04-dashboards-visualizacion/panel-heatmap.md
-      - Panel de texto: 04-dashboards-visualizacion/panel-texto.md
-      - Panel Canvas: 04-dashboards-visualizacion/panel-canvas.md
-      - Lista de dashboards: 04-dashboards-visualizacion/lista-dashboards.md
-      - Plugins de paneles: 04-dashboards-visualizacion/plugins-paneles.md
-      - Transformaciones: 04-dashboards-visualizacion/transformaciones.md
-      - Manipulación de paneles: 04-dashboards-visualizacion/manipulacion-paneles.md
-      - Laboratorio: 04-dashboards-visualizacion/laboratorio.md
+      - Introducción al bloque: 04-dashboards-visualizacion/01-index.md
+      - Conceptos de dashboards: 04-dashboards-visualizacion/02-conceptos-dashboards.md
+      - Lista de dashboards: 04-dashboards-visualizacion/03-lista-dashboards.md
+      - Manipulación de paneles: 04-dashboards-visualizacion/04-manipulacion-paneles.md
+      - Panel Stat: 04-dashboards-visualizacion/05-panel-stat.md
+      - Panel Gauge: 04-dashboards-visualizacion/06-panel-gauge.md
+      - Panel Bar Gauge: 04-dashboards-visualizacion/07-panel-bar-gauge.md
+      - Panel Time series: 04-dashboards-visualizacion/08-panel-time-series.md
+      - Panel Heatmap: 04-dashboards-visualizacion/09-panel-heatmap.md
+      - Panel de texto: 04-dashboards-visualizacion/10-panel-texto.md
+      - Panel Canvas: 04-dashboards-visualizacion/11-panel-canvas.md
+      - Transformaciones: 04-dashboards-visualizacion/12-transformaciones.md
+      - Plugins de paneles: 04-dashboards-visualizacion/13-plugins-paneles.md
+      - Laboratorio integrador: 04-dashboards-visualizacion/14-laboratorio.md
 
   - Anotaciones y alertas:
       - Introducción: 05-anotaciones-alertas/index.md
