@@ -154,17 +154,17 @@ nav:
 
   - Anotaciones y alertas:
       - Introducción: 05-anotaciones-alertas/01-index.md
-      - Anotaciones: 05-anotaciones-alertas/anotaciones.md
-      - Alertas: 05-anotaciones-alertas/alertas.md
-      - Reglas de alerta: 05-anotaciones-alertas/reglas-alerta.md
-      - Condiciones y expresiones: 05-anotaciones-alertas/condiciones-expresiones.md
-      - Lista de alertas: 05-anotaciones-alertas/lista-alertas.md
-      - Contactos de notificación: 05-anotaciones-alertas/contactos-notificacion.md
-      - Políticas de notificación: 05-anotaciones-alertas/politicas-notificacion.md
-      - Silenciados: 05-anotaciones-alertas/silenciados.md
-      - Correo electrónico: 05-anotaciones-alertas/correo-electronico.md
-      - Otras notificaciones: 05-anotaciones-alertas/otras-notificaciones.md
-      - Laboratorio: 05-anotaciones-alertas/laboratorio.md
+      - Alertas: 05-anotaciones-alertas/02-alertas.md
+      - Anotaciones: 05-anotaciones-alertas/03-anotaciones.md
+      - Reglas de alerta: 05-anotaciones-alertas/04-reglas-alerta.md
+      - Condiciones y expresiones: 05-anotaciones-alertas/05-condiciones-expresiones.md
+      - Lista de alertas: 05-anotaciones-alertas/06-lista-alertas.md
+      - Contactos de notificación: 05-anotaciones-alertas/07-contactos-notificacion.md
+      - Correo electrónico: 05-anotaciones-alertas/08-correo-electronico.md
+      - Otras notificaciones: 05-anotaciones-alertas/09-otras-notificaciones.md
+      - Políticas de notificación: 05-anotaciones-alertas/10-politicas-notificacion.md
+      - Silenciados: 05-anotaciones-alertas/11-silenciados.md
+      - Laboratorio: 05-anotaciones-alertas/12-laboratorio.md
 
   - Proyecto final:
       - Introducción: 06-proyecto-final/01-index.md
