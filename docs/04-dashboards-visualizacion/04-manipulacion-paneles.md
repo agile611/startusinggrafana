@@ -89,7 +89,7 @@ La consulta puede ser la misma, pero la visualización y el objetivo del panel s
 
 ---
 
-# Ciclo de vida de un panel
+## Ciclo de vida de un panel
 
 El ciclo habitual de un panel es:
 
@@ -163,7 +163,7 @@ Los cambios deben guardarse en el dashboard.
 
 ---
 
-# Partes principales de un panel
+## Partes principales de un panel
 
 ## Título
 
@@ -283,7 +283,7 @@ Pueden utilizarse para:
 
 ---
 
-# Crear un panel
+## Crear un panel
 
 ## Procedimiento general
 
@@ -336,7 +336,7 @@ Interpretación:
 
 ---
 
-# Editar un panel
+## Editar un panel
 
 ## Acceder al editor
 
@@ -381,7 +381,7 @@ No conviene cambiar muchas opciones sin comprobar el resultado. Es mejor realiza
 
 ---
 
-# Modificar el título
+## Modificar el título
 
 Un título debe describir el dato y, cuando sea necesario, el contexto.
 
@@ -421,7 +421,7 @@ Estado de objetivos por job
 
 ---
 
-# Añadir una descripción
+## Añadir una descripción
 
 Una descripción puede documentar el significado del panel.
 
@@ -454,7 +454,7 @@ problemas de rendimiento o falta de memoria disponible.
 
 ---
 
-# Cambiar la fuente de datos
+## Cambiar la fuente de datos
 
 Un panel puede utilizar una fuente de datos concreta.
 
@@ -492,7 +492,7 @@ up
 
 ---
 
-# Cambiar la visualización
+## Cambiar la visualización
 
 La misma consulta puede representarse de distintas formas.
 
@@ -576,7 +576,7 @@ node_load1
 
 ---
 
-# Configurar unidades
+## Configurar unidades
 
 Las unidades hacen que un valor sea interpretable.
 
@@ -669,7 +669,7 @@ La carga no debe confundirse con un porcentaje de CPU.
 
 ---
 
-# Configurar decimales
+## Configurar decimales
 
 Los decimales deben ajustarse al nivel de precisión necesario.
 
@@ -700,7 +700,7 @@ Utilizar:
 
 ---
 
-# Configurar límites mínimos y máximos
+## Configurar límites mínimos y máximos
 
 Los límites ayudan a que un panel represente correctamente el rango esperado.
 
@@ -731,7 +731,7 @@ No se debe establecer automáticamente un máximo de `100` para una métrica de 
 
 ---
 
-# Configurar umbrales
+## Configurar umbrales
 
 ## Ejemplo de memoria
 
@@ -799,7 +799,7 @@ Umbrales:
 
 ---
 
-# Configurar leyendas
+## Configurar leyendas
 
 La leyenda ayuda a identificar cada serie.
 
@@ -837,7 +837,7 @@ Evitar leyendas excesivamente largas.
 
 ---
 
-# Mover paneles
+## Mover paneles
 
 Los paneles pueden moverse para organizar la distribución del dashboard.
 
@@ -879,7 +879,7 @@ Ejemplo:
 
 ---
 
-# Redimensionar paneles
+## Redimensionar paneles
 
 El tamaño del panel debe corresponder a la cantidad de información que muestra.
 
@@ -925,7 +925,7 @@ Un panel demasiado grande puede desperdiciar espacio.
 
 ---
 
-# Duplicar un panel
+## Duplicar un panel
 
 Duplicar un panel permite crear otro panel con una configuración similar.
 
@@ -985,7 +985,7 @@ Aunque ambos paneles pueden utilizar un Gauge, sus unidades, títulos y consulta
 
 ---
 
-# Copiar un panel entre dashboards
+## Copiar un panel entre dashboards
 
 Copiar un panel permite reutilizarlo en otro dashboard.
 
@@ -1003,7 +1003,7 @@ No se debe asumir que funcionará sin modificaciones.
 
 ---
 
-# Eliminar un panel
+## Eliminar un panel
 
 Eliminar un panel no elimina la métrica de Prometheus ni borra otros paneles.
 
@@ -1032,7 +1032,7 @@ No se realiza desde Grafana.
 
 ---
 
-# Guardar los cambios
+## Guardar los cambios
 
 Después de modificar un panel, normalmente hay dos niveles de guardado:
 
@@ -1054,7 +1054,7 @@ Comprobar siempre que:
 
 ---
 
-# Deshacer cambios
+## Deshacer cambios
 
 Cuando se realizan cambios experimentales:
 
@@ -1070,7 +1070,7 @@ Por eso conviene exportar una copia de los dashboards importantes.
 
 ---
 
-# Inspector de paneles
+## Inspector de paneles
 
 El inspector ayuda a comprender qué está ocurriendo dentro de un panel.
 
@@ -1110,7 +1110,7 @@ El inspector es útil cuando:
 
 ---
 
-# Ejemplo de panel de disponibilidad
+## Ejemplo de panel de disponibilidad
 
 ## Consulta original
 
@@ -1165,7 +1165,7 @@ Max: 100
 
 ---
 
-# Ejemplo de panel de CPU
+## Ejemplo de panel de CPU
 
 ## Consulta
 
@@ -1209,7 +1209,7 @@ pkill yes
 
 ---
 
-# Ejemplo de panel de memoria
+## Ejemplo de panel de memoria
 
 ## Consulta
 
@@ -1249,7 +1249,7 @@ requieren una revisión del consumo de procesos y de la memoria disponible.
 
 ---
 
-# Ejemplo de panel de almacenamiento
+## Ejemplo de panel de almacenamiento
 
 ## Consulta
 
@@ -1296,7 +1296,7 @@ El resultado de PromQL y `df -h` puede variar ligeramente debido al momento de c
 
 ---
 
-# Ejemplo de panel de red
+## Ejemplo de panel de red
 
 ## Tráfico recibido
 
@@ -1335,7 +1335,7 @@ para evitar incluir tráfico interno del sistema.
 
 ---
 
-# Ejemplo de sesión 1: crear un panel desde cero
+## Ejemplo de sesión 1: crear un panel desde cero
 
 ## Objetivo
 
@@ -1384,7 +1384,7 @@ count(up)
 
 ---
 
-# Ejemplo de sesión 2: editar la visualización
+## Ejemplo de sesión 2: editar la visualización
 
 ## Objetivo
 
@@ -1455,7 +1455,7 @@ Disponibilidad global
 
 ---
 
-# Ejemplo de sesión 3: duplicar y modificar un panel
+## Ejemplo de sesión 3: duplicar y modificar un panel
 
 ## Objetivo
 
@@ -1510,7 +1510,7 @@ Max: 100
 
 ---
 
-# Ejemplo de sesión 4: mover y redimensionar paneles
+## Ejemplo de sesión 4: mover y redimensionar paneles
 
 ## Objetivo
 
@@ -1558,7 +1558,7 @@ Supongamos que todos los paneles están desordenados.
 
 ---
 
-# Ejemplo de sesión 5: diagnosticar un panel sin datos
+## Ejemplo de sesión 5: diagnosticar un panel sin datos
 
 ## Objetivo
 
@@ -1609,7 +1609,7 @@ node_memory_MemAvailable_bytes
 
 ---
 
-# Ejemplo de sesión 6: copiar un panel a otro dashboard
+## Ejemplo de sesión 6: copiar un panel a otro dashboard
 
 ## Objetivo
 
@@ -1636,7 +1636,7 @@ Reutilizar un panel en otro dashboard.
 
 ---
 
-# Ejemplo de sesión 7: eliminar y recuperar un panel
+## Ejemplo de sesión 7: eliminar y recuperar un panel
 
 ## Objetivo
 
@@ -1672,7 +1672,7 @@ Panel temporal
 
 ---
 
-# Ejemplo de sesión 8: utilizar el inspector
+## Ejemplo de sesión 8: utilizar el inspector
 
 ## Objetivo
 
@@ -1699,7 +1699,7 @@ Revisar los datos internos de un panel.
 
 ---
 
-# Buenas prácticas de manipulación
+## Buenas prácticas de manipulación
 
 ## Realizar cambios pequeños
 
@@ -1745,7 +1745,7 @@ El panel debe poder interpretarse rápidamente.
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
 ## El panel no muestra datos
 
@@ -1859,7 +1859,7 @@ Comprobar:
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -1968,7 +1968,7 @@ Evidencias recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
 ## Objetivo
 
@@ -2049,7 +2049,7 @@ Realizar las siguientes operaciones:
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Operación | Realizada | Observaciones |
 |---|---|---|
@@ -2075,7 +2075,7 @@ Realizar las siguientes operaciones:
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Un panel combina consulta, fuente de datos y visualización.
 - La manipulación de paneles permite adaptar un dashboard a las necesidades del usuario.
@@ -2100,7 +2100,7 @@ Realizar las siguientes operaciones:
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué elementos principales forman un panel?
 2. ¿Qué diferencia existe entre una consulta y una visualización?
@@ -2130,7 +2130,7 @@ Realizar las siguientes operaciones:
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear y manipular paneles siguiendo un proceso ordenado:
 

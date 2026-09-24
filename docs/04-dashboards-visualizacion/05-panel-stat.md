@@ -16,7 +16,7 @@ Ejemplos de información apropiada para un panel Stat:
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -41,7 +41,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Un panel Stat muestra principalmente un valor reducido.
 
@@ -124,7 +124,7 @@ No es la mejor visualización para analizar en detalle cómo ha evolucionado una
 
 ---
 
-# Cuándo utilizar un panel Stat
+## Cuándo utilizar un panel Stat
 
 El panel Stat es apropiado cuando:
 
@@ -136,7 +136,7 @@ El panel Stat es apropiado cuando:
 - La métrica puede resumirse mediante una agregación.
 - Se desea mostrar una tendencia pequeña junto al valor actual.
 
-## Ejemplos adecuados
+### Ejemplos adecuados
 
 ```promql
 sum(up)
@@ -176,7 +176,7 @@ Número de series de CPU en modo idle.
 
 ---
 
-# Cuándo no utilizar un panel Stat
+## Cuándo no utilizar un panel Stat
 
 No suele ser la mejor opción cuando se necesita:
 
@@ -201,7 +201,7 @@ Para esos casos pueden ser más apropiados:
 
 ---
 
-# Anatomía de un panel Stat
+## Anatomía de un panel Stat
 
 Un panel Stat puede incluir los siguientes elementos:
 
@@ -217,7 +217,7 @@ Un panel Stat puede incluir los siguientes elementos:
 +--------------------------------------+
 ```
 
-## Título
+### Título
 
 Identifica el indicador.
 
@@ -231,7 +231,7 @@ Carga del sistema
 Alertas activas
 ```
 
-## Valor principal
+### Valor principal
 
 Es el dato más importante del panel.
 
@@ -244,7 +244,7 @@ Ejemplos:
 0
 ```
 
-## Unidad
+### Unidad
 
 Aclara cómo debe interpretarse el valor.
 
@@ -258,7 +258,7 @@ seconds
 none
 ```
 
-## Decimales
+### Decimales
 
 Controlan la precisión visual.
 
@@ -274,7 +274,7 @@ en lugar de:
 85.437829 %
 ```
 
-## Sparkline
+### Sparkline
 
 Una sparkline es una pequeña representación de la evolución temporal del valor.
 
@@ -287,7 +287,7 @@ Permite mostrar:
 
 La sparkline proporciona contexto, pero no sustituye a un gráfico temporal detallado.
 
-## Umbrales
+### Umbrales
 
 Cambian el color del valor según su magnitud.
 
@@ -299,7 +299,7 @@ Ejemplo:
 90    Rojo
 ```
 
-## Mapa de valores
+### Mapa de valores
 
 Permite sustituir valores numéricos por texto.
 
@@ -310,7 +310,7 @@ Ejemplo:
 0 → CAÍDO
 ```
 
-## Texto de valor
+### Texto de valor
 
 Puede configurarse para mostrar:
 
@@ -322,7 +322,7 @@ Puede configurarse para mostrar:
 
 ---
 
-# Diferencia entre Stat y Gauge
+## Diferencia entre Stat y Gauge
 
 Ambos pueden mostrar un valor resumido, pero tienen objetivos diferentes.
 
@@ -336,7 +336,7 @@ Ambos pueden mostrar un valor resumido, pero tienen objetivos diferentes.
 | Comparar muchos elementos | Limitado | Bar Gauge suele ser mejor |
 | Uso en tarjetas de resumen | Muy adecuado | Menos habitual |
 
-## Ejemplo
+### Ejemplo
 
 Para mostrar el número de objetivos:
 
@@ -369,13 +369,13 @@ Gauge
 
 ---
 
-# Diferencia entre Stat y Time series
+## Diferencia entre Stat y Time series
 
 El panel Stat muestra principalmente el valor reducido actual.
 
 El panel Time series muestra cómo cambia el valor a lo largo del tiempo.
 
-## Stat
+### Stat
 
 Consulta:
 
@@ -395,7 +395,7 @@ Pregunta que responde:
 ¿Cuál es la carga actual?
 ```
 
-## Time series
+### Time series
 
 Consulta:
 
@@ -418,9 +418,9 @@ Panel Time series: evolución temporal
 
 ---
 
-# Crear un panel Stat
+## Crear un panel Stat
 
-## Procedimiento general
+### Procedimiento general
 
 1. Acceder a Grafana.
 2. Abrir un dashboard.
@@ -437,7 +437,7 @@ Panel Time series: evolución temporal
 13. Guardar el panel.
 14. Guardar el dashboard.
 
-## Consulta inicial
+### Consulta inicial
 
 Para una primera prueba, utilizar:
 
@@ -456,7 +456,7 @@ Decimales: 0
 
 ---
 
-# Configurar la reducción de datos
+## Configurar la reducción de datos
 
 Una consulta puede devolver varias series o varios valores.
 
@@ -464,7 +464,7 @@ El panel Stat necesita decidir qué valor debe mostrar.
 
 Para ello se utiliza una reducción.
 
-## Reducciones habituales
+### Reducciones habituales
 
 | Reducción | Función |
 |---|---|
@@ -478,7 +478,7 @@ Para ello se utiliza una reducción.
 | First | Primer valor |
 | Range | Diferencia entre máximo y mínimo |
 
-## Ejemplo con varias series
+### Ejemplo con varias series
 
 Consulta:
 
@@ -507,7 +507,7 @@ La consulta ya devuelve un único valor:
 2
 ```
 
-## Recomendación
+### Recomendación
 
 Cuando sea posible, preparar el resultado desde PromQL.
 
@@ -529,7 +529,7 @@ Esto hace que el propósito del panel sea más explícito.
 
 ---
 
-# Configurar el valor actual
+## Configurar el valor actual
 
 Para mostrar el valor más reciente, utilizar una reducción equivalente a:
 
@@ -543,13 +543,13 @@ o:
 Last not null
 ```
 
-## Diferencia
+### Diferencia
 
-### Last
+#### Last
 
 Muestra el último valor recibido, aunque pueda ser nulo según el resultado.
 
-### Last not null
+#### Last not null
 
 Busca el último valor disponible que no sea nulo.
 
@@ -563,9 +563,9 @@ Sin embargo, no debe ocultarse indefinidamente la ausencia de datos. Un panel qu
 
 ---
 
-# Configurar la unidad
+## Configurar la unidad
 
-## Disponibilidad como número
+### Disponibilidad como número
 
 Consulta:
 
@@ -579,7 +579,7 @@ Unidad:
 None
 ```
 
-## Disponibilidad como porcentaje
+### Disponibilidad como porcentaje
 
 Consulta:
 
@@ -593,7 +593,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Memoria disponible
+### Memoria disponible
 
 Consulta:
 
@@ -607,7 +607,7 @@ Unidad:
 Bytes (IEC)
 ```
 
-## Carga del sistema
+### Carga del sistema
 
 Consulta:
 
@@ -621,7 +621,7 @@ Unidad:
 None
 ```
 
-## Tráfico de red
+### Tráfico de red
 
 Consulta:
 
@@ -641,11 +641,11 @@ bytes/sec
 
 ---
 
-# Configurar decimales
+## Configurar decimales
 
 La cantidad de decimales debe adaptarse al dato.
 
-## Ejemplos
+### Ejemplos
 
 ```text
 Objetivos disponibles: 0 decimales
@@ -655,13 +655,13 @@ Memoria: automático
 Tráfico: 1 o 2 decimales
 ```
 
-## Ejemplo incorrecto
+### Ejemplo incorrecto
 
 ```text
 Disponibilidad global: 99.837492 %
 ```
 
-## Ejemplo recomendado
+### Ejemplo recomendado
 
 ```text
 Disponibilidad global: 99.8 %
@@ -671,7 +671,7 @@ Los decimales innecesarios dificultan la lectura y no siempre aportan precisión
 
 ---
 
-# Configurar colores y umbrales
+## Configurar colores y umbrales
 
 El panel Stat puede cambiar de color según:
 
@@ -680,7 +680,7 @@ El panel Stat puede cambiar de color según:
 - Estado.
 - Configuración fija.
 
-## Ejemplo: disponibilidad
+### Ejemplo: disponibilidad
 
 Consulta:
 
@@ -704,7 +704,7 @@ Interpretación:
 99 - 100 %     Normal
 ```
 
-## Ejemplo: objetivos disponibles
+### Ejemplo: objetivos disponibles
 
 Consulta:
 
@@ -722,7 +722,7 @@ Supongamos que se esperan dos objetivos:
 2      Verde
 ```
 
-## Ejemplo: uso de memoria
+### Ejemplo: uso de memoria
 
 Consulta:
 
@@ -743,17 +743,17 @@ Umbrales:
 90     Rojo
 ```
 
-## Consideración importante
+### Consideración importante
 
 Los umbrales de un panel comunican visualmente un estado, pero no sustituyen necesariamente una regla de alerta.
 
 ---
 
-# Configurar mapas de valores
+## Configurar mapas de valores
 
 Los mapas de valores permiten presentar un valor técnico como un texto comprensible.
 
-## Mapa básico de disponibilidad
+### Mapa básico de disponibilidad
 
 Consulta:
 
@@ -780,7 +780,7 @@ o:
 DOWN
 ```
 
-## Mapa con colores
+### Mapa con colores
 
 Configurar:
 
@@ -789,14 +789,14 @@ UP   → verde
 DOWN → rojo
 ```
 
-## Ventajas
+### Ventajas
 
 - Mejora la interpretación.
 - Reduce la dependencia de números.
 - Facilita la lectura para usuarios no técnicos.
 - Permite crear indicadores operativos.
 
-## Precauciones
+### Precauciones
 
 - El mapa debe cubrir los valores esperados.
 - Los valores no contemplados deben tener un comportamiento claro.
@@ -805,7 +805,7 @@ DOWN → rojo
 
 ---
 
-# Configurar el nombre del campo
+## Configurar el nombre del campo
 
 Cuando la consulta devuelve una serie con etiquetas, el panel puede mostrar un nombre automático poco claro.
 
@@ -845,7 +845,7 @@ Se puede utilizar:
 
 ---
 
-# Configurar una sparkline
+## Configurar una sparkline
 
 La sparkline muestra una pequeña tendencia junto al valor principal.
 
@@ -857,7 +857,7 @@ Es útil para detectar:
 - Cambios bruscos.
 - Estabilidad.
 
-## Ejemplo
+### Ejemplo
 
 Consulta:
 
@@ -881,7 +881,7 @@ Para analizar con detalle la evolución, utilizar un panel Time series.
 
 ---
 
-# Configurar el texto mostrado
+## Configurar el texto mostrado
 
 El panel Stat puede mostrar diferentes combinaciones de información.
 
@@ -893,7 +893,7 @@ Name
 Value and name
 ```
 
-## Solo valor
+### Solo valor
 
 ```text
 2
@@ -901,7 +901,7 @@ Value and name
 
 Útil cuando el título del panel ya explica el significado.
 
-## Nombre y valor
+### Nombre y valor
 
 ```text
 Objetivos disponibles: 2
@@ -909,7 +909,7 @@ Objetivos disponibles: 2
 
 Útil cuando el panel se consulta fuera del contexto habitual.
 
-## Texto mediante mapa de valores
+### Texto mediante mapa de valores
 
 ```text
 UP
@@ -919,11 +919,11 @@ UP
 
 ---
 
-# Configurar el comportamiento ante ausencia de datos
+## Configurar el comportamiento ante ausencia de datos
 
 Un panel Stat puede encontrarse en diferentes situaciones.
 
-## Valor cero
+### Valor cero
 
 El valor real es `0`.
 
@@ -941,7 +941,7 @@ Resultado:
 
 Esto no significa necesariamente que no haya datos. Significa que la suma de los valores es cero.
 
-## Sin datos
+### Sin datos
 
 La consulta no devuelve ninguna serie.
 
@@ -951,15 +951,15 @@ Ejemplo:
 metrica_que_no_existe
 ```
 
-## Valor nulo
+### Valor nulo
 
 Existe una serie, pero el valor no está disponible en el punto consultado.
 
-## Error
+### Error
 
 La consulta, la fuente de datos o la conexión producen un error.
 
-## Importancia operativa
+### Importancia operativa
 
 No se debe confundir:
 
@@ -980,51 +980,51 @@ Por ejemplo:
 
 ---
 
-# Consultas para paneles Stat
+## Consultas para paneles Stat
 
-## Objetivos disponibles
+### Objetivos disponibles
 
 ```promql
 sum(up)
 ```
 
-## Objetivos totales
+### Objetivos totales
 
 ```promql
 count(up)
 ```
 
-## Objetivos caídos
+### Objetivos caídos
 
 ```promql
 count(up == 0)
 ```
 
-## Porcentaje de disponibilidad
+### Porcentaje de disponibilidad
 
 ```promql
 100 * avg(up)
 ```
 
-## Objetivos de Node Exporter disponibles
+### Objetivos de Node Exporter disponibles
 
 ```promql
 sum(up{job="node_exporter"})
 ```
 
-## Estado de Node Exporter
+### Estado de Node Exporter
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Memoria disponible
+### Memoria disponible
 
 ```promql
 node_memory_MemAvailable_bytes
 ```
 
-## Memoria utilizada en porcentaje
+### Memoria utilizada en porcentaje
 
 ```promql
 100 * (
@@ -1035,19 +1035,19 @@ node_memory_MemAvailable_bytes
 )
 ```
 
-## Carga de un minuto
+### Carga de un minuto
 
 ```promql
 node_load1
 ```
 
-## Carga de cinco minutos
+### Carga de cinco minutos
 
 ```promql
 node_load5
 ```
 
-## Uso del sistema de ficheros raíz
+### Uso del sistema de ficheros raíz
 
 ```promql
 100 * (
@@ -1064,7 +1064,7 @@ node_load5
 )
 ```
 
-## Tráfico recibido
+### Tráfico recibido
 
 ```promql
 sum(
@@ -1076,19 +1076,19 @@ sum(
 
 ---
 
-# Ejemplo completo 1: objetivos disponibles
+## Ejemplo completo 1: objetivos disponibles
 
-## Objetivo
+### Objetivo
 
 Crear un panel Stat que muestre cuántos objetivos están disponibles.
 
-## Consulta
+### Consulta
 
 ```promql
 sum(up)
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Objetivos disponibles
@@ -1098,7 +1098,7 @@ Decimales: 0
 Reducción: Last
 ```
 
-## Umbrales
+### Umbrales
 
 Si se esperan dos objetivos:
 
@@ -1108,14 +1108,14 @@ Si se esperan dos objetivos:
 2      Verde
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Número de objetivos cuyo último scraping ha sido correcto.
 El valor se obtiene sumando la métrica up.
 ```
 
-## Resultado esperado
+### Resultado esperado
 
 ```text
 2
@@ -1123,19 +1123,19 @@ El valor se obtiene sumando la métrica up.
 
 ---
 
-# Ejemplo completo 2: disponibilidad global
+## Ejemplo completo 2: disponibilidad global
 
-## Objetivo
+### Objetivo
 
 Mostrar la disponibilidad global como porcentaje.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * avg(up)
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Disponibilidad global
@@ -1146,7 +1146,7 @@ Min: 0
 Max: 100
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Rojo
@@ -1154,13 +1154,13 @@ Max: 100
 99     Verde
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje medio de objetivos disponibles en el último scraping.
 ```
 
-## Resultado esperado
+### Resultado esperado
 
 ```text
 100.0 %
@@ -1170,13 +1170,13 @@ si todos los objetivos están disponibles.
 
 ---
 
-# Ejemplo completo 3: uso de memoria
+## Ejemplo completo 3: uso de memoria
 
-## Objetivo
+### Objetivo
 
 Mostrar el porcentaje actual de memoria utilizada.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1187,7 +1187,7 @@ Mostrar el porcentaje actual de memoria utilizada.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Memoria utilizada
@@ -1199,7 +1199,7 @@ Max: 100
 Sparkline: Activada
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Verde
@@ -1207,7 +1207,7 @@ Sparkline: Activada
 90     Rojo
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje de memoria utilizada por el sistema.
@@ -1216,40 +1216,40 @@ Los valores superiores al 90 % requieren una revisión del consumo de memoria.
 
 ---
 
-# Ejemplo completo 4: estado textual de Node Exporter
+## Ejemplo completo 4: estado textual de Node Exporter
 
-## Objetivo
+### Objetivo
 
 Mostrar `UP` o `DOWN` en lugar de `1` o `0`.
 
-## Consulta
+### Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Estado de Node Exporter
 Visualización: Stat
 ```
 
-## Mapa de valores
+### Mapa de valores
 
 ```text
 1 → UP
 0 → DOWN
 ```
 
-## Colores
+### Colores
 
 ```text
 UP   → Verde
 DOWN → Rojo
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Estado del último scraping realizado sobre Node Exporter.
@@ -1259,19 +1259,19 @@ DOWN indica que el último scraping ha fallado.
 
 ---
 
-# Ejemplo completo 5: carga del sistema
+## Ejemplo completo 5: carga del sistema
 
-## Objetivo
+### Objetivo
 
 Mostrar la carga actual del sistema.
 
-## Consulta
+### Consulta
 
 ```promql
 node_load1
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Carga del sistema
@@ -1281,14 +1281,14 @@ Decimales: 2
 Sparkline: Activada
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Carga media del sistema durante el último minuto.
 Este valor no es un porcentaje de CPU.
 ```
 
-## Consideración
+### Consideración
 
 La carga del sistema debe interpretarse teniendo en cuenta el número de CPU disponibles.
 
@@ -1314,13 +1314,13 @@ count by (instance) (
 
 ---
 
-# Ejemplo de sesión 1: crear un Stat básico
+## Ejemplo de sesión 1: crear un Stat básico
 
-## Objetivo
+### Objetivo
 
 Crear un panel que muestre el número de objetivos disponibles.
 
-## Pasos
+### Pasos
 
 1. Acceder a Grafana:
 
@@ -1349,7 +1349,7 @@ Objetivos disponibles
 10. Guardar el panel.
 11. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Anota el valor mostrado.
 2. Compáralo con la consulta:
@@ -1364,19 +1364,19 @@ up
 
 ---
 
-# Ejemplo de sesión 2: crear una disponibilidad porcentual
+## Ejemplo de sesión 2: crear una disponibilidad porcentual
 
-## Objetivo
+### Objetivo
 
 Crear un panel Stat que muestre la disponibilidad global.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * avg(up)
 ```
 
-## Pasos
+### Pasos
 
 1. Añadir un panel nuevo.
 2. Seleccionar Prometheus.
@@ -1404,7 +1404,7 @@ Max: 100
 8. Guardar el panel.
 9. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Comprueba el valor actual.
 2. Detén Node Exporter:
@@ -1426,19 +1426,19 @@ sudo systemctl start node_exporter
 
 ---
 
-# Ejemplo de sesión 3: configurar un mapa de valores
+## Ejemplo de sesión 3: configurar un mapa de valores
 
-## Objetivo
+### Objetivo
 
 Representar el estado de Node Exporter como `UP` o `DOWN`.
 
-## Consulta
+### Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Stat.
 2. Introducir la consulta.
@@ -1464,7 +1464,7 @@ DOWN → Rojo
 
 6. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Comprueba el estado inicial.
 2. Detén Node Exporter.
@@ -1476,19 +1476,19 @@ DOWN → Rojo
 
 ---
 
-# Ejemplo de sesión 4: añadir una sparkline
+## Ejemplo de sesión 4: añadir una sparkline
 
-## Objetivo
+### Objetivo
 
 Mostrar el valor actual y una tendencia reciente.
 
-## Consulta
+### Consulta
 
 ```promql
 node_load1
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Stat.
 2. Introducir la consulta.
@@ -1518,7 +1518,7 @@ pkill yes
 
 9. Observar la recuperación.
 
-## Actividades
+### Actividades
 
 1. Describe la forma de la sparkline.
 2. Indica si el valor aumenta o disminuye.
@@ -1527,13 +1527,13 @@ pkill yes
 
 ---
 
-# Ejemplo de sesión 5: comparar Stat y Gauge
+## Ejemplo de sesión 5: comparar Stat y Gauge
 
-## Objetivo
+### Objetivo
 
 Comparar dos formas de representar el mismo indicador.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1544,7 +1544,7 @@ Comparar dos formas de representar el mismo indicador.
 )
 ```
 
-## Panel 1: Stat
+### Panel 1: Stat
 
 ```text
 Título: Memoria utilizada
@@ -1553,7 +1553,7 @@ Unidad: Percent (0-100)
 Decimales: 1
 ```
 
-## Panel 2: Gauge
+### Panel 2: Gauge
 
 ```text
 Título: Memoria utilizada
@@ -1563,7 +1563,7 @@ Min: 0
 Max: 100
 ```
 
-## Actividades
+### Actividades
 
 1. Crea ambos paneles.
 2. Colócalos juntos.
@@ -1577,19 +1577,19 @@ Max: 100
 
 ---
 
-# Ejemplo de sesión 6: diagnosticar un Stat sin datos
+## Ejemplo de sesión 6: diagnosticar un Stat sin datos
 
-## Objetivo
+### Objetivo
 
 Identificar la causa de un panel Stat vacío.
 
-## Consulta incorrecta
+### Consulta incorrecta
 
 ```promql
 metrica_de_prueba_inexistente
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Stat.
 2. Introducir la consulta incorrecta.
@@ -1606,7 +1606,7 @@ up
 8. Comprobar que aparecen datos.
 9. Guardar el panel corregido.
 
-## Actividades
+### Actividades
 
 Explicar la diferencia entre:
 
@@ -1632,9 +1632,9 @@ Documentar qué representa cada resultado.
 
 ---
 
-# Ejemplo de sesión 7: crear varios indicadores
+## Ejemplo de sesión 7: crear varios indicadores
 
-## Objetivo
+### Objetivo
 
 Crear un bloque de indicadores resumidos.
 
@@ -1648,7 +1648,7 @@ Crear los siguientes paneles Stat:
 | Carga del sistema | `node_load1` | None |
 | Tráfico recibido | Consulta de red | bytes/sec |
 
-## Distribución
+### Distribución
 
 ```text
 +----------------------+----------------------+----------------------+
@@ -1658,7 +1658,7 @@ Crear los siguientes paneles Stat:
 +----------------------+----------------------+----------------------+
 ```
 
-## Actividades
+### Actividades
 
 1. Crea los paneles.
 2. Configura los títulos.
@@ -1672,13 +1672,13 @@ Crear los siguientes paneles Stat:
 
 ---
 
-# Ejemplo de sesión 8: utilizar un Stat con una variable
+## Ejemplo de sesión 8: utilizar un Stat con una variable
 
-## Objetivo
+### Objetivo
 
 Crear un panel que cambie según la instancia seleccionada.
 
-## Crear la variable
+### Crear la variable
 
 Crear una variable de dashboard llamada:
 
@@ -1694,7 +1694,7 @@ label_values(up, instance)
 
 Según la versión y la configuración de Grafana, puede ser necesario utilizar una consulta compatible con el editor de variables.
 
-## Consulta del panel
+### Consulta del panel
 
 ```promql
 100 * (
@@ -1709,7 +1709,7 @@ Según la versión y la configuración de Grafana, puede ser necesario utilizar 
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Memoria utilizada - $instance
@@ -1717,7 +1717,7 @@ Visualización: Stat
 Unidad: Percent (0-100)
 ```
 
-## Actividades
+### Actividades
 
 1. Crea la variable.
 2. Comprueba las instancias disponibles.
@@ -1729,13 +1729,13 @@ Unidad: Percent (0-100)
 
 ---
 
-# Ejemplo de sesión 9: verificar el valor desde la API de Prometheus
+## Ejemplo de sesión 9: verificar el valor desde la API de Prometheus
 
-## Objetivo
+### Objetivo
 
 Comparar el valor mostrado en Grafana con el valor devuelto por Prometheus.
 
-## Consultar objetivos disponibles
+### Consultar objetivos disponibles
 
 ```bash
 curl -sG \
@@ -1744,7 +1744,7 @@ curl -sG \
   | jq
 ```
 
-## Consultar disponibilidad
+### Consultar disponibilidad
 
 ```bash
 curl -sG \
@@ -1753,7 +1753,7 @@ curl -sG \
   | jq
 ```
 
-## Mostrar únicamente el valor
+### Mostrar únicamente el valor
 
 ```bash
 curl -sG \
@@ -1762,7 +1762,7 @@ curl -sG \
   | jq -r '.data.result[0].value[1]'
 ```
 
-## Actividades
+### Actividades
 
 1. Consulta el valor desde Grafana.
 2. Consulta el valor desde la API.
@@ -1772,9 +1772,9 @@ curl -sG \
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Utilizar una consulta que devuelva un resultado claro
+### Utilizar una consulta que devuelva un resultado claro
 
 Un panel Stat funciona mejor cuando la consulta devuelve un único valor.
 
@@ -1786,35 +1786,35 @@ sum(up)
 
 Es más claro que mostrar directamente muchas series y depender de una reducción poco evidente.
 
-## Configurar la unidad
+### Configurar la unidad
 
 Nunca dejar ambiguo un porcentaje, una cantidad de memoria o una velocidad de red.
 
-## No ocultar problemas con valores antiguos
+### No ocultar problemas con valores antiguos
 
 Si se utiliza `Last not null`, revisar qué ocurre cuando la fuente deja de enviar datos.
 
 Un valor antiguo puede parecer actual si no se comunica correctamente su antigüedad.
 
-## Utilizar títulos operativos
+### Utilizar títulos operativos
 
 El título debe permitir entender el panel sin abrirlo.
 
-## Utilizar umbrales coherentes
+### Utilizar umbrales coherentes
 
 Aplicar una misma convención en todos los paneles del dashboard.
 
-## Activar sparklines con moderación
+### Activar sparklines con moderación
 
 Las sparklines son útiles para añadir contexto, pero no deben sustituir a un análisis temporal detallado.
 
-## No mostrar demasiados Stat juntos
+### No mostrar demasiados Stat juntos
 
 Un conjunto excesivo de indicadores puede saturar visualmente el dashboard.
 
 Agrupar únicamente los indicadores más importantes.
 
-## Combinar Stat con otras visualizaciones
+### Combinar Stat con otras visualizaciones
 
 Una buena combinación puede ser:
 
@@ -1826,9 +1826,9 @@ Table: detalle por instancia
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## El Stat muestra `No data`
+### El Stat muestra `No data`
 
 Comprobar:
 
@@ -1852,7 +1852,7 @@ Revisar:
 - Estado de los targets.
 - Inspector del panel.
 
-## El Stat muestra cero
+### El Stat muestra cero
 
 Determinar si el cero es válido.
 
@@ -1870,7 +1870,7 @@ Si todos los objetivos están caídos, el resultado puede ser:
 
 Esto es diferente de una consulta sin resultados.
 
-## El Stat muestra un valor inesperado
+### El Stat muestra un valor inesperado
 
 Comprobar:
 
@@ -1882,7 +1882,7 @@ Comprobar:
 - Rango temporal.
 - Variables.
 
-## El Stat muestra demasiados valores
+### El Stat muestra demasiados valores
 
 La consulta puede devolver varias series.
 
@@ -1902,7 +1902,7 @@ max(node_load1)
 
 También se puede configurar una reducción, pero conviene comprender primero las series devueltas.
 
-## El color no cambia
+### El color no cambia
 
 Revisar:
 
@@ -1912,7 +1912,7 @@ Revisar:
 - Que la consulta devuelva un porcentaje si los umbrales están definidos de 0 a 100.
 - Que el panel no utilice un mapa de valores que sobrescriba el comportamiento esperado.
 
-## La unidad aparece duplicada
+### La unidad aparece duplicada
 
 Ejemplo:
 
@@ -1926,7 +1926,7 @@ Comprobar que:
 - La unidad está configurada una sola vez.
 - El mapa de valores no incluye el símbolo `%`.
 
-## La sparkline no aparece
+### La sparkline no aparece
 
 Revisar:
 
@@ -1936,7 +1936,7 @@ Revisar:
 - Que el panel no esté configurado únicamente para una consulta instantánea.
 - Que el resultado no sea exclusivamente un valor calculado sin historial.
 
-## El Stat muestra datos antiguos
+### El Stat muestra datos antiguos
 
 Revisar:
 
@@ -1949,7 +1949,7 @@ Revisar:
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -2052,15 +2052,15 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear un conjunto de paneles Stat para resumir el estado de un servidor Linux.
 
-## Paneles obligatorios
+### Paneles obligatorios
 
-### Panel 1: objetivos disponibles
+#### Panel 1: objetivos disponibles
 
 ```promql
 sum(up)
@@ -2074,7 +2074,7 @@ Unidad: None
 Decimales: 0
 ```
 
-### Panel 2: disponibilidad global
+#### Panel 2: disponibilidad global
 
 ```promql
 100 * avg(up)
@@ -2090,7 +2090,7 @@ Min: 0
 Max: 100
 ```
 
-### Panel 3: uso de memoria
+#### Panel 3: uso de memoria
 
 ```promql
 100 * (
@@ -2111,7 +2111,7 @@ Min: 0
 Max: 100
 ```
 
-### Panel 4: estado de Node Exporter
+#### Panel 4: estado de Node Exporter
 
 ```promql
 up{job="node_exporter"}
@@ -2124,7 +2124,7 @@ Título: Estado de Node Exporter
 Mapa: 1 = UP, 0 = DOWN
 ```
 
-### Panel 5: carga del sistema
+#### Panel 5: carga del sistema
 
 ```promql
 node_load1
@@ -2139,7 +2139,7 @@ Decimales: 2
 Sparkline: Activada
 ```
 
-## Tareas
+### Tareas
 
 1. Crear los cinco paneles.
 2. Configurar los títulos.
@@ -2159,7 +2159,7 @@ Sparkline: Activada
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2182,7 +2182,7 @@ Sparkline: Activada
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - El panel Stat muestra principalmente un valor resumido.
 - Es adecuado para indicadores actuales y tarjetas de resumen.
@@ -2207,7 +2207,7 @@ Sparkline: Activada
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué finalidad tiene un panel Stat?
 2. ¿Qué tipo de información representa mejor?
@@ -2237,7 +2237,7 @@ Sparkline: Activada
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear indicadores resumidos y configurarlos correctamente.
 

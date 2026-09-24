@@ -28,7 +28,7 @@ Un Heatmap ayuda a responder preguntas como:
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -53,7 +53,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Un Heatmap representa la cantidad o densidad de observaciones dentro de diferentes rangos de valores y momentos temporales.
 
@@ -95,7 +95,7 @@ La intensidad del color no representa directamente el valor de la métrica. Repr
 
 ---
 
-# Qué es un bucket
+## Qué es un bucket
 
 Un **bucket** es un intervalo que agrupa valores.
 
@@ -141,11 +141,11 @@ Indica que se han observado 1200 peticiones con una duración menor o igual que 
 
 ---
 
-# Histogramas de Prometheus
+## Histogramas de Prometheus
 
 Una métrica de tipo histograma suele generar tres familias de series:
 
-## `_bucket`
+### `_bucket`
 
 Cuenta las observaciones acumuladas por intervalo.
 
@@ -155,7 +155,7 @@ Ejemplo:
 http_request_duration_seconds_bucket
 ```
 
-## `_sum`
+### `_sum`
 
 Suma todos los valores observados.
 
@@ -165,7 +165,7 @@ Ejemplo:
 http_request_duration_seconds_sum
 ```
 
-## `_count`
+### `_count`
 
 Cuenta todas las observaciones.
 
@@ -175,7 +175,7 @@ Ejemplo:
 http_request_duration_seconds_count
 ```
 
-## Ejemplo conceptual
+### Ejemplo conceptual
 
 ```text
 http_request_duration_seconds_bucket{le="0.1"}   850
@@ -199,7 +199,7 @@ Interpretación:
 
 ---
 
-# Cuándo utilizar un Heatmap
+## Cuándo utilizar un Heatmap
 
 El Heatmap es apropiado cuando:
 
@@ -211,7 +211,7 @@ El Heatmap es apropiado cuando:
 - Se utilizan histogramas de Prometheus.
 - Una línea temporal no muestra suficiente información.
 
-## Ejemplos adecuados
+### Ejemplos adecuados
 
 - Latencia de peticiones HTTP.
 - Duración de consultas a una base de datos.
@@ -224,7 +224,7 @@ El Heatmap es apropiado cuando:
 
 ---
 
-# Cuándo no utilizar un Heatmap
+## Cuándo no utilizar un Heatmap
 
 No suele ser la mejor opción cuando se necesita:
 
@@ -248,7 +248,7 @@ En esos casos pueden ser más adecuadas otras visualizaciones:
 
 ---
 
-# Diferencia entre Heatmap y Time series
+## Diferencia entre Heatmap y Time series
 
 Un panel Time series muestra normalmente una línea por serie.
 
@@ -267,7 +267,7 @@ Cuántas peticiones estuvieron entre 100 y 200 ms
 durante cada intervalo de tiempo
 ```
 
-## Time series
+### Time series
 
 Puede representar:
 
@@ -287,7 +287,7 @@ Resultado:
 Latencia media
 ```
 
-## Heatmap
+### Heatmap
 
 Puede representar:
 
@@ -299,7 +299,7 @@ El promedio puede ocultar valores extremos. El Heatmap conserva más informació
 
 ---
 
-# Diferencia entre Heatmap y percentiles
+## Diferencia entre Heatmap y percentiles
 
 Un percentil resume una distribución en un único valor.
 
@@ -330,7 +330,7 @@ Time series: percentil 50, 95 y 99
 
 ---
 
-# Anatomía de un Heatmap
+## Anatomía de un Heatmap
 
 Un Heatmap contiene normalmente:
 
@@ -348,11 +348,11 @@ Un Heatmap contiene normalmente:
 +------------------------------------------------------+
 ```
 
-## Eje temporal
+### Eje temporal
 
 Representa cuándo se produjeron las observaciones.
 
-## Eje de valores
+### Eje de valores
 
 Representa los rangos de la métrica.
 
@@ -365,7 +365,7 @@ Bytes
 Número de elementos
 ```
 
-## Celdas
+### Celdas
 
 Cada celda corresponde a una combinación de:
 
@@ -373,19 +373,19 @@ Cada celda corresponde a una combinación de:
 Intervalo temporal + intervalo de valores
 ```
 
-## Intensidad
+### Intensidad
 
 La intensidad del color representa la cantidad de observaciones.
 
-## Buckets
+### Buckets
 
 Los límites de los buckets determinan la resolución vertical.
 
 ---
 
-# Crear un panel Heatmap
+## Crear un panel Heatmap
 
-## Procedimiento general
+### Procedimiento general
 
 1. Acceder a Grafana.
 2. Abrir un dashboard.
@@ -402,7 +402,7 @@ Los límites de los buckets determinan la resolución vertical.
 13. Guardar el panel.
 14. Guardar el dashboard.
 
-## Consulta inicial
+### Consulta inicial
 
 Una métrica típica puede ser:
 
@@ -422,9 +422,9 @@ La consulta agrupa las observaciones por límite superior `le`.
 
 ---
 
-# Consultas de histogramas
+## Consultas de histogramas
 
-## Buckets de latencia
+### Buckets de latencia
 
 ```promql
 sum by (le) (
@@ -432,7 +432,7 @@ sum by (le) (
 )
 ```
 
-## Buckets por servicio
+### Buckets por servicio
 
 ```promql
 sum by (service, le) (
@@ -440,7 +440,7 @@ sum by (service, le) (
 )
 ```
 
-## Buckets por ruta
+### Buckets por ruta
 
 ```promql
 sum by (handler, le) (
@@ -448,7 +448,7 @@ sum by (handler, le) (
 )
 ```
 
-## Buckets por instancia
+### Buckets por instancia
 
 ```promql
 sum by (instance, le) (
@@ -456,7 +456,7 @@ sum by (instance, le) (
 )
 ```
 
-## Buckets filtrados por método HTTP
+### Buckets filtrados por método HTTP
 
 ```promql
 sum by (le) (
@@ -468,7 +468,7 @@ sum by (le) (
 )
 ```
 
-## Buckets filtrados por servicio
+### Buckets filtrados por servicio
 
 ```promql
 sum by (le) (
@@ -482,11 +482,11 @@ sum by (le) (
 
 ---
 
-# Consultar los percentiles de un histograma
+## Consultar los percentiles de un histograma
 
 La función `histogram_quantile()` calcula un percentil aproximado a partir de buckets.
 
-## Percentil 50
+### Percentil 50
 
 ```promql
 histogram_quantile(
@@ -499,7 +499,7 @@ histogram_quantile(
 
 El percentil 50 también se conoce como mediana.
 
-## Percentil 90
+### Percentil 90
 
 ```promql
 histogram_quantile(
@@ -510,7 +510,7 @@ histogram_quantile(
 )
 ```
 
-## Percentil 95
+### Percentil 95
 
 ```promql
 histogram_quantile(
@@ -521,7 +521,7 @@ histogram_quantile(
 )
 ```
 
-## Percentil 99
+### Percentil 99
 
 ```promql
 histogram_quantile(
@@ -532,7 +532,7 @@ histogram_quantile(
 )
 ```
 
-## Percentiles por servicio
+### Percentiles por servicio
 
 ```promql
 histogram_quantile(
@@ -543,7 +543,7 @@ histogram_quantile(
 )
 ```
 
-## Percentiles por instancia
+### Percentiles por instancia
 
 ```promql
 histogram_quantile(
@@ -558,7 +558,7 @@ La etiqueta `le` debe conservarse para que `histogram_quantile()` pueda reconstr
 
 ---
 
-# Latencia media de un histograma
+## Latencia media de un histograma
 
 La media puede calcularse utilizando `_sum` y `_count`.
 
@@ -580,7 +580,7 @@ sum by (service) (
 )
 ```
 
-## Limitación
+### Limitación
 
 La media no muestra la distribución completa.
 
@@ -595,7 +595,7 @@ El Heatmap permite observar esa diferencia.
 
 ---
 
-# Métricas de ejemplo para practicar
+## Métricas de ejemplo para practicar
 
 Para practicar un Heatmap se necesita una métrica con buckets.
 
@@ -639,7 +639,7 @@ _bucket
 
 ---
 
-# Crear una métrica de ejemplo con Node Exporter
+## Crear una métrica de ejemplo con Node Exporter
 
 Node Exporter normalmente no proporciona una métrica HTTP de latencia con buckets lista para usar.
 
@@ -686,7 +686,7 @@ le="+Inf"
 
 ---
 
-# Configurar el formato de datos
+## Configurar el formato de datos
 
 Las versiones de Grafana pueden presentar diferentes opciones para configurar los datos del Heatmap.
 
@@ -701,7 +701,7 @@ Entre las opciones habituales se encuentran:
 - Campo de valor.
 - Transformaciones de datos.
 
-## Configuración conceptual
+### Configuración conceptual
 
 ```text
 Tiempo: timestamp
@@ -721,11 +721,11 @@ La interfaz exacta puede variar según la versión de Grafana y la forma en que 
 
 ---
 
-# Configurar la unidad
+## Configurar la unidad
 
 La unidad debe corresponder a la métrica original.
 
-## Latencia en segundos
+### Latencia en segundos
 
 Si la métrica es:
 
@@ -739,7 +739,7 @@ Utilizar:
 Seconds
 ```
 
-## Latencia en milisegundos
+### Latencia en milisegundos
 
 Si la consulta multiplica el resultado por `1000`, utilizar:
 
@@ -749,7 +749,7 @@ Milliseconds
 
 Sin embargo, los buckets originales deben estar definidos de forma coherente.
 
-## Tamaño de respuesta
+### Tamaño de respuesta
 
 Para:
 
@@ -763,7 +763,7 @@ Utilizar:
 Bytes
 ```
 
-## Duración de trabajos
+### Duración de trabajos
 
 Para:
 
@@ -779,7 +779,7 @@ Seconds
 
 ---
 
-# Configurar colores
+## Configurar colores
 
 El esquema de colores representa la densidad de observaciones.
 
@@ -791,7 +791,7 @@ Densidad media: color intermedio
 Mucha densidad: color intenso
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Utilizar una escala continua.
 - Elegir colores con suficiente contraste.
@@ -814,7 +814,7 @@ Estado crítico
 
 ---
 
-# Interpretar un Heatmap de latencia
+## Interpretar un Heatmap de latencia
 
 Supongamos que el gráfico muestra:
 
@@ -849,19 +849,19 @@ Existen valores extremos o peticiones lentas.
 
 ---
 
-# Ejemplo completo 1: Heatmap de latencia HTTP
+## Ejemplo completo 1: Heatmap de latencia HTTP
 
-## Objetivo
+### Objetivo
 
 Representar la distribución de duración de las peticiones HTTP.
 
-## Métrica
+### Métrica
 
 ```promql
 http_request_duration_seconds_bucket
 ```
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (le) (
@@ -869,7 +869,7 @@ sum by (le) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Distribución de latencias HTTP
@@ -878,14 +878,14 @@ Unidad: Seconds
 Rango temporal: Last 1 hour
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Distribución temporal de las duraciones de las peticiones HTTP.
 Cada bucket representa un intervalo acumulado de latencia.
 ```
 
-## Interpretación
+### Interpretación
 
 - La zona más intensa representa el intervalo más frecuente.
 - Una concentración cercana a cero indica respuestas rápidas.
@@ -894,13 +894,13 @@ Cada bucket representa un intervalo acumulado de latencia.
 
 ---
 
-# Ejemplo completo 2: Heatmap por servicio
+## Ejemplo completo 2: Heatmap por servicio
 
-## Objetivo
+### Objetivo
 
 Analizar la distribución de latencias de cada servicio.
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (service, le) (
@@ -908,7 +908,7 @@ sum by (service, le) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Distribución de latencias por servicio
@@ -917,7 +917,7 @@ Unidad: Seconds
 Rango temporal: Last 6 hours
 ```
 
-## Recomendación
+### Recomendación
 
 Si el Heatmap resulta difícil de interpretar porque mezcla demasiados servicios:
 
@@ -926,7 +926,7 @@ Si el Heatmap resulta difícil de interpretar porque mezcla demasiados servicios
 - Utilizar una variable de dashboard.
 - Utilizar un Time series de percentiles para comparar servicios.
 
-## Consulta filtrada
+### Consulta filtrada
 
 ```promql
 sum by (le) (
@@ -940,19 +940,19 @@ sum by (le) (
 
 ---
 
-# Ejemplo completo 3: Heatmap de tamaño de respuesta
+## Ejemplo completo 3: Heatmap de tamaño de respuesta
 
-## Objetivo
+### Objetivo
 
 Representar la distribución de tamaños de respuesta HTTP.
 
-## Métrica
+### Métrica
 
 ```promql
 http_response_size_bytes_bucket
 ```
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (le) (
@@ -960,7 +960,7 @@ sum by (le) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Distribución del tamaño de las respuestas
@@ -969,7 +969,7 @@ Unidad: Bytes
 Rango temporal: Last 1 hour
 ```
 
-## Interpretación
+### Interpretación
 
 Puede ayudar a identificar:
 
@@ -980,19 +980,19 @@ Puede ayudar a identificar:
 
 ---
 
-# Ejemplo completo 4: Heatmap de duración de trabajos
+## Ejemplo completo 4: Heatmap de duración de trabajos
 
-## Objetivo
+### Objetivo
 
 Analizar la duración de trabajos procesados por un sistema.
 
-## Métrica
+### Métrica
 
 ```promql
 job_duration_seconds_bucket
 ```
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (le) (
@@ -1000,7 +1000,7 @@ sum by (le) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Distribución de duración de trabajos
@@ -1009,7 +1009,7 @@ Unidad: Seconds
 Rango temporal: Last 24 hours
 ```
 
-## Interpretación
+### Interpretación
 
 - Una banda estable indica duraciones constantes.
 - Una banda que sube indica trabajos más lentos.
@@ -1018,13 +1018,13 @@ Rango temporal: Last 24 hours
 
 ---
 
-# Ejemplo de sesión 1: localizar histogramas
+## Ejemplo de sesión 1: localizar histogramas
 
-## Objetivo
+### Objetivo
 
 Identificar qué métricas de tipo histograma existen en Prometheus.
 
-## Pasos
+### Pasos
 
 1. Abrir Grafana.
 2. Acceder a **Explore**.
@@ -1038,7 +1038,7 @@ Identificar qué métricas de tipo histograma existen en Prometheus.
 5. Revisar los nombres devueltos.
 6. Seleccionar una métrica relacionada con latencia o duración.
 
-## Actividades
+### Actividades
 
 1. Anota tres métricas con sufijo `_bucket`.
 2. Busca las variantes `_sum` y `_count`.
@@ -1048,13 +1048,13 @@ Identificar qué métricas de tipo histograma existen en Prometheus.
 
 ---
 
-# Ejemplo de sesión 2: comprobar los buckets
+## Ejemplo de sesión 2: comprobar los buckets
 
-## Objetivo
+### Objetivo
 
 Conocer los intervalos disponibles para una métrica de histograma.
 
-## Consulta
+### Consulta
 
 ```promql
 count by (le) (
@@ -1062,7 +1062,7 @@ count by (le) (
 )
 ```
 
-## Alternativa
+### Alternativa
 
 ```promql
 sum by (le) (
@@ -1070,7 +1070,7 @@ sum by (le) (
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Ejecutar la consulta.
 2. Revisar los valores de `le`.
@@ -1078,7 +1078,7 @@ sum by (le) (
 4. Anotar el número de buckets.
 5. Comprobar si los límites son adecuados para la métrica.
 
-## Actividades
+### Actividades
 
 Responder:
 
@@ -1090,13 +1090,13 @@ Responder:
 
 ---
 
-# Ejemplo de sesión 3: crear un Heatmap de latencia
+## Ejemplo de sesión 3: crear un Heatmap de latencia
 
-## Objetivo
+### Objetivo
 
 Crear un Heatmap con la distribución temporal de latencias.
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (le) (
@@ -1104,7 +1104,7 @@ sum by (le) (
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un dashboard nuevo.
 2. Añadir un panel.
@@ -1124,7 +1124,7 @@ Rango temporal: Last 1 hour
 9. Guardar el panel.
 10. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Identifica la zona de mayor densidad.
 2. Observa si la distribución se desplaza.
@@ -1134,13 +1134,13 @@ Rango temporal: Last 1 hour
 
 ---
 
-# Ejemplo de sesión 4: comparar Heatmap y percentiles
+## Ejemplo de sesión 4: comparar Heatmap y percentiles
 
-## Objetivo
+### Objetivo
 
 Comparar la distribución completa con varios percentiles.
 
-## Panel 1: Heatmap
+### Panel 1: Heatmap
 
 Consulta:
 
@@ -1150,7 +1150,7 @@ sum by (le) (
 )
 ```
 
-## Panel 2: percentil 50
+### Panel 2: percentil 50
 
 ```promql
 histogram_quantile(
@@ -1161,7 +1161,7 @@ histogram_quantile(
 )
 ```
 
-## Panel 3: percentil 95
+### Panel 3: percentil 95
 
 ```promql
 histogram_quantile(
@@ -1172,7 +1172,7 @@ histogram_quantile(
 )
 ```
 
-## Panel 4: percentil 99
+### Panel 4: percentil 99
 
 ```promql
 histogram_quantile(
@@ -1183,7 +1183,7 @@ histogram_quantile(
 )
 ```
 
-## Actividades
+### Actividades
 
 1. Coloca los paneles en el mismo dashboard.
 2. Compara la zona más intensa del Heatmap con el percentil 50.
@@ -1193,13 +1193,13 @@ histogram_quantile(
 
 ---
 
-# Ejemplo de sesión 5: analizar una distribución por servicio
+## Ejemplo de sesión 5: analizar una distribución por servicio
 
-## Objetivo
+### Objetivo
 
 Comparar la latencia de varios servicios.
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (service, le) (
@@ -1207,7 +1207,7 @@ sum by (service, le) (
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear el panel.
 2. Introducir la consulta.
@@ -1233,7 +1233,7 @@ sum by (le) (
 6. Crear un panel adicional para otro servicio.
 7. Comparar ambos Heatmaps.
 
-## Actividades
+### Actividades
 
 1. Identifica el servicio con mayor dispersión.
 2. Identifica el servicio con más valores extremos.
@@ -1242,15 +1242,15 @@ sum by (le) (
 
 ---
 
-# Ejemplo de sesión 6: generar actividad para observar cambios
+## Ejemplo de sesión 6: generar actividad para observar cambios
 
-## Objetivo
+### Objetivo
 
 Observar cómo cambia una distribución cuando se modifica la carga del sistema.
 
 La actividad debe realizarse únicamente en un entorno de laboratorio autorizado.
 
-## Pasos
+### Pasos
 
 1. Abrir el Heatmap de latencias.
 2. Registrar la distribución inicial.
@@ -1260,7 +1260,7 @@ La actividad debe realizarse únicamente en un entorno de laboratorio autorizado
 6. Detener la carga.
 7. Observar la recuperación.
 
-## Actividades
+### Actividades
 
 1. Captura el Heatmap antes de la carga.
 2. Captura el Heatmap durante la carga.
@@ -1271,19 +1271,19 @@ La actividad debe realizarse únicamente en un entorno de laboratorio autorizado
 
 ---
 
-# Ejemplo de sesión 7: identificar una consulta incorrecta
+## Ejemplo de sesión 7: identificar una consulta incorrecta
 
-## Objetivo
+### Objetivo
 
 Comprender la diferencia entre buckets acumulados y valores por intervalo.
 
-## Consulta inicial:
+### Consulta inicial:
 
 ```promql
 http_request_duration_seconds_bucket
 ```
 
-## Consulta temporal:
+### Consulta temporal:
 
 ```promql
 rate(
@@ -1291,7 +1291,7 @@ rate(
 )
 ```
 
-## Consulta agrupada:
+### Consulta agrupada:
 
 ```promql
 sum by (le) (
@@ -1299,7 +1299,7 @@ sum by (le) (
 )
 ```
 
-## Actividades
+### Actividades
 
 1. Ejecuta la primera consulta.
 2. Ejecuta la segunda.
@@ -1310,13 +1310,13 @@ sum by (le) (
 
 ---
 
-# Ejemplo de sesión 8: diagnosticar un Heatmap sin datos
+## Ejemplo de sesión 8: diagnosticar un Heatmap sin datos
 
-## Objetivo
+### Objetivo
 
 Diagnosticar un panel Heatmap vacío.
 
-## Consulta incorrecta
+### Consulta incorrecta
 
 ```promql
 sum by (le) (
@@ -1326,7 +1326,7 @@ sum by (le) (
 )
 ```
 
-## Procedimiento
+### Procedimiento
 
 1. Ejecutar la consulta en Explore.
 2. Comprobar si devuelve datos.
@@ -1338,7 +1338,7 @@ sum by (le) (
 8. Revisar las transformaciones.
 9. Comprobar el formato de datos del Heatmap.
 
-## Actividades
+### Actividades
 
 Documentar:
 
@@ -1352,13 +1352,13 @@ Resultado final:
 
 ---
 
-# Ejemplo de sesión 9: comprobar la media y los percentiles
+## Ejemplo de sesión 9: comprobar la media y los percentiles
 
-## Objetivo
+### Objetivo
 
 Comparar la latencia media con los percentiles.
 
-## Latencia media
+### Latencia media
 
 ```promql
 rate(http_request_duration_seconds_sum[5m])
@@ -1366,7 +1366,7 @@ rate(http_request_duration_seconds_sum[5m])
 rate(http_request_duration_seconds_count[5m])
 ```
 
-## Percentil 50
+### Percentil 50
 
 ```promql
 histogram_quantile(
@@ -1377,7 +1377,7 @@ histogram_quantile(
 )
 ```
 
-## Percentil 95
+### Percentil 95
 
 ```promql
 histogram_quantile(
@@ -1388,7 +1388,7 @@ histogram_quantile(
 )
 ```
 
-## Percentil 99
+### Percentil 99
 
 ```promql
 histogram_quantile(
@@ -1399,7 +1399,7 @@ histogram_quantile(
 )
 ```
 
-## Actividades
+### Actividades
 
 1. Crea un Time series con las cuatro consultas.
 2. Configura la unidad como `Seconds`.
@@ -1409,13 +1409,13 @@ histogram_quantile(
 
 ---
 
-# Ejemplo de sesión 10: verificar la métrica mediante la API
+## Ejemplo de sesión 10: verificar la métrica mediante la API
 
-## Objetivo
+### Objetivo
 
 Consultar los buckets directamente desde Prometheus.
 
-## Consulta de buckets
+### Consulta de buckets
 
 ```bash
 curl -sG \
@@ -1425,7 +1425,7 @@ curl -sG \
   | jq
 ```
 
-## Consulta del percentil 95
+### Consulta del percentil 95
 
 ```bash
 curl -sG \
@@ -1435,7 +1435,7 @@ curl -sG \
   | jq
 ```
 
-## Actividades
+### Actividades
 
 1. Compara el resultado de la API con Grafana.
 2. Comprueba las etiquetas.
@@ -1445,11 +1445,11 @@ curl -sG \
 
 ---
 
-# Configurar variables de dashboard
+## Configurar variables de dashboard
 
 Una variable permite seleccionar el contexto del Heatmap.
 
-## Variable de servicio
+### Variable de servicio
 
 Nombre:
 
@@ -1468,7 +1468,7 @@ label_values(
 
 La sintaxis disponible puede variar según la versión de Grafana y el editor de variables.
 
-## Consulta del panel
+### Consulta del panel
 
 ```promql
 sum by (le) (
@@ -1480,7 +1480,7 @@ sum by (le) (
 )
 ```
 
-## Actividades
+### Actividades
 
 1. Crea la variable `service`.
 2. Comprueba los valores disponibles.
@@ -1492,11 +1492,11 @@ sum by (le) (
 
 ---
 
-# Configurar el intervalo de tiempo
+## Configurar el intervalo de tiempo
 
 El rango temporal debe adaptarse al análisis.
 
-## Rango corto
+### Rango corto
 
 ```text
 Last 15 minutes
@@ -1508,7 +1508,7 @@ Last 15 minutes
 - Cambios recientes.
 - Pruebas de laboratorio.
 
-## Rango medio
+### Rango medio
 
 ```text
 Last 1 hour
@@ -1521,7 +1521,7 @@ Last 6 hours
 - Comparar periodos.
 - Observar una tendencia reciente.
 
-## Rango largo
+### Rango largo
 
 ```text
 Last 24 hours
@@ -1538,7 +1538,7 @@ Un rango excesivamente largo puede comprimir la información y dificultar la lec
 
 ---
 
-# Configurar la resolución
+## Configurar la resolución
 
 La resolución temporal determina cuántos puntos se calculan.
 
@@ -1556,7 +1556,7 @@ Una consulta demasiado poco precisa puede:
 - Perder detalles.
 - Ocultar periodos cortos de latencia alta.
 
-## Recomendación
+### Recomendación
 
 El intervalo de consulta debe estar relacionado con:
 
@@ -1568,11 +1568,11 @@ El intervalo de consulta debe estar relacionado con:
 
 ---
 
-# Configurar buckets
+## Configurar buckets
 
 La calidad del Heatmap depende de los buckets disponibles.
 
-## Pocos buckets
+### Pocos buckets
 
 Ventajas:
 
@@ -1586,7 +1586,7 @@ Inconvenientes:
 - Percentiles menos exactos.
 - Distribución menos detallada.
 
-## Muchos buckets
+### Muchos buckets
 
 Ventajas:
 
@@ -1601,7 +1601,7 @@ Inconvenientes:
 - Mayor coste de consulta.
 - Visualización potencialmente saturada.
 
-## Ejemplo
+### Ejemplo
 
 Buckets poco detallados:
 
@@ -1632,7 +1632,7 @@ Los límites deben elegirse según el comportamiento esperado de la métrica.
 
 ---
 
-# El bucket `+Inf`
+## El bucket `+Inf`
 
 Los histogramas de Prometheus deben incluir un bucket infinito superior:
 
@@ -1653,14 +1653,14 @@ Si falta o está mal configurado, las consultas de histogramas pueden producir r
 
 ---
 
-# Histograma clásico y Native Histogram
+## Histograma clásico y Native Histogram
 
 Prometheus puede trabajar con:
 
 - Histogramas clásicos basados en series `_bucket`.
 - Native Histograms, según la versión y la configuración.
 
-## Histograma clásico
+### Histograma clásico
 
 Utiliza series como:
 
@@ -1681,7 +1681,7 @@ histogram_quantile(
 )
 ```
 
-## Native Histogram
+### Native Histogram
 
 Puede utilizar una representación diferente y requiere que la versión de Prometheus, Grafana y la fuente de datos sean compatibles.
 
@@ -1696,9 +1696,9 @@ Cálculo de percentiles
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Confirmar que la métrica es un histograma
+### Confirmar que la métrica es un histograma
 
 Buscar:
 
@@ -1706,7 +1706,7 @@ Buscar:
 {__name__=~".*_bucket"}
 ```
 
-## Conservar la etiqueta `le`
+### Conservar la etiqueta `le`
 
 Para calcular percentiles:
 
@@ -1716,7 +1716,7 @@ sum by (le) (...)
 
 No eliminar `le` antes de utilizar `histogram_quantile()`.
 
-## Utilizar `rate()` para contadores
+### Utilizar `rate()` para contadores
 
 Los buckets clásicos son contadores acumulativos.
 
@@ -1734,11 +1734,11 @@ increase(metric_bucket[5m])
 
 según el objetivo del análisis.
 
-## Elegir buckets adecuados
+### Elegir buckets adecuados
 
 Los buckets deben cubrir el rango normal y los valores extremos esperados.
 
-## Documentar las unidades
+### Documentar las unidades
 
 Indicar si los valores están en:
 
@@ -1749,31 +1749,31 @@ Bytes
 Kilobytes
 ```
 
-## Comparar con percentiles
+### Comparar con percentiles
 
 El Heatmap debe complementarse con percentiles cuando se necesite una lectura operativa rápida.
 
-## Filtrar etiquetas
+### Filtrar etiquetas
 
 Evitar mezclar servicios o rutas que tengan comportamientos muy diferentes sin documentarlo.
 
-## No interpretar el color como severidad automáticamente
+### No interpretar el color como severidad automáticamente
 
 La intensidad representa densidad, no necesariamente un estado de alerta.
 
-## Utilizar rangos temporales coherentes
+### Utilizar rangos temporales coherentes
 
 Comparar periodos con suficiente cantidad de observaciones.
 
-## Revisar el número de series
+### Revisar el número de series
 
 Una consulta excesivamente amplia puede sobrecargar Prometheus y Grafana.
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## El Heatmap no muestra datos
+### El Heatmap no muestra datos
 
 Comprobar:
 
@@ -1800,7 +1800,7 @@ Revisar:
 - Formato de datos.
 - Transformaciones.
 
-## La métrica no tiene `_bucket`
+### La métrica no tiene `_bucket`
 
 Puede que:
 
@@ -1812,7 +1812,7 @@ Puede que:
 
 Un Summary suele exponer cuantiles directamente, pero no permite reconstruir la misma distribución que un histograma.
 
-## El resultado de `histogram_quantile()` es `NaN`
+### El resultado de `histogram_quantile()` es `NaN`
 
 Posibles causas:
 
@@ -1823,7 +1823,7 @@ Posibles causas:
 - La consulta agrupa incorrectamente.
 - El rango temporal es demasiado corto.
 
-## El percentil parece incorrecto
+### El percentil parece incorrecto
 
 Comprobar:
 
@@ -1834,7 +1834,7 @@ Comprobar:
 - Que las unidades son correctas.
 - Que el rango temporal contiene suficiente tráfico.
 
-## El Heatmap parece una serie temporal normal
+### El Heatmap parece una serie temporal normal
 
 Posibles causas:
 
@@ -1844,7 +1844,7 @@ Posibles causas:
 - Se ha eliminado la etiqueta `le`.
 - Se está utilizando una consulta de percentil en lugar de buckets.
 
-## Todos los colores tienen la misma intensidad
+### Todos los colores tienen la misma intensidad
 
 Posibles causas:
 
@@ -1855,7 +1855,7 @@ Posibles causas:
 - Consulta agregada incorrectamente.
 - La métrica no se actualiza.
 
-## El gráfico tiene demasiados datos
+### El gráfico tiene demasiados datos
 
 Aplicar:
 
@@ -1866,7 +1866,7 @@ Aplicar:
 - Menor resolución.
 - Consultas agrupadas.
 
-## La latencia aparece en una unidad incorrecta
+### La latencia aparece en una unidad incorrecta
 
 Si la métrica termina en:
 
@@ -1884,7 +1884,7 @@ Si se multiplica por:
 
 el resultado pasa a milisegundos y la unidad debe cambiarse.
 
-## La distribución no cambia
+### La distribución no cambia
 
 Posibles causas:
 
@@ -1897,7 +1897,7 @@ Posibles causas:
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -2015,13 +2015,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear un dashboard para analizar la distribución temporal de latencias de una aplicación.
 
-## Requisitos previos
+### Requisitos previos
 
 Debe existir una métrica de histograma como:
 
@@ -2031,7 +2031,7 @@ http_request_duration_seconds_bucket
 
 Si la métrica utiliza otro nombre, adaptar las consultas.
 
-## Panel 1: Heatmap de latencias
+### Panel 1: Heatmap de latencias
 
 Consulta:
 
@@ -2049,7 +2049,7 @@ Unidad: Seconds
 Rango temporal: Last 1 hour
 ```
 
-## Panel 2: percentil 50
+### Panel 2: percentil 50
 
 ```promql
 histogram_quantile(
@@ -2072,7 +2072,7 @@ Unidad:
 Seconds
 ```
 
-## Panel 3: percentil 95
+### Panel 3: percentil 95
 
 ```promql
 histogram_quantile(
@@ -2095,7 +2095,7 @@ Unidad:
 Seconds
 ```
 
-## Panel 4: percentil 99
+### Panel 4: percentil 99
 
 ```promql
 histogram_quantile(
@@ -2118,7 +2118,7 @@ Unidad:
 Seconds
 ```
 
-## Panel 5: latencia media
+### Panel 5: latencia media
 
 ```promql
 rate(http_request_duration_seconds_sum[5m])
@@ -2138,7 +2138,7 @@ Unidad:
 Seconds
 ```
 
-## Distribución propuesta
+### Distribución propuesta
 
 ```text
 +------------------------------------------------------+
@@ -2150,7 +2150,7 @@ Seconds
 +--------------------+---------------------------------+
 ```
 
-## Tareas
+### Tareas
 
 1. Localizar la métrica de histograma.
 2. Identificar sus buckets.
@@ -2171,7 +2171,7 @@ Seconds
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2195,7 +2195,7 @@ Seconds
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Un Heatmap representa la distribución de valores a lo largo del tiempo.
 - Cada celda combina un intervalo temporal y un intervalo de valores.
@@ -2222,7 +2222,7 @@ Seconds
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué finalidad tiene un panel Heatmap?
 2. ¿Qué diferencia existe entre un Heatmap y un Time series?
@@ -2252,7 +2252,7 @@ Seconds
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de utilizar un Heatmap para analizar distribuciones temporales y no únicamente valores medios.
 

@@ -36,7 +36,7 @@ Una transformación no modifica los datos originales almacenados en Prometheus. 
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -65,7 +65,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Las fuentes de datos devuelven datos en un formato que no siempre coincide con la visualización deseada.
 
@@ -87,7 +87,7 @@ Después de aplicar transformaciones, puede mostrarse:
 
 La transformación no ha cambiado la métrica original. Solo ha cambiado la forma en que Grafana la presenta.
 
-## Ejemplo conceptual
+### Ejemplo conceptual
 
 ```text
 Resultado original:
@@ -107,11 +107,11 @@ server-01     73.4 %
 
 ---
 
-# Consulta, transformación y visualización
+## Consulta, transformación y visualización
 
 Estos tres elementos cumplen funciones diferentes.
 
-## Consulta
+### Consulta
 
 Obtiene datos de la fuente.
 
@@ -121,7 +121,7 @@ Ejemplo:
 up
 ```
 
-## Transformación
+### Transformación
 
 Modifica la estructura o el contenido del resultado.
 
@@ -132,7 +132,7 @@ Ejemplos:
 - Ordenar por valor.
 - Crear una columna calculada.
 
-## Visualización
+### Visualización
 
 Representa el resultado.
 
@@ -165,7 +165,7 @@ Table
 
 ---
 
-# Cuándo utilizar transformaciones
+## Cuándo utilizar transformaciones
 
 Las transformaciones son apropiadas cuando:
 
@@ -178,7 +178,7 @@ Las transformaciones son apropiadas cuando:
 - Se necesita adaptar una consulta a una visualización.
 - La operación no resulta sencilla o cómoda en PromQL.
 
-## Ejemplos
+### Ejemplos
 
 - Convertir `instance` en una columna visible.
 - Mostrar solo los cinco servidores con más CPU.
@@ -190,7 +190,7 @@ Las transformaciones son apropiadas cuando:
 
 ---
 
-# Cuándo no utilizar transformaciones
+## Cuándo no utilizar transformaciones
 
 No conviene utilizar transformaciones cuando:
 
@@ -202,7 +202,7 @@ No conviene utilizar transformaciones cuando:
 - Se produce una gran cantidad de datos innecesarios.
 - La transformación aumenta excesivamente el coste de Grafana.
 
-## Regla práctica
+### Regla práctica
 
 Utilizar PromQL para:
 
@@ -223,7 +223,7 @@ Utilizar transformaciones para:
 
 ---
 
-# Acceder al editor de transformaciones
+## Acceder al editor de transformaciones
 
 Procedimiento general:
 
@@ -240,7 +240,7 @@ Procedimiento general:
 
 La interfaz exacta puede variar según la versión de Grafana.
 
-## Orden de las transformaciones
+### Orden de las transformaciones
 
 Las transformaciones se ejecutan en el orden en que aparecen.
 
@@ -258,7 +258,7 @@ Cambiar el orden puede cambiar el resultado.
 
 ---
 
-# Resultado de datos y data frames
+## Resultado de datos y data frames
 
 Grafana trabaja internamente con estructuras de datos llamadas **data frames**.
 
@@ -294,7 +294,7 @@ Comprender esta estructura ayuda a interpretar por qué una transformación func
 
 ---
 
-# Transformación: Organize fields by name
+## Transformación: Organize fields by name
 
 La transformación **Organize fields by name** permite organizar los campos de un resultado.
 
@@ -305,19 +305,19 @@ Puede utilizarse para:
 - Ocultar columnas.
 - Mostrar únicamente los campos necesarios.
 
-## Resultado original
+### Resultado original
 
 | Time | instance | job | Value |
 |---|---|---|---:|
 | 17:00 | server-01:9100 | node_exporter | 73.42 |
 
-## Resultado organizado
+### Resultado organizado
 
 | Servidor | CPU |
 |---|---:|
 | server-01:9100 | 73.42 |
 
-## Operaciones habituales
+### Operaciones habituales
 
 ```text
 Renombrar instance → Servidor
@@ -327,7 +327,7 @@ Ocultar job
 Reordenar columnas
 ```
 
-## Cuándo utilizarla
+### Cuándo utilizarla
 
 - Paneles Table.
 - Tablas de inventario.
@@ -337,11 +337,11 @@ Reordenar columnas
 
 ---
 
-# Transformación: Filter fields by name
+## Transformación: Filter fields by name
 
 Permite incluir o excluir campos por nombre o patrón.
 
-## Ejemplo
+### Ejemplo
 
 Resultado:
 
@@ -360,14 +360,14 @@ instance
 Value
 ```
 
-## Utilidad
+### Utilidad
 
 - Ocultar timestamps.
 - Ocultar etiquetas técnicas.
 - Mostrar solo columnas relevantes.
 - Reducir el ruido visual.
 
-## Precaución
+### Precaución
 
 No ocultar campos necesarios para identificar correctamente los valores.
 
@@ -375,11 +375,11 @@ Por ejemplo, ocultar `instance` en un resultado con varios servidores puede hace
 
 ---
 
-# Transformación: Rename by regex
+## Transformación: Rename by regex
 
 Permite cambiar nombres utilizando expresiones regulares.
 
-## Ejemplo
+### Ejemplo
 
 Campo original:
 
@@ -404,7 +404,7 @@ Expresión:
 Sustitución:
 ```
 
-## Otro ejemplo
+### Otro ejemplo
 
 Campo original:
 
@@ -418,7 +418,7 @@ Nombre deseado:
 CPU
 ```
 
-## Cuándo utilizarla
+### Cuándo utilizarla
 
 - Simplificar nombres largos.
 - Eliminar puertos.
@@ -426,7 +426,7 @@ CPU
 - Cambiar prefijos.
 - Crear etiquetas más legibles.
 
-## Precauciones
+### Precauciones
 
 - Probar la expresión con varios valores.
 - Comprobar que no se eliminan partes importantes.
@@ -435,11 +435,11 @@ CPU
 
 ---
 
-# Transformación: Filter data by values
+## Transformación: Filter data by values
 
 Permite filtrar filas según el valor de un campo.
 
-## Ejemplo
+### Ejemplo
 
 Supongamos una tabla:
 
@@ -462,7 +462,7 @@ Resultado:
 | server-02 | 82 |
 | server-03 | 94 |
 
-## Usos habituales
+### Usos habituales
 
 - Mostrar servidores con CPU elevada.
 - Mostrar discos por encima de un umbral.
@@ -470,7 +470,7 @@ Resultado:
 - Ocultar interfaces sin tráfico.
 - Filtrar servicios concretos.
 
-## Diferencia con PromQL
+### Diferencia con PromQL
 
 Filtrar en PromQL suele reducir los datos antes de que lleguen a Grafana.
 
@@ -480,11 +480,11 @@ Para grandes volúmenes, suele ser más eficiente filtrar en PromQL.
 
 ---
 
-# Transformación: Limit
+## Transformación: Limit
 
 Permite limitar el número de filas mostradas.
 
-## Ejemplo
+### Ejemplo
 
 Resultado original:
 
@@ -504,11 +504,11 @@ Resultado:
 5 filas
 ```
 
-## Importante
+### Importante
 
 El resultado depende del orden aplicado.
 
-### Orden incorrecto
+#### Orden incorrecto
 
 ```text
 1. Limitar a 5.
@@ -517,7 +517,7 @@ El resultado depende del orden aplicado.
 
 En este caso pueden mostrarse cinco servidores que no son los de mayor CPU.
 
-### Orden recomendado
+#### Orden recomendado
 
 ```text
 1. Ordenar por CPU descendente.
@@ -532,11 +532,11 @@ Los cinco servidores con mayor CPU
 
 ---
 
-# Transformación: Sort by
+## Transformación: Sort by
 
 Permite ordenar filas según uno o varios campos.
 
-## Ejemplo
+### Ejemplo
 
 | Servidor | CPU |
 |---|---:|
@@ -552,7 +552,7 @@ Orden descendente:
 | server-02 | 82 |
 | server-01 | 45 |
 
-## Usos
+### Usos
 
 - Mostrar primero los valores críticos.
 - Ordenar por nombre.
@@ -560,7 +560,7 @@ Orden descendente:
 - Ordenar por almacenamiento.
 - Ordenar por latencia.
 
-## Combinación habitual
+### Combinación habitual
 
 ```text
 1. Convertir etiquetas en campos.
@@ -571,7 +571,7 @@ Orden descendente:
 
 ---
 
-# Transformación: Reduce
+## Transformación: Reduce
 
 La transformación **Reduce** convierte varios valores en un valor reducido.
 
@@ -587,7 +587,7 @@ Reducciones habituales:
 - Count.
 - Range.
 
-## Ejemplo
+### Ejemplo
 
 Serie temporal:
 
@@ -621,7 +621,7 @@ Resultado:
 53.3
 ```
 
-## Usos habituales
+### Usos habituales
 
 - Crear un Stat a partir de una serie temporal.
 - Mostrar el último valor.
@@ -629,7 +629,7 @@ Resultado:
 - Obtener el máximo de un intervalo.
 - Crear una tabla resumen.
 
-## Precaución
+### Precaución
 
 El método de reducción debe coincidir con el significado del panel.
 
@@ -642,23 +642,23 @@ Por ejemplo:
 
 ---
 
-# Transformación: Labels to fields
+## Transformación: Labels to fields
 
 Convierte etiquetas de una serie en campos o columnas.
 
-## Resultado original
+### Resultado original
 
 ```text
 {instance="server-01:9100", job="node_exporter"} 73.4
 ```
 
-## Después de convertir etiquetas
+### Después de convertir etiquetas
 
 | instance | job | Value |
 |---|---|---:|
 | server-01:9100 | node_exporter | 73.4 |
 
-## Usos
+### Usos
 
 - Crear tablas.
 - Mostrar etiquetas como columnas.
@@ -666,7 +666,7 @@ Convierte etiquetas de una serie en campos o columnas.
 - Mostrar instancias y valores.
 - Convertir resultados Prometheus en estructura tabular.
 
-## Ejemplo de resultado final
+### Ejemplo de resultado final
 
 | Servidor | Job | CPU |
 |---|---|---:|
@@ -682,11 +682,11 @@ Value → CPU
 
 ---
 
-# Transformación: Series to rows
+## Transformación: Series to rows
 
 Convierte series en una tabla de filas.
 
-## Resultado original
+### Resultado original
 
 Varias series temporales:
 
@@ -695,7 +695,7 @@ CPU{instance="server-01"}
 CPU{instance="server-02"}
 ```
 
-## Resultado conceptual
+### Resultado conceptual
 
 | Metric | Time | Value |
 |---|---|---:|
@@ -704,24 +704,24 @@ CPU{instance="server-02"}
 | CPU server-02 | 17:00 | 62 |
 | CPU server-02 | 17:05 | 74 |
 
-## Usos
+### Usos
 
 - Inspeccionar datos temporales.
 - Crear una tabla de muestras.
 - Analizar series individualmente.
 - Preparar datos para otras transformaciones.
 
-## Precaución
+### Precaución
 
 Puede generar muchas filas si el rango temporal es grande.
 
 ---
 
-# Transformación: Time series to table
+## Transformación: Time series to table
 
 Convierte datos de series temporales en una tabla.
 
-## Ejemplo
+### Ejemplo
 
 Consulta:
 
@@ -746,7 +746,7 @@ Después de la transformación:
 | 17:05 | 0.51 |
 | 17:10 | 0.63 |
 
-## Usos
+### Usos
 
 - Revisar valores concretos.
 - Exportar datos.
@@ -755,11 +755,11 @@ Después de la transformación:
 
 ---
 
-# Transformación: Join by field
+## Transformación: Join by field
 
 Combina resultados utilizando un campo común.
 
-## Consulta A: CPU
+### Consulta A: CPU
 
 ```promql
 100 - (
@@ -769,7 +769,7 @@ Combina resultados utilizando un campo común.
 )
 ```
 
-## Consulta B: memoria
+### Consulta B: memoria
 
 ```promql
 100 * (
@@ -786,14 +786,14 @@ Ambas consultas pueden compartir:
 instance
 ```
 
-## Resultado combinado
+### Resultado combinado
 
 | instance | CPU | Memoria |
 |---|---:|---:|
 | server-01:9100 | 42 | 61 |
 | server-02:9100 | 78 | 74 |
 
-## Tipos de unión
+### Tipos de unión
 
 Según la versión pueden existir opciones como:
 
@@ -802,17 +802,17 @@ Según la versión pueden existir opciones como:
 - Join by field.
 - Join by labels.
 
-## Diferencia conceptual
+### Diferencia conceptual
 
-### Inner join
+#### Inner join
 
 Muestra solo los elementos presentes en ambos resultados.
 
-### Outer join
+#### Outer join
 
 Puede conservar elementos aunque falten en uno de los resultados.
 
-## Precauciones
+### Precauciones
 
 - El campo de unión debe tener el mismo nombre.
 - Los valores deben coincidir.
@@ -821,7 +821,7 @@ Puede conservar elementos aunque falten en uno de los resultados.
 
 ---
 
-# Transformación: Concatenate fields
+## Transformación: Concatenate fields
 
 Combina campos o resultados en una estructura común.
 
@@ -832,7 +832,7 @@ Puede utilizarse para:
 - Combinar resultados con la misma estructura.
 - Construir una tabla común.
 
-## Ejemplo
+### Ejemplo
 
 Consulta A:
 
@@ -853,7 +853,7 @@ Resultado concatenado:
 | server-01 | 42 |
 | server-02 | 78 |
 
-## Diferencia con Join
+### Diferencia con Join
 
 ```text
 Join:
@@ -865,11 +865,11 @@ Añade resultados con una estructura compatible.
 
 ---
 
-# Transformación: Add field from calculation
+## Transformación: Add field from calculation
 
 Permite crear un campo calculado a partir de otros campos.
 
-## Ejemplo
+### Ejemplo
 
 Si una tabla contiene:
 
@@ -889,7 +889,7 @@ Resultado:
 |---:|---:|---:|
 | 42 | 61 | 51.5 |
 
-## Operaciones posibles
+### Operaciones posibles
 
 Según la versión y la configuración:
 
@@ -902,7 +902,7 @@ Según la versión y la configuración:
 - Operaciones binarias.
 - Operaciones entre campos.
 
-## Ejemplo de porcentaje
+### Ejemplo de porcentaje
 
 Si se dispone de:
 
@@ -917,7 +917,7 @@ Calcular:
 100 * Disponible / Total
 ```
 
-## Precauciones
+### Precauciones
 
 - Comprobar las unidades.
 - Evitar dividir entre cero.
@@ -927,11 +927,11 @@ Calcular:
 
 ---
 
-# Transformación: Group by
+## Transformación: Group by
 
 Agrupa filas según uno o varios campos.
 
-## Ejemplo original
+### Ejemplo original
 
 | Servicio | Estado | Valor |
 |---|---|---:|
@@ -961,7 +961,7 @@ Resultado conceptual:
 | api | 2 | 2 |
 | web | 2 | 1 |
 
-## Usos
+### Usos
 
 - Agrupar instancias por servicio.
 - Contar estados.
@@ -970,7 +970,7 @@ Resultado conceptual:
 
 ---
 
-# Transformación: Convert field type
+## Transformación: Convert field type
 
 Permite cambiar el tipo de un campo.
 
@@ -982,7 +982,7 @@ Número → Texto
 Texto → Tiempo
 ```
 
-## Problema habitual
+### Problema habitual
 
 Una tabla puede contener:
 
@@ -1010,7 +1010,7 @@ Convertir el campo a número permite ordenar correctamente:
 20
 ```
 
-## Precauciones
+### Precauciones
 
 - Comprobar el formato original.
 - Revisar separadores decimales.
@@ -1019,7 +1019,7 @@ Convertir el campo a número permite ordenar correctamente:
 
 ---
 
-# Transformación: Config from query results
+## Transformación: Config from query results
 
 Permite utilizar el resultado de una consulta para configurar propiedades de otro panel.
 
@@ -1034,7 +1034,7 @@ Puede utilizarse para obtener dinámicamente:
 
 La disponibilidad y el comportamiento exacto dependen de la versión de Grafana y del tipo de panel.
 
-## Ejemplo conceptual
+### Ejemplo conceptual
 
 Una consulta devuelve:
 
@@ -1044,7 +1044,7 @@ Una consulta devuelve:
 
 Otra consulta utiliza esos valores para configurar el panel.
 
-## Precauciones
+### Precauciones
 
 - Documentar la consulta de configuración.
 - Comprobar qué campos se utilizan.
@@ -1053,11 +1053,11 @@ Otra consulta utiliza esos valores para configurar el panel.
 
 ---
 
-# Transformación: Partition by values
+## Transformación: Partition by values
 
 Divide los datos en grupos según el valor de un campo.
 
-## Ejemplo
+### Ejemplo
 
 Tabla:
 
@@ -1084,7 +1084,7 @@ Frame Laboratorio:
 lab-01      34
 ```
 
-## Usos
+### Usos
 
 - Separar producción y laboratorio.
 - Crear grupos por equipo.
@@ -1093,7 +1093,7 @@ lab-01      34
 
 ---
 
-# Transformación: Group to nested tables
+## Transformación: Group to nested tables
 
 Puede organizar datos relacionados en estructuras anidadas o agrupadas.
 
@@ -1108,7 +1108,7 @@ Debe utilizarse con moderación porque las estructuras demasiado complejas dific
 
 ---
 
-# Transformaciones y múltiples consultas
+## Transformaciones y múltiples consultas
 
 Un panel puede tener varias consultas:
 
@@ -1125,7 +1125,7 @@ Las transformaciones pueden aplicarse:
 - A un frame concreto.
 - A los resultados combinados.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Consulta A:
@@ -1151,13 +1151,13 @@ Resultado:
 
 ---
 
-# Ejemplo completo 1: tabla de CPU por instancia
+## Ejemplo completo 1: tabla de CPU por instancia
 
-## Objetivo
+### Objetivo
 
 Crear una tabla legible con el uso de CPU por instancia.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1167,13 +1167,13 @@ Crear una tabla legible con el uso de CPU por instancia.
 )
 ```
 
-## Transformaciones
+### Transformaciones
 
-### 1. Labels to fields
+#### 1. Labels to fields
 
 Convertir `instance` en una columna.
 
-### 2. Organize fields by name
+#### 2. Organize fields by name
 
 Configurar:
 
@@ -1189,7 +1189,7 @@ Time
 job
 ```
 
-### 3. Sort by
+#### 3. Sort by
 
 Ordenar:
 
@@ -1197,7 +1197,7 @@ Ordenar:
 CPU descendente
 ```
 
-## Resultado
+### Resultado
 
 | Servidor | CPU |
 |---|---:|
@@ -1206,13 +1206,13 @@ CPU descendente
 
 ---
 
-# Ejemplo completo 2: cinco servidores con más CPU
+## Ejemplo completo 2: cinco servidores con más CPU
 
-## Objetivo
+### Objetivo
 
 Mostrar únicamente los servidores con mayor uso.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1222,7 +1222,7 @@ Mostrar únicamente los servidores con mayor uso.
 )
 ```
 
-## Transformaciones
+### Transformaciones
 
 ```text
 1. Labels to fields.
@@ -1231,13 +1231,13 @@ Mostrar únicamente los servidores con mayor uso.
 4. Limit a 5.
 ```
 
-## Resultado
+### Resultado
 
 ```text
 Se muestran los cinco servidores con mayor CPU.
 ```
 
-## Alternativa con PromQL
+### Alternativa con PromQL
 
 ```promql
 topk(
@@ -1250,7 +1250,7 @@ topk(
 )
 ```
 
-## Comparación
+### Comparación
 
 ```text
 topk() en PromQL:
@@ -1264,13 +1264,13 @@ Para grandes volúmenes, `topk()` suele ser más eficiente.
 
 ---
 
-# Ejemplo completo 3: tabla de CPU y memoria
+## Ejemplo completo 3: tabla de CPU y memoria
 
-## Objetivo
+### Objetivo
 
 Combinar CPU y memoria en una única tabla.
 
-## Consulta A: CPU
+### Consulta A: CPU
 
 ```promql
 100 - (
@@ -1280,7 +1280,7 @@ Combinar CPU y memoria en una única tabla.
 )
 ```
 
-## Consulta B: memoria
+### Consulta B: memoria
 
 ```promql
 100 * (
@@ -1291,7 +1291,7 @@ Combinar CPU y memoria en una única tabla.
 )
 ```
 
-## Transformaciones
+### Transformaciones
 
 ```text
 1. Labels to fields.
@@ -1301,14 +1301,14 @@ Combinar CPU y memoria en una única tabla.
 5. Sort by CPU descendente.
 ```
 
-## Resultado
+### Resultado
 
 | Servidor | CPU | Memoria |
 |---|---:|---:|
 | server-02:9100 | 82.1 | 74.5 |
 | server-01:9100 | 42.3 | 61.2 |
 
-## Descripción
+### Descripción
 
 ```text
 Comparación de CPU y memoria por instancia.
@@ -1317,33 +1317,33 @@ Los resultados se unen mediante la etiqueta instance.
 
 ---
 
-# Ejemplo completo 4: crear un campo de estado
+## Ejemplo completo 4: crear un campo de estado
 
-## Objetivo
+### Objetivo
 
 Añadir una columna textual según el valor de disponibilidad.
 
-## Consulta
+### Consulta
 
 ```promql
 up
 ```
 
-## Resultado original
+### Resultado original
 
 | instance | Value |
 |---|---:|
 | server-01:9100 | 1 |
 | server-02:9100 | 0 |
 
-## Transformaciones posibles
+### Transformaciones posibles
 
 1. Labels to fields.
 2. Rename fields.
 3. Add field from calculation o Value mappings, según la versión.
 4. Crear o representar el estado.
 
-## Resultado deseado
+### Resultado deseado
 
 | Servidor | Estado |
 |---|---|
@@ -1354,13 +1354,13 @@ Si la transformación no permite convertir directamente `1` y `0` en texto, util
 
 ---
 
-# Ejemplo completo 5: calcular diferencia entre servidores
+## Ejemplo completo 5: calcular diferencia entre servidores
 
-## Objetivo
+### Objetivo
 
 Comparar el uso de CPU de dos instancias.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1370,7 +1370,7 @@ Comparar el uso de CPU de dos instancias.
 )
 ```
 
-## Transformaciones
+### Transformaciones
 
 1. Convertir etiquetas en campos.
 2. Filtrar o seleccionar dos servidores.
@@ -1382,7 +1382,7 @@ Comparar el uso de CPU de dos instancias.
 CPU servidor A - CPU servidor B
 ```
 
-## Resultado conceptual
+### Resultado conceptual
 
 ```text
 CPU server-01: 42 %
@@ -1391,44 +1391,44 @@ CPU server-02: 78 %
 Diferencia: 36 puntos porcentuales
 ```
 
-## Precaución
+### Precaución
 
 La diferencia debe interpretarse como diferencia de puntos porcentuales, no como porcentaje relativo, salvo que se calcule explícitamente.
 
 ---
 
-# Ejemplo completo 6: transformar una serie temporal en Stat
+## Ejemplo completo 6: transformar una serie temporal en Stat
 
-## Objetivo
+### Objetivo
 
 Mostrar en un panel Stat el último valor de una métrica temporal.
 
-## Consulta
+### Consulta
 
 ```promql
 node_load1
 ```
 
-## Transformación
+### Transformación
 
 ```text
 Reduce
 Método: Last not null
 ```
 
-## Visualización
+### Visualización
 
 ```text
 Stat
 ```
 
-## Resultado
+### Resultado
 
 ```text
 0.82
 ```
 
-## Variantes
+### Variantes
 
 ```text
 Last: valor actual
@@ -1439,13 +1439,13 @@ Min: valor mínimo
 
 ---
 
-# Ejemplo completo 7: tabla de uso de almacenamiento
+## Ejemplo completo 7: tabla de uso de almacenamiento
 
-## Objetivo
+### Objetivo
 
 Crear una tabla de sistemas de ficheros ordenados por ocupación.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1460,7 +1460,7 @@ Crear una tabla de sistemas de ficheros ordenados por ocupación.
 )
 ```
 
-## Transformaciones
+### Transformaciones
 
 ```text
 1. Labels to fields.
@@ -1472,7 +1472,7 @@ Crear una tabla de sistemas de ficheros ordenados por ocupación.
 7. Filter data by values si se desea mostrar Uso > 80.
 ```
 
-## Resultado
+### Resultado
 
 | Servidor | Punto de montaje | Uso |
 |---|---|---:|
@@ -1481,13 +1481,13 @@ Crear una tabla de sistemas de ficheros ordenados por ocupación.
 
 ---
 
-# Ejemplo de sesión 1: renombrar y ocultar campos
+## Ejemplo de sesión 1: renombrar y ocultar campos
 
-## Objetivo
+### Objetivo
 
 Crear una tabla legible a partir de una consulta Prometheus.
 
-## Pasos
+### Pasos
 
 1. Crear un panel nuevo.
 2. Introducir:
@@ -1516,7 +1516,7 @@ Time
 
 9. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Añade una columna de estado legible.
 2. Ordena por servidor.
@@ -1525,13 +1525,13 @@ Time
 
 ---
 
-# Ejemplo de sesión 2: ordenar y limitar resultados
+## Ejemplo de sesión 2: ordenar y limitar resultados
 
-## Objetivo
+### Objetivo
 
 Mostrar los tres servidores con mayor uso de CPU.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1541,7 +1541,7 @@ Mostrar los tres servidores con mayor uso de CPU.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Table.
 2. Añadir la consulta.
@@ -1559,7 +1559,7 @@ Limit: 3
 
 10. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Cambia el límite a `5`.
 2. Cambia el orden a ascendente.
@@ -1569,13 +1569,13 @@ Limit: 3
 
 ---
 
-# Ejemplo de sesión 3: unir CPU y memoria
+## Ejemplo de sesión 3: unir CPU y memoria
 
-## Objetivo
+### Objetivo
 
 Crear una tabla que muestre dos recursos por instancia.
 
-## Consulta A
+### Consulta A
 
 ```promql
 100 - (
@@ -1585,7 +1585,7 @@ Crear una tabla que muestre dos recursos por instancia.
 )
 ```
 
-## Consulta B
+### Consulta B
 
 ```promql
 100 * (
@@ -1596,7 +1596,7 @@ Crear una tabla que muestre dos recursos por instancia.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Table.
 2. Añadir las dos consultas.
@@ -1611,7 +1611,7 @@ Crear una tabla que muestre dos recursos por instancia.
    - `Value B` → `Memoria`
 9. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Ordena por CPU.
 2. Oculta campos duplicados.
@@ -1620,20 +1620,20 @@ Crear una tabla que muestre dos recursos por instancia.
 
 ---
 
-# Ejemplo de sesión 4: crear un campo calculado
+## Ejemplo de sesión 4: crear un campo calculado
 
-## Objetivo
+### Objetivo
 
 Crear una columna de promedio de CPU y memoria.
 
-## Datos de partida
+### Datos de partida
 
 | Servidor | CPU | Memoria |
 |---|---:|---:|
 | server-01 | 42 | 61 |
 | server-02 | 78 | 74 |
 
-## Pasos
+### Pasos
 
 1. Crear la tabla de CPU y memoria.
 2. Añadir `Add field from calculation`.
@@ -1650,14 +1650,14 @@ Crear una columna de promedio de CPU y memoria.
 Promedio de recursos
 ```
 
-## Resultado
+### Resultado
 
 | Servidor | CPU | Memoria | Promedio |
 |---|---:|---:|---:|
 | server-01 | 42 | 61 | 51.5 |
 | server-02 | 78 | 74 | 76 |
 
-## Actividades
+### Actividades
 
 1. Crea el campo calculado.
 2. Ordena por promedio.
@@ -1666,19 +1666,19 @@ Promedio de recursos
 
 ---
 
-# Ejemplo de sesión 5: reducir una serie temporal
+## Ejemplo de sesión 5: reducir una serie temporal
 
-## Objetivo
+### Objetivo
 
 Mostrar el último valor de la carga del sistema.
 
-## Consulta
+### Consulta
 
 ```promql
 node_load1
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel.
 2. Introducir la consulta.
@@ -1693,7 +1693,7 @@ Last not null
 6. Configurar la unidad como `None`.
 7. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Cambia la reducción a `Mean`.
 2. Cambia la reducción a `Max`.
@@ -1705,13 +1705,13 @@ Last not null
 
 ---
 
-# Ejemplo de sesión 6: filtrar valores elevados
+## Ejemplo de sesión 6: filtrar valores elevados
 
-## Objetivo
+### Objetivo
 
 Mostrar únicamente los sistemas de ficheros con más del 80 % de uso.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1726,7 +1726,7 @@ Mostrar únicamente los sistemas de ficheros con más del 80 % de uso.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Table.
 2. Añadir la consulta.
@@ -1743,7 +1743,7 @@ Valor: 80
 
 7. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Cambia el filtro a `90`.
 2. Comprueba qué sistemas desaparecen.
@@ -1757,13 +1757,13 @@ Valor: 80
 
 ---
 
-# Ejemplo de sesión 7: convertir tipos de campo
+## Ejemplo de sesión 7: convertir tipos de campo
 
-## Objetivo
+### Objetivo
 
 Corregir un campo numérico que se interpreta como texto.
 
-## Datos iniciales
+### Datos iniciales
 
 ```text
 "9"
@@ -1790,7 +1790,7 @@ Orden numérico:
 100
 ```
 
-## Pasos
+### Pasos
 
 1. Crear o utilizar una tabla.
 2. Identificar el campo interpretado como texto.
@@ -1805,7 +1805,7 @@ Number
 6. Ordenar de forma ascendente.
 7. Comprobar el resultado.
 
-## Actividades
+### Actividades
 
 1. Documenta el problema inicial.
 2. Convierte el campo.
@@ -1814,13 +1814,13 @@ Number
 
 ---
 
-# Ejemplo de sesión 8: diagnosticar una transformación incorrecta
+## Ejemplo de sesión 8: diagnosticar una transformación incorrecta
 
-## Objetivo
+### Objetivo
 
 Analizar un panel cuyo resultado no coincide con la consulta.
 
-## Situación
+### Situación
 
 La consulta devuelve:
 
@@ -1830,7 +1830,7 @@ CPU por instancia
 
 Pero el panel muestra una única fila.
 
-## Procedimiento
+### Procedimiento
 
 1. Revisar la consulta.
 2. Revisar los datos originales.
@@ -1842,7 +1842,7 @@ Pero el panel muestra una única fila.
 8. Añadirlas una por una.
 9. Guardar el resultado correcto.
 
-## Actividades
+### Actividades
 
 Documentar:
 
@@ -1857,13 +1857,13 @@ Resultado final:
 
 ---
 
-# Ejemplo de sesión 9: inspeccionar los datos intermedios
+## Ejemplo de sesión 9: inspeccionar los datos intermedios
 
-## Objetivo
+### Objetivo
 
 Comprender el resultado después de cada transformación.
 
-## Pasos
+### Pasos
 
 1. Crear un panel con una consulta sencilla.
 2. Añadir una transformación.
@@ -1873,7 +1873,7 @@ Comprender el resultado después de cada transformación.
 6. Repetir el proceso.
 7. Anotar los cambios de campos y filas.
 
-## Actividades
+### Actividades
 
 Crear la secuencia:
 
@@ -1903,13 +1903,13 @@ Anotar:
 
 ---
 
-# Ejemplo de sesión 10: exportar un panel transformado
+## Ejemplo de sesión 10: exportar un panel transformado
 
-## Objetivo
+### Objetivo
 
 Conservar un dashboard con transformaciones documentadas.
 
-## Pasos
+### Pasos
 
 1. Crear una tabla de CPU y memoria.
 2. Añadir las transformaciones.
@@ -1932,7 +1932,7 @@ jq empty dashboard-transformaciones.json
 8. Importar una copia.
 9. Comprobar que las transformaciones se conservan.
 
-## Actividades
+### Actividades
 
 1. Exporta el dashboard.
 2. Importa una copia.
@@ -1941,7 +1941,7 @@ jq empty dashboard-transformaciones.json
 
 ---
 
-# Orden recomendado de transformaciones
+## Orden recomendado de transformaciones
 
 Una secuencia habitual para construir una tabla es:
 
@@ -1958,7 +1958,7 @@ Una secuencia habitual para construir una tabla es:
 10. Elegir la visualización.
 ```
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Consultas CPU y memoria
@@ -1992,7 +1992,7 @@ El orden puede variar según el resultado deseado.
 
 ---
 
-# Transformaciones y rendimiento
+## Transformaciones y rendimiento
 
 Las transformaciones se ejecutan en Grafana después de obtener los datos.
 
@@ -2004,7 +2004,7 @@ Esto tiene varias consecuencias:
 - El panel puede tardar más en cargar.
 - Una transformación compleja puede dificultar el diagnóstico.
 
-## Mejorar el rendimiento
+### Mejorar el rendimiento
 
 Preferir PromQL para:
 
@@ -2040,19 +2040,19 @@ Limit
 
 en el navegador.
 
-## Recomendación
+### Recomendación
 
 Reducir los datos en la fuente y utilizar transformaciones para la presentación final.
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Mantener pocas transformaciones
+### Mantener pocas transformaciones
 
 Un panel con muchas transformaciones puede ser difícil de mantener.
 
-## Nombrar claramente los campos
+### Nombrar claramente los campos
 
 Utilizar:
 
@@ -2073,19 +2073,19 @@ Field 3
 Columna nueva
 ```
 
-## Documentar el orden
+### Documentar el orden
 
 Indicar por qué se utiliza cada transformación.
 
-## Revisar los datos originales
+### Revisar los datos originales
 
 Antes de modificar el resultado, comprobar qué devuelve la consulta.
 
-## Probar una transformación cada vez
+### Probar una transformación cada vez
 
 Esto facilita localizar errores.
 
-## Utilizar PromQL cuando sea más eficiente
+### Utilizar PromQL cuando sea más eficiente
 
 Especialmente para:
 
@@ -2095,15 +2095,15 @@ Especialmente para:
 - Cálculos sobre contadores.
 - Restricciones por etiquetas.
 
-## No ocultar campos necesarios
+### No ocultar campos necesarios
 
 Conservar siempre una identificación clara del recurso.
 
-## Comprobar unidades
+### Comprobar unidades
 
 Una transformación puede producir un campo nuevo sin unidad evidente.
 
-## Revisar valores nulos
+### Revisar valores nulos
 
 Los valores nulos pueden afectar:
 
@@ -2113,15 +2113,15 @@ Los valores nulos pueden afectar:
 - Uniones.
 - Filtros.
 
-## Guardar después de probar
+### Guardar después de probar
 
 No guardar configuraciones experimentales sin comprobar el resultado.
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## La transformación no cambia el resultado
+### La transformación no cambia el resultado
 
 Comprobar:
 
@@ -2131,7 +2131,7 @@ Comprobar:
 - Que la transformación es compatible con el tipo de datos.
 - Que no existe otra transformación posterior que deshaga el resultado.
 
-## La unión no combina los resultados
+### La unión no combina los resultados
 
 Comprobar:
 
@@ -2142,7 +2142,7 @@ Comprobar:
 - Que una consulta no devuelve `server-01` y otra `server-01:9100`.
 - Que el tipo del campo es el mismo.
 
-## Se pierden filas después de un Join
+### Se pierden filas después de un Join
 
 Posibles causas:
 
@@ -2152,7 +2152,7 @@ Posibles causas:
 - Existen duplicados.
 - Se ha aplicado un filtro anterior.
 
-## El orden numérico es incorrecto
+### El orden numérico es incorrecto
 
 Posibles causas:
 
@@ -2167,7 +2167,7 @@ Solución:
 Convert field type → Number
 ```
 
-## El panel muestra demasiadas filas
+### El panel muestra demasiadas filas
 
 Aplicar:
 
@@ -2178,7 +2178,7 @@ Aplicar:
 - Rangos temporales más cortos.
 - Exclusión de etiquetas.
 
-## La transformación Reduce muestra un valor inesperado
+### La transformación Reduce muestra un valor inesperado
 
 Comprobar:
 
@@ -2189,7 +2189,7 @@ Comprobar:
 - Aplicación a todos los frames.
 - Diferencia entre `Last`, `Mean`, `Max` y `Sum`.
 
-## El cálculo devuelve valores incorrectos
+### El cálculo devuelve valores incorrectos
 
 Comprobar:
 
@@ -2200,7 +2200,7 @@ Comprobar:
 - Orden de las operaciones.
 - Escala del resultado.
 
-## La tabla pierde la identificación del servidor
+### La tabla pierde la identificación del servidor
 
 Se ha ocultado o eliminado el campo `instance`.
 
@@ -2212,7 +2212,7 @@ instance
 
 o crear un campo equivalente antes de ocultar columnas.
 
-## La transformación funciona en una versión, pero no en otra
+### La transformación funciona en una versión, pero no en otra
 
 Las transformaciones disponibles y su configuración pueden variar.
 
@@ -2226,7 +2226,7 @@ Comprobar:
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -2332,13 +2332,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear una tabla operativa con CPU, memoria y almacenamiento por instancia.
 
-## Consulta A: CPU
+### Consulta A: CPU
 
 ```promql
 100 - (
@@ -2348,7 +2348,7 @@ Crear una tabla operativa con CPU, memoria y almacenamiento por instancia.
 )
 ```
 
-## Consulta B: memoria
+### Consulta B: memoria
 
 ```promql
 100 * (
@@ -2359,7 +2359,7 @@ Crear una tabla operativa con CPU, memoria y almacenamiento por instancia.
 )
 ```
 
-## Consulta C: almacenamiento
+### Consulta C: almacenamiento
 
 ```promql
 max by (instance, mountpoint) (
@@ -2376,7 +2376,7 @@ max by (instance, mountpoint) (
 )
 ```
 
-## Transformaciones
+### Transformaciones
 
 Aplicar una secuencia equivalente a:
 
@@ -2390,14 +2390,14 @@ Aplicar una secuencia equivalente a:
 7. Limit a 5.
 ```
 
-## Resultado esperado
+### Resultado esperado
 
 | Servidor | CPU | Memoria | Almacenamiento |
 |---|---:|---:|---:|
 | server-02:9100 | 82.1 | 74.5 | 88.2 |
 | server-01:9100 | 42.3 | 61.2 | 73.4 |
 
-## Tareas
+### Tareas
 
 1. Crear un panel Table.
 2. Añadir las tres consultas.
@@ -2417,7 +2417,7 @@ Aplicar una secuencia equivalente a:
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2440,7 +2440,7 @@ Aplicar una secuencia equivalente a:
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Las transformaciones modifican los resultados antes de visualizarlos.
 - No cambian los datos originales de Prometheus.
@@ -2466,7 +2466,7 @@ Aplicar una secuencia equivalente a:
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué es una transformación en Grafana?
 2. ¿Qué diferencia existe entre una consulta y una transformación?
@@ -2496,7 +2496,7 @@ Aplicar una secuencia equivalente a:
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de adaptar los resultados de las consultas a las necesidades de cada visualización.
 

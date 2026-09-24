@@ -15,7 +15,7 @@ Mientras que un panel Gauge suele centrarse en un valor individual, el Bar Gauge
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -39,7 +39,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 El panel Bar Gauge transforma cada serie devuelta por una consulta en una barra.
 
@@ -84,7 +84,7 @@ Esta representación permite identificar rápidamente el valor más alto y el m�
 
 ---
 
-# Cuándo utilizar un Bar Gauge
+## Cuándo utilizar un Bar Gauge
 
 El Bar Gauge es apropiado cuando:
 
@@ -95,9 +95,9 @@ El Bar Gauge es apropiado cuando:
 - La consulta devuelve una cantidad moderada de series.
 - Los umbrales son aplicables a todas las series.
 
-## Ejemplos adecuados
+### Ejemplos adecuados
 
-### CPU por instancia
+#### CPU por instancia
 
 ```promql
 100 - (
@@ -107,7 +107,7 @@ El Bar Gauge es apropiado cuando:
 )
 ```
 
-### Memoria por instancia
+#### Memoria por instancia
 
 ```promql
 100 * (
@@ -118,7 +118,7 @@ El Bar Gauge es apropiado cuando:
 )
 ```
 
-### Uso de sistemas de ficheros
+#### Uso de sistemas de ficheros
 
 ```promql
 100 * (
@@ -133,7 +133,7 @@ El Bar Gauge es apropiado cuando:
 )
 ```
 
-### Tráfico recibido por instancia
+#### Tráfico recibido por instancia
 
 ```promql
 sum by (instance) (
@@ -145,7 +145,7 @@ sum by (instance) (
 
 ---
 
-# Cuándo no utilizar un Bar Gauge
+## Cuándo no utilizar un Bar Gauge
 
 No suele ser la mejor opción cuando se necesita:
 
@@ -169,7 +169,7 @@ En esos casos pueden ser más adecuadas otras visualizaciones:
 
 ---
 
-# Diferencia entre Bar Gauge y Gauge
+## Diferencia entre Bar Gauge y Gauge
 
 Ambos paneles utilizan barras o escalas, pero su propósito principal es diferente.
 
@@ -184,7 +184,7 @@ Ambos paneles utilizan barras o escalas, pero su propósito principal es diferen
 | Uso de disco por servidor | Limitado | Muy adecuado |
 | Identificación del valor máximo | Menos directa | Muy clara |
 
-## Ejemplo
+### Ejemplo
 
 Para mostrar la memoria de un único servidor:
 
@@ -200,13 +200,13 @@ Bar Gauge
 
 ---
 
-# Diferencia entre Bar Gauge y Stat
+## Diferencia entre Bar Gauge y Stat
 
 El panel Stat resume una métrica en un valor principal.
 
 El Bar Gauge conserva la comparación entre varias series.
 
-## Stat
+### Stat
 
 Consulta:
 
@@ -230,7 +230,7 @@ Pregunta que responde:
 ¿Cuál es el uso medio de CPU?
 ```
 
-## Bar Gauge
+### Bar Gauge
 
 Consulta:
 
@@ -258,13 +258,13 @@ Pregunta que responde:
 
 ---
 
-# Diferencia entre Bar Gauge y Time series
+## Diferencia entre Bar Gauge y Time series
 
 El Bar Gauge muestra una comparación actual o reducida.
 
 El Time series muestra la evolución temporal.
 
-## Bar Gauge
+### Bar Gauge
 
 ```text
 server-01  35 %
@@ -278,7 +278,7 @@ server-03  91 %
 Comparar el estado actual de varios servidores.
 ```
 
-## Time series
+### Time series
 
 ```text
 Uso de CPU de cada servidor durante la última hora.
@@ -299,7 +299,7 @@ Time series: evolución histórica
 
 ---
 
-# Anatomía de un panel Bar Gauge
+## Anatomía de un panel Bar Gauge
 
 Un Bar Gauge puede tener una estructura similar a esta:
 
@@ -313,7 +313,7 @@ Un Bar Gauge puede tener una estructura similar a esta:
 +------------------------------------------------------+
 ```
 
-## Serie
+### Serie
 
 Cada barra corresponde a una serie devuelta por la consulta.
 
@@ -325,7 +325,7 @@ Ejemplos:
 - Un job.
 - Un servicio.
 
-## Nombre de la serie
+### Nombre de la serie
 
 Debe permitir identificar el elemento representado.
 
@@ -335,7 +335,7 @@ Ejemplo:
 server-01:9100
 ```
 
-## Valor
+### Valor
 
 Es el resultado actual o reducido de la serie.
 
@@ -345,7 +345,7 @@ Ejemplo:
 78.2 %
 ```
 
-## Unidad
+### Unidad
 
 Aclara cómo debe interpretarse el valor.
 
@@ -358,7 +358,7 @@ Bytes (IEC)
 Celsius
 ```
 
-## Escala
+### Escala
 
 Define el rango común de las barras.
 
@@ -369,7 +369,7 @@ Mínimo: 0
 Máximo: 100
 ```
 
-## Umbrales
+### Umbrales
 
 Permiten utilizar colores según el valor.
 
@@ -381,7 +381,7 @@ Ejemplo:
 90     Rojo
 ```
 
-## Orden
+### Orden
 
 Las barras pueden ordenarse:
 
@@ -396,9 +396,9 @@ Para localizar rápidamente el recurso más utilizado, el orden descendente suel
 
 ---
 
-# Crear un panel Bar Gauge
+## Crear un panel Bar Gauge
 
-## Procedimiento general
+### Procedimiento general
 
 1. Acceder a Grafana.
 2. Abrir un dashboard.
@@ -416,7 +416,7 @@ Para localizar rápidamente el recurso más utilizado, el orden descendente suel
 14. Guardar el panel.
 15. Guardar el dashboard.
 
-## Consulta inicial recomendada
+### Consulta inicial recomendada
 
 Para comparar CPU por instancia:
 
@@ -441,9 +441,9 @@ Orden: Descendente por valor
 
 ---
 
-# Consultas PromQL para Bar Gauge
+## Consultas PromQL para Bar Gauge
 
-## Uso de CPU por instancia
+### Uso de CPU por instancia
 
 ```promql
 100 - (
@@ -455,7 +455,7 @@ Orden: Descendente por valor
 
 Cada barra representa una instancia.
 
-## Uso de CPU por job
+### Uso de CPU por job
 
 ```promql
 100 - (
@@ -467,7 +467,7 @@ Cada barra representa una instancia.
 
 Cada barra representa un job.
 
-## Memoria utilizada por instancia
+### Memoria utilizada por instancia
 
 ```promql
 100 * (
@@ -480,7 +480,7 @@ Cada barra representa un job.
 
 Si existe más de una instancia, Grafana puede mostrar una barra por instancia.
 
-## Memoria disponible por instancia
+### Memoria disponible por instancia
 
 ```promql
 100 *
@@ -489,7 +489,7 @@ node_memory_MemAvailable_bytes
 node_memory_MemTotal_bytes
 ```
 
-## Uso del sistema de ficheros por punto de montaje
+### Uso del sistema de ficheros por punto de montaje
 
 ```promql
 100 * (
@@ -504,7 +504,7 @@ node_memory_MemTotal_bytes
 )
 ```
 
-## Uso del sistema de ficheros raíz por instancia
+### Uso del sistema de ficheros raíz por instancia
 
 ```promql
 100 * (
@@ -521,7 +521,7 @@ node_memory_MemTotal_bytes
 )
 ```
 
-## Tráfico recibido por instancia
+### Tráfico recibido por instancia
 
 ```promql
 sum by (instance) (
@@ -531,7 +531,7 @@ sum by (instance) (
 )
 ```
 
-## Tráfico enviado por instancia
+### Tráfico enviado por instancia
 
 ```promql
 sum by (instance) (
@@ -541,7 +541,7 @@ sum by (instance) (
 )
 ```
 
-## Tráfico recibido por interfaz
+### Tráfico recibido por interfaz
 
 ```promql
 sum by (device) (
@@ -551,7 +551,7 @@ sum by (device) (
 )
 ```
 
-## Carga media por instancia
+### Carga media por instancia
 
 ```promql
 avg by (instance) (
@@ -561,11 +561,11 @@ avg by (instance) (
 
 ---
 
-# Agrupaciones en PromQL
+## Agrupaciones en PromQL
 
 La agrupación determina qué representa cada barra.
 
-## Agrupar por instancia
+### Agrupar por instancia
 
 ```promql
 sum by (instance) (
@@ -580,7 +580,7 @@ instance="server-01:9100"
 instance="server-02:9100"
 ```
 
-## Agrupar por interfaz
+### Agrupar por interfaz
 
 ```promql
 sum by (device) (
@@ -596,7 +596,7 @@ device="ens18"
 device="wlan0"
 ```
 
-## Agrupar por job
+### Agrupar por job
 
 ```promql
 sum by (job) (
@@ -611,7 +611,7 @@ job="prometheus"
 job="node_exporter"
 ```
 
-## Agrupar por instancia y punto de montaje
+### Agrupar por instancia y punto de montaje
 
 ```promql
 100 * (
@@ -645,11 +645,11 @@ max by (instance, mountpoint) (
 
 ---
 
-# Configurar orientación
+## Configurar orientación
 
 El Bar Gauge puede utilizar diferentes orientaciones según el diseño del dashboard.
 
-## Orientación horizontal
+### Orientación horizontal
 
 Es adecuada cuando:
 
@@ -665,7 +665,7 @@ server-01:9100  ████████████░░░░░░░░  55
 server-02:9100  █████████████████░░░  82 %
 ```
 
-## Orientación vertical
+### Orientación vertical
 
 Es adecuada cuando:
 
@@ -683,15 +683,15 @@ Ejemplo conceptual:
  server1  server2  server3
 ```
 
-## Recomendación
+### Recomendación
 
 Utilizar orientación horizontal cuando los nombres de las instancias, interfaces o puntos de montaje sean largos.
 
 ---
 
-# Configurar unidades
+## Configurar unidades
 
-## CPU por instancia
+### CPU por instancia
 
 Consulta:
 
@@ -709,7 +709,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Memoria por instancia
+### Memoria por instancia
 
 Consulta:
 
@@ -728,7 +728,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Almacenamiento
+### Almacenamiento
 
 Consulta:
 
@@ -751,7 +751,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Tráfico de red
+### Tráfico de red
 
 Consulta:
 
@@ -769,7 +769,7 @@ Unidad:
 bytes/sec
 ```
 
-## Memoria disponible en bytes
+### Memoria disponible en bytes
 
 Consulta:
 
@@ -783,7 +783,7 @@ Unidad:
 Bytes (IEC)
 ```
 
-## Temperatura
+### Temperatura
 
 Consulta:
 
@@ -799,11 +799,11 @@ Celsius
 
 ---
 
-# Configurar límites
+## Configurar límites
 
 Los límites deben ser compatibles con la consulta.
 
-## Porcentajes
+### Porcentajes
 
 ```text
 Mínimo: 0
@@ -818,7 +818,7 @@ Aplicable a:
 - Disponibilidad.
 - Porcentaje de errores.
 
-## Tráfico de red
+### Tráfico de red
 
 Para tráfico de red, puede ser preferible utilizar:
 
@@ -829,7 +829,7 @@ Máximo: Automático
 
 o establecer un máximo conocido según el enlace.
 
-## Carga del sistema
+### Carga del sistema
 
 La carga no debe configurarse automáticamente como porcentaje.
 
@@ -843,17 +843,9 @@ Máximo: Automático
 
 ---
 
-# Configurar umbrales
+## Configurar umbrales
 
-## CPU por servidor
-
-```text
-0      Verde
-70     Amarillo
-90     Rojo
-```
-
-## Memoria por servidor
+### CPU por servidor
 
 ```text
 0      Verde
@@ -861,7 +853,15 @@ Máximo: Automático
 90     Rojo
 ```
 
-## Almacenamiento por punto de montaje
+### Memoria por servidor
+
+```text
+0      Verde
+70     Amarillo
+90     Rojo
+```
+
+### Almacenamiento por punto de montaje
 
 ```text
 0      Verde
@@ -869,7 +869,7 @@ Máximo: Automático
 90     Rojo
 ```
 
-## Tráfico de red
+### Tráfico de red
 
 Los umbrales de tráfico dependen de:
 
@@ -883,7 +883,7 @@ Los umbrales de tráfico dependen de:
 
 No es recomendable utilizar automáticamente los mismos umbrales que para CPU y memoria.
 
-## Disponibilidad
+### Disponibilidad
 
 ```text
 0      Rojo
@@ -893,11 +893,11 @@ No es recomendable utilizar automáticamente los mismos umbrales que para CPU y 
 
 ---
 
-# Ordenar las barras
+## Ordenar las barras
 
 El orden debe facilitar la interpretación.
 
-## Orden descendente por valor
+### Orden descendente por valor
 
 Adecuado para detectar los valores más altos:
 
@@ -907,7 +907,7 @@ server-02  78.2 %
 server-01  35.4 %
 ```
 
-## Orden ascendente por valor
+### Orden ascendente por valor
 
 Adecuado para detectar los valores más bajos:
 
@@ -917,7 +917,7 @@ server-02  78.2 %
 server-03  91.7 %
 ```
 
-## Orden alfabético
+### Orden alfabético
 
 Adecuado cuando se necesita localizar una instancia concreta:
 
@@ -927,13 +927,13 @@ server-02
 server-03
 ```
 
-## Recomendación
+### Recomendación
 
 Para dashboards operativos, el orden descendente suele ser el más útil cuando se monitorizan consumos.
 
 ---
 
-# Configurar nombres de series
+## Configurar nombres de series
 
 Una consulta puede generar nombres largos.
 
@@ -955,7 +955,7 @@ o:
 server-01
 ```
 
-## Nombres por instancia
+### Nombres por instancia
 
 Consulta agrupada:
 
@@ -973,7 +973,7 @@ Nombre recomendado:
 {{instance}}
 ```
 
-## Nombres por interfaz
+### Nombres por interfaz
 
 Consulta:
 
@@ -991,7 +991,7 @@ Nombre recomendado:
 {{device}}
 ```
 
-## Nombres por punto de montaje
+### Nombres por punto de montaje
 
 Consulta:
 
@@ -1018,13 +1018,13 @@ Nombre recomendado:
 
 ---
 
-# Controlar demasiadas series
+## Controlar demasiadas series
 
 Un Bar Gauge funciona mejor con un número moderado de barras.
 
 Si la consulta devuelve demasiadas series, aplicar filtros o agregaciones.
 
-## Filtrar una instancia
+### Filtrar una instancia
 
 ```promql
 100 - (
@@ -1037,7 +1037,7 @@ Si la consulta devuelve demasiadas series, aplicar filtros o agregaciones.
 )
 ```
 
-## Filtrar interfaces
+### Filtrar interfaces
 
 ```promql
 sum by (device) (
@@ -1047,7 +1047,7 @@ sum by (device) (
 )
 ```
 
-## Excluir interfaces
+### Excluir interfaces
 
 ```promql
 sum by (device) (
@@ -1058,7 +1058,7 @@ sum by (device) (
 )
 ```
 
-## Mostrar los cinco valores más altos
+### Mostrar los cinco valores más altos
 
 PromQL permite utilizar:
 
@@ -1073,7 +1073,7 @@ topk(
 )
 ```
 
-## Mostrar los cinco valores más bajos
+### Mostrar los cinco valores más bajos
 
 ```promql
 bottomk(
@@ -1088,13 +1088,13 @@ bottomk(
 
 ---
 
-# Ejemplo completo 1: CPU por instancia
+## Ejemplo completo 1: CPU por instancia
 
-## Objetivo
+### Objetivo
 
 Comparar el porcentaje de CPU utilizado por varias instancias.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1104,7 +1104,7 @@ Comparar el porcentaje de CPU utilizado por varias instancias.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de CPU por instancia
@@ -1117,7 +1117,7 @@ Decimales: 1
 Orden: Descendente por valor
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Verde
@@ -1125,7 +1125,7 @@ Orden: Descendente por valor
 90     Rojo
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje medio de CPU utilizada por instancia durante los últimos cinco minutos.
@@ -1134,13 +1134,13 @@ Las barras se ordenan de mayor a menor consumo.
 
 ---
 
-# Ejemplo completo 2: memoria por instancia
+## Ejemplo completo 2: memoria por instancia
 
-## Objetivo
+### Objetivo
 
 Comparar el porcentaje de memoria utilizada en varios servidores.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1151,7 +1151,7 @@ Comparar el porcentaje de memoria utilizada en varios servidores.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de memoria por instancia
@@ -1164,7 +1164,7 @@ Decimales: 1
 Orden: Descendente por valor
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Verde
@@ -1172,7 +1172,7 @@ Orden: Descendente por valor
 90     Rojo
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje de memoria utilizada por cada instancia monitorizada.
@@ -1180,13 +1180,13 @@ Porcentaje de memoria utilizada por cada instancia monitorizada.
 
 ---
 
-# Ejemplo completo 3: almacenamiento por punto de montaje
+## Ejemplo completo 3: almacenamiento por punto de montaje
 
-## Objetivo
+### Objetivo
 
 Identificar los sistemas de ficheros con mayor ocupación.
 
-## Consulta
+### Consulta
 
 ```promql
 max by (instance, mountpoint) (
@@ -1203,7 +1203,7 @@ max by (instance, mountpoint) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de almacenamiento
@@ -1216,13 +1216,13 @@ Decimales: 1
 Orden: Descendente por valor
 ```
 
-## Nombres
+### Nombres
 
 ```text
 {{instance}} - {{mountpoint}}
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Verde
@@ -1230,7 +1230,7 @@ Orden: Descendente por valor
 90     Rojo
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje de espacio utilizado por punto de montaje.
@@ -1239,13 +1239,13 @@ Se excluyen los sistemas tmpfs y overlay.
 
 ---
 
-# Ejemplo completo 4: tráfico recibido por interfaz
+## Ejemplo completo 4: tráfico recibido por interfaz
 
-## Objetivo
+### Objetivo
 
 Comparar el tráfico recibido por las interfaces de red.
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (device) (
@@ -1255,7 +1255,7 @@ sum by (device) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Tráfico recibido por interfaz
@@ -1268,13 +1268,13 @@ Decimales: 1
 Orden: Descendente por valor
 ```
 
-## Nombres
+### Nombres
 
 ```text
 {{device}}
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Velocidad media de recepción por interfaz durante los últimos cinco minutos.
@@ -1283,13 +1283,13 @@ La interfaz de loopback se excluye.
 
 ---
 
-# Ejemplo de sesión 1: crear un Bar Gauge de CPU
+## Ejemplo de sesión 1: crear un Bar Gauge de CPU
 
-## Objetivo
+### Objetivo
 
 Comparar el uso de CPU de las instancias monitorizadas.
 
-## Pasos
+### Pasos
 
 1. Acceder a Grafana:
 
@@ -1334,7 +1334,7 @@ Orientación: Horizontal
 10. Guardar el panel.
 11. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Identifica la instancia con mayor uso.
 2. Identifica la instancia con menor uso.
@@ -1346,13 +1346,13 @@ Orientación: Horizontal
 
 ---
 
-# Ejemplo de sesión 2: crear un Bar Gauge de memoria
+## Ejemplo de sesión 2: crear un Bar Gauge de memoria
 
-## Objetivo
+### Objetivo
 
 Comparar la memoria utilizada en las instancias.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1363,7 +1363,7 @@ Comparar la memoria utilizada en las instancias.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Bar Gauge.
 2. Introducir la consulta.
@@ -1389,7 +1389,7 @@ Orientación: Horizontal
 5. Ordenar de mayor a menor.
 6. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Identifica la instancia con más memoria utilizada.
 2. Compara el resultado con `free -h`.
@@ -1399,13 +1399,13 @@ Orientación: Horizontal
 
 ---
 
-# Ejemplo de sesión 3: crear un Bar Gauge de almacenamiento
+## Ejemplo de sesión 3: crear un Bar Gauge de almacenamiento
 
-## Objetivo
+### Objetivo
 
 Identificar los sistemas de ficheros más llenos.
 
-## Consulta
+### Consulta
 
 ```promql
 max by (instance, mountpoint) (
@@ -1422,7 +1422,7 @@ max by (instance, mountpoint) (
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Bar Gauge.
 2. Introducir la consulta.
@@ -1453,7 +1453,7 @@ Máximo: 100
 7. Ordenar de mayor a menor.
 8. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Identifica los sistemas de ficheros con mayor uso.
 2. Comprueba el sistema raíz con:
@@ -1468,13 +1468,13 @@ df -h /
 
 ---
 
-# Ejemplo de sesión 4: crear un Bar Gauge de red
+## Ejemplo de sesión 4: crear un Bar Gauge de red
 
-## Objetivo
+### Objetivo
 
 Comparar el tráfico recibido por las interfaces de red.
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (device) (
@@ -1484,7 +1484,7 @@ sum by (device) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Tráfico recibido por interfaz
@@ -1496,7 +1496,7 @@ Orientación: Horizontal
 Orden: Descendente por valor
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Identifica la interfaz con mayor tráfico.
@@ -1522,13 +1522,13 @@ ip -s link
 
 ---
 
-# Ejemplo de sesión 5: comparar orientación horizontal y vertical
+## Ejemplo de sesión 5: comparar orientación horizontal y vertical
 
-## Objetivo
+### Objetivo
 
 Determinar qué orientación facilita más la lectura.
 
-## Pasos
+### Pasos
 
 1. Crear un Bar Gauge de CPU por instancia.
 2. Utilizar orientación horizontal.
@@ -1537,7 +1537,7 @@ Determinar qué orientación facilita más la lectura.
 5. Guardar otra captura.
 6. Comparar ambos resultados.
 
-## Actividades
+### Actividades
 
 Responder:
 
@@ -1549,13 +1549,13 @@ Responder:
 
 ---
 
-# Ejemplo de sesión 6: mostrar los cinco servidores con más CPU
+## Ejemplo de sesión 6: mostrar los cinco servidores con más CPU
 
-## Objetivo
+### Objetivo
 
 Reducir el número de barras y destacar los valores más altos.
 
-## Consulta
+### Consulta
 
 ```promql
 topk(
@@ -1568,7 +1568,7 @@ topk(
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Cinco instancias con mayor uso de CPU
@@ -1579,7 +1579,7 @@ Máximo: 100
 Orden: Descendente por valor
 ```
 
-## Actividades
+### Actividades
 
 1. Ejecuta la consulta.
 2. Comprueba cuántas barras aparecen.
@@ -1590,13 +1590,13 @@ Orden: Descendente por valor
 
 ---
 
-# Ejemplo de sesión 7: diagnosticar demasiadas barras
+## Ejemplo de sesión 7: diagnosticar demasiadas barras
 
-## Objetivo
+### Objetivo
 
 Identificar una consulta que devuelve demasiadas series.
 
-## Consulta inicial
+### Consulta inicial
 
 ```promql
 node_network_receive_bytes_total
@@ -1609,7 +1609,7 @@ Esta consulta puede devolver muchas series porque incluye:
 - Tipo de métrica.
 - Otras etiquetas.
 
-## Consulta mejorada
+### Consulta mejorada
 
 ```promql
 sum by (device) (
@@ -1619,7 +1619,7 @@ sum by (device) (
 )
 ```
 
-## Actividades
+### Actividades
 
 1. Ejecuta la primera consulta.
 2. Observa el número de barras.
@@ -1631,19 +1631,19 @@ sum by (device) (
 
 ---
 
-# Ejemplo de sesión 8: diagnosticar un Bar Gauge sin datos
+## Ejemplo de sesión 8: diagnosticar un Bar Gauge sin datos
 
-## Objetivo
+### Objetivo
 
 Diferenciar un problema de visualización de un problema de consulta.
 
-## Consulta incorrecta
+### Consulta incorrecta
 
 ```promql
 metrica_que_no_existe
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Bar Gauge.
 2. Introducir la consulta incorrecta.
@@ -1664,7 +1664,7 @@ node_load1
 
 8. Restaurar la consulta de CPU.
 
-## Actividades
+### Actividades
 
 Documentar:
 
@@ -1676,13 +1676,13 @@ Documentar:
 
 ---
 
-# Ejemplo de sesión 9: utilizar una variable de instancia
+## Ejemplo de sesión 9: utilizar una variable de instancia
 
-## Objetivo
+### Objetivo
 
 Permitir que el usuario seleccione la instancia que desea analizar.
 
-## Crear la variable
+### Crear la variable
 
 Crear una variable de dashboard llamada:
 
@@ -1698,7 +1698,7 @@ label_values(up, instance)
 
 La sintaxis disponible puede variar según la versión y el editor de variables utilizado.
 
-## Consulta del panel
+### Consulta del panel
 
 ```promql
 100 - (
@@ -1711,7 +1711,7 @@ La sintaxis disponible puede variar según la versión y el editor de variables 
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de CPU de la instancia seleccionada
@@ -1720,7 +1720,7 @@ Mínimo: 0
 Máximo: 100
 ```
 
-## Actividades
+### Actividades
 
 1. Crea la variable.
 2. Comprueba las instancias disponibles.
@@ -1732,13 +1732,13 @@ Máximo: 100
 
 ---
 
-# Ejemplo de sesión 10: verificar resultados mediante la API
+## Ejemplo de sesión 10: verificar resultados mediante la API
 
-## Objetivo
+### Objetivo
 
 Comparar los valores mostrados en Grafana con la API de Prometheus.
 
-## Consultar CPU por instancia
+### Consultar CPU por instancia
 
 ```bash
 curl -sG \
@@ -1753,7 +1753,7 @@ curl -sG \
   | jq
 ```
 
-## Consultar memoria por instancia
+### Consultar memoria por instancia
 
 ```bash
 curl -sG \
@@ -1769,7 +1769,7 @@ curl -sG \
   | jq
 ```
 
-## Mostrar nombres y valores
+### Mostrar nombres y valores
 
 ```bash
 curl -sG \
@@ -1791,7 +1791,7 @@ curl -sG \
   '
 ```
 
-## Actividades
+### Actividades
 
 1. Ejecuta la consulta desde la terminal.
 2. Ejecuta la misma consulta en Grafana.
@@ -1801,9 +1801,9 @@ curl -sG \
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Utilizar una agrupación clara
+### Utilizar una agrupación clara
 
 La consulta debe agrupar los datos según la comparación que se desea realizar.
 
@@ -1821,7 +1821,7 @@ sum by (device) (...)
 max by (instance, mountpoint) (...)
 ```
 
-## Limitar el número de series
+### Limitar el número de series
 
 Un Bar Gauge con demasiadas barras es difícil de leer.
 
@@ -1833,11 +1833,11 @@ topk(5, ...)
 
 o filtros por etiquetas.
 
-## Ordenar de forma útil
+### Ordenar de forma útil
 
 Para identificar problemas, ordenar de mayor a menor.
 
-## Utilizar nombres cortos y claros
+### Utilizar nombres cortos y claros
 
 Mostrar:
 
@@ -1851,7 +1851,7 @@ en lugar de:
 {instance="server-01:9100",job="node_exporter"}
 ```
 
-## Mantener una escala común
+### Mantener una escala común
 
 Cuando se comparan barras, todas deben utilizar una escala coherente.
 
@@ -1861,7 +1861,7 @@ Para porcentajes:
 0 - 100
 ```
 
-## No comparar métricas incompatibles
+### No comparar métricas incompatibles
 
 No colocar en el mismo Bar Gauge:
 
@@ -1872,7 +1872,7 @@ No colocar en el mismo Bar Gauge:
 
 Cada panel debe utilizar valores comparables.
 
-## Documentar la consulta
+### Documentar la consulta
 
 La descripción debe indicar:
 
@@ -1882,7 +1882,7 @@ La descripción debe indicar:
 - Qué periodo calcula `rate()`.
 - Qué interfaces o sistemas se excluyen.
 
-## Combinar con otras visualizaciones
+### Combinar con otras visualizaciones
 
 Una distribución eficaz puede ser:
 
@@ -1894,9 +1894,9 @@ Table: etiquetas y detalle
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## El Bar Gauge no muestra datos
+### El Bar Gauge no muestra datos
 
 Comprobar:
 
@@ -1920,7 +1920,7 @@ Revisar:
 - Variables.
 - Inspector.
 
-## Solo aparece una barra
+### Solo aparece una barra
 
 Posibles causas:
 
@@ -1946,7 +1946,7 @@ sum by (instance) (
 )
 ```
 
-## Aparecen demasiadas barras
+### Aparecen demasiadas barras
 
 Aplicar:
 
@@ -1957,7 +1957,7 @@ Aplicar:
 - Exclusiones de sistemas de ficheros.
 - Variables.
 
-## Las barras tienen nombres ilegibles
+### Las barras tienen nombres ilegibles
 
 Configurar:
 
@@ -1967,7 +1967,7 @@ Configurar:
 - Campos visibles.
 - Agrupaciones más claras.
 
-## Todas las barras aparecen con el mismo color
+### Todas las barras aparecen con el mismo color
 
 Revisar:
 
@@ -1977,7 +1977,7 @@ Revisar:
 - Valores devueltos.
 - Tipo de unidad.
 
-## Las barras tienen escalas incorrectas
+### Las barras tienen escalas incorrectas
 
 Comprobar:
 
@@ -1987,7 +1987,7 @@ Comprobar:
 - Si la consulta devuelve `0 - 1` o `0 - 100`.
 - Si se ha aplicado una transformación.
 
-## El orden no es útil
+### El orden no es útil
 
 Cambiar el orden:
 
@@ -1999,7 +1999,7 @@ Alfabético
 
 Para incidencias, normalmente es útil mostrar primero los valores más altos.
 
-## El tráfico aparece como cero
+### El tráfico aparece como cero
 
 Posibles causas:
 
@@ -2016,7 +2016,7 @@ Comprobar:
 ip -s link
 ```
 
-## El uso de disco aparece duplicado
+### El uso de disco aparece duplicado
 
 Puede haber varias series para el mismo punto de montaje debido a etiquetas adicionales.
 
@@ -2039,7 +2039,7 @@ max by (instance, mountpoint) (
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -2167,13 +2167,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear un dashboard que compare los recursos utilizados por varias instancias.
 
-## Panel 1: CPU por instancia
+### Panel 1: CPU por instancia
 
 Consulta:
 
@@ -2203,7 +2203,7 @@ Umbrales:
 90     Rojo
 ```
 
-## Panel 2: memoria por instancia
+### Panel 2: memoria por instancia
 
 Consulta:
 
@@ -2226,7 +2226,7 @@ Máximo: 100
 Orden: Descendente por valor
 ```
 
-## Panel 3: almacenamiento
+### Panel 3: almacenamiento
 
 Consulta:
 
@@ -2255,7 +2255,7 @@ Máximo: 100
 Orden: Descendente por valor
 ```
 
-## Panel 4: tráfico recibido
+### Panel 4: tráfico recibido
 
 Consulta:
 
@@ -2277,7 +2277,7 @@ Máximo: Automático
 Orden: Descendente por valor
 ```
 
-## Distribución propuesta
+### Distribución propuesta
 
 ```text
 +------------------------------------------------------+
@@ -2291,7 +2291,7 @@ Orden: Descendente por valor
 +------------------------------------------------------+
 ```
 
-## Tareas
+### Tareas
 
 1. Crear los cuatro paneles.
 2. Utilizar Bar Gauge en todos ellos.
@@ -2312,7 +2312,7 @@ Orden: Descendente por valor
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2338,7 +2338,7 @@ Orden: Descendente por valor
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - El panel Bar Gauge permite comparar varias series mediante barras.
 - Cada barra representa una serie devuelta por la consulta.
@@ -2363,7 +2363,7 @@ Orden: Descendente por valor
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué finalidad tiene un panel Bar Gauge?
 2. ¿Qué diferencia existe entre un Bar Gauge y un Gauge?
@@ -2393,7 +2393,7 @@ Orden: Descendente por valor
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear comparaciones visuales entre varias series.
 

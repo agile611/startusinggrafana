@@ -30,7 +30,7 @@ Vista operativa personalizada
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -56,7 +56,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Un panel Canvas permite crear una composición visual libre dentro de Grafana.
 
@@ -92,7 +92,7 @@ El objetivo no es decorar el dashboard. El objetivo es mostrar la información d
 
 ---
 
-# Cuándo utilizar Canvas
+## Cuándo utilizar Canvas
 
 Canvas es apropiado cuando:
 
@@ -104,9 +104,9 @@ Canvas es apropiado cuando:
 - Se desea crear una pantalla de operaciones.
 - Se necesita una representación sencilla de un servicio.
 
-## Ejemplos adecuados
+### Ejemplos adecuados
 
-### Mapa de servidores
+#### Mapa de servidores
 
 ```text
 Servidor web 1
@@ -115,13 +115,13 @@ Servidor de base de datos
 Servidor de monitorización
 ```
 
-### Flujo de una aplicación
+#### Flujo de una aplicación
 
 ```text
 Usuarios → API → Servicios → Base de datos
 ```
 
-### Estado de una infraestructura
+#### Estado de una infraestructura
 
 ```text
 Prometheus: UP
@@ -130,13 +130,13 @@ Node Exporter: UP
 Aplicación web: DOWN
 ```
 
-### Indicadores sobre un plano
+#### Indicadores sobre un plano
 
 Una imagen puede representar un centro de datos y los valores pueden situarse sobre los equipos correspondientes.
 
 ---
 
-# Cuándo no utilizar Canvas
+## Cuándo no utilizar Canvas
 
 Canvas no suele ser la mejor opción cuando se necesita:
 
@@ -165,13 +165,13 @@ Canvas puede complementar estos paneles, pero no debe utilizarse para mostrar to
 
 ---
 
-# Diferencia entre Canvas y panel Text
+## Diferencia entre Canvas y panel Text
 
 El panel Text se utiliza principalmente para documentación.
 
 Canvas se utiliza para crear una composición visual con elementos colocados libremente.
 
-## Panel Text
+### Panel Text
 
 Adecuado para:
 
@@ -183,7 +183,7 @@ Adecuado para:
 - Advertencias.
 ```
 
-## Panel Canvas
+### Panel Canvas
 
 Adecuado para:
 
@@ -200,7 +200,7 @@ Es posible incluir texto dentro de Canvas, pero su propósito principal es la co
 
 ---
 
-# Diferencia entre Canvas y Node Graph
+## Diferencia entre Canvas y Node Graph
 
 Node Graph está orientado a representar relaciones entre nodos mediante datos estructurados.
 
@@ -222,7 +222,7 @@ Utilizar Node Graph cuando las relaciones entre nodos procedan directamente de l
 
 ---
 
-# Elementos de Canvas
+## Elementos de Canvas
 
 La disponibilidad exacta de elementos puede variar según la versión de Grafana.
 
@@ -239,7 +239,7 @@ Entre los elementos habituales se encuentran:
 - Fondos.
 - Contenedores o grupos.
 
-## Texto
+### Texto
 
 Permite añadir:
 
@@ -251,7 +251,7 @@ Nombres de servicios
 Advertencias
 ```
 
-## Forma
+### Forma
 
 Permite crear:
 
@@ -263,7 +263,7 @@ Fondos
 Zonas de agrupación
 ```
 
-## Imagen
+### Imagen
 
 Permite utilizar:
 
@@ -275,7 +275,7 @@ Mapas de red
 Esquemas de arquitectura
 ```
 
-## Icono
+### Icono
 
 Permite representar visualmente:
 
@@ -288,7 +288,7 @@ Redes
 Dispositivos
 ```
 
-## Valor de métrica
+### Valor de métrica
 
 Permite mostrar un valor procedente de una consulta.
 
@@ -300,7 +300,7 @@ Memoria: 61 %
 Estado: UP
 ```
 
-## Conexiones
+### Conexiones
 
 Permiten representar relaciones o flujos:
 
@@ -312,9 +312,9 @@ Prometheus → Exporters
 
 ---
 
-# Crear un panel Canvas
+## Crear un panel Canvas
 
-## Procedimiento general
+### Procedimiento general
 
 1. Acceder a Grafana.
 2. Abrir un dashboard.
@@ -330,7 +330,7 @@ Prometheus → Exporters
 12. Guardar el panel.
 13. Guardar el dashboard.
 
-## Diseño inicial recomendado
+### Diseño inicial recomendado
 
 Para una práctica de laboratorio:
 
@@ -348,7 +348,7 @@ Para una práctica de laboratorio:
 
 ---
 
-# Planificar el diseño
+## Planificar el diseño
 
 Antes de crear el panel Canvas, definir:
 
@@ -361,7 +361,7 @@ Antes de crear el panel Canvas, definir:
 - Qué tamaño tendrá el panel.
 - Quién utilizará la vista.
 
-## Ejemplo de planificación
+### Ejemplo de planificación
 
 ```text
 Objetivo:
@@ -391,9 +391,9 @@ Una buena planificación evita terminar con muchos elementos superpuestos y sin 
 
 ---
 
-# Crear una composición básica
+## Crear una composición básica
 
-## Elementos recomendados
+### Elementos recomendados
 
 Crear:
 
@@ -407,7 +407,7 @@ Crear:
 7. Una leyenda de colores.
 ```
 
-## Distribución
+### Distribución
 
 ```text
 +------------------------------------------------------+
@@ -421,7 +421,7 @@ Crear:
 +------------------------------------------------------+
 ```
 
-## Buenas prácticas
+### Buenas prácticas
 
 - Mantener márgenes.
 - Alinear las tarjetas.
@@ -433,7 +433,7 @@ Crear:
 
 ---
 
-# Configurar texto
+## Configurar texto
 
 El texto puede utilizarse para:
 
@@ -444,7 +444,7 @@ El texto puede utilizarse para:
 - Descripciones.
 - Etiquetas de ejes visuales.
 
-## Ejemplo de títulos
+### Ejemplo de títulos
 
 ```text
 Estado de infraestructura
@@ -453,7 +453,7 @@ Servidores de producción
 Flujo de la aplicación
 ```
 
-## Ejemplo de etiquetas
+### Ejemplo de etiquetas
 
 ```text
 Usuarios
@@ -463,7 +463,7 @@ Base de datos
 Monitorización
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Utilizar títulos breves.
 - Evitar párrafos extensos dentro de diagramas.
@@ -473,7 +473,7 @@ Monitorización
 
 ---
 
-# Configurar formas
+## Configurar formas
 
 Las formas pueden utilizarse como:
 
@@ -484,7 +484,7 @@ Las formas pueden utilizarse como:
 - Indicadores visuales.
 - Separadores.
 
-## Ejemplo de tarjeta
+### Ejemplo de tarjeta
 
 ```text
 +----------------------------+
@@ -494,7 +494,7 @@ Las formas pueden utilizarse como:
 +----------------------------+
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Utilizar un mismo estilo para componentes equivalentes.
 - Reservar colores intensos para estados importantes.
@@ -504,7 +504,7 @@ Las formas pueden utilizarse como:
 
 ---
 
-# Configurar colores
+## Configurar colores
 
 Los colores deben tener un significado coherente.
 
@@ -518,7 +518,7 @@ Azul: información
 Gris: elemento inactivo o no seleccionado
 ```
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Prometheus: verde
@@ -527,7 +527,7 @@ Aplicación web: amarillo
 Base de datos: rojo
 ```
 
-## Precauciones
+### Precauciones
 
 No utilizar colores únicamente por motivos decorativos.
 
@@ -543,7 +543,7 @@ Rojo = no disponible o crítico
 
 ---
 
-# Añadir valores dinámicos
+## Añadir valores dinámicos
 
 Los valores dinámicos proceden de consultas de Grafana.
 
@@ -570,7 +570,7 @@ node_load1
 )
 ```
 
-## Valores adecuados para Canvas
+### Valores adecuados para Canvas
 
 - Disponibilidad.
 - CPU.
@@ -581,7 +581,7 @@ node_load1
 - Tráfico.
 - Número de errores.
 
-## Recomendación
+### Recomendación
 
 Utilizar valores reducidos y fáciles de interpretar.
 
@@ -589,33 +589,33 @@ Canvas no debería mostrar cientos de series en una única zona visual.
 
 ---
 
-# Consultas PromQL para Canvas
+## Consultas PromQL para Canvas
 
-## Estado de Prometheus
+### Estado de Prometheus
 
 ```promql
 up{job="prometheus"}
 ```
 
-## Estado de Node Exporter
+### Estado de Node Exporter
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Objetivos disponibles
+### Objetivos disponibles
 
 ```promql
 sum(up)
 ```
 
-## Disponibilidad global
+### Disponibilidad global
 
 ```promql
 100 * avg(up)
 ```
 
-## CPU de una instancia
+### CPU de una instancia
 
 ```promql
 100 - (
@@ -628,7 +628,7 @@ sum(up)
 )
 ```
 
-## CPU por instancia
+### CPU por instancia
 
 ```promql
 100 - (
@@ -638,7 +638,7 @@ sum(up)
 )
 ```
 
-## Memoria utilizada
+### Memoria utilizada
 
 ```promql
 100 * (
@@ -649,7 +649,7 @@ sum(up)
 )
 ```
 
-## Uso del sistema de ficheros raíz
+### Uso del sistema de ficheros raíz
 
 ```promql
 100 * (
@@ -666,7 +666,7 @@ sum(up)
 )
 ```
 
-## Carga del sistema
+### Carga del sistema
 
 ```promql
 node_load1
@@ -674,9 +674,9 @@ node_load1
 
 ---
 
-# Mostrar el estado de un servicio
+## Mostrar el estado de un servicio
 
-## Consulta
+### Consulta
 
 ```promql
 up{job="node_exporter"}
@@ -689,7 +689,7 @@ Resultado:
 0 = no disponible
 ```
 
-## Interpretación visual
+### Interpretación visual
 
 ```text
 1 → UP → Verde
@@ -715,11 +715,11 @@ Las posibilidades exactas dependen de la versión de Grafana y de la configuraci
 
 ---
 
-# Configurar unidades y formatos
+## Configurar unidades y formatos
 
 Los valores mostrados en Canvas deben tener unidades claras.
 
-## Porcentajes
+### Porcentajes
 
 ```text
 CPU: 42 %
@@ -733,7 +733,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Bytes
+### Bytes
 
 ```text
 Memoria disponible: 4.2 GiB
@@ -745,7 +745,7 @@ Unidad:
 Bytes (IEC)
 ```
 
-## Velocidad
+### Velocidad
 
 ```text
 Tráfico: 1.4 MB/s
@@ -757,7 +757,7 @@ Unidad:
 bytes/sec
 ```
 
-## Carga
+### Carga
 
 ```text
 Carga: 0.82
@@ -773,11 +773,11 @@ La carga no debe mostrarse como porcentaje salvo que se haya realizado un cálcu
 
 ---
 
-# Configurar umbrales en Canvas
+## Configurar umbrales en Canvas
 
 Cuando un valor dinámico utiliza umbrales, se puede representar con colores o estilos diferentes.
 
-## Ejemplo de CPU
+### Ejemplo de CPU
 
 ```text
 0 - 69 %:   Verde
@@ -785,7 +785,7 @@ Cuando un valor dinámico utiliza umbrales, se puede representar con colores o e
 90 - 100 %: Rojo
 ```
 
-## Ejemplo de memoria
+### Ejemplo de memoria
 
 ```text
 0 - 69 %:   Verde
@@ -793,7 +793,7 @@ Cuando un valor dinámico utiliza umbrales, se puede representar con colores o e
 90 - 100 %: Rojo
 ```
 
-## Ejemplo de almacenamiento
+### Ejemplo de almacenamiento
 
 ```text
 0 - 79 %:   Verde
@@ -801,7 +801,7 @@ Cuando un valor dinámico utiliza umbrales, se puede representar con colores o e
 90 - 100 %: Rojo
 ```
 
-## Consideración
+### Consideración
 
 La consulta, la unidad y el umbral deben utilizar la misma escala.
 
@@ -830,7 +830,7 @@ o ajustar la escala a `0 - 1`.
 
 ---
 
-# Utilizar imágenes de fondo
+## Utilizar imágenes de fondo
 
 Una imagen de fondo puede representar:
 
@@ -841,7 +841,7 @@ Una imagen de fondo puede representar:
 - Un esquema de aplicación.
 - Un mapa de ubicación.
 
-## Recomendaciones
+### Recomendaciones
 
 - Utilizar imágenes con licencia adecuada.
 - Mantener un contraste suficiente.
@@ -851,7 +851,7 @@ Una imagen de fondo puede representar:
 - Documentar el origen si es necesario.
 - No incluir información sensible.
 
-## Ejemplo de composición
+### Ejemplo de composición
 
 ```text
 Imagen de fondo:
@@ -867,9 +867,9 @@ Elementos superpuestos:
 
 ---
 
-# Representar un flujo de aplicación
+## Representar un flujo de aplicación
 
-## Diseño conceptual
+### Diseño conceptual
 
 ```text
 +----------+      +-------------+      +-------------+
@@ -882,7 +882,7 @@ Elementos superpuestos:
                                       +-------------+
 ```
 
-## Datos dinámicos
+### Datos dinámicos
 
 En cada bloque se pueden mostrar:
 
@@ -894,7 +894,7 @@ Latencia
 Errores
 ```
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Aplicación
@@ -907,9 +907,9 @@ El panel Canvas puede ofrecer una vista de alto nivel, mientras que otros dashbo
 
 ---
 
-# Representar una topología de monitorización
+## Representar una topología de monitorización
 
-## Diseño conceptual
+### Diseño conceptual
 
 ```text
 +-------------+
@@ -929,7 +929,7 @@ El panel Canvas puede ofrecer una vista de alto nivel, mientras que otros dashbo
 +-------------+    +-------------+
 ```
 
-## Valores dinámicos
+### Valores dinámicos
 
 Para Prometheus:
 
@@ -949,7 +949,7 @@ Para el estado de una instancia:
 up{instance="server-01:9100"}
 ```
 
-## Actividad
+### Actividad
 
 Crear un Canvas que muestre:
 
@@ -963,7 +963,7 @@ Crear un Canvas que muestre:
 
 ---
 
-# Utilizar enlaces
+## Utilizar enlaces
 
 Los elementos de Canvas pueden configurarse con enlaces, según la versión y el tipo de elemento.
 
@@ -976,7 +976,7 @@ Los enlaces pueden dirigir a:
 - Documentación.
 - Un sistema de tickets.
 
-## Ejemplo conceptual
+### Ejemplo conceptual
 
 ```text
 Servidor web
@@ -986,7 +986,7 @@ Servidor web
       +--> Runbook de incidencias
 ```
 
-## Buenas prácticas
+### Buenas prácticas
 
 - Utilizar enlaces descriptivos.
 - Comprobar los permisos del destino.
@@ -997,7 +997,7 @@ Servidor web
 
 ---
 
-# Organizar elementos y capas
+## Organizar elementos y capas
 
 En una composición Canvas puede haber elementos superpuestos.
 
@@ -1011,7 +1011,7 @@ Es importante controlar:
 - Distribución.
 - Bloqueo de elementos.
 
-## Orden recomendado
+### Orden recomendado
 
 ```text
 1. Fondo.
@@ -1024,7 +1024,7 @@ Es importante controlar:
 8. Avisos.
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Bloquear el fondo después de colocarlo.
 - Agrupar elementos relacionados.
@@ -1035,11 +1035,11 @@ Es importante controlar:
 
 ---
 
-# Crear tarjetas de servicio
+## Crear tarjetas de servicio
 
 Una tarjeta puede representar un componente.
 
-## Ejemplo
+### Ejemplo
 
 ```text
 +-----------------------------+
@@ -1052,7 +1052,7 @@ Una tarjeta puede representar un componente.
 +-----------------------------+
 ```
 
-## Elementos de una tarjeta
+### Elementos de una tarjeta
 
 ```text
 Fondo:
@@ -1074,7 +1074,7 @@ Métrica 3:
 Latencia p95: 180 ms
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Mantener el mismo tamaño en todas las tarjetas.
 - Utilizar la misma posición para cada métrica.
@@ -1084,13 +1084,13 @@ Latencia p95: 180 ms
 
 ---
 
-# Ejemplo completo 1: Canvas de infraestructura
+## Ejemplo completo 1: Canvas de infraestructura
 
-## Objetivo
+### Objetivo
 
 Crear un mapa visual de una infraestructura pequeña.
 
-## Componentes
+### Componentes
 
 ```text
 Prometheus
@@ -1100,7 +1100,7 @@ Servidor de base de datos
 Node Exporter
 ```
 
-## Diseño
+### Diseño
 
 ```text
 +------------------------------------------------------+
@@ -1123,7 +1123,7 @@ Node Exporter
 +------------------------------------------------------+
 ```
 
-## Valores recomendados
+### Valores recomendados
 
 ```promql
 up{job="prometheus"}
@@ -1137,7 +1137,7 @@ up{job="node_exporter"}
 100 * avg(up)
 ```
 
-## Actividad
+### Actividad
 
 1. Crear el fondo.
 2. Añadir las tarjetas.
@@ -1149,13 +1149,13 @@ up{job="node_exporter"}
 
 ---
 
-# Ejemplo completo 2: Canvas de estado operativo
+## Ejemplo completo 2: Canvas de estado operativo
 
-## Objetivo
+### Objetivo
 
 Mostrar los indicadores principales de un servidor.
 
-## Elementos
+### Elementos
 
 ```text
 Nombre del servidor
@@ -1166,15 +1166,15 @@ Almacenamiento
 Carga
 ```
 
-## Consultas
+### Consultas
 
-### Estado
+#### Estado
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### CPU
+#### CPU
 
 ```promql
 100 - (
@@ -1187,7 +1187,7 @@ up{job="node_exporter"}
 )
 ```
 
-### Memoria
+#### Memoria
 
 ```promql
 100 * (
@@ -1202,7 +1202,7 @@ up{job="node_exporter"}
 )
 ```
 
-### Almacenamiento
+#### Almacenamiento
 
 ```promql
 100 * (
@@ -1221,13 +1221,13 @@ up{job="node_exporter"}
 )
 ```
 
-### Carga
+#### Carga
 
 ```promql
 node_load1{instance="localhost:9100"}
 ```
 
-## Diseño conceptual
+### Diseño conceptual
 
 ```text
 +--------------------------------------+
@@ -1243,13 +1243,13 @@ node_load1{instance="localhost:9100"}
 
 ---
 
-# Ejemplo completo 3: Canvas de flujo de aplicación
+## Ejemplo completo 3: Canvas de flujo de aplicación
 
-## Objetivo
+### Objetivo
 
 Representar el flujo principal de una aplicación.
 
-## Diseño
+### Diseño
 
 ```text
 +----------+       +----------+       +-------------+
@@ -1262,7 +1262,7 @@ Representar el flujo principal de una aplicación.
                                       +-------------+
 ```
 
-## Información dinámica
+### Información dinámica
 
 ```text
 Web:
@@ -1281,7 +1281,7 @@ Base de datos:
 - Uso de disco
 ```
 
-## Actividades
+### Actividades
 
 1. Crea los cuatro bloques.
 2. Añade las conexiones.
@@ -1292,13 +1292,13 @@ Base de datos:
 
 ---
 
-# Ejemplo de sesión 1: crear un Canvas básico
+## Ejemplo de sesión 1: crear un Canvas básico
 
-## Objetivo
+### Objetivo
 
 Crear una composición sencilla con tres servicios.
 
-## Pasos
+### Pasos
 
 1. Acceder a Grafana.
 2. Abrir un dashboard.
@@ -1330,7 +1330,7 @@ Rojo: no disponible
 10. Guardar el panel.
 11. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Cambia el color de fondo.
 2. Alinea los tres elementos.
@@ -1340,25 +1340,25 @@ Rojo: no disponible
 
 ---
 
-# Ejemplo de sesión 2: añadir valores dinámicos
+## Ejemplo de sesión 2: añadir valores dinámicos
 
-## Objetivo
+### Objetivo
 
 Mostrar el estado actual de Prometheus y Node Exporter.
 
-## Consulta de Prometheus
+### Consulta de Prometheus
 
 ```promql
 up{job="prometheus"}
 ```
 
-## Consulta de Node Exporter
+### Consulta de Node Exporter
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir el panel Canvas.
 2. Añadir un elemento de valor de métrica.
@@ -1376,7 +1376,7 @@ Prometheus
 9. Configurar colores o mapas de valores.
 10. Guardar.
 
-## Actividades
+### Actividades
 
 1. Detén Node Exporter:
 
@@ -1397,13 +1397,13 @@ sudo systemctl start node_exporter
 
 ---
 
-# Ejemplo de sesión 3: añadir CPU y memoria
+## Ejemplo de sesión 3: añadir CPU y memoria
 
-## Objetivo
+### Objetivo
 
 Crear una tarjeta visual con recursos del servidor.
 
-## Pasos
+### Pasos
 
 1. Crear una forma como fondo.
 2. Añadir un texto:
@@ -1442,7 +1442,7 @@ Servidor Linux
 9. Configurar colores.
 10. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Añade una métrica de almacenamiento.
 2. Añade la carga del sistema.
@@ -1452,13 +1452,13 @@ Servidor Linux
 
 ---
 
-# Ejemplo de sesión 4: crear un mapa de topología
+## Ejemplo de sesión 4: crear un mapa de topología
 
-## Objetivo
+### Objetivo
 
 Representar la relación entre Prometheus y dos servidores.
 
-## Diseño
+### Diseño
 
 ```text
                          +-------------+
@@ -1473,7 +1473,7 @@ Representar la relación entre Prometheus y dos servidores.
                 +---------------+ +---------------+
 ```
 
-## Pasos
+### Pasos
 
 1. Añadir el título.
 2. Añadir la forma de Prometheus.
@@ -1485,7 +1485,7 @@ Representar la relación entre Prometheus y dos servidores.
 8. Añadir una leyenda.
 9. Guardar.
 
-## Actividades
+### Actividades
 
 1. Detén uno de los exporters.
 2. Observa el cambio de estado.
@@ -1495,13 +1495,13 @@ Representar la relación entre Prometheus y dos servidores.
 
 ---
 
-# Ejemplo de sesión 5: usar una imagen de fondo
+## Ejemplo de sesión 5: usar una imagen de fondo
 
-## Objetivo
+### Objetivo
 
 Colocar valores dinámicos sobre una imagen de infraestructura.
 
-## Preparación
+### Preparación
 
 Utilizar una imagen de laboratorio autorizada que represente:
 
@@ -1512,7 +1512,7 @@ Una arquitectura
 Una topología
 ```
 
-## Pasos
+### Pasos
 
 1. Añadir un elemento de imagen.
 2. Seleccionar la imagen.
@@ -1524,7 +1524,7 @@ Una topología
 8. Comprobar el contraste.
 9. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Coloca un indicador por servidor.
 2. Utiliza verde para disponibilidad.
@@ -1534,13 +1534,13 @@ Una topología
 
 ---
 
-# Ejemplo de sesión 6: crear enlaces hacia otros dashboards
+## Ejemplo de sesión 6: crear enlaces hacia otros dashboards
 
-## Objetivo
+### Objetivo
 
 Convertir elementos Canvas en puntos de navegación.
 
-## Pasos
+### Pasos
 
 1. Crear una tarjeta para el servidor web.
 2. Abrir la configuración del elemento.
@@ -1550,7 +1550,7 @@ Convertir elementos Canvas en puntos de navegación.
 6. Probar ambos enlaces.
 7. Revisar los permisos.
 
-## Actividades
+### Actividades
 
 1. Añade un enlace al dashboard de red.
 2. Añade un enlace a un runbook.
@@ -1565,33 +1565,33 @@ Haz clic en el componente para consultar el detalle.
 
 ---
 
-# Ejemplo de sesión 7: configurar colores por estado
+## Ejemplo de sesión 7: configurar colores por estado
 
-## Objetivo
+### Objetivo
 
 Representar visualmente los estados `UP` y `DOWN`.
 
-## Consulta
+### Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Mapa de valores
+### Mapa de valores
 
 ```text
 1 → UP
 0 → DOWN
 ```
 
-## Colores
+### Colores
 
 ```text
 UP → Verde
 DOWN → Rojo
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un valor dinámico.
 2. Seleccionar la métrica.
@@ -1603,7 +1603,7 @@ DOWN → Rojo
 8. Iniciar Node Exporter.
 9. Confirmar la recuperación.
 
-## Actividades
+### Actividades
 
 1. Añade un tercer estado para ausencia de datos.
 2. Documenta la diferencia entre:
@@ -1614,13 +1614,13 @@ DOWN → Rojo
 
 ---
 
-# Ejemplo de sesión 8: crear una vista con variables
+## Ejemplo de sesión 8: crear una vista con variables
 
-## Objetivo
+### Objetivo
 
 Permitir la selección de una instancia.
 
-## Crear la variable
+### Crear la variable
 
 Crear una variable llamada:
 
@@ -1636,7 +1636,7 @@ label_values(up, instance)
 
 La sintaxis puede variar según la versión de Grafana y el editor de variables.
 
-## Consulta de CPU
+### Consulta de CPU
 
 ```promql
 100 - (
@@ -1649,7 +1649,7 @@ La sintaxis puede variar según la versión de Grafana y el editor de variables.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear la variable.
 2. Añadir un elemento dinámico de CPU.
@@ -1664,7 +1664,7 @@ Instancia seleccionada: $instance
 6. Comprobar el valor mostrado.
 7. Probar la opción `All`.
 
-## Actividades
+### Actividades
 
 1. Añade una variable `job`.
 2. Muestra el job seleccionado.
@@ -1673,19 +1673,19 @@ Instancia seleccionada: $instance
 
 ---
 
-# Ejemplo de sesión 9: diagnosticar un elemento sin datos
+## Ejemplo de sesión 9: diagnosticar un elemento sin datos
 
-## Objetivo
+### Objetivo
 
 Identificar por qué un valor Canvas no se muestra correctamente.
 
-## Consulta incorrecta
+### Consulta incorrecta
 
 ```promql
 metrica_inexistente_para_canvas
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un elemento dinámico.
 2. Introducir la consulta incorrecta.
@@ -1702,7 +1702,7 @@ up
 8. Restaurar la consulta válida.
 9. Guardar el panel.
 
-## Actividades
+### Actividades
 
 Documentar:
 
@@ -1718,13 +1718,13 @@ Resultado final:
 
 ---
 
-# Ejemplo de sesión 10: exportar un dashboard con Canvas
+## Ejemplo de sesión 10: exportar un dashboard con Canvas
 
-## Objetivo
+### Objetivo
 
 Crear una copia de seguridad del diseño.
 
-## Pasos
+### Pasos
 
 1. Abrir el dashboard.
 2. Revisar los elementos Canvas.
@@ -1749,7 +1749,7 @@ jq empty dashboard-canvas-infraestructura.json
 11. Comprobar el diseño.
 12. Comprobar los valores dinámicos.
 
-## Actividades
+### Actividades
 
 1. Exporta el dashboard.
 2. Importa una copia.
@@ -1760,9 +1760,9 @@ jq empty dashboard-canvas-infraestructura.json
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Diseñar antes de configurar
+### Diseñar antes de configurar
 
 Definir primero:
 
@@ -1774,7 +1774,7 @@ Definir primero:
 - Responsables.
 - Público objetivo.
 
-## Mantener una jerarquía visual
+### Mantener una jerarquía visual
 
 El usuario debe distinguir rápidamente:
 
@@ -1786,15 +1786,15 @@ Métricas
 Acciones
 ```
 
-## Utilizar un número limitado de colores
+### Utilizar un número limitado de colores
 
 Una paleta pequeña facilita la interpretación.
 
-## Reservar el rojo para problemas reales
+### Reservar el rojo para problemas reales
 
 No utilizar rojo como decoración.
 
-## Mantener el mismo estilo
+### Mantener el mismo estilo
 
 Las tarjetas equivalentes deben tener:
 
@@ -1804,11 +1804,11 @@ Las tarjetas equivalentes deben tener:
 - Misma posición de las métricas.
 - Misma estructura.
 
-## Utilizar elementos dinámicos con moderación
+### Utilizar elementos dinámicos con moderación
 
 Canvas no debe convertirse en una pantalla llena de valores pequeños.
 
-## Evitar el solapamiento
+### Evitar el solapamiento
 
 Comprobar la vista en:
 
@@ -1817,19 +1817,19 @@ Comprobar la vista en:
 - Diferentes resoluciones.
 - Navegadores compatibles.
 
-## Utilizar imágenes optimizadas
+### Utilizar imágenes optimizadas
 
 Imágenes excesivamente grandes pueden afectar al rendimiento.
 
-## Bloquear elementos estáticos
+### Bloquear elementos estáticos
 
 Bloquear fondos y elementos que no deben moverse accidentalmente.
 
-## Documentar las consultas
+### Documentar las consultas
 
 Añadir un panel Text cercano o una descripción del dashboard.
 
-## Probar estados normales y anómalos
+### Probar estados normales y anómalos
 
 Comprobar:
 
@@ -1841,7 +1841,7 @@ Comprobar:
 
 ---
 
-# Seguridad del panel Canvas
+## Seguridad del panel Canvas
 
 Canvas puede mostrar información sensible de forma muy visible.
 
@@ -1857,7 +1857,7 @@ No incluir:
 - Rutas de administración sin protección.
 - Imágenes con información confidencial.
 
-## Revisar imágenes
+### Revisar imágenes
 
 Una imagen de fondo puede contener:
 
@@ -1870,7 +1870,7 @@ Una imagen de fondo puede contener:
 
 Antes de compartir el dashboard, revisar también las imágenes.
 
-## Revisar enlaces
+### Revisar enlaces
 
 No incluir enlaces como:
 
@@ -1882,9 +1882,9 @@ Utilizar enlaces autenticados mediante el mecanismo de acceso correspondiente.
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## El panel Canvas aparece vacío
+### El panel Canvas aparece vacío
 
 Comprobar:
 
@@ -1895,7 +1895,7 @@ Comprobar:
 - Que la imagen no cubre todo el contenido.
 - Que el zoom no oculta los elementos.
 
-## Un elemento queda detrás de otro
+### Un elemento queda detrás de otro
 
 Revisar:
 
@@ -1905,7 +1905,7 @@ Revisar:
 - Agrupaciones.
 - Visibilidad.
 
-## El valor dinámico no aparece
+### El valor dinámico no aparece
 
 Comprobar:
 
@@ -1918,7 +1918,7 @@ Comprobar:
 - Inspector del panel.
 - Elemento seleccionado.
 
-## El valor aparece con una unidad incorrecta
+### El valor aparece con una unidad incorrecta
 
 Revisar:
 
@@ -1928,7 +1928,7 @@ Revisar:
 - Escala.
 - Decimales.
 
-## Todos los elementos tienen el mismo color
+### Todos los elementos tienen el mismo color
 
 Comprobar:
 
@@ -1939,7 +1939,7 @@ Comprobar:
 - Campo utilizado.
 - Compatibilidad de la versión.
 
-## La imagen no se muestra
+### La imagen no se muestra
 
 Posibles causas:
 
@@ -1951,7 +1951,7 @@ Posibles causas:
 - Imagen demasiado grande.
 - Restricciones de seguridad.
 
-## Los enlaces no funcionan
+### Los enlaces no funcionan
 
 Comprobar:
 
@@ -1962,7 +1962,7 @@ Comprobar:
 - Rutas relativas.
 - Restricciones del navegador.
 
-## El diseño se ve mal en otra pantalla
+### El diseño se ve mal en otra pantalla
 
 Posibles causas:
 
@@ -1980,7 +1980,7 @@ Soluciones:
 - Utilizar tamaños coherentes.
 - Probar distintas resoluciones.
 
-## El panel tarda en cargar
+### El panel tarda en cargar
 
 Posibles causas:
 
@@ -1993,7 +1993,7 @@ Posibles causas:
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -2094,13 +2094,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear un panel Canvas que represente visualmente una infraestructura de laboratorio.
 
-## Componentes
+### Componentes
 
 ```text
 Grafana
@@ -2110,7 +2110,7 @@ Servidor de base de datos
 Node Exporter
 ```
 
-## Diseño propuesto
+### Diseño propuesto
 
 ```text
 +------------------------------------------------------+
@@ -2135,7 +2135,7 @@ Node Exporter
 +------------------------------------------------------+
 ```
 
-## Elementos obligatorios
+### Elementos obligatorios
 
 Añadir:
 
@@ -2150,21 +2150,21 @@ Añadir:
 - Enlace a otro dashboard.
 - Descripción del entorno.
 
-## Consultas mínimas
+### Consultas mínimas
 
-### Prometheus
+#### Prometheus
 
 ```promql
 up{job="prometheus"}
 ```
 
-### Node Exporter
+#### Node Exporter
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### CPU
+#### CPU
 
 ```promql
 100 - (
@@ -2174,7 +2174,7 @@ up{job="node_exporter"}
 )
 ```
 
-### Memoria
+#### Memoria
 
 ```promql
 100 * (
@@ -2185,7 +2185,7 @@ up{job="node_exporter"}
 )
 ```
 
-## Tareas
+### Tareas
 
 1. Crear el panel Canvas.
 2. Crear la estructura visual.
@@ -2207,7 +2207,7 @@ up{job="node_exporter"}
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2231,7 +2231,7 @@ up{job="node_exporter"}
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Canvas permite crear composiciones visuales personalizadas.
 - Puede combinar texto, formas, imágenes, iconos y valores dinámicos.
@@ -2257,7 +2257,7 @@ up{job="node_exporter"}
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué finalidad tiene un panel Canvas?
 2. ¿Qué diferencia existe entre Canvas y un panel Text?
@@ -2287,7 +2287,7 @@ up{job="node_exporter"}
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear una vista Canvas que combine diseño visual y datos de monitorización.
 

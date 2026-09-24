@@ -29,7 +29,7 @@ Los plugins permiten adaptar Grafana a diferentes necesidades:
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -55,7 +55,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Un plugin es un componente que añade funcionalidades a Grafana.
 
@@ -117,11 +117,11 @@ Visualización personalizada
 
 ---
 
-# Tipos de plugins de Grafana
+## Tipos de plugins de Grafana
 
 Grafana puede utilizar diferentes categorías de plugins.
 
-## Plugins de panel
+### Plugins de panel
 
 Añaden visualizaciones.
 
@@ -135,7 +135,7 @@ Ejemplos de funciones:
 - Paneles con HTML o SVG.
 - Representaciones geográficas.
 
-## Plugins de fuentes de datos
+### Plugins de fuentes de datos
 
 Permiten consultar sistemas externos.
 
@@ -149,7 +149,7 @@ Ejemplos:
 - MySQL.
 - Microsoft SQL Server.
 
-## Plugins de aplicación
+### Plugins de aplicación
 
 Añaden funcionalidades más amplias, como:
 
@@ -159,7 +159,7 @@ Añaden funcionalidades más amplias, como:
 - Vistas de aplicación.
 - Flujos de trabajo.
 
-## Plugins de autenticación
+### Plugins de autenticación
 
 Permiten integrar Grafana con mecanismos externos de autenticación.
 
@@ -177,9 +177,9 @@ Plugins de panel
 
 ---
 
-# Plugins integrados y plugins externos
+## Plugins integrados y plugins externos
 
-## Plugins integrados
+### Plugins integrados
 
 Son los paneles disponibles en la instalación estándar de Grafana.
 
@@ -203,7 +203,7 @@ Ventajas:
 - Tienen una integración directa con Grafana.
 - Reciben mantenimiento dentro del ciclo de Grafana.
 
-## Plugins externos
+### Plugins externos
 
 Son desarrollados y distribuidos fuera del conjunto principal de Grafana.
 
@@ -230,7 +230,7 @@ Antes de utilizarlos se debe revisar:
 
 ---
 
-# Cuándo utilizar un plugin de panel
+## Cuándo utilizar un plugin de panel
 
 Un plugin puede ser útil cuando:
 
@@ -243,9 +243,9 @@ Un plugin puede ser útil cuando:
 - El equipo ya utiliza un plugin aprobado.
 - La visualización aporta información operativa real.
 
-## Ejemplos
+### Ejemplos
 
-### Mapa geográfico
+#### Mapa geográfico
 
 Representar:
 
@@ -253,7 +253,7 @@ Representar:
 Disponibilidad de servicios por ubicación.
 ```
 
-### Diagrama de red
+#### Diagrama de red
 
 Representar:
 
@@ -261,7 +261,7 @@ Representar:
 Routers, switches, servidores y conexiones.
 ```
 
-### Visualización especializada
+#### Visualización especializada
 
 Representar:
 
@@ -269,7 +269,7 @@ Representar:
 Distribuciones, relaciones o indicadores personalizados.
 ```
 
-### Panel operativo
+#### Panel operativo
 
 Representar:
 
@@ -279,7 +279,7 @@ Estado de un servicio mediante una vista diseñada para un equipo concreto.
 
 ---
 
-# Cuándo no utilizar un plugin
+## Cuándo no utilizar un plugin
 
 No conviene instalar un plugin cuando:
 
@@ -293,7 +293,7 @@ No conviene instalar un plugin cuando:
 - El dashboard debe ser fácilmente portable.
 - Se necesita mantener una instalación mínima.
 
-## Regla práctica
+### Regla práctica
 
 Antes de instalar un plugin, comprobar si el resultado puede conseguirse con:
 
@@ -309,7 +309,7 @@ Instalar plugins no debe convertirse en el equivalente técnico de comprar otra 
 
 ---
 
-# Buscar plugins
+## Buscar plugins
 
 Desde la interfaz de Grafana se puede consultar el catálogo de plugins disponible para la instalación.
 
@@ -336,15 +336,15 @@ La ubicación exacta de las opciones puede variar según:
 
 ---
 
-# Información que se debe revisar
+## Información que se debe revisar
 
 Antes de instalar un plugin, revisar:
 
-## Nombre
+### Nombre
 
 Confirmar que corresponde al plugin esperado.
 
-## Identificador
+### Identificador
 
 Los plugins tienen un identificador único.
 
@@ -356,7 +356,7 @@ fabric-panel-plugin
 
 El identificador se utiliza a menudo en comandos y configuraciones.
 
-## Versión
+### Versión
 
 Comprobar:
 
@@ -366,7 +366,7 @@ Versión disponible
 Versión mínima de Grafana
 ```
 
-## Firma
+### Firma
 
 Determinar si el plugin está:
 
@@ -377,7 +377,7 @@ Firmado por un proveedor
 Firmado por la comunidad
 ```
 
-## Compatibilidad
+### Compatibilidad
 
 Comprobar:
 
@@ -389,7 +389,7 @@ Comprobar:
 - Tipo de consultas.
 - Dependencias.
 
-## Mantenimiento
+### Mantenimiento
 
 Revisar:
 
@@ -400,7 +400,7 @@ Revisar:
 - Actividad del proyecto.
 - Soporte disponible.
 
-## Permisos
+### Permisos
 
 Revisar qué permisos solicita el plugin.
 
@@ -408,7 +408,7 @@ Un plugin de panel no debería recibir permisos innecesarios.
 
 ---
 
-# Instalar un plugin desde la interfaz
+## Instalar un plugin desde la interfaz
 
 El procedimiento general es:
 
@@ -427,7 +427,7 @@ La instalación puede requerir permisos administrativos.
 
 ---
 
-# Instalar un plugin desde la línea de comandos
+## Instalar un plugin desde la línea de comandos
 
 Grafana proporciona una herramienta administrativa para gestionar plugins.
 
@@ -463,7 +463,7 @@ Comprobar los logs:
 sudo journalctl -u grafana-server -n 100 --no-pager
 ```
 
-## Precauciones
+### Precauciones
 
 - Sustituir `ID_DEL_PLUGIN` por un identificador verificado.
 - No copiar comandos de fuentes desconocidas.
@@ -473,7 +473,7 @@ sudo journalctl -u grafana-server -n 100 --no-pager
 
 ---
 
-# Directorios habituales de plugins
+## Directorios habituales de plugins
 
 La ubicación depende del método de instalación y del sistema operativo.
 
@@ -507,7 +507,7 @@ No se debe asumir que todas las instalaciones utilizan la misma ruta.
 
 ---
 
-# Instalar un plugin manualmente
+## Instalar un plugin manualmente
 
 La instalación manual puede consistir en:
 
@@ -540,7 +540,7 @@ Reiniciar:
 sudo systemctl restart grafana-server
 ```
 
-## Precaución
+### Precaución
 
 La instalación manual requiere más control y más comprobaciones que la instalación desde el catálogo.
 
@@ -548,7 +548,7 @@ No instalar archivos descargados de ubicaciones no verificadas.
 
 ---
 
-# Plugins no firmados
+## Plugins no firmados
 
 Grafana puede bloquear plugins no firmados por razones de seguridad.
 
@@ -567,7 +567,7 @@ Después de modificar la configuración:
 sudo systemctl restart grafana-server
 ```
 
-## Advertencias
+### Advertencias
 
 Permitir plugins no firmados:
 
@@ -581,7 +581,7 @@ No utilizar una configuración genérica que permita cualquier plugin.
 
 ---
 
-# Comprobar que un plugin está instalado
+## Comprobar que un plugin está instalado
 
 Desde la interfaz:
 
@@ -619,7 +619,7 @@ sudo journalctl -u grafana-server \
 
 ---
 
-# Actualizar un plugin
+## Actualizar un plugin
 
 Antes de actualizar:
 
@@ -646,7 +646,7 @@ Después:
 sudo systemctl restart grafana-server
 ```
 
-## Comprobaciones posteriores
+### Comprobaciones posteriores
 
 - El plugin aparece instalado.
 - Los paneles siguen cargando.
@@ -658,7 +658,7 @@ sudo systemctl restart grafana-server
 
 ---
 
-# Deshabilitar un plugin
+## Deshabilitar un plugin
 
 Deshabilitar un plugin puede ser útil cuando:
 
@@ -680,7 +680,7 @@ Antes de deshabilitarlo:
 
 ---
 
-# Eliminar un plugin
+## Eliminar un plugin
 
 Antes de eliminar un plugin:
 
@@ -693,7 +693,7 @@ Antes de eliminar un plugin:
 7. Revisar los logs.
 8. Comprobar que Grafana inicia correctamente.
 
-## Localizar referencias en dashboards exportados
+### Localizar referencias en dashboards exportados
 
 Si existen ficheros JSON:
 
@@ -709,7 +709,7 @@ jq '.. | strings | select(contains("ID_DEL_PLUGIN"))' \
   dashboard.json
 ```
 
-## Advertencia
+### Advertencia
 
 Eliminar un plugin no convierte automáticamente sus paneles en paneles estándar.
 
@@ -721,7 +721,7 @@ Panel plugin not found
 
 ---
 
-# Dependencias de un dashboard
+## Dependencias de un dashboard
 
 Un dashboard puede depender de:
 
@@ -736,10 +736,10 @@ Un dashboard puede depender de:
 - Un sistema de autenticación.
 - Una versión concreta de Grafana.
 
-## Ejemplo de documentación
+### Ejemplo de documentación
 
 ```markdown
-## Dependencias
+### Dependencias
 
 - Grafana: versión compatible con el dashboard.
 - Fuente de datos: Prometheus.
@@ -759,7 +759,7 @@ Documentar estas dependencias facilita:
 
 ---
 
-# Exportar un dashboard que utiliza un plugin
+## Exportar un dashboard que utiliza un plugin
 
 Al exportar un dashboard, la definición del panel puede conservar:
 
@@ -781,7 +781,7 @@ En el sistema destino puede ser necesario:
 4. Importar el dashboard.
 5. Revisar cada panel.
 
-## Proceso recomendado
+### Proceso recomendado
 
 ```text
 Exportar dashboard
@@ -804,7 +804,7 @@ Probar paneles
 
 ---
 
-# Diagnóstico de plugins
+## Diagnóstico de plugins
 
 Cuando un panel basado en un plugin no funciona, revisar en este orden:
 
@@ -821,7 +821,7 @@ Cuando un panel basado en un plugin no funciona, revisar en este orden:
 10. Compatibilidad del navegador.
 ```
 
-## Comprobar el panel
+### Comprobar el panel
 
 Revisar si aparece:
 
@@ -833,7 +833,7 @@ Unknown panel type
 Error loading plugin
 ```
 
-## Revisar logs
+### Revisar logs
 
 ```bash
 sudo journalctl -u grafana-server \
@@ -852,9 +852,9 @@ sudo journalctl -u grafana-server \
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## El plugin no aparece en la lista
+### El plugin no aparece en la lista
 
 Comprobar:
 
@@ -867,7 +867,7 @@ Comprobar:
 - Compatibilidad de versión.
 - Firma del plugin.
 
-## Aparece “Plugin not found”
+### Aparece “Plugin not found”
 
 Posibles causas:
 
@@ -884,7 +884,7 @@ Solución general:
 3. Reiniciar Grafana.
 4. Volver a abrir el dashboard.
 
-## El plugin aparece, pero el panel está vacío
+### El plugin aparece, pero el panel está vacío
 
 Comprobar:
 
@@ -896,7 +896,7 @@ Comprobar:
 - Transformaciones.
 - Opciones específicas del plugin.
 
-## El plugin provoca errores en Grafana
+### El plugin provoca errores en Grafana
 
 Revisar:
 
@@ -910,7 +910,7 @@ Revisar:
 
 En laboratorio se puede deshabilitar temporalmente para aislar el problema.
 
-## El plugin no está firmado
+### El plugin no está firmado
 
 No habilitarlo automáticamente en producción.
 
@@ -924,7 +924,7 @@ Revisar:
 - Necesidad real.
 - Alcance de la configuración.
 
-## El panel cambia después de actualizar
+### El panel cambia después de actualizar
 
 Posibles causas:
 
@@ -943,7 +943,7 @@ Comparar:
 - Exportación JSON.
 - Documentación de cambios.
 
-## El dashboard no se puede importar
+### El dashboard no se puede importar
 
 Comprobar:
 
@@ -957,13 +957,13 @@ Comprobar:
 
 ---
 
-# Seguridad de los plugins
+## Seguridad de los plugins
 
 Los plugins son software que se ejecuta o se integra con Grafana.
 
 Por ello deben tratarse como componentes de la plataforma.
 
-## Buenas prácticas
+### Buenas prácticas
 
 - Instalar plugins desde fuentes confiables.
 - Revisar firmas.
@@ -978,7 +978,7 @@ Por ello deben tratarse como componentes de la plataforma.
 - Mantener copias de seguridad.
 - No instalar plugins por recomendación no verificada.
 
-## En producción
+### En producción
 
 Antes de instalar un plugin:
 
@@ -994,7 +994,7 @@ Antes de instalar un plugin:
 
 ---
 
-# Rendimiento
+## Rendimiento
 
 Un plugin puede afectar al rendimiento de:
 
@@ -1004,7 +1004,7 @@ Un plugin puede afectar al rendimiento de:
 - La red.
 - La experiencia del usuario.
 
-## Factores que pueden aumentar el coste
+### Factores que pueden aumentar el coste
 
 - Muchas consultas.
 - Muchas series.
@@ -1015,7 +1015,7 @@ Un plugin puede afectar al rendimiento de:
 - Paneles muy grandes.
 - Uso simultáneo por muchos usuarios.
 
-## Recomendaciones
+### Recomendaciones
 
 - Limitar el número de paneles.
 - Limitar la cantidad de series.
@@ -1027,7 +1027,7 @@ Un plugin puede afectar al rendimiento de:
 
 ---
 
-# Plugins y permisos de usuario
+## Plugins y permisos de usuario
 
 No todos los usuarios deben poder:
 
@@ -1037,7 +1037,7 @@ No todos los usuarios deben poder:
 - Configurar plugins.
 - Administrar Grafana.
 
-## Separación de responsabilidades
+### Separación de responsabilidades
 
 | Rol | Acceso habitual |
 |---|---|
@@ -1047,67 +1047,67 @@ No todos los usuarios deben poder:
 
 La configuración exacta depende de la organización y de la versión de Grafana.
 
-## Recomendación
+### Recomendación
 
 Limitar la administración de plugins a usuarios responsables de la plataforma.
 
 ---
 
-# Ejemplo completo 1: documentar un plugin de panel
+## Ejemplo completo 1: documentar un plugin de panel
 
-## Contenido recomendado
+### Contenido recomendado
 
 ```markdown
-# Plugin de panel utilizado
+## Plugin de panel utilizado
 
-## Identificador
+### Identificador
 
 ```text
 ejemplo-panel-plugin
 ```
 
-## Versión
+### Versión
 
 ```text
 1.2.0
 ```
 
-## Finalidad
+### Finalidad
 
 Representar visualmente la distribución de estados
 de los servicios monitorizados.
 
-## Fuente de datos
+### Fuente de datos
 
 ```text
 Prometheus
 ```
 
-## Dashboards dependientes
+### Dashboards dependientes
 
 - Resumen de infraestructura.
 - Estado de aplicaciones.
 
-## Requisitos
+### Requisitos
 
 - Grafana compatible.
 - Prometheus configurado.
 - Variables `instance` y `job`.
 
-## Mantenimiento
+### Mantenimiento
 
 Revisar la compatibilidad antes de actualizar Grafana.
 ```
 
 ---
 
-# Ejemplo completo 2: instalar un plugin en laboratorio
+## Ejemplo completo 2: instalar un plugin en laboratorio
 
-## Objetivo
+### Objetivo
 
 Practicar el proceso de instalación de un plugin sin afectar a producción.
 
-## Pasos conceptuales
+### Pasos conceptuales
 
 1. Consultar el catálogo.
 2. Seleccionar un plugin aprobado para el laboratorio.
@@ -1122,7 +1122,7 @@ Practicar el proceso de instalación de un plugin sin afectar a producción.
 11. Guardar el resultado.
 12. Documentar la instalación.
 
-## Comandos de comprobación
+### Comandos de comprobación
 
 ```bash
 grafana-cli plugins ls
@@ -1142,7 +1142,7 @@ sudo journalctl -u grafana-server \
   --no-pager
 ```
 
-## Actividades
+### Actividades
 
 1. Identifica el plugin instalado.
 2. Anota su versión.
@@ -1154,19 +1154,19 @@ sudo journalctl -u grafana-server \
 
 ---
 
-# Ejemplo completo 3: crear un panel con un plugin
+## Ejemplo completo 3: crear un panel con un plugin
 
-## Objetivo
+### Objetivo
 
 Utilizar un plugin de panel para mostrar una métrica.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * avg(up)
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un dashboard de laboratorio.
 2. Añadir un panel.
@@ -1179,7 +1179,7 @@ Utilizar un plugin de panel para mostrar una métrica.
 9. Guardar el panel.
 10. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Cambia la consulta a:
 
@@ -1198,13 +1198,13 @@ Utilizar un plugin de panel para mostrar una métrica.
 
 ---
 
-# Ejemplo de sesión 1: inventario de plugins
+## Ejemplo de sesión 1: inventario de plugins
 
-## Objetivo
+### Objetivo
 
 Identificar los plugins disponibles en una instalación de Grafana.
 
-## Pasos
+### Pasos
 
 1. Abrir Grafana.
 2. Acceder a la sección de plugins.
@@ -1222,7 +1222,7 @@ Identificar los plugins disponibles en una instalación de Grafana.
 grafana-cli plugins ls
 ```
 
-## Actividades
+### Actividades
 
 Crear una tabla:
 
@@ -1240,13 +1240,13 @@ Responder:
 
 ---
 
-# Ejemplo de sesión 2: instalar y comprobar un plugin
+## Ejemplo de sesión 2: instalar y comprobar un plugin
 
-## Objetivo
+### Objetivo
 
 Instalar un plugin aprobado para el laboratorio.
 
-## Pasos
+### Pasos
 
 1. Seleccionar el plugin.
 2. Revisar la documentación.
@@ -1281,7 +1281,7 @@ sudo journalctl -u grafana-server \
 9. Confirmar que aparece en Grafana.
 10. Crear un panel de prueba.
 
-## Actividades
+### Actividades
 
 1. Anota el resultado de cada paso.
 2. Comprueba la versión instalada.
@@ -1291,19 +1291,19 @@ sudo journalctl -u grafana-server \
 
 ---
 
-# Ejemplo de sesión 3: probar la compatibilidad
+## Ejemplo de sesión 3: probar la compatibilidad
 
-## Objetivo
+### Objetivo
 
 Comprobar que un plugin funciona con una consulta Prometheus.
 
-## Consulta inicial
+### Consulta inicial
 
 ```promql
 up
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel con el plugin.
 2. Ejecutar la consulta.
@@ -1325,7 +1325,7 @@ node_load1
 8. Probar una variable.
 9. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. ¿Qué tipos de datos acepta el plugin?
 2. ¿Permite varias series?
@@ -1336,13 +1336,13 @@ node_load1
 
 ---
 
-# Ejemplo de sesión 4: actualizar un plugin
+## Ejemplo de sesión 4: actualizar un plugin
 
-## Objetivo
+### Objetivo
 
 Practicar una actualización controlada.
 
-## Pasos
+### Pasos
 
 1. Consultar la versión instalada:
 
@@ -1371,7 +1371,7 @@ sudo systemctl restart grafana-server
 10. Comprobar el panel.
 11. Comparar con la exportación anterior.
 
-## Actividades
+### Actividades
 
 1. Documenta la versión anterior.
 2. Documenta la versión nueva.
@@ -1383,25 +1383,25 @@ sudo systemctl restart grafana-server
 
 ---
 
-# Ejemplo de sesión 5: simular una migración
+## Ejemplo de sesión 5: simular una migración
 
-## Objetivo
+### Objetivo
 
 Importar un dashboard que utiliza un plugin en otra instancia de Grafana.
 
-## Instancia origen
+### Instancia origen
 
 ```text
 Grafana A
 ```
 
-## Instancia destino
+### Instancia destino
 
 ```text
 Grafana B
 ```
 
-## Pasos
+### Pasos
 
 1. En Grafana A, identificar el plugin.
 2. Exportar el dashboard.
@@ -1413,7 +1413,7 @@ Grafana B
 8. Comprobar el panel.
 9. Comparar las configuraciones.
 
-## Actividades
+### Actividades
 
 1. Importa el dashboard sin instalar el plugin.
 2. Documenta el error.
@@ -1424,13 +1424,13 @@ Grafana B
 
 ---
 
-# Ejemplo de sesión 6: diagnosticar un plugin ausente
+## Ejemplo de sesión 6: diagnosticar un plugin ausente
 
-## Objetivo
+### Objetivo
 
 Resolver un dashboard que muestra un panel desconocido.
 
-## Situación
+### Situación
 
 El dashboard presenta:
 
@@ -1438,7 +1438,7 @@ El dashboard presenta:
 Panel plugin not found
 ```
 
-## Procedimiento
+### Procedimiento
 
 1. Exportar el dashboard.
 2. Abrir el JSON.
@@ -1455,7 +1455,7 @@ grafana-cli plugins ls
 8. Volver a abrir el dashboard.
 9. Comprobar el panel.
 
-## Actividades
+### Actividades
 
 Documentar:
 
@@ -1470,17 +1470,17 @@ Resultado:
 
 ---
 
-# Ejemplo de sesión 7: probar un plugin no firmado en laboratorio
+## Ejemplo de sesión 7: probar un plugin no firmado en laboratorio
 
-## Objetivo
+### Objetivo
 
 Comprender las implicaciones de un plugin no firmado.
 
-## Advertencia
+### Advertencia
 
 Esta actividad debe realizarse únicamente en un entorno aislado y autorizado.
 
-## Pasos
+### Pasos
 
 1. Revisar el identificador del plugin.
 2. Confirmar que la fuente es confiable.
@@ -1500,7 +1500,7 @@ Configuración conceptual:
 allow_loading_unsigned_plugins = ID_DEL_PLUGIN
 ```
 
-## Actividades
+### Actividades
 
 1. Explica por qué se requiere una configuración especial.
 2. Explica los riesgos.
@@ -1511,13 +1511,13 @@ allow_loading_unsigned_plugins = ID_DEL_PLUGIN
 
 ---
 
-# Ejemplo de sesión 8: eliminar un plugin no utilizado
+## Ejemplo de sesión 8: eliminar un plugin no utilizado
 
-## Objetivo
+### Objetivo
 
 Retirar un plugin después de comprobar que no existen dependencias.
 
-## Pasos
+### Pasos
 
 1. Listar los plugins:
 
@@ -1541,7 +1541,7 @@ grep -R "ID_DEL_PLUGIN" \
 9. Comprobar los dashboards.
 10. Documentar la retirada.
 
-## Actividades
+### Actividades
 
 1. Identifica qué dashboards dependían del plugin.
 2. Registra cómo se sustituyeron.
@@ -1550,13 +1550,13 @@ grep -R "ID_DEL_PLUGIN" \
 
 ---
 
-# Ejemplo de sesión 9: revisar rendimiento
+## Ejemplo de sesión 9: revisar rendimiento
 
-## Objetivo
+### Objetivo
 
 Observar el impacto de un panel basado en un plugin.
 
-## Pasos
+### Pasos
 
 1. Abrir el panel.
 2. Utilizar un rango de una hora.
@@ -1568,7 +1568,7 @@ Observar el impacto de un panel basado en un plugin.
 8. Revisar los logs.
 9. Utilizar las herramientas del navegador si están disponibles.
 
-## Actividades
+### Actividades
 
 1. ¿Cambia el tiempo de carga?
 2. ¿Qué ocurre al mostrar más series?
@@ -1578,18 +1578,18 @@ Observar el impacto de un panel basado en un plugin.
 
 ---
 
-# Ejemplo de sesión 10: documentar una dependencia
+## Ejemplo de sesión 10: documentar una dependencia
 
-## Objetivo
+### Objetivo
 
 Crear documentación para que otro administrador pueda recuperar el dashboard.
 
-## Contenido
+### Contenido
 
 ```markdown
-# Dependencias del dashboard
+## Dependencias del dashboard
 
-## Grafana
+### Grafana
 
 Versión probada:
 
@@ -1597,7 +1597,7 @@ Versión probada:
 Indicar versión
 ```
 
-## Plugin de panel
+### Plugin de panel
 
 Identificador:
 
@@ -1611,20 +1611,20 @@ Versión:
 Indicar versión
 ```
 
-## Fuente de datos
+### Fuente de datos
 
 ```text
 Prometheus
 ```
 
-## Variables
+### Variables
 
 ```text
 instance
 job
 ```
 
-## Transformaciones
+### Transformaciones
 
 ```text
 Labels to fields
@@ -1632,7 +1632,7 @@ Organize fields by name
 Reduce
 ```
 
-## Procedimiento de recuperación
+### Procedimiento de recuperación
 
 1. Instalar Grafana.
 2. Configurar Prometheus.
@@ -1644,7 +1644,7 @@ Reduce
 8. Probar el panel.
 ```
 
-## Actividades
+### Actividades
 
 1. Completa la documentación.
 2. Exporta el dashboard.
@@ -1653,7 +1653,7 @@ Reduce
 
 ---
 
-# Gestión de plugins mediante configuración
+## Gestión de plugins mediante configuración
 
 Grafana puede tener opciones relacionadas con plugins en su fichero de configuración.
 
@@ -1697,7 +1697,7 @@ No modificar la configuración sin:
 
 ---
 
-# Plugins y archivos JSON
+## Plugins y archivos JSON
 
 Un dashboard exportado puede incluir referencias como:
 
@@ -1723,7 +1723,7 @@ Buscar referencias de forma general:
 grep -n "ID_DEL_PLUGIN" dashboard.json
 ```
 
-## Actividades
+### Actividades
 
 1. Exporta un dashboard con un plugin.
 2. Busca su identificador.
@@ -1734,9 +1734,9 @@ grep -n "ID_DEL_PLUGIN" dashboard.json
 
 ---
 
-# Buenas prácticas de ciclo de vida
+## Buenas prácticas de ciclo de vida
 
-## Antes de instalar
+### Antes de instalar
 
 ```text
 1. Definir la necesidad.
@@ -1747,7 +1747,7 @@ grep -n "ID_DEL_PLUGIN" dashboard.json
 6. Probar en laboratorio.
 ```
 
-## Durante la instalación
+### Durante la instalación
 
 ```text
 1. Registrar versión.
@@ -1758,7 +1758,7 @@ grep -n "ID_DEL_PLUGIN" dashboard.json
 6. Revisar logs.
 ```
 
-## Durante la operación
+### Durante la operación
 
 ```text
 1. Supervisar errores.
@@ -1768,7 +1768,7 @@ grep -n "ID_DEL_PLUGIN" dashboard.json
 5. Revisar rendimiento.
 ```
 
-## Antes de eliminar
+### Antes de eliminar
 
 ```text
 1. Buscar dependencias.
@@ -1781,7 +1781,7 @@ grep -n "ID_DEL_PLUGIN" dashboard.json
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -1891,13 +1891,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Instalar, utilizar, documentar y mantener un plugin de panel en un entorno de laboratorio.
 
-## Requisitos
+### Requisitos
 
 Utilizar un plugin aprobado por el instructor.
 
@@ -1912,7 +1912,7 @@ Compatibilidad
 Fuente de instalación
 ```
 
-## Tareas
+### Tareas
 
 1. Consultar los plugins instalados.
 2. Seleccionar un plugin de panel.
@@ -1939,7 +1939,7 @@ Fuente de instalación
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -1966,7 +1966,7 @@ Fuente de instalación
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Un plugin amplía las capacidades de Grafana.
 - Los plugins de panel añaden nuevas visualizaciones.
@@ -1993,7 +1993,7 @@ Fuente de instalación
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué es un plugin de Grafana?
 2. ¿Qué diferencia existe entre un plugin de panel y un plugin de fuente de datos?
@@ -2023,7 +2023,7 @@ Fuente de instalación
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de gestionar plugins de paneles de forma controlada.
 

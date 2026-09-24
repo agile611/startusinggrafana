@@ -39,7 +39,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-## Introducción
+### Introducción
 
 Grafana puede contener muchos dashboards. Si todos se almacenan en el mismo lugar y utilizan nombres poco descriptivos, localizar la información puede resultar complicado.
 
@@ -94,7 +94,7 @@ Dashboards/
 
 ---
 
-# Acceder a la lista de dashboards
+## Acceder a la lista de dashboards
 
 Para acceder a la lista:
 
@@ -117,9 +117,9 @@ La apariencia exacta puede variar según la versión de Grafana y el tema utiliz
 
 ---
 
-# Elementos principales
+## Elementos principales
 
-## Dashboard
+### Dashboard
 
 Es una vista formada por uno o varios paneles.
 
@@ -138,7 +138,7 @@ Puede contener paneles de:
 - Red.
 - Carga del sistema.
 
-## Carpeta
+### Carpeta
 
 Una carpeta agrupa dashboards relacionados.
 
@@ -157,7 +157,7 @@ Almacenamiento
 Monitorización de red
 ```
 
-## Panel
+### Panel
 
 Un panel es una visualización individual dentro de un dashboard.
 
@@ -167,7 +167,7 @@ Ejemplo:
 Uso de CPU
 ```
 
-## Favorito
+### Favorito
 
 Un dashboard marcado como favorito aparece en una lista de acceso rápido.
 
@@ -178,7 +178,7 @@ Los favoritos son útiles para:
 - Dashboards de incidencias.
 - Dashboards de supervisión principal.
 
-## Etiqueta
+### Etiqueta
 
 Una etiqueta permite clasificar un dashboard mediante palabras clave.
 
@@ -197,9 +197,9 @@ Las etiquetas facilitan la búsqueda y la clasificación.
 
 ---
 
-# Crear un dashboard
+## Crear un dashboard
 
-## Crear un dashboard vacío
+### Crear un dashboard vacío
 
 Pasos generales:
 
@@ -211,7 +211,7 @@ Pasos generales:
 6. Introducir una consulta.
 7. Guardar el dashboard.
 
-## Nombre recomendado
+### Nombre recomendado
 
 Los nombres deben ser claros y descriptivos.
 
@@ -234,7 +234,7 @@ Rendimiento de aplicaciones
 Capacidad de almacenamiento
 ```
 
-## Descripción recomendada
+### Descripción recomendada
 
 Una descripción puede indicar:
 
@@ -256,7 +256,7 @@ Entorno: laboratorio.
 
 ---
 
-# Guardar un dashboard
+## Guardar un dashboard
 
 Al guardar un dashboard, Grafana puede solicitar:
 
@@ -278,7 +278,7 @@ Es importante guardar después de:
 
 Un dashboard no guardado puede perder los últimos cambios.
 
-## Buenas prácticas al guardar
+### Buenas prácticas al guardar
 
 - Utilizar nombres descriptivos.
 - Seleccionar la carpeta correcta.
@@ -289,11 +289,11 @@ Un dashboard no guardado puede perder los últimos cambios.
 
 ---
 
-# Organizar dashboards mediante carpetas
+## Organizar dashboards mediante carpetas
 
 Las carpetas permiten separar dashboards por función, entorno o equipo.
 
-## Organización por función
+### Organización por función
 
 ```text
 Infraestructura/
@@ -303,7 +303,7 @@ Redes/
 Seguridad/
 ```
 
-## Organización por entorno
+### Organización por entorno
 
 ```text
 Producción/
@@ -312,7 +312,7 @@ Desarrollo/
 Laboratorio/
 ```
 
-## Organización por equipo
+### Organización por equipo
 
 ```text
 Sistemas/
@@ -321,7 +321,7 @@ Desarrollo/
 Operaciones/
 ```
 
-## Organización combinada
+### Organización combinada
 
 ```text
 Producción/
@@ -339,7 +339,7 @@ La estructura debe ser sencilla. Una jerarquía demasiado profunda puede dificul
 
 ---
 
-# Buscar dashboards
+## Buscar dashboards
 
 La búsqueda permite localizar dashboards por:
 
@@ -369,7 +369,7 @@ produccion
 red
 ```
 
-## Recomendaciones para facilitar las búsquedas
+### Recomendaciones para facilitar las búsquedas
 
 Utilizar nombres y etiquetas consistentes.
 
@@ -401,7 +401,7 @@ Prueba definitiva
 
 ---
 
-# Marcar dashboards como favoritos
+## Marcar dashboards como favoritos
 
 Un dashboard favorito aparece en una zona de acceso rápido.
 
@@ -417,11 +417,11 @@ No es recomendable marcar todos los dashboards como favoritos. Si todo es favori
 
 ---
 
-# Abrir y utilizar un dashboard
+## Abrir y utilizar un dashboard
 
 Al abrir un dashboard se pueden modificar distintos aspectos de la visualización.
 
-## Rango temporal
+### Rango temporal
 
 El selector temporal permite consultar periodos como:
 
@@ -435,7 +435,7 @@ Last 24 hours
 Last 7 days
 ```
 
-## Actualización automática
+### Actualización automática
 
 Grafana puede actualizar los datos de forma periódica.
 
@@ -451,7 +451,7 @@ Intervalos habituales:
 
 Un intervalo demasiado corto puede incrementar la carga sobre la fuente de datos.
 
-## Variables
+### Variables
 
 Las variables permiten cambiar el contexto del dashboard.
 
@@ -469,11 +469,11 @@ Un dashboard con una variable `instance` puede mostrar diferentes servidores sin
 
 ---
 
-# Compartir dashboards
+## Compartir dashboards
 
 Grafana permite compartir un dashboard de varias formas.
 
-## Compartir mediante enlace
+### Compartir mediante enlace
 
 Se puede generar un enlace para acceder al dashboard.
 
@@ -485,7 +485,7 @@ Antes de compartirlo, comprobar:
 - Si las consultas exponen nombres internos.
 - Si el acceso requiere autenticación.
 
-## Compartir una instantánea
+### Compartir una instantánea
 
 Una instantánea contiene una copia de los datos visibles en un momento concreto.
 
@@ -499,7 +499,7 @@ Puede ser útil para:
 
 Una instantánea no representa necesariamente el estado actual del sistema.
 
-## Compartir una imagen
+### Compartir una imagen
 
 Una imagen puede utilizarse en:
 
@@ -511,7 +511,7 @@ Una imagen puede utilizarse en:
 
 La imagen no permite interactuar con el dashboard.
 
-## Buenas prácticas de seguridad
+### Buenas prácticas de seguridad
 
 No compartir públicamente dashboards que contengan:
 
@@ -526,7 +526,7 @@ No compartir públicamente dashboards que contengan:
 
 ---
 
-# Exportar un dashboard
+## Exportar un dashboard
 
 Exportar un dashboard permite guardar su definición en formato JSON.
 
@@ -541,7 +541,7 @@ El fichero puede incluir:
 - Rangos temporales.
 - Enlaces.
 
-## Procedimiento general
+### Procedimiento general
 
 1. Abrir el dashboard.
 2. Abrir el menú de opciones.
@@ -567,7 +567,7 @@ Copiar el fichero:
 ~/laboratorio-grafana/dashboards/monitorizacion-servidor-linux.json
 ```
 
-## Ventajas de exportar
+### Ventajas de exportar
 
 - Crear copias de seguridad.
 - Migrar dashboards.
@@ -577,7 +577,7 @@ Copiar el fichero:
 - Reutilizar un dashboard.
 - Controlar cambios mediante Git.
 
-## Precauciones
+### Precauciones
 
 Un dashboard exportado puede contener referencias a:
 
@@ -592,7 +592,7 @@ Al importarlo en otro sistema puede ser necesario adaptar estos elementos.
 
 ---
 
-# Importar un dashboard
+## Importar un dashboard
 
 La importación permite cargar un dashboard desde:
 
@@ -601,7 +601,7 @@ La importación permite cargar un dashboard desde:
 - Una definición copiada.
 - Una URL, según la configuración y la versión.
 
-## Procedimiento general
+### Procedimiento general
 
 1. Acceder a **Dashboards**.
 2. Seleccionar **Import**.
@@ -611,7 +611,7 @@ La importación permite cargar un dashboard desde:
 6. Seleccionar la carpeta.
 7. Confirmar la importación.
 
-## Comprobar después de importar
+### Comprobar después de importar
 
 - Que los paneles existen.
 - Que las consultas son válidas.
@@ -623,7 +623,7 @@ La importación permite cargar un dashboard desde:
 
 ---
 
-# Copiar un dashboard
+## Copiar un dashboard
 
 Copiar un dashboard puede ser útil para crear una nueva versión sin modificar el original.
 
@@ -664,7 +664,7 @@ La copia debe revisarse para comprobar:
 
 ---
 
-# Eliminar un dashboard
+## Eliminar un dashboard
 
 La eliminación debe realizarse con precaución.
 
@@ -693,7 +693,7 @@ Eliminar un dashboard puede borrar toda la estructura de paneles, consultas y co
 
 ---
 
-# Permisos y acceso
+## Permisos y acceso
 
 El acceso a un dashboard puede depender de:
 
@@ -714,7 +714,7 @@ Admin: puede administrar
 
 Los nombres exactos pueden variar según la configuración de Grafana.
 
-## Buenas prácticas
+### Buenas prácticas
 
 - Dar permisos de lectura a quienes solo necesitan consultar.
 - Reservar permisos de edición para responsables del dashboard.
@@ -726,7 +726,7 @@ Los nombres exactos pueden variar según la configuración de Grafana.
 
 ---
 
-# Ejemplo de organización
+## Ejemplo de organización
 
 Una organización sencilla para un curso puede ser:
 
@@ -761,13 +761,13 @@ No producción/
 
 ---
 
-# Ejemplo de sesión 1: crear el primer dashboard
+## Ejemplo de sesión 1: crear el primer dashboard
 
-## Objetivo
+### Objetivo
 
 Crear un dashboard básico y guardarlo en una carpeta.
 
-## Pasos
+### Pasos
 
 1. Acceder a Grafana:
 
@@ -811,7 +811,7 @@ Laboratorio
 Dashboard inicial para comprobar la disponibilidad de Prometheus y Node Exporter.
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el dashboard.
 2. Comprueba que aparece en la lista.
@@ -822,13 +822,13 @@ Dashboard inicial para comprobar la disponibilidad de Prometheus y Node Exporter
 
 ---
 
-# Ejemplo de sesión 2: crear una estructura de carpetas
+## Ejemplo de sesión 2: crear una estructura de carpetas
 
-## Objetivo
+### Objetivo
 
 Organizar varios dashboards mediante carpetas.
 
-## Crear carpetas
+### Crear carpetas
 
 Crear las siguientes carpetas:
 
@@ -838,7 +838,7 @@ Infraestructura
 Redes
 ```
 
-## Crear dashboards de ejemplo
+### Crear dashboards de ejemplo
 
 Crear los siguientes dashboards:
 
@@ -856,7 +856,7 @@ Asignarlos así:
 | Infraestructura - Recursos del servidor | Infraestructura |
 | Redes - Tráfico de red | Redes |
 
-## Actividades
+### Actividades
 
 1. Crea las carpetas.
 2. Crea los dashboards.
@@ -870,13 +870,13 @@ Asignarlos así:
 
 ---
 
-# Ejemplo de sesión 3: buscar y marcar favoritos
+## Ejemplo de sesión 3: buscar y marcar favoritos
 
-## Objetivo
+### Objetivo
 
 Localizar dashboards rápidamente y configurar favoritos.
 
-## Pasos
+### Pasos
 
 1. Acceder a la lista de dashboards.
 2. Buscar:
@@ -890,7 +890,7 @@ Infraestructura
 5. Volver a la sección de dashboards favoritos.
 6. Confirmar que aparece.
 
-## Actividades
+### Actividades
 
 1. Marca dos dashboards como favoritos.
 2. Elimina uno de favoritos.
@@ -901,13 +901,13 @@ Infraestructura
 
 ---
 
-# Ejemplo de sesión 4: exportar un dashboard
+## Ejemplo de sesión 4: exportar un dashboard
 
-## Objetivo
+### Objetivo
 
 Exportar un dashboard para crear una copia de seguridad.
 
-## Pasos
+### Pasos
 
 1. Abrir:
 
@@ -931,7 +931,7 @@ mkdir -p ~/laboratorio-grafana/evidencias/lista-dashboards
 
 6. Guardar el JSON en ese directorio.
 
-## Comprobar el fichero
+### Comprobar el fichero
 
 ```bash
 ls -lh ~/laboratorio-grafana/evidencias/lista-dashboards/
@@ -950,7 +950,7 @@ Resultado esperado:
 Sin salida y código de retorno 0
 ```
 
-## Actividades
+### Actividades
 
 1. Exporta el dashboard.
 2. Comprueba que el fichero existe.
@@ -962,13 +962,13 @@ Sin salida y código de retorno 0
 
 ---
 
-# Ejemplo de sesión 5: importar un dashboard
+## Ejemplo de sesión 5: importar un dashboard
 
-## Objetivo
+### Objetivo
 
 Importar un dashboard exportado previamente.
 
-## Pasos
+### Pasos
 
 1. Abrir la sección **Dashboards**.
 2. Seleccionar **Import**.
@@ -988,7 +988,7 @@ Monitorización de servidor Linux - Copia
 6. Seleccionar la carpeta `Laboratorio`.
 7. Confirmar la importación.
 
-## Comprobaciones
+### Comprobaciones
 
 Después de importar, revisar:
 
@@ -1000,7 +1000,7 @@ Después de importar, revisar:
 - Que los rangos temporales funcionan.
 - Que no aparecen errores de plugins.
 
-## Actividades
+### Actividades
 
 1. Importa el dashboard.
 2. Cambia su nombre.
@@ -1011,25 +1011,25 @@ Después de importar, revisar:
 
 ---
 
-# Ejemplo de sesión 6: copiar un dashboard para otro entorno
+## Ejemplo de sesión 6: copiar un dashboard para otro entorno
 
-## Objetivo
+### Objetivo
 
 Crear una versión de un dashboard para un entorno diferente.
 
-## Dashboard original
+### Dashboard original
 
 ```text
 Monitorización de servidor Linux - Laboratorio
 ```
 
-## Nueva copia
+### Nueva copia
 
 ```text
 Monitorización de servidor Linux - Preproducción
 ```
 
-## Pasos
+### Pasos
 
 1. Abrir el dashboard original.
 2. Utilizar la opción de guardar como o copiar.
@@ -1045,7 +1045,7 @@ Infraestructura
 7. Revisar los filtros.
 8. Guardar la nueva versión.
 
-## Actividades
+### Actividades
 
 1. Crea la copia.
 2. Comprueba que existen ambos dashboards.
@@ -1056,13 +1056,13 @@ Infraestructura
 
 ---
 
-# Ejemplo de sesión 7: compartir un dashboard de forma segura
+## Ejemplo de sesión 7: compartir un dashboard de forma segura
 
-## Objetivo
+### Objetivo
 
 Analizar las opciones de compartición y sus implicaciones.
 
-## Pasos
+### Pasos
 
 1. Abrir un dashboard de laboratorio.
 2. Abrir la opción de compartir.
@@ -1071,7 +1071,7 @@ Analizar las opciones de compartición y sus implicaciones.
 5. Revisar la opción de imagen.
 6. No publicar información sensible.
 
-## Actividades
+### Actividades
 
 Responder:
 
@@ -1083,13 +1083,13 @@ Responder:
 
 ---
 
-# Ejemplo de sesión 8: eliminar un dashboard de prueba
+## Ejemplo de sesión 8: eliminar un dashboard de prueba
 
-## Objetivo
+### Objetivo
 
 Eliminar de forma controlada un dashboard que ya no sea necesario.
 
-## Pasos
+### Pasos
 
 1. Crear un dashboard temporal:
 
@@ -1109,7 +1109,7 @@ up
 6. Confirmar la eliminación.
 7. Buscarlo de nuevo.
 
-## Actividades
+### Actividades
 
 1. Explica qué diferencia existe entre borrar un panel y borrar un dashboard.
 2. Justifica por qué se exportó antes de eliminarlo.
@@ -1118,9 +1118,9 @@ up
 
 ---
 
-# Ejemplo de sesión 9: revisar dashboards desde la API
+## Ejemplo de sesión 9: revisar dashboards desde la API
 
-## Objetivo
+### Objetivo
 
 Consultar información de dashboards utilizando la API de Grafana.
 
@@ -1160,7 +1160,7 @@ curl -s \
   '
 ```
 
-## Precauciones
+### Precauciones
 
 - No guardar tokens en repositorios.
 - No incluir tokens en capturas.
@@ -1168,7 +1168,7 @@ curl -s \
 - Utilizar permisos mínimos.
 - Revocar tokens que ya no sean necesarios.
 
-## Actividades
+### Actividades
 
 1. Consulta los dashboards.
 2. Muestra sus nombres.
@@ -1178,9 +1178,9 @@ curl -s \
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## No aparece un dashboard
+### No aparece un dashboard
 
 Comprobar:
 
@@ -1191,7 +1191,7 @@ Comprobar:
 - Si el dashboard fue eliminado.
 - Si se está utilizando la organización correcta.
 
-## No se puede guardar un dashboard
+### No se puede guardar un dashboard
 
 Posibles causas:
 
@@ -1201,7 +1201,7 @@ Posibles causas:
 - Existe un conflicto de versión.
 - La sesión ha caducado.
 
-## El dashboard importado no muestra datos
+### El dashboard importado no muestra datos
 
 Comprobar:
 
@@ -1214,7 +1214,7 @@ Comprobar:
 - Nombre de la instancia.
 - Disponibilidad de Prometheus.
 
-## El dashboard importado tiene paneles rotos
+### El dashboard importado tiene paneles rotos
 
 Posibles causas:
 
@@ -1225,7 +1225,7 @@ Posibles causas:
 - La consulta utiliza métricas que no existen.
 - Se importó una versión antigua.
 
-## El dashboard está duplicado
+### El dashboard está duplicado
 
 Revisar:
 
@@ -1238,7 +1238,7 @@ Revisar:
 
 Mantener una sola versión oficial y eliminar copias obsoletas.
 
-## Los usuarios no pueden abrir el dashboard
+### Los usuarios no pueden abrir el dashboard
 
 Comprobar:
 
@@ -1251,9 +1251,9 @@ Comprobar:
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Utilizar una convención de nombres
+### Utilizar una convención de nombres
 
 Ejemplo:
 
@@ -1269,7 +1269,7 @@ Laboratorio - Prometheus - Estado
 Preproducción - Web - Rendimiento
 ```
 
-## Utilizar carpetas con una finalidad clara
+### Utilizar carpetas con una finalidad clara
 
 No crear carpetas innecesarias.
 
@@ -1282,7 +1282,7 @@ Laboratorio
 Archivados
 ```
 
-## Mantener una versión oficial
+### Mantener una versión oficial
 
 Evitar varias copias con nombres ambiguos.
 
@@ -1294,7 +1294,7 @@ Monitorización Linux - Laboratorio
 Monitorización Linux - Archivado
 ```
 
-## Exportar antes de realizar cambios importantes
+### Exportar antes de realizar cambios importantes
 
 Antes de modificar un dashboard crítico:
 
@@ -1306,11 +1306,11 @@ Antes de modificar un dashboard crítico:
 5. Documentar.
 ```
 
-## Añadir descripciones
+### Añadir descripciones
 
 La descripción debe permitir que otra persona entienda el dashboard sin consultar al autor.
 
-## Utilizar etiquetas
+### Utilizar etiquetas
 
 Ejemplos:
 
@@ -1323,7 +1323,7 @@ red
 laboratorio
 ```
 
-## Revisar periódicamente
+### Revisar periódicamente
 
 Eliminar o archivar:
 
@@ -1336,7 +1336,7 @@ Eliminar o archivar:
 
 ---
 
-# Evidencias de la sesión
+## Evidencias de la sesión
 
 Crear el directorio:
 
@@ -1401,13 +1401,13 @@ Las capturas recomendadas son:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear una organización de dashboards para un entorno de monitorización.
 
-## Requisitos
+### Requisitos
 
 Crear las carpetas:
 
@@ -1425,7 +1425,7 @@ Infraestructura - Recursos del servidor
 Redes - Tráfico de red
 ```
 
-## Dashboard 1: estado de los objetivos
+### Dashboard 1: estado de los objetivos
 
 Consulta:
 
@@ -1439,7 +1439,7 @@ Visualización recomendada:
 Table
 ```
 
-## Dashboard 2: recursos del servidor
+### Dashboard 2: recursos del servidor
 
 Paneles mínimos:
 
@@ -1450,7 +1450,7 @@ Uso del sistema de ficheros
 Carga del sistema
 ```
 
-## Dashboard 3: tráfico de red
+### Dashboard 3: tráfico de red
 
 Paneles mínimos:
 
@@ -1460,7 +1460,7 @@ Tráfico enviado
 Estado de las interfaces
 ```
 
-## Tareas
+### Tareas
 
 1. Crear las carpetas.
 2. Crear los dashboards.
@@ -1475,7 +1475,7 @@ Estado de las interfaces
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Elemento | Resultado | Observaciones |
 |---|---|---|
@@ -1494,7 +1494,7 @@ Estado de las interfaces
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - La lista de dashboards permite localizar y administrar las vistas de Grafana.
 - Las carpetas ayudan a organizar dashboards relacionados.
@@ -1518,7 +1518,7 @@ Estado de las interfaces
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué función cumple la lista de dashboards?
 2. ¿Qué diferencia existe entre una carpeta y un dashboard?
@@ -1548,7 +1548,7 @@ Estado de las interfaces
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de gestionar una colección organizada de dashboards.
 

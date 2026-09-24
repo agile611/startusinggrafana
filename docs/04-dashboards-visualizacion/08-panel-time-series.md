@@ -17,7 +17,7 @@ A diferencia de un panel Stat o Gauge, que suelen centrarse en el valor actual, 
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -45,7 +45,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Un panel Time series representa valores asociados a instantes temporales.
 
@@ -109,7 +109,7 @@ El panel Time series permite responder preguntas como:
 
 ---
 
-# Cuándo utilizar un panel Time series
+## Cuándo utilizar un panel Time series
 
 El panel Time series es apropiado cuando se necesita:
 
@@ -122,9 +122,9 @@ El panel Time series es apropiado cuando se necesita:
 - Comparar periodos.
 - Mostrar datos de contadores mediante `rate()`.
 
-## Ejemplos adecuados
+### Ejemplos adecuados
 
-### Uso de CPU
+#### Uso de CPU
 
 ```promql
 100 - (
@@ -134,7 +134,7 @@ El panel Time series es apropiado cuando se necesita:
 )
 ```
 
-### Memoria utilizada
+#### Memoria utilizada
 
 ```promql
 100 * (
@@ -145,13 +145,13 @@ El panel Time series es apropiado cuando se necesita:
 )
 ```
 
-### Carga del sistema
+#### Carga del sistema
 
 ```promql
 node_load1
 ```
 
-### Tráfico recibido
+#### Tráfico recibido
 
 ```promql
 sum by (instance) (
@@ -161,7 +161,7 @@ sum by (instance) (
 )
 ```
 
-### Espacio utilizado
+#### Espacio utilizado
 
 ```promql
 100 * (
@@ -180,7 +180,7 @@ sum by (instance) (
 
 ---
 
-# Cuándo no utilizar un panel Time series
+## Cuándo no utilizar un panel Time series
 
 No suele ser la mejor opción cuando se necesita:
 
@@ -212,13 +212,13 @@ Table: detalle por instancia
 
 ---
 
-# Diferencia entre Time series y Stat
+## Diferencia entre Time series y Stat
 
 El panel Stat muestra principalmente el valor actual o reducido.
 
 El panel Time series muestra cómo varía el valor.
 
-## Stat
+### Stat
 
 Consulta:
 
@@ -238,7 +238,7 @@ Pregunta que responde:
 ¿Cuál es la carga actual?
 ```
 
-## Time series
+### Time series
 
 Consulta:
 
@@ -256,13 +256,13 @@ Ambos paneles pueden utilizar la misma consulta, pero ofrecen información difer
 
 ---
 
-# Diferencia entre Time series y Gauge
+## Diferencia entre Time series y Gauge
 
 El Gauge muestra un valor dentro de un rango.
 
 El Time series muestra la evolución temporal.
 
-## Gauge
+### Gauge
 
 Adecuado para:
 
@@ -270,7 +270,7 @@ Adecuado para:
 Uso actual de memoria: 73 %
 ```
 
-## Time series
+### Time series
 
 Adecuado para:
 
@@ -284,13 +284,13 @@ El Time series permite estudiar la tendencia y localizar cuándo se produjeron l
 
 ---
 
-# Diferencia entre Time series y Bar Gauge
+## Diferencia entre Time series y Bar Gauge
 
 El Bar Gauge compara valores actuales o reducidos.
 
 El Time series muestra el comportamiento de esos valores a lo largo del tiempo.
 
-## Bar Gauge
+### Bar Gauge
 
 ```text
 server-01  35 %
@@ -298,7 +298,7 @@ server-02  78 %
 server-03  91 %
 ```
 
-## Time series
+### Time series
 
 ```text
 Uso de CPU de server-01, server-02 y server-03 durante la última hora
@@ -308,7 +308,7 @@ Una visualización no sustituye necesariamente a la otra. En dashboards operativ
 
 ---
 
-# Anatomía de un panel Time series
+## Anatomía de un panel Time series
 
 Un panel Time series contiene normalmente:
 
@@ -327,7 +327,7 @@ Un panel Time series contiene normalmente:
 +------------------------------------------------------+
 ```
 
-## Eje temporal
+### Eje temporal
 
 Muestra el periodo representado.
 
@@ -341,7 +341,7 @@ Ejemplos:
 Últimos 7 días
 ```
 
-## Eje vertical
+### Eje vertical
 
 Muestra los valores de la métrica.
 
@@ -353,7 +353,7 @@ Ejemplos:
 0 - 1 MB/s
 ```
 
-## Serie
+### Serie
 
 Cada línea, área o conjunto de puntos representa una serie.
 
@@ -366,7 +366,7 @@ Una serie puede corresponder a:
 - Una métrica.
 - Una aplicación.
 
-## Leyenda
+### Leyenda
 
 Identifica cada serie.
 
@@ -378,19 +378,19 @@ server-02:9100
 server-03:9100
 ```
 
-## Tooltip
+### Tooltip
 
 Al colocar el cursor sobre el gráfico, Grafana muestra los valores de las series en ese instante.
 
-## Umbrales
+### Umbrales
 
 Pueden aparecer como líneas o regiones horizontales para indicar límites operativos.
 
 ---
 
-# Crear un panel Time series
+## Crear un panel Time series
 
-## Procedimiento general
+### Procedimiento general
 
 1. Acceder a Grafana.
 2. Abrir un dashboard.
@@ -408,7 +408,7 @@ Pueden aparecer como líneas o regiones horizontales para indicar límites opera
 14. Guardar el panel.
 15. Guardar el dashboard.
 
-## Consulta inicial recomendada
+### Consulta inicial recomendada
 
 Para una primera prueba:
 
@@ -427,9 +427,9 @@ Rango temporal: Last 1 hour
 
 ---
 
-# Consultas PromQL para Time series
+## Consultas PromQL para Time series
 
-## Uso de CPU por instancia
+### Uso de CPU por instancia
 
 ```promql
 100 - (
@@ -439,7 +439,7 @@ Rango temporal: Last 1 hour
 )
 ```
 
-## Uso global de CPU
+### Uso global de CPU
 
 ```promql
 100 - (
@@ -449,7 +449,7 @@ Rango temporal: Last 1 hour
 )
 ```
 
-## Memoria utilizada
+### Memoria utilizada
 
 ```promql
 100 * (
@@ -460,31 +460,31 @@ Rango temporal: Last 1 hour
 )
 ```
 
-## Memoria disponible
+### Memoria disponible
 
 ```promql
 node_memory_MemAvailable_bytes
 ```
 
-## Carga de un minuto
+### Carga de un minuto
 
 ```promql
 node_load1
 ```
 
-## Carga de cinco minutos
+### Carga de cinco minutos
 
 ```promql
 node_load5
 ```
 
-## Carga de quince minutos
+### Carga de quince minutos
 
 ```promql
 node_load15
 ```
 
-## Tráfico recibido por instancia
+### Tráfico recibido por instancia
 
 ```promql
 sum by (instance) (
@@ -494,7 +494,7 @@ sum by (instance) (
 )
 ```
 
-## Tráfico enviado por instancia
+### Tráfico enviado por instancia
 
 ```promql
 sum by (instance) (
@@ -504,7 +504,7 @@ sum by (instance) (
 )
 ```
 
-## Tráfico recibido por interfaz
+### Tráfico recibido por interfaz
 
 ```promql
 sum by (device) (
@@ -514,7 +514,7 @@ sum by (device) (
 )
 ```
 
-## Paquetes recibidos
+### Paquetes recibidos
 
 ```promql
 sum by (instance) (
@@ -524,7 +524,7 @@ sum by (instance) (
 )
 ```
 
-## Uso del sistema de ficheros raíz
+### Uso del sistema de ficheros raíz
 
 ```promql
 100 * (
@@ -541,7 +541,7 @@ sum by (instance) (
 )
 ```
 
-## Disponibilidad
+### Disponibilidad
 
 ```promql
 avg by (job) (
@@ -549,7 +549,7 @@ avg by (job) (
 )
 ```
 
-## Número de objetivos disponibles
+### Número de objetivos disponibles
 
 ```promql
 sum(up)
@@ -559,7 +559,7 @@ Esta consulta devuelve un único valor y, por tanto, suele ser más apropiada pa
 
 ---
 
-# Uso de `rate()` en series temporales
+## Uso de `rate()` en series temporales
 
 Muchas métricas de Node Exporter son contadores acumulativos.
 
@@ -581,21 +581,21 @@ rate(
 
 La expresión calcula el ritmo medio de crecimiento durante los últimos cinco minutos.
 
-## Ejemplos
+### Ejemplos
 
-### Bytes recibidos por segundo
+#### Bytes recibidos por segundo
 
 ```promql
 rate(node_network_receive_bytes_total[5m])
 ```
 
-### Bytes enviados por segundo
+#### Bytes enviados por segundo
 
 ```promql
 rate(node_network_transmit_bytes_total[5m])
 ```
 
-### CPU utilizada
+#### CPU utilizada
 
 ```promql
 rate(node_cpu_seconds_total{mode!="idle"}[5m])
@@ -605,11 +605,11 @@ Para representar un porcentaje de CPU, suele ser preferible calcular el tiempo i
 
 ---
 
-# Configurar el rango temporal
+## Configurar el rango temporal
 
 El rango temporal define qué intervalo se muestra.
 
-## Rangos habituales
+### Rangos habituales
 
 ```text
 Last 5 minutes
@@ -622,7 +622,7 @@ Last 24 hours
 Last 7 days
 ```
 
-## Elegir un rango adecuado
+### Elegir un rango adecuado
 
 | Objetivo | Rango recomendado |
 |---|---|
@@ -638,7 +638,7 @@ Un rango demasiado largo puede comprimir los detalles y dificultar la interpreta
 
 ---
 
-# Configurar la frecuencia de actualización
+## Configurar la frecuencia de actualización
 
 Grafana puede actualizar automáticamente los datos.
 
@@ -653,7 +653,7 @@ Intervalos habituales:
 15 minutes
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Utilizar intervalos cortos para incidencias activas.
 - Utilizar intervalos más largos para análisis de capacidad.
@@ -665,9 +665,9 @@ Si Prometheus realiza scraping cada 15 segundos, actualizar Grafana cada 1 segun
 
 ---
 
-# Configurar líneas, puntos y áreas
+## Configurar líneas, puntos y áreas
 
-## Líneas
+### Líneas
 
 Son la representación habitual.
 
@@ -679,7 +679,7 @@ Adecuadas para:
 - Tráfico.
 - Latencia.
 
-## Puntos
+### Puntos
 
 Los puntos permiten identificar muestras individuales.
 
@@ -689,7 +689,7 @@ Son útiles cuando:
 - Se necesita comprobar la existencia de muestras.
 - Se quieren destacar eventos concretos.
 
-## Áreas
+### Áreas
 
 Las áreas pueden utilizarse para destacar la magnitud de una métrica.
 
@@ -700,7 +700,7 @@ Son útiles para:
 - Series acumuladas.
 - Gráficos apilados.
 
-## Recomendación
+### Recomendación
 
 No utilizar áreas apiladas cuando las series no sean sumables o comparables.
 
@@ -708,7 +708,7 @@ Por ejemplo, apilar porcentajes de CPU de varios servidores puede producir una i
 
 ---
 
-# Configurar el grosor de línea
+## Configurar el grosor de línea
 
 El grosor debe facilitar la lectura sin ocultar otras series.
 
@@ -724,7 +724,7 @@ Un grosor excesivo puede hacer que las líneas se mezclen.
 
 ---
 
-# Configurar la interpolación
+## Configurar la interpolación
 
 La interpolación define cómo se conectan los puntos.
 
@@ -735,19 +735,19 @@ Opciones habituales:
 - Escalonada.
 - Sin conexión.
 
-## Lineal
+### Lineal
 
 Une los puntos mediante líneas rectas.
 
 Adecuada para la mayoría de métricas.
 
-## Suavizada
+### Suavizada
 
 Genera curvas visualmente más suaves.
 
 Debe utilizarse con cuidado porque puede sugerir valores intermedios que no fueron medidos realmente.
 
-## Escalonada
+### Escalonada
 
 Mantiene un valor hasta que aparece una nueva muestra.
 
@@ -758,15 +758,15 @@ Puede ser adecuada para:
 - Cambios de configuración.
 - Estados de servicio.
 
-## Sin conexión
+### Sin conexión
 
 Puede utilizarse cuando no se desea inferir valores entre muestras.
 
 ---
 
-# Configurar los ejes
+## Configurar los ejes
 
-## Unidad del eje
+### Unidad del eje
 
 La unidad debe coincidir con la métrica.
 
@@ -781,7 +781,7 @@ Celsius
 None
 ```
 
-## Mínimo y máximo
+### Mínimo y máximo
 
 Para porcentajes:
 
@@ -797,7 +797,7 @@ Mínimo: Automático
 Máximo: Automático
 ```
 
-## Eje izquierdo y derecho
+### Eje izquierdo y derecho
 
 Puede utilizarse un segundo eje cuando se comparan métricas con escalas diferentes.
 
@@ -808,13 +808,13 @@ Ejemplo:
 
 Sin embargo, los ejes dobles pueden dificultar la lectura.
 
-## Recomendación
+### Recomendación
 
 Utilizar ejes separados únicamente cuando la comparación sea necesaria y esté claramente documentada.
 
 ---
 
-# Configurar una escala logarítmica
+## Configurar una escala logarítmica
 
 Una escala logarítmica puede ser útil cuando los valores abarcan varios órdenes de magnitud.
 
@@ -845,11 +845,11 @@ La escala logarítmica debe indicarse claramente para evitar interpretaciones in
 
 ---
 
-# Configurar la leyenda
+## Configurar la leyenda
 
 La leyenda permite identificar cada serie.
 
-## Ejemplo por instancia
+### Ejemplo por instancia
 
 Consulta:
 
@@ -867,7 +867,7 @@ Nombre recomendado:
 {{instance}}
 ```
 
-## Ejemplo por interfaz
+### Ejemplo por interfaz
 
 Consulta:
 
@@ -885,7 +885,7 @@ Nombre recomendado:
 {{device}}
 ```
 
-## Ejemplo por job
+### Ejemplo por job
 
 Consulta:
 
@@ -901,7 +901,7 @@ Nombre recomendado:
 {{job}}
 ```
 
-## Buenas prácticas
+### Buenas prácticas
 
 - Mostrar únicamente las etiquetas necesarias.
 - Evitar nombres excesivamente largos.
@@ -911,11 +911,11 @@ Nombre recomendado:
 
 ---
 
-# Configurar colores
+## Configurar colores
 
 Los colores deben ayudar a identificar las series y los estados.
 
-## Colores por serie
+### Colores por serie
 
 Adecuados cuando se comparan:
 
@@ -927,7 +927,7 @@ server-03
 
 Cada serie recibe un color diferente.
 
-## Colores por umbral
+### Colores por umbral
 
 Adecuados cuando se muestran estados:
 
@@ -937,7 +937,7 @@ Adecuados cuando se muestran estados:
 90 - 100 %: rojo
 ```
 
-## Recomendación
+### Recomendación
 
 Si el objetivo principal es comparar instancias, utilizar colores por serie.
 
@@ -945,39 +945,39 @@ Si el objetivo principal es identificar estados, utilizar colores basados en umb
 
 ---
 
-# Configurar umbrales
+## Configurar umbrales
 
 Los umbrales pueden aparecer como líneas o regiones horizontales.
 
-## CPU
+### CPU
 
 ```text
 70 %: advertencia
 90 %: crítico
 ```
 
-## Memoria
+### Memoria
 
 ```text
 70 %: advertencia
 90 %: crítico
 ```
 
-## Almacenamiento
+### Almacenamiento
 
 ```text
 80 %: advertencia
 90 %: crítico
 ```
 
-## Disponibilidad
+### Disponibilidad
 
 ```text
 90 %: advertencia
 99 %: normal
 ```
 
-## Ejemplo conceptual
+### Ejemplo conceptual
 
 ```text
 100 % ─────────────────────────────
@@ -990,7 +990,7 @@ Los umbrales deben documentarse y adaptarse al entorno.
 
 ---
 
-# Configurar transformaciones
+## Configurar transformaciones
 
 Las transformaciones permiten modificar los datos antes de representarlos.
 
@@ -1004,7 +1004,7 @@ Pueden utilizarse para:
 - Crear campos calculados.
 - Organizar tablas resultantes.
 
-## Ejemplos de uso
+### Ejemplos de uso
 
 - Cambiar un nombre largo por uno breve.
 - Ocultar etiquetas innecesarias.
@@ -1012,7 +1012,7 @@ Pueden utilizarse para:
 - Filtrar una instancia concreta.
 - Ordenar series por valor.
 
-## Precaución
+### Precaución
 
 Las transformaciones pueden dificultar el diagnóstico si no están documentadas.
 
@@ -1020,9 +1020,9 @@ La consulta original y las transformaciones deben tener un propósito claro.
 
 ---
 
-# Comparar varias instancias
+## Comparar varias instancias
 
-## Consulta de CPU por instancia
+### Consulta de CPU por instancia
 
 ```promql
 100 - (
@@ -1034,7 +1034,7 @@ La consulta original y las transformaciones deben tener un propósito claro.
 
 Cada instancia aparece como una serie independiente.
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de CPU por instancia
@@ -1044,7 +1044,7 @@ Máximo: 100
 Leyenda: {{instance}}
 ```
 
-## Interpretación
+### Interpretación
 
 - Una línea estable indica un consumo constante.
 - Picos repetidos pueden indicar cargas periódicas.
@@ -1053,24 +1053,24 @@ Leyenda: {{instance}}
 
 ---
 
-# Representar estados en el tiempo
+## Representar estados en el tiempo
 
 La métrica `up` puede representarse como una serie temporal.
 
-## Consulta
+### Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Interpretación
+### Interpretación
 
 ```text
 1 = disponible
 0 = no disponible
 ```
 
-## Configuración recomendada
+### Configuración recomendada
 
 ```text
 Título: Disponibilidad de Node Exporter
@@ -1082,7 +1082,7 @@ Max: 1
 
 La interpolación escalonada representa mejor los cambios discretos entre `0` y `1`.
 
-## Actividad
+### Actividad
 
 Detener Node Exporter:
 
@@ -1102,13 +1102,13 @@ Observar la recuperación.
 
 ---
 
-# Ejemplo completo 1: Time series de CPU
+## Ejemplo completo 1: Time series de CPU
 
-## Objetivo
+### Objetivo
 
 Mostrar el uso de CPU por instancia durante la última hora.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1118,7 +1118,7 @@ Mostrar el uso de CPU por instancia durante la última hora.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de CPU por instancia
@@ -1131,14 +1131,14 @@ Rango temporal: Last 1 hour
 Leyenda: {{instance}}
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje medio de CPU utilizada por instancia durante los últimos cinco minutos.
 La serie muestra su evolución durante el rango temporal seleccionado.
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 70 %: advertencia
@@ -1147,13 +1147,13 @@ La serie muestra su evolución durante el rango temporal seleccionado.
 
 ---
 
-# Ejemplo completo 2: Time series de memoria
+## Ejemplo completo 2: Time series de memoria
 
-## Objetivo
+### Objetivo
 
 Mostrar la evolución del porcentaje de memoria utilizada.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1164,7 +1164,7 @@ Mostrar la evolución del porcentaje de memoria utilizada.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Evolución del uso de memoria
@@ -1177,7 +1177,7 @@ Rango temporal: Last 6 hours
 Leyenda: {{instance}}
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje de memoria utilizada por instancia durante las últimas seis horas.
@@ -1185,7 +1185,7 @@ Los incrementos sostenidos pueden indicar una fuga de memoria o un aumento
 progresivo de la carga.
 ```
 
-## Interpretación
+### Interpretación
 
 - Una línea estable indica un consumo constante.
 - Una subida gradual puede indicar crecimiento de procesos.
@@ -1194,13 +1194,13 @@ progresivo de la carga.
 
 ---
 
-# Ejemplo completo 3: Time series de red
+## Ejemplo completo 3: Time series de red
 
-## Objetivo
+### Objetivo
 
 Representar el tráfico recibido y enviado.
 
-## Consulta A: tráfico recibido
+### Consulta A: tráfico recibido
 
 ```promql
 sum by (instance) (
@@ -1210,7 +1210,7 @@ sum by (instance) (
 )
 ```
 
-## Consulta B: tráfico enviado
+### Consulta B: tráfico enviado
 
 ```promql
 sum by (instance) (
@@ -1220,7 +1220,7 @@ sum by (instance) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Tráfico de red por instancia
@@ -1231,14 +1231,14 @@ Decimales: 1
 Leyenda: {{instance}}
 ```
 
-## Nombres de las consultas
+### Nombres de las consultas
 
 ```text
 A: Recibido - {{instance}}
 B: Enviado - {{instance}}
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Velocidad media de tráfico recibido y enviado durante los últimos cinco minutos.
@@ -1247,13 +1247,13 @@ Se excluye la interfaz de loopback.
 
 ---
 
-# Ejemplo completo 4: Time series de almacenamiento
+## Ejemplo completo 4: Time series de almacenamiento
 
-## Objetivo
+### Objetivo
 
 Observar la evolución del espacio utilizado en el sistema de ficheros raíz.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1270,7 +1270,7 @@ Observar la evolución del espacio utilizado en el sistema de ficheros raíz.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Evolución del uso del sistema de ficheros raíz
@@ -1282,7 +1282,7 @@ Decimales: 1
 Rango temporal: Last 24 hours
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje de espacio utilizado en el sistema de ficheros raíz.
@@ -1291,13 +1291,13 @@ Una tendencia ascendente sostenida puede indicar que el disco se está llenando.
 
 ---
 
-# Ejemplo de sesión 1: crear un Time series básico
+## Ejemplo de sesión 1: crear un Time series básico
 
-## Objetivo
+### Objetivo
 
 Crear un gráfico de la carga del sistema.
 
-## Pasos
+### Pasos
 
 1. Acceder a Grafana:
 
@@ -1327,7 +1327,7 @@ Carga del sistema
 11. Guardar el panel.
 12. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Cambia el rango a `Last 15 minutes`.
 2. Cambia el rango a `Last 24 hours`.
@@ -1338,13 +1338,13 @@ Carga del sistema
 
 ---
 
-# Ejemplo de sesión 2: representar CPU por instancia
+## Ejemplo de sesión 2: representar CPU por instancia
 
-## Objetivo
+### Objetivo
 
 Crear un gráfico con una línea por instancia.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1354,7 +1354,7 @@ Crear un gráfico con una línea por instancia.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Time series.
 2. Introducir la consulta.
@@ -1379,7 +1379,7 @@ Leyenda: {{instance}}
 5. Activar el tooltip compartido.
 6. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Identifica las líneas de cada instancia.
 2. Determina cuál presenta el pico más alto.
@@ -1400,13 +1400,13 @@ pkill yes
 
 ---
 
-# Ejemplo de sesión 3: comparar CPU y memoria
+## Ejemplo de sesión 3: comparar CPU y memoria
 
-## Objetivo
+### Objetivo
 
 Crear un gráfico con dos consultas relacionadas.
 
-## Consulta A: CPU
+### Consulta A: CPU
 
 ```promql
 100 - (
@@ -1416,7 +1416,7 @@ Crear un gráfico con dos consultas relacionadas.
 )
 ```
 
-## Consulta B: memoria
+### Consulta B: memoria
 
 ```promql
 100 * (
@@ -1427,7 +1427,7 @@ Crear un gráfico con dos consultas relacionadas.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: CPU y memoria del servidor
@@ -1436,7 +1436,7 @@ Mínimo: 0
 Máximo: 100
 ```
 
-## Actividades
+### Actividades
 
 1. Añade las dos consultas.
 2. Configura nombres:
@@ -1450,19 +1450,19 @@ Máximo: 100
 
 ---
 
-# Ejemplo de sesión 4: representar disponibilidad
+## Ejemplo de sesión 4: representar disponibilidad
 
-## Objetivo
+### Objetivo
 
 Observar las caídas y recuperaciones de Node Exporter.
 
-## Consulta
+### Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Disponibilidad de Node Exporter
@@ -1473,7 +1473,7 @@ Interpolación: Escalonada
 Leyenda: {{instance}}
 ```
 
-## Pasos
+### Pasos
 
 1. Crear el panel.
 2. Introducir la consulta.
@@ -1495,7 +1495,7 @@ sudo systemctl start node_exporter
 
 9. Observar el cambio a `1`.
 
-## Actividades
+### Actividades
 
 1. Anota las horas aproximadas de caída y recuperación.
 2. Explica el efecto del intervalo de scraping.
@@ -1505,13 +1505,13 @@ sudo systemctl start node_exporter
 
 ---
 
-# Ejemplo de sesión 5: representar tráfico de red
+## Ejemplo de sesión 5: representar tráfico de red
 
-## Objetivo
+### Objetivo
 
 Mostrar el tráfico recibido y enviado por instancia.
 
-## Consulta A
+### Consulta A
 
 ```promql
 sum by (instance) (
@@ -1521,7 +1521,7 @@ sum by (instance) (
 )
 ```
 
-## Consulta B
+### Consulta B
 
 ```promql
 sum by (instance) (
@@ -1531,7 +1531,7 @@ sum by (instance) (
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Time series.
 2. Añadir las dos consultas.
@@ -1555,7 +1555,7 @@ Leyenda: {{instance}}
 ip -s link
 ```
 
-## Actividades
+### Actividades
 
 1. Identifica la diferencia entre tráfico recibido y enviado.
 2. Explica por qué se excluye `lo`.
@@ -1564,13 +1564,13 @@ ip -s link
 
 ---
 
-# Ejemplo de sesión 6: analizar el almacenamiento
+## Ejemplo de sesión 6: analizar el almacenamiento
 
-## Objetivo
+### Objetivo
 
 Observar si el uso del sistema de ficheros aumenta con el tiempo.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1587,7 +1587,7 @@ Observar si el uso del sistema de ficheros aumenta con el tiempo.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Time series.
 2. Configurar la unidad como porcentaje.
@@ -1600,7 +1600,7 @@ Observar si el uso del sistema de ficheros aumenta con el tiempo.
 df -h /
 ```
 
-## Actividades
+### Actividades
 
 1. Describe la tendencia.
 2. Comprueba si existen picos.
@@ -1610,13 +1610,13 @@ df -h /
 
 ---
 
-# Ejemplo de sesión 7: utilizar el tooltip
+## Ejemplo de sesión 7: utilizar el tooltip
 
-## Objetivo
+### Objetivo
 
 Consultar los valores exactos de varias series en el mismo instante.
 
-## Pasos
+### Pasos
 
 1. Abrir el panel de CPU.
 2. Colocar el cursor sobre una zona del gráfico.
@@ -1625,7 +1625,7 @@ Consultar los valores exactos de varias series en el mismo instante.
 5. Comparar los valores de todas las instancias.
 6. Desplazar el cursor hacia un pico.
 
-## Actividades
+### Actividades
 
 1. Identifica la instancia con mayor valor.
 2. Anota la hora del pico.
@@ -1634,13 +1634,13 @@ Consultar los valores exactos de varias series en el mismo instante.
 
 ---
 
-# Ejemplo de sesión 8: trabajar con `topk()`
+## Ejemplo de sesión 8: trabajar con `topk()`
 
-## Objetivo
+### Objetivo
 
 Mostrar únicamente las instancias con mayor uso de CPU.
 
-## Consulta
+### Consulta
 
 ```promql
 topk(
@@ -1653,7 +1653,7 @@ topk(
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Time series.
 2. Introducir la consulta.
@@ -1662,7 +1662,7 @@ topk(
 5. Activar la leyenda.
 6. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Compara la consulta con la versión sin `topk()`.
 2. Cambia `5` por `3`.
@@ -1671,19 +1671,19 @@ topk(
 
 ---
 
-# Ejemplo de sesión 9: diagnosticar un panel sin datos
+## Ejemplo de sesión 9: diagnosticar un panel sin datos
 
-## Objetivo
+### Objetivo
 
 Diferenciar un problema de consulta, fuente de datos o rango temporal.
 
-## Consulta incorrecta
+### Consulta incorrecta
 
 ```promql
 metrica_temporal_inexistente
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Time series.
 2. Introducir la consulta incorrecta.
@@ -1706,7 +1706,7 @@ node_load1
 9. Revisar el rango temporal.
 10. Restaurar una consulta válida.
 
-## Actividades
+### Actividades
 
 Documentar:
 
@@ -1719,13 +1719,13 @@ Documentar:
 
 ---
 
-# Ejemplo de sesión 10: comparar datos con la API de Prometheus
+## Ejemplo de sesión 10: comparar datos con la API de Prometheus
 
-## Objetivo
+### Objetivo
 
 Comprobar que los valores del gráfico coinciden con los datos devueltos por Prometheus.
 
-## Consulta de CPU
+### Consulta de CPU
 
 ```bash
 curl -sG \
@@ -1745,7 +1745,7 @@ curl -sG \
 
 Según la versión y el shell utilizado, puede ser necesario proporcionar marcas temporales absolutas para `start` y `end`.
 
-## Consulta instantánea
+### Consulta instantánea
 
 ```bash
 curl -sG \
@@ -1760,7 +1760,7 @@ curl -sG \
   | jq
 ```
 
-## Actividades
+### Actividades
 
 1. Compara el valor más reciente con Grafana.
 2. Comprueba el número de series.
@@ -1770,13 +1770,13 @@ curl -sG \
 
 ---
 
-# Configurar paneles con varias consultas
+## Configurar paneles con varias consultas
 
 Un panel Time series puede contener varias consultas.
 
-## Ejemplo
+### Ejemplo
 
-### Consulta A: CPU
+#### Consulta A: CPU
 
 ```promql
 100 - (
@@ -1786,7 +1786,7 @@ Un panel Time series puede contener varias consultas.
 )
 ```
 
-### Consulta B: memoria
+#### Consulta B: memoria
 
 ```promql
 100 * (
@@ -1797,13 +1797,13 @@ Un panel Time series puede contener varias consultas.
 )
 ```
 
-### Consulta C: carga
+#### Consulta C: carga
 
 ```promql
 node_load1
 ```
 
-## Precaución
+### Precaución
 
 CPU y memoria pueden compartir una escala de porcentajes.
 
@@ -1823,7 +1823,7 @@ Panel 2: carga del sistema
 
 ---
 
-# Configurar paneles con ejes diferentes
+## Configurar paneles con ejes diferentes
 
 Si se representan métricas con unidades diferentes, utilizar ejes separados con precaución.
 
@@ -1841,13 +1841,13 @@ Opciones:
 - Utilizar transformaciones.
 - Normalizar los valores.
 
-## Recomendación
+### Recomendación
 
 Para formación y operación, dos paneles separados suelen ser más fáciles de interpretar que un gráfico con dos escalas.
 
 ---
 
-# Configurar series apiladas
+## Configurar series apiladas
 
 El apilamiento coloca las series unas encima de otras.
 
@@ -1861,14 +1861,14 @@ Tráfico recibido por interfaz
 
 No suele ser adecuado para comparar directamente el uso de CPU de varios servidores, porque la suma visual puede sugerir un porcentaje global que no representa correctamente el sistema.
 
-## Utilizar apilamiento cuando:
+### Utilizar apilamiento cuando:
 
 - Las series representan partes de un total.
 - Se desea observar una suma.
 - Todas las series utilizan la misma unidad.
 - La suma tiene significado operativo.
 
-## Evitar apilamiento cuando:
+### Evitar apilamiento cuando:
 
 - Se comparan instancias independientes.
 - Se utilizan porcentajes de sistemas diferentes.
@@ -1876,7 +1876,7 @@ No suele ser adecuado para comparar directamente el uso de CPU de varios servido
 
 ---
 
-# Configurar valores nulos y huecos
+## Configurar valores nulos y huecos
 
 En una serie temporal pueden existir intervalos sin datos.
 
@@ -1896,7 +1896,7 @@ Grafana puede:
 - Mostrar cero.
 - Mantener el último valor.
 
-## Recomendación
+### Recomendación
 
 No convertir automáticamente los huecos en cero sin comprender el significado.
 
@@ -1914,7 +1914,7 @@ El valor es cero
 
 ---
 
-# Configurar puntos y muestras
+## Configurar puntos y muestras
 
 Los puntos muestran las muestras individuales.
 
@@ -1928,7 +1928,7 @@ Son útiles para comprobar:
 
 Para métricas de alta frecuencia y muchas series, mostrar puntos puede saturar visualmente el gráfico.
 
-## Recomendación
+### Recomendación
 
 - Utilizar puntos en diagnósticos.
 - Ocultarlos en dashboards con muchas series.
@@ -1937,7 +1937,7 @@ Para métricas de alta frecuencia y muchas series, mostrar puntos puede saturar 
 
 ---
 
-# Configurar alertas visuales mediante umbrales
+## Configurar alertas visuales mediante umbrales
 
 Los umbrales pueden mostrarse como líneas horizontales.
 
@@ -1961,13 +1961,13 @@ Los umbrales visuales no sustituyen a una regla de alerta. Una alerta debe confi
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Elegir un rango temporal adecuado
+### Elegir un rango temporal adecuado
 
 No analizar una tendencia de horas con un rango de cinco minutos.
 
-## Utilizar nombres de series claros
+### Utilizar nombres de series claros
 
 Ejemplo:
 
@@ -1977,7 +1977,7 @@ Memoria - server-01
 Recibido - server-01
 ```
 
-## Evitar demasiadas series
+### Evitar demasiadas series
 
 Si hay demasiadas líneas:
 
@@ -1988,19 +1988,19 @@ Si hay demasiadas líneas:
 - Utilizar un Bar Gauge.
 - Separar por entorno.
 
-## Utilizar las unidades correctas
+### Utilizar las unidades correctas
 
 Un valor sin unidad puede ser ambiguo.
 
-## Configurar la leyenda
+### Configurar la leyenda
 
 La leyenda debe ayudar a identificar el origen de cada serie.
 
-## No utilizar escalas engañosas
+### No utilizar escalas engañosas
 
 Para porcentajes, comenzar el eje en `0` suele ser más claro.
 
-## Documentar las consultas
+### Documentar las consultas
 
 La descripción debe explicar:
 
@@ -2010,7 +2010,7 @@ La descripción debe explicar:
 - Qué unidad se muestra.
 - Qué significan los umbrales.
 
-## Combinar resumen y tendencia
+### Combinar resumen y tendencia
 
 Una estructura eficaz:
 
@@ -2020,15 +2020,15 @@ Fila central: Time series
 Fila inferior: tablas y detalles
 ```
 
-## Revisar el rendimiento
+### Revisar el rendimiento
 
 El número de series y el rango temporal afectan al rendimiento.
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## El panel no muestra datos
+### El panel no muestra datos
 
 Comprobar:
 
@@ -2053,7 +2053,7 @@ Revisar:
 - Inspector.
 - Intervalo de scraping.
 
-## La línea aparece plana
+### La línea aparece plana
 
 Posibles causas:
 
@@ -2072,7 +2072,7 @@ Puntos visibles
 Una consulta menos agregada
 ```
 
-## La línea tiene picos inesperados
+### La línea tiene picos inesperados
 
 Comprobar:
 
@@ -2084,7 +2084,7 @@ Comprobar:
 - Transformaciones.
 - El rango temporal.
 
-## La gráfica tiene demasiadas líneas
+### La gráfica tiene demasiadas líneas
 
 Aplicar:
 
@@ -2107,7 +2107,7 @@ También se puede agrupar:
 sum by (job) (...)
 ```
 
-## Los colores no se distinguen
+### Los colores no se distinguen
 
 Posibles soluciones:
 
@@ -2118,7 +2118,7 @@ Posibles soluciones:
 - Utilizar un Bar Gauge.
 - Utilizar una tabla.
 
-## Los valores no coinciden con el sistema operativo
+### Los valores no coinciden con el sistema operativo
 
 Posibles causas:
 
@@ -2130,7 +2130,7 @@ Posibles causas:
 - Redondeo.
 - Diferencia entre porcentaje y proporción.
 
-## La métrica de red aparece como un contador
+### La métrica de red aparece como un contador
 
 Si se muestra:
 
@@ -2146,7 +2146,7 @@ Para mostrar velocidad:
 rate(node_network_receive_bytes_total[5m])
 ```
 
-## La CPU supera el 100 %
+### La CPU supera el 100 %
 
 Posibles causas:
 
@@ -2165,7 +2165,7 @@ Consulta recomendada:
 )
 ```
 
-## Aparecen huecos
+### Aparecen huecos
 
 Comprobar:
 
@@ -2179,7 +2179,7 @@ Comprobar:
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -2306,13 +2306,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear un dashboard temporal para analizar la evolución de los principales recursos de un servidor.
 
-## Panel 1: CPU
+### Panel 1: CPU
 
 Consulta:
 
@@ -2335,7 +2335,7 @@ Leyenda: {{instance}}
 Rango: Last 1 hour
 ```
 
-## Panel 2: memoria
+### Panel 2: memoria
 
 Consulta:
 
@@ -2359,7 +2359,7 @@ Leyenda: {{instance}}
 Rango: Last 6 hours
 ```
 
-## Panel 3: almacenamiento
+### Panel 3: almacenamiento
 
 Consulta:
 
@@ -2388,7 +2388,7 @@ Máximo: 100
 Rango: Last 24 hours
 ```
 
-## Panel 4: tráfico de red
+### Panel 4: tráfico de red
 
 Consulta A:
 
@@ -2420,7 +2420,7 @@ Leyenda: {{instance}}
 Rango: Last 1 hour
 ```
 
-## Panel 5: disponibilidad
+### Panel 5: disponibilidad
 
 Consulta:
 
@@ -2439,7 +2439,7 @@ Interpolación: Escalonada
 Rango: Last 30 minutes
 ```
 
-## Tareas
+### Tareas
 
 1. Crear los cinco paneles.
 2. Seleccionar Time series.
@@ -2462,7 +2462,7 @@ Rango: Last 30 minutes
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2487,7 +2487,7 @@ Rango: Last 30 minutes
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - El panel Time series representa la evolución temporal de una o varias métricas.
 - Es adecuado para analizar tendencias, picos, caídas y recuperaciones.
@@ -2514,7 +2514,7 @@ Rango: Last 30 minutes
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué finalidad tiene un panel Time series?
 2. ¿Qué diferencia existe entre un Time series y un Stat?
@@ -2544,7 +2544,7 @@ Rango: Last 30 minutes
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear gráficos temporales claros y útiles para analizar el comportamiento de un sistema.
 

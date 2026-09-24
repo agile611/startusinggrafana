@@ -83,7 +83,7 @@ Un dashboard no debe ser una colección desordenada de gráficos. Cada panel deb
 
 ---
 
-# Componentes de un dashboard
+## Componentes de un dashboard
 
 ## Dashboard
 
@@ -259,7 +259,7 @@ Una leyenda mal configurada puede dificultar la interpretación del gráfico.
 
 ---
 
-# Diferencia entre métrica, consulta y panel
+## Diferencia entre métrica, consulta y panel
 
 Estos conceptos están relacionados, pero no son equivalentes.
 
@@ -292,7 +292,7 @@ La visualización determina la forma en que se presenta.
 
 ---
 
-# Tipos de información
+## Tipos de información
 
 ## Valores individuales
 
@@ -388,7 +388,7 @@ up
 
 ---
 
-# Principios de diseño
+## Principios de diseño
 
 ## Mostrar primero la información importante
 
@@ -488,7 +488,7 @@ Un panel de texto puede explicar:
 
 ---
 
-# Ejemplos de consultas PromQL
+## Ejemplos de consultas PromQL
 
 ## Estado de los objetivos
 
@@ -583,7 +583,7 @@ sum by (instance) (
 
 ---
 
-# Ejemplo de diseño
+## Ejemplo de diseño
 
 ## Objetivo
 
@@ -626,7 +626,7 @@ El dashboard tendrá los siguientes paneles:
 Contenido:
 
 ```markdown
-# Monitorización de servidor Linux
+## Monitorización de servidor Linux
 
 Este dashboard muestra el estado y el uso de recursos del servidor.
 
@@ -652,7 +652,7 @@ Prometheus.
 
 ---
 
-# Ejemplo de sesión 1: comprobar el entorno
+## Ejemplo de sesión 1: comprobar el entorno
 
 ## Objetivo
 
@@ -713,7 +713,7 @@ La API de Grafana debe devolver un resultado con la base de datos en estado:
 
 ---
 
-# Ejemplo de sesión 2: comprobar la fuente de datos
+## Ejemplo de sesión 2: comprobar la fuente de datos
 
 ## Objetivo
 
@@ -753,7 +753,7 @@ http://localhost:9090
 
 ---
 
-# Ejemplo de sesión 3: crear un dashboard básico
+## Ejemplo de sesión 3: crear un dashboard básico
 
 ## Objetivo
 
@@ -801,7 +801,7 @@ Monitorización de servidor Linux
 
 ---
 
-# Ejemplo de sesión 4: comparar visualizaciones
+## Ejemplo de sesión 4: comparar visualizaciones
 
 ## Objetivo
 
@@ -851,7 +851,7 @@ La visualización `Gauge` puede utilizarse para mostrar el porcentaje de disponi
 
 ---
 
-# Ejemplo de sesión 5: configurar unidades y umbrales
+## Ejemplo de sesión 5: configurar unidades y umbrales
 
 ## Objetivo
 
@@ -912,7 +912,7 @@ Porcentaje de memoria utilizada en el servidor monitorizado.
 
 ---
 
-# Ejemplo de sesión 6: crear un panel temporal
+## Ejemplo de sesión 6: crear un panel temporal
 
 ## Objetivo
 
@@ -962,7 +962,7 @@ pkill yes
 
 ---
 
-# Ejemplo de sesión 7: organizar un dashboard
+## Ejemplo de sesión 7: organizar un dashboard
 
 ## Objetivo
 
@@ -995,7 +995,7 @@ Descripción
 
 ---
 
-# Ejemplo de sesión 8: comprobar un problema de datos
+## Ejemplo de sesión 8: comprobar un problema de datos
 
 ## Objetivo
 
@@ -1068,7 +1068,7 @@ Resultado esperado:
 
 ---
 
-# Ejemplo de sesión 9: aplicar una transformación
+## Ejemplo de sesión 9: aplicar una transformación
 
 ## Objetivo
 
@@ -1112,7 +1112,7 @@ Estado
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
 ## Utilizar nombres consistentes
 
@@ -1198,7 +1198,7 @@ Cada panel debe ayudar a:
 
 ---
 
-# Errores habituales
+## Errores habituales
 
 ## Mostrar un valor sin unidad
 
@@ -1256,7 +1256,7 @@ Un dashboard debe probarse cuando:
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Un dashboard agrupa información relacionada.
 - Un panel es una visualización individual.
@@ -1279,7 +1279,7 @@ Un dashboard debe probarse cuando:
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué es un dashboard?
 2. ¿Qué diferencia existe entre un dashboard y un panel?
@@ -1309,7 +1309,7 @@ Un dashboard debe probarse cuando:
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de diseñar un dashboard básico siguiendo este proceso:
 

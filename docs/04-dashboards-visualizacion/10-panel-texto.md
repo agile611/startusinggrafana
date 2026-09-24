@@ -22,7 +22,7 @@ Ejemplos de contenido que puede incluir:
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -48,7 +48,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Un dashboard sin contexto puede ser difícil de interpretar.
 
@@ -90,7 +90,7 @@ Para documentación técnica, Markdown suele ser la opción más práctica.
 
 ---
 
-# Cuándo utilizar un panel Text
+## Cuándo utilizar un panel Text
 
 El panel Text es apropiado cuando se necesita:
 
@@ -105,16 +105,16 @@ El panel Text es apropiado cuando se necesita:
 - Separar visualmente grupos de paneles.
 - Crear material de prácticas.
 
-## Ejemplos adecuados
+### Ejemplos adecuados
 
-### Descripción del dashboard
+#### Descripción del dashboard
 
 ```markdown
 Este dashboard muestra el estado de los servidores Linux
 monitorizados mediante Prometheus y Node Exporter.
 ```
 
-### Leyenda de colores
+#### Leyenda de colores
 
 ```markdown
 - Verde: estado normal
@@ -122,7 +122,7 @@ monitorizados mediante Prometheus y Node Exporter.
 - Rojo: situación crítica
 ```
 
-### Procedimiento de diagnóstico
+#### Procedimiento de diagnóstico
 
 ```markdown
 1. Comprobar la disponibilidad del objetivo.
@@ -131,7 +131,7 @@ monitorizados mediante Prometheus y Node Exporter.
 4. Revisar los logs del servicio.
 ```
 
-### Información del entorno
+#### Información del entorno
 
 ```markdown
 | Elemento | Valor |
@@ -144,7 +144,7 @@ monitorizados mediante Prometheus y Node Exporter.
 
 ---
 
-# Cuándo no utilizar un panel Text
+## Cuándo no utilizar un panel Text
 
 El panel Text no debe utilizarse como sustituto de una métrica cuando se necesita:
 
@@ -172,11 +172,11 @@ El panel Text puede acompañar a estos paneles, pero no reemplaza sus funciones.
 
 ---
 
-# Modos de visualización
+## Modos de visualización
 
 El panel Text puede ofrecer diferentes modos de edición y representación.
 
-## Texto plano
+### Texto plano
 
 Muestra el contenido sin formato especial.
 
@@ -190,7 +190,7 @@ Fuente de datos: Prometheus.
 
 Es adecuado para mensajes breves.
 
-## Markdown
+### Markdown
 
 Permite utilizar:
 
@@ -207,7 +207,7 @@ Permite utilizar:
 Ejemplo:
 
 ```markdown
-# Monitorización de servidores
+## Monitorización de servidores
 
 **Entorno:** laboratorio
 
@@ -219,7 +219,7 @@ Ejemplo:
 
 Markdown suele ser el modo recomendado para documentación técnica.
 
-## HTML
+### HTML
 
 Permite utilizar elementos HTML si la versión y la configuración de Grafana lo permiten.
 
@@ -234,9 +234,9 @@ El uso de HTML debe realizarse con precaución porque puede estar restringido po
 
 ---
 
-# Crear un panel Text
+## Crear un panel Text
 
-## Procedimiento general
+### Procedimiento general
 
 1. Abrir Grafana.
 2. Acceder a un dashboard.
@@ -249,20 +249,20 @@ El uso de HTML debe realizarse con precaución porque puede estar restringido po
 9. Guardar el panel.
 10. Guardar el dashboard.
 
-## Contenido inicial recomendado
+### Contenido inicial recomendado
 
 ```markdown
-# Dashboard de monitorización
+## Dashboard de monitorización
 
 Este dashboard muestra el estado de los servidores Linux
 del entorno de laboratorio.
 
-## Fuente de datos
+### Fuente de datos
 
 - Prometheus
 - Node Exporter
 
-## Métricas principales
+### Métricas principales
 
 - Disponibilidad
 - CPU
@@ -273,27 +273,27 @@ del entorno de laboratorio.
 
 ---
 
-# Sintaxis básica de Markdown
+## Sintaxis básica de Markdown
 
-## Títulos
+### Títulos
 
 ```markdown
-# Título principal
+## Título principal
 
-## Sección
+### Sección
 
-### Subsección
+#### Subsección
 ```
 
 Resultado conceptual:
 
-# Título principal
+## Título principal
 
-## Sección
+### Sección
 
-### Subsección
+#### Subsección
 
-## Negrita
+### Negrita
 
 ```markdown
 **Texto importante**
@@ -303,7 +303,7 @@ Resultado:
 
 **Texto importante**
 
-## Cursiva
+### Cursiva
 
 ```markdown
 *Texto destacado*
@@ -313,7 +313,7 @@ Resultado:
 
 *Texto destacado*
 
-## Listas sin ordenar
+### Listas sin ordenar
 
 ```markdown
 - CPU
@@ -322,7 +322,7 @@ Resultado:
 - Red
 ```
 
-## Listas ordenadas
+### Listas ordenadas
 
 ```markdown
 1. Comprobar la alerta.
@@ -331,19 +331,19 @@ Resultado:
 4. Documentar el resultado.
 ```
 
-## Enlaces
+### Enlaces
 
 ```markdown
 [Documentación de Grafana](https://grafana.com/docs/)
 ```
 
-## Código en línea
+### Código en línea
 
 ```markdown
 Utiliza la consulta `up` para comprobar la disponibilidad.
 ```
 
-## Bloques de código
+### Bloques de código
 
 ````markdown
 ```promql
@@ -351,13 +351,13 @@ sum(up)
 ```
 ````
 
-## Separadores
+### Separadores
 
 ```markdown
 ---
 ```
 
-## Citas
+### Citas
 
 ```markdown
 > Los paneles deben documentar el contexto necesario
@@ -366,7 +366,7 @@ sum(up)
 
 ---
 
-# Crear tablas
+## Crear tablas
 
 Las tablas son útiles para mostrar información estructurada.
 
@@ -390,7 +390,7 @@ Resultado:
 | Almacenamiento | % | 80 |
 | Disponibilidad | % | 90 |
 
-## Recomendaciones para las tablas
+### Recomendaciones para las tablas
 
 - Utilizar pocas columnas.
 - Mantener los nombres breves.
@@ -401,7 +401,7 @@ Resultado:
 
 ---
 
-# Crear bloques de código
+## Crear bloques de código
 
 Un bloque de código puede documentar:
 
@@ -411,7 +411,7 @@ Un bloque de código puede documentar:
 - Fragmentos de configuración.
 - Procedimientos de diagnóstico.
 
-## Consulta PromQL
+### Consulta PromQL
 
 ````markdown
 ```promql
@@ -419,7 +419,7 @@ Un bloque de código puede documentar:
 ```
 ````
 
-## Comando de Linux
+### Comando de Linux
 
 ````markdown
 ```bash
@@ -427,7 +427,7 @@ systemctl status node_exporter
 ```
 ````
 
-## Configuración
+### Configuración
 
 ````markdown
 ```text
@@ -449,7 +449,7 @@ Esto mejora la legibilidad y el resaltado de sintaxis.
 
 ---
 
-# Utilizar variables de dashboard
+## Utilizar variables de dashboard
 
 Las variables permiten mostrar información dinámica en un panel Text.
 
@@ -462,10 +462,10 @@ $service
 $environment
 ```
 
-## Ejemplo de texto dinámico
+### Ejemplo de texto dinámico
 
 ```markdown
-# Monitorización de `$instance`
+## Monitorización de `$instance`
 
 Este panel muestra información de la instancia seleccionada:
 
@@ -476,10 +476,10 @@ Este panel muestra información de la instancia seleccionada:
 
 Cuando el usuario cambia la variable, el texto puede actualizarse.
 
-## Ejemplo con una variable de servicio
+### Ejemplo con una variable de servicio
 
 ```markdown
-## Servicio seleccionado
+### Servicio seleccionado
 
 El dashboard está mostrando actualmente:
 
@@ -489,7 +489,7 @@ Revisa los paneles inferiores para consultar su disponibilidad,
 rendimiento y consumo de recursos.
 ```
 
-## Precauciones
+### Precauciones
 
 - Comprobar que la variable existe.
 - Utilizar exactamente el nombre configurado.
@@ -499,7 +499,7 @@ rendimiento y consumo de recursos.
 
 ---
 
-# Utilizar enlaces
+## Utilizar enlaces
 
 Un panel Text puede incluir enlaces a:
 
@@ -512,10 +512,10 @@ Un panel Text puede incluir enlaces a:
 - Paneles relacionados.
 - Procedimientos de operación.
 
-## Ejemplo
+### Ejemplo
 
 ```markdown
-## Enlaces útiles
+### Enlaces útiles
 
 - [Documentación de Grafana](https://grafana.com/docs/)
 - [Documentación de Prometheus](https://prometheus.io/docs/)
@@ -523,7 +523,7 @@ Un panel Text puede incluir enlaces a:
 - [Repositorio de dashboards](https://example.com/repositorio/dashboards)
 ```
 
-## Enlaces internos
+### Enlaces internos
 
 Según la configuración, pueden utilizarse enlaces a otros dashboards:
 
@@ -533,7 +533,7 @@ Según la configuración, pueden utilizarse enlaces a otros dashboards:
 
 La URL exacta depende de la instancia de Grafana y del identificador del dashboard.
 
-## Buenas prácticas
+### Buenas prácticas
 
 - Utilizar textos descriptivos.
 - No mostrar URLs enormes si no son necesarias.
@@ -544,19 +544,19 @@ La URL exacta depende de la instancia de Grafana y del identificador del dashboa
 
 ---
 
-# Crear una portada de dashboard
+## Crear una portada de dashboard
 
 Un panel Text puede colocarse en la parte superior como portada.
 
-## Ejemplo
+### Ejemplo
 
 ```markdown
-# Monitorización de infraestructura
+## Monitorización de infraestructura
 
 Este dashboard resume el estado de los servidores Linux
 del entorno de producción.
 
-## Información del entorno
+### Información del entorno
 
 | Elemento | Valor |
 |---|---|
@@ -566,7 +566,7 @@ del entorno de producción.
 | Actualización | Cada 30 segundos |
 | Responsable | Equipo de operaciones |
 
-## Lectura recomendada
+### Lectura recomendada
 
 1. Comprobar la disponibilidad.
 2. Revisar los indicadores de CPU y memoria.
@@ -574,7 +574,7 @@ del entorno de producción.
 4. Consultar los paneles de detalle.
 ```
 
-## Ubicación recomendada
+### Ubicación recomendada
 
 Colocar la portada:
 
@@ -586,14 +586,14 @@ Debe ser visible antes de los paneles de métricas.
 
 ---
 
-# Documentar unidades y umbrales
+## Documentar unidades y umbrales
 
 El panel Text puede explicar cómo interpretar los valores.
 
-## Ejemplo
+### Ejemplo
 
 ```markdown
-## Interpretación de los colores
+### Interpretación de los colores
 
 | Color | Significado |
 |---|---|
@@ -601,7 +601,7 @@ El panel Text puede explicar cómo interpretar los valores.
 | Amarillo | Valor elevado; requiere revisión |
 | Rojo | Situación crítica o posible incidencia |
 
-## Umbrales
+### Umbrales
 
 - CPU:
   - Advertencia: 70 %
@@ -614,7 +614,7 @@ El panel Text puede explicar cómo interpretar los valores.
   - Crítico: 90 %
 ```
 
-## Importante
+### Importante
 
 Los umbrales visuales del texto deben coincidir con los configurados en los paneles.
 
@@ -632,22 +632,22 @@ CPU crítica a partir del 90 %
 
 ---
 
-# Documentar consultas PromQL
+## Documentar consultas PromQL
 
 Un panel Text puede incluir las consultas principales del dashboard.
 
-## Ejemplo
+### Ejemplo
 
 ````markdown
-## Consultas principales
+### Consultas principales
 
-### Disponibilidad
+#### Disponibilidad
 
 ```promql
 sum(up)
 ```
 
-### Uso de CPU
+#### Uso de CPU
 
 ```promql
 100 - (
@@ -657,7 +657,7 @@ sum(up)
 )
 ```
 
-### Uso de memoria
+#### Uso de memoria
 
 ```promql
 100 * (
@@ -669,7 +669,7 @@ sum(up)
 ```
 ````
 
-## Recomendaciones
+### Recomendaciones
 
 - Documentar únicamente las consultas importantes.
 - Añadir una breve explicación.
@@ -680,14 +680,14 @@ sum(up)
 
 ---
 
-# Crear instrucciones de operación
+## Crear instrucciones de operación
 
 El panel Text puede contener procedimientos para operadores.
 
-## Ejemplo
+### Ejemplo
 
 ```markdown
-# Procedimiento ante una alerta de CPU
+## Procedimiento ante una alerta de CPU
 
 1. Comprueba qué instancia presenta el valor elevado.
 2. Revisa la evolución en el panel de CPU.
@@ -698,7 +698,7 @@ El panel Text puede contener procedimientos para operadores.
 7. Documenta las acciones realizadas.
 ```
 
-## Comandos relacionados
+### Comandos relacionados
 
 ````markdown
 ```bash
@@ -709,44 +709,44 @@ journalctl -u nombre-del-servicio --since "15 minutes ago"
 ```
 ````
 
-## Advertencia
+### Advertencia
 
 Los comandos mostrados deben adaptarse al entorno. No se deben incluir comandos destructivos o peligrosos sin una explicación clara y autorización.
 
 ---
 
-# Crear una guía de diagnóstico
+## Crear una guía de diagnóstico
 
-## Ejemplo
+### Ejemplo
 
 ```markdown
-# Diagnóstico de un objetivo caído
+## Diagnóstico de un objetivo caído
 
-## 1. Comprobar Prometheus
+### 1. Comprobar Prometheus
 
 ```bash
 systemctl status prometheus
 ```
 
-## 2. Comprobar Node Exporter
+### 2. Comprobar Node Exporter
 
 ```bash
 systemctl status node_exporter
 ```
 
-## 3. Comprobar conectividad
+### 3. Comprobar conectividad
 
 ```bash
 curl http://localhost:9100/metrics
 ```
 
-## 4. Comprobar desde Prometheus
+### 4. Comprobar desde Prometheus
 
 ```promql
 up
 ```
 
-## 5. Revisar los logs
+### 5. Revisar los logs
 
 ```bash
 journalctl -u node_exporter --since "15 minutes ago"
@@ -757,11 +757,11 @@ Este contenido debe adaptarse a la arquitectura real del laboratorio.
 
 ---
 
-# Mostrar avisos y advertencias
+## Mostrar avisos y advertencias
 
 Un panel Text puede destacar información importante.
 
-## Ejemplo
+### Ejemplo
 
 ```markdown
 > **Aviso de mantenimiento**
@@ -770,7 +770,7 @@ Un panel Text puede destacar información importante.
 > Es normal observar valores `0` o huecos temporales en los paneles.
 ```
 
-## Ejemplo de advertencia de seguridad
+### Ejemplo de advertencia de seguridad
 
 ```markdown
 > **Información sensible**
@@ -779,7 +779,7 @@ Un panel Text puede destacar información importante.
 > No debe compartirse fuera de la organización.
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Utilizar avisos breves.
 - Colocarlos cerca de los paneles afectados.
@@ -789,21 +789,21 @@ Un panel Text puede destacar información importante.
 
 ---
 
-# Crear una guía para alumnos
+## Crear una guía para alumnos
 
 El panel Text puede servir como instrucciones de laboratorio.
 
-## Ejemplo
+### Ejemplo
 
 ```markdown
-# Práctica: análisis de recursos
+## Práctica: análisis de recursos
 
-## Objetivo
+### Objetivo
 
 Analizar el uso de CPU, memoria y almacenamiento
 durante los últimos 30 minutos.
 
-## Tareas
+### Tareas
 
 1. Identifica la instancia con mayor CPU.
 2. Comprueba la evolución de la memoria.
@@ -812,7 +812,7 @@ durante los últimos 30 minutos.
 5. Observa el cambio en el dashboard.
 6. Documenta tus conclusiones.
 
-## Evidencias
+### Evidencias
 
 - Captura del panel de CPU.
 - Captura del panel de memoria.
@@ -824,14 +824,14 @@ Este tipo de panel permite que las instrucciones estén junto a las métricas qu
 
 ---
 
-# Crear separadores visuales
+## Crear separadores visuales
 
 Los paneles Text pueden utilizarse para separar secciones.
 
-## Ejemplo
+### Ejemplo
 
 ```markdown
-# Estado general
+## Estado general
 
 Los siguientes paneles muestran los indicadores principales.
 ```
@@ -839,7 +839,7 @@ Los siguientes paneles muestran los indicadores principales.
 Después:
 
 ```markdown
-# Recursos del sistema
+## Recursos del sistema
 
 Esta sección muestra CPU, memoria y almacenamiento.
 ```
@@ -847,12 +847,12 @@ Esta sección muestra CPU, memoria y almacenamiento.
 Después:
 
 ```markdown
-# Red
+## Red
 
 Esta sección muestra el tráfico y el estado de las interfaces.
 ```
 
-## Recomendación
+### Recomendación
 
 Usar separadores cuando el dashboard tenga muchos paneles.
 
@@ -860,14 +860,14 @@ No crear demasiadas secciones, porque una estructura excesivamente fragmentada d
 
 ---
 
-# Mostrar información dinámica de tiempo
+## Mostrar información dinámica de tiempo
 
 Grafana ofrece variables globales o funciones que pueden estar disponibles según la versión y el contexto.
 
 También se puede documentar el rango seleccionado utilizando texto fijo:
 
 ```markdown
-## Periodo de análisis
+### Periodo de análisis
 
 Utiliza el selector temporal del dashboard para cambiar
 el intervalo de consulta.
@@ -883,18 +883,18 @@ La forma más fiable consiste en:
 
 ---
 
-# Utilizar HTML con precaución
+## Utilizar HTML con precaución
 
 HTML puede permitir diseños personalizados, pero introduce riesgos y limitaciones.
 
-## Ejemplo sencillo
+### Ejemplo sencillo
 
 ```html
 <h2>Monitorización de infraestructura</h2>
 <p>Entorno de laboratorio.</p>
 ```
 
-## Posibles restricciones
+### Posibles restricciones
 
 Según la versión y la configuración:
 
@@ -905,7 +905,7 @@ Según la versión y la configuración:
 - El contenido activo puede estar deshabilitado.
 - El resultado puede variar entre versiones.
 
-## Recomendación
+### Recomendación
 
 Utilizar Markdown para la documentación habitual.
 
@@ -923,7 +923,7 @@ No incluir:
 
 ---
 
-# Seguridad del panel Text
+## Seguridad del panel Text
 
 Aunque el panel Text parezca estático, puede contener información sensible.
 
@@ -939,7 +939,7 @@ No incluir:
 - Enlaces sin protección.
 - Credenciales dentro de URLs.
 
-## Ejemplo incorrecto
+### Ejemplo incorrecto
 
 ```markdown
 Token de Prometheus:
@@ -949,14 +949,14 @@ eyJhbGciOi...
 ```
 ```
 
-## Ejemplo correcto
+### Ejemplo correcto
 
 ```markdown
 Para consultar la API se necesita un token con permisos de lectura.
 El token debe almacenarse en una variable segura y nunca en el dashboard.
 ```
 
-## Compartición
+### Compartición
 
 Antes de compartir un dashboard, revisar:
 
@@ -971,17 +971,17 @@ Antes de compartir un dashboard, revisar:
 
 ---
 
-# Ejemplo completo 1: portada de monitorización
+## Ejemplo completo 1: portada de monitorización
 
-## Contenido
+### Contenido
 
 ```markdown
-# Monitorización de infraestructura
+## Monitorización de infraestructura
 
 Este dashboard muestra el estado operativo de los servidores
 Linux monitorizados mediante Prometheus y Node Exporter.
 
-## Entorno
+### Entorno
 
 | Elemento | Valor |
 |---|---|
@@ -991,7 +991,7 @@ Linux monitorizados mediante Prometheus y Node Exporter.
 | Rango recomendado | Última hora |
 | Actualización | Según la configuración del dashboard |
 
-## Paneles disponibles
+### Paneles disponibles
 
 1. Disponibilidad de los objetivos.
 2. Uso de CPU.
@@ -1000,7 +1000,7 @@ Linux monitorizados mediante Prometheus y Node Exporter.
 5. Tráfico de red.
 6. Tendencias temporales.
 
-## Interpretación
+### Interpretación
 
 - Verde: situación normal.
 - Amarillo: valor elevado; revisar.
@@ -1011,14 +1011,14 @@ Linux monitorizados mediante Prometheus y Node Exporter.
 
 ---
 
-# Ejemplo completo 2: documentación de recursos
+## Ejemplo completo 2: documentación de recursos
 
-## Contenido
+### Contenido
 
 ```markdown
-# Recursos del sistema
+## Recursos del sistema
 
-## CPU
+### CPU
 
 El porcentaje de CPU se calcula a partir del tiempo
 que las CPUs no están en estado `idle`.
@@ -1033,7 +1033,7 @@ Consulta utilizada:
 )
 ```
 
-## Memoria
+### Memoria
 
 El uso de memoria se calcula a partir de la memoria disponible
 y la memoria total.
@@ -1049,7 +1049,7 @@ Consulta utilizada:
 )
 ```
 
-## Almacenamiento
+### Almacenamiento
 
 El uso del sistema de ficheros raíz excluye `tmpfs` y `overlay`.
 
@@ -1073,14 +1073,14 @@ Consulta utilizada:
 
 ---
 
-# Ejemplo completo 3: procedimiento operativo
+## Ejemplo completo 3: procedimiento operativo
 
-## Contenido
+### Contenido
 
 ```markdown
-# Procedimiento ante una incidencia
+## Procedimiento ante una incidencia
 
-## Paso 1: disponibilidad
+### Paso 1: disponibilidad
 
 Comprueba si el objetivo aparece como disponible:
 
@@ -1088,7 +1088,7 @@ Comprueba si el objetivo aparece como disponible:
 up
 ```
 
-## Paso 2: recursos
+### Paso 2: recursos
 
 Revisa:
 
@@ -1097,12 +1097,12 @@ Revisa:
 - Almacenamiento.
 - Tráfico de red.
 
-## Paso 3: tendencia
+### Paso 3: tendencia
 
 Amplía el rango temporal para comprobar
 cuándo comenzó el problema.
 
-## Paso 4: sistema operativo
+### Paso 4: sistema operativo
 
 Ejecuta las comprobaciones autorizadas:
 
@@ -1112,7 +1112,7 @@ free -h
 df -h
 ```
 
-## Paso 5: documentación
+### Paso 5: documentación
 
 Registra:
 
@@ -1126,13 +1126,13 @@ Registra:
 
 ---
 
-# Ejemplo de sesión 1: crear una portada
+## Ejemplo de sesión 1: crear una portada
 
-## Objetivo
+### Objetivo
 
 Añadir una portada documentada al dashboard principal.
 
-## Pasos
+### Pasos
 
 1. Abrir el dashboard.
 2. Añadir un panel.
@@ -1141,12 +1141,12 @@ Añadir una portada documentada al dashboard principal.
 5. Introducir:
 
 ```markdown
-# Dashboard de monitorización
+## Dashboard de monitorización
 
 Este dashboard muestra el estado de los servidores Linux
 del entorno de laboratorio.
 
-## Orden de lectura
+### Orden de lectura
 
 1. Disponibilidad.
 2. CPU y memoria.
@@ -1161,7 +1161,7 @@ del entorno de laboratorio.
 9. Guardar el panel.
 10. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Añade una tabla del entorno.
 2. Añade una sección de interpretación.
@@ -1171,16 +1171,16 @@ del entorno de laboratorio.
 
 ---
 
-# Ejemplo de sesión 2: documentar umbrales
+## Ejemplo de sesión 2: documentar umbrales
 
-## Objetivo
+### Objetivo
 
 Crear un panel Text que explique los colores utilizados en el dashboard.
 
-## Contenido
+### Contenido
 
 ```markdown
-# Interpretación de umbrales
+## Interpretación de umbrales
 
 | Métrica | Verde | Amarillo | Rojo |
 |---|---:|---:|---:|
@@ -1193,7 +1193,7 @@ Crear un panel Text que explique los colores utilizados en el dashboard.
 > En producción deben adaptarse al comportamiento del servicio.
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Colócalo junto a los Gauges.
@@ -1204,24 +1204,24 @@ Crear un panel Text que explique los colores utilizados en el dashboard.
 
 ---
 
-# Ejemplo de sesión 3: documentar consultas PromQL
+## Ejemplo de sesión 3: documentar consultas PromQL
 
-## Objetivo
+### Objetivo
 
 Crear una sección de referencia para las consultas principales.
 
-## Contenido
+### Contenido
 
 ````markdown
-# Consultas de referencia
+## Consultas de referencia
 
-## Disponibilidad
+### Disponibilidad
 
 ```promql
 sum(up)
 ```
 
-## CPU
+### CPU
 
 ```promql
 100 - (
@@ -1231,7 +1231,7 @@ sum(up)
 )
 ```
 
-## Memoria
+### Memoria
 
 ```promql
 100 * (
@@ -1242,19 +1242,19 @@ sum(up)
 )
 ```
 
-## Carga del sistema
+### Carga del sistema
 
 ```promql
 node_load1
 ```
 
-## Nota
+### Nota
 
 Las consultas se ejecutan contra la fuente de datos Prometheus.
 El intervalo `[5m]` representa la ventana utilizada para calcular tasas.
 ````
 
-## Actividades
+### Actividades
 
 1. Añade las consultas utilizadas en tu dashboard.
 2. Indica la unidad de cada resultado.
@@ -1264,13 +1264,13 @@ El intervalo `[5m]` representa la ventana utilizada para calcular tasas.
 
 ---
 
-# Ejemplo de sesión 4: utilizar variables
+## Ejemplo de sesión 4: utilizar variables
 
-## Objetivo
+### Objetivo
 
 Mostrar en el texto la instancia seleccionada.
 
-## Requisito
+### Requisito
 
 Debe existir una variable llamada:
 
@@ -1278,10 +1278,10 @@ Debe existir una variable llamada:
 instance
 ```
 
-## Contenido
+### Contenido
 
 ```markdown
-# Servidor seleccionado
+## Servidor seleccionado
 
 El dashboard está mostrando información de:
 
@@ -1292,7 +1292,7 @@ Utiliza el selector superior para cambiar
 la instancia analizada.
 ```
 
-## Actividades
+### Actividades
 
 1. Crea la variable `instance`.
 2. Añade el panel Text.
@@ -1303,22 +1303,22 @@ la instancia analizada.
 
 ---
 
-# Ejemplo de sesión 5: crear un procedimiento de incidencia
+## Ejemplo de sesión 5: crear un procedimiento de incidencia
 
-## Objetivo
+### Objetivo
 
 Crear instrucciones para investigar un servidor con CPU elevada.
 
-## Contenido
+### Contenido
 
 ```markdown
-# Procedimiento: CPU elevada
+## Procedimiento: CPU elevada
 
-## Indicador inicial
+### Indicador inicial
 
 Revisa el panel **Uso de CPU por instancia**.
 
-## Comprobaciones
+### Comprobaciones
 
 1. Identifica la instancia afectada.
 2. Amplía el rango temporal.
@@ -1326,7 +1326,7 @@ Revisa el panel **Uso de CPU por instancia**.
 4. Revisa la carga del sistema.
 5. Consulta los procesos con mayor consumo.
 
-## Comandos autorizados
+### Comandos autorizados
 
 ```bash
 uptime
@@ -1334,7 +1334,7 @@ top
 ps aux --sort=-%cpu | head
 ```
 
-## Documentar
+### Documentar
 
 - Instancia afectada.
 - Hora de inicio.
@@ -1344,7 +1344,7 @@ ps aux --sort=-%cpu | head
 - Resultado.
 ```
 
-## Actividades
+### Actividades
 
 1. Añade el procedimiento al dashboard.
 2. Genera carga controlada en el laboratorio.
@@ -1354,23 +1354,23 @@ ps aux --sort=-%cpu | head
 
 ---
 
-# Ejemplo de sesión 6: crear un panel Text para una práctica
+## Ejemplo de sesión 6: crear un panel Text para una práctica
 
-## Objetivo
+### Objetivo
 
 Utilizar el panel Text como guía de trabajo para los alumnos.
 
-## Contenido
+### Contenido
 
 ```markdown
-# Práctica: análisis del servidor
+## Práctica: análisis del servidor
 
-## Objetivo
+### Objetivo
 
 Analizar la disponibilidad y el consumo de recursos
 durante los últimos 30 minutos.
 
-## Tareas
+### Tareas
 
 1. Comprueba el número de objetivos disponibles.
 2. Identifica la instancia con mayor uso de CPU.
@@ -1381,7 +1381,7 @@ durante los últimos 30 minutos.
 7. Detén la carga.
 8. Documenta la recuperación.
 
-## Evidencias
+### Evidencias
 
 - Captura del dashboard inicial.
 - Captura durante la carga.
@@ -1390,7 +1390,7 @@ durante los últimos 30 minutos.
 - Conclusiones.
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Colócalo en la parte superior.
@@ -1400,16 +1400,16 @@ durante los últimos 30 minutos.
 
 ---
 
-# Ejemplo de sesión 7: crear enlaces internos
+## Ejemplo de sesión 7: crear enlaces internos
 
-## Objetivo
+### Objetivo
 
 Añadir enlaces a otros dashboards relacionados.
 
-## Contenido
+### Contenido
 
 ```markdown
-# Dashboards relacionados
+## Dashboards relacionados
 
 - [Resumen de infraestructura](/d/ID_RESUMEN/infraestructura)
 - [Monitorización de red](/d/ID_RED/redes)
@@ -1418,7 +1418,7 @@ Añadir enlaces a otros dashboards relacionados.
 
 Los identificadores son ejemplos. Deben sustituirse por las rutas reales de la instancia.
 
-## Actividades
+### Actividades
 
 1. Crea tres dashboards relacionados.
 2. Copia sus enlaces.
@@ -1429,16 +1429,16 @@ Los identificadores son ejemplos. Deben sustituirse por las rutas reales de la i
 
 ---
 
-# Ejemplo de sesión 8: revisar seguridad del contenido
+## Ejemplo de sesión 8: revisar seguridad del contenido
 
-## Objetivo
+### Objetivo
 
 Identificar información que no debe incluirse en un panel Text.
 
-## Contenido incorrecto
+### Contenido incorrecto
 
 ```markdown
-# Acceso a la API
+## Acceso a la API
 
 Token:
 
@@ -1453,10 +1453,10 @@ https://usuario:contraseña@example.com
 ```
 ```
 
-## Contenido corregido
+### Contenido corregido
 
 ```markdown
-# Acceso a la API
+## Acceso a la API
 
 La API requiere autenticación.
 
@@ -1467,7 +1467,7 @@ La API requiere autenticación.
 - Revócalo cuando ya no sea necesario.
 ```
 
-## Actividades
+### Actividades
 
 1. Revisa los paneles Text existentes.
 2. Busca tokens, contraseñas y URLs sensibles.
@@ -1477,23 +1477,23 @@ La API requiere autenticación.
 
 ---
 
-# Ejemplo de sesión 9: comparar Markdown y HTML
+## Ejemplo de sesión 9: comparar Markdown y HTML
 
-## Objetivo
+### Objetivo
 
 Observar las diferencias entre los modos de edición.
 
-## Markdown
+### Markdown
 
 ```markdown
-## Estado del laboratorio
+### Estado del laboratorio
 
 - Prometheus: disponible
 - Grafana: disponible
 - Node Exporter: disponible
 ```
 
-## HTML
+### HTML
 
 ```html
 <h2>Estado del laboratorio</h2>
@@ -1504,7 +1504,7 @@ Observar las diferencias entre los modos de edición.
 </ul>
 ```
 
-## Actividades
+### Actividades
 
 1. Crea un panel Markdown.
 2. Crea un panel HTML.
@@ -1515,13 +1515,13 @@ Observar las diferencias entre los modos de edición.
 
 ---
 
-# Ejemplo de sesión 10: exportar un dashboard documentado
+## Ejemplo de sesión 10: exportar un dashboard documentado
 
-## Objetivo
+### Objetivo
 
 Conservar una copia del dashboard con sus paneles Text.
 
-## Pasos
+### Pasos
 
 1. Abrir el dashboard.
 2. Comprobar todos los paneles Text.
@@ -1545,7 +1545,7 @@ jq empty dashboard-infraestructura-documentado.json
 10. Importar una copia en otro dashboard.
 11. Comprobar que el contenido Text se conserva.
 
-## Actividades
+### Actividades
 
 1. Exporta el dashboard.
 2. Importa una copia.
@@ -1556,13 +1556,13 @@ jq empty dashboard-infraestructura-documentado.json
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Colocar la documentación donde sea visible
+### Colocar la documentación donde sea visible
 
 La portada debe estar normalmente al principio del dashboard.
 
-## Utilizar títulos claros
+### Utilizar títulos claros
 
 Ejemplos:
 
@@ -1574,7 +1574,7 @@ Consultas PromQL
 Dashboards relacionados
 ```
 
-## Mantener el contenido breve
+### Mantener el contenido breve
 
 Un panel Text no debe convertirse en un manual completo.
 
@@ -1586,7 +1586,7 @@ Para contenidos extensos:
 - Utilizar un repositorio.
 - Utilizar un wiki.
 
-## Mantener sincronizada la documentación
+### Mantener sincronizada la documentación
 
 Actualizar el panel cuando cambien:
 
@@ -1598,7 +1598,7 @@ Actualizar el panel cuando cambien:
 - Enlaces.
 - Responsables.
 
-## Utilizar Markdown preferentemente
+### Utilizar Markdown preferentemente
 
 Markdown suele ofrecer un equilibrio adecuado entre:
 
@@ -1608,11 +1608,11 @@ Markdown suele ofrecer un equilibrio adecuado entre:
 - Portabilidad.
 - Sencillez.
 
-## No incluir secretos
+### No incluir secretos
 
 Los paneles Text forman parte del dashboard y pueden exportarse.
 
-## Documentar las unidades
+### Documentar las unidades
 
 Indicar si una métrica se expresa en:
 
@@ -1624,11 +1624,11 @@ Segundos
 Grados Celsius
 ```
 
-## Utilizar tablas pequeñas
+### Utilizar tablas pequeñas
 
 Las tablas muy anchas dificultan la lectura en pantallas pequeñas.
 
-## Revisar el dashboard completo
+### Revisar el dashboard completo
 
 La documentación debe concordar con:
 
@@ -1641,9 +1641,9 @@ La documentación debe concordar con:
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## El texto no se muestra correctamente
+### El texto no se muestra correctamente
 
 Comprobar:
 
@@ -1655,7 +1655,7 @@ Comprobar:
 - La previsualización.
 - La versión de Grafana.
 
-## La tabla aparece deformada
+### La tabla aparece deformada
 
 Revisar:
 
@@ -1674,7 +1674,7 @@ Ejemplo válido:
 | Grafana | Disponible |
 ```
 
-## El enlace no funciona
+### El enlace no funciona
 
 Comprobar:
 
@@ -1685,7 +1685,7 @@ Comprobar:
 - Organización.
 - Acceso de la cuenta actual.
 
-## La variable no se sustituye
+### La variable no se sustituye
 
 Comprobar:
 
@@ -1696,7 +1696,7 @@ Comprobar:
 - Que se ha guardado el dashboard.
 - Que la versión de Grafana admite esa sustitución en el panel Text.
 
-## El HTML no aparece
+### El HTML no aparece
 
 Posibles causas:
 
@@ -1708,7 +1708,7 @@ Posibles causas:
 
 Utilizar Markdown como alternativa.
 
-## El contenido es demasiado largo
+### El contenido es demasiado largo
 
 Soluciones:
 
@@ -1718,7 +1718,7 @@ Soluciones:
 - Añadir un enlace.
 - Utilizar una página de documentación externa.
 
-## El contenido contiene información sensible
+### El contenido contiene información sensible
 
 Realizar una revisión inmediata:
 
@@ -1731,7 +1731,7 @@ Realizar una revisión inmediata:
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -1743,9 +1743,9 @@ Guardar el contenido utilizado:
 
 ```bash
 cat > ~/laboratorio-grafana/evidencias/panel-texto/contenido.md <<'EOF'
-# Dashboard de monitorización
+## Dashboard de monitorización
 
-## Entorno
+### Entorno
 
 | Elemento | Valor |
 |---|---|
@@ -1753,7 +1753,7 @@ cat > ~/laboratorio-grafana/evidencias/panel-texto/contenido.md <<'EOF'
 | Fuente de datos | Prometheus |
 | Exporter | Node Exporter |
 
-## Interpretación
+### Interpretación
 
 - Verde: estado normal
 - Amarillo: requiere revisión
@@ -1807,23 +1807,23 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear un dashboard documentado mediante paneles Text y paneles de métricas.
 
-## Panel Text 1: portada
+### Panel Text 1: portada
 
 Contenido mínimo:
 
 ```markdown
-# Monitorización de servidores Linux
+## Monitorización de servidores Linux
 
 Este dashboard muestra el estado de los servidores
 del entorno de laboratorio.
 
-## Paneles
+### Paneles
 
 - Disponibilidad.
 - CPU.
@@ -1833,7 +1833,7 @@ del entorno de laboratorio.
 - Tendencias.
 ```
 
-## Panel Text 2: información del entorno
+### Panel Text 2: información del entorno
 
 Crear una tabla:
 
@@ -1847,26 +1847,26 @@ Crear una tabla:
 | Responsable | Equipo de sistemas |
 ```
 
-## Panel Text 3: interpretación
+### Panel Text 3: interpretación
 
 ```markdown
-# Interpretación de colores
+## Interpretación de colores
 
 - Verde: estado normal.
 - Amarillo: valor elevado.
 - Rojo: situación crítica.
 
-## Umbrales
+### Umbrales
 
 - CPU: advertencia al 70 %, crítico al 90 %.
 - Memoria: advertencia al 70 %, crítico al 90 %.
 - Disco: advertencia al 80 %, crítico al 90 %.
 ```
 
-## Panel Text 4: procedimiento
+### Panel Text 4: procedimiento
 
 ```markdown
-# Procedimiento ante una incidencia
+## Procedimiento ante una incidencia
 
 1. Comprobar `up`.
 2. Identificar la instancia afectada.
@@ -1876,7 +1876,7 @@ Crear una tabla:
 6. Documentar el resultado.
 ```
 
-## Paneles de métricas
+### Paneles de métricas
 
 Añadir también:
 
@@ -1888,7 +1888,7 @@ Time series de CPU
 Time series de red
 ```
 
-## Tareas
+### Tareas
 
 1. Crear el dashboard.
 2. Crear los paneles Text.
@@ -1907,7 +1907,7 @@ Time series de red
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -1930,7 +1930,7 @@ Time series de red
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - El panel Text añade contexto y documentación a un dashboard.
 - No sustituye a los paneles que representan métricas.
@@ -1955,7 +1955,7 @@ Time series de red
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué finalidad tiene un panel Text?
 2. ¿Qué diferencia existe entre un panel Text y un panel Stat?
@@ -1985,7 +1985,7 @@ Time series de red
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear dashboards documentados y comprensibles.
 

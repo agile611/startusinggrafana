@@ -21,7 +21,7 @@ El objetivo no es únicamente crear gráficos. El objetivo es construir un dashb
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar este laboratorio, el alumno podrá:
 
@@ -47,7 +47,7 @@ Al finalizar este laboratorio, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 Un dashboard de monitorización debe responder rápidamente a preguntas operativas como:
 
@@ -90,7 +90,7 @@ La estructura puede adaptarse al entorno de prácticas.
 
 ---
 
-# Arquitectura del laboratorio
+## Arquitectura del laboratorio
 
 La arquitectura mínima recomendada es:
 
@@ -110,9 +110,9 @@ La arquitectura mínima recomendada es:
                      +---------------+
 ```
 
-## Componentes
+### Componentes
 
-### Grafana
+#### Grafana
 
 Se utiliza para:
 
@@ -123,7 +123,7 @@ Se utiliza para:
 - Aplicar transformaciones.
 - Exportar e importar dashboards.
 
-### Prometheus
+#### Prometheus
 
 Se utiliza para:
 
@@ -132,7 +132,7 @@ Se utiliza para:
 - Ejecutar consultas PromQL.
 - Proporcionar los datos a Grafana.
 
-### Node Exporter
+#### Node Exporter
 
 Se utiliza para exponer métricas del sistema operativo:
 
@@ -146,7 +146,7 @@ Se utiliza para exponer métricas del sistema operativo:
 
 ---
 
-# Requisitos previos
+## Requisitos previos
 
 Antes de comenzar, comprobar:
 
@@ -158,7 +158,7 @@ Antes de comenzar, comprobar:
 - El alumno tiene permisos para crear dashboards.
 - Existe un entorno de laboratorio autorizado.
 
-## Comprobar servicios
+### Comprobar servicios
 
 Los nombres pueden variar según la instalación.
 
@@ -174,7 +174,7 @@ sudo systemctl status prometheus
 sudo systemctl status node_exporter
 ```
 
-## Comprobar Node Exporter
+### Comprobar Node Exporter
 
 ```bash
 curl http://localhost:9100/metrics
@@ -189,7 +189,7 @@ node_filesystem_size_bytes
 node_network_receive_bytes_total
 ```
 
-## Comprobar Prometheus
+### Comprobar Prometheus
 
 Abrir:
 
@@ -218,7 +218,7 @@ Interpretación:
 
 ---
 
-# Preparar el directorio de evidencias
+## Preparar el directorio de evidencias
 
 Crear un directorio para conservar las evidencias:
 
@@ -264,13 +264,13 @@ EOF
 
 ---
 
-# Fase 1: comprobar la fuente de datos
+## Fase 1: comprobar la fuente de datos
 
-## Objetivo
+### Objetivo
 
 Verificar que Grafana puede consultar Prometheus.
 
-## Pasos
+### Pasos
 
 1. Acceder a Grafana.
 2. Abrir la configuración.
@@ -294,7 +294,7 @@ http://prometheus:9090
 
 La URL depende de la arquitectura utilizada.
 
-## Actividades
+### Actividades
 
 1. Anota el nombre de la fuente de datos.
 2. Anota su tipo.
@@ -306,7 +306,7 @@ La URL depende de la arquitectura utilizada.
 up
 ```
 
-## Evidencia
+### Evidencia
 
 Guardar:
 
@@ -316,13 +316,13 @@ Guardar:
 
 ---
 
-# Fase 2: crear el dashboard
+## Fase 2: crear el dashboard
 
-## Objetivo
+### Objetivo
 
 Crear el dashboard principal del laboratorio.
 
-## Pasos
+### Pasos
 
 1. Crear un dashboard nuevo.
 2. Asignar el nombre:
@@ -347,7 +347,7 @@ Last 1 hour
 6. Guardar el dashboard.
 7. Añadir una descripción general.
 
-## Descripción recomendada
+### Descripción recomendada
 
 ```text
 Dashboard de prácticas para analizar disponibilidad,
@@ -355,7 +355,7 @@ CPU, memoria, almacenamiento, red y evolución temporal
 de un entorno Linux monitorizado mediante Prometheus.
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el dashboard.
 2. Guarda una primera versión.
@@ -365,9 +365,9 @@ de un entorno Linux monitorizado mediante Prometheus.
 
 ---
 
-# Fase 3: crear variables de dashboard
+## Fase 3: crear variables de dashboard
 
-## Objetivo
+### Objetivo
 
 Permitir que el usuario seleccione dinámicamente un objetivo o una instancia.
 
@@ -375,7 +375,7 @@ Las variables evitan tener que modificar manualmente cada consulta.
 
 ---
 
-## Variable `job`
+### Variable `job`
 
 Crear una variable llamada:
 
@@ -400,7 +400,7 @@ prometheus
 
 ---
 
-## Variable `instance`
+### Variable `instance`
 
 Crear una variable llamada:
 
@@ -421,7 +421,7 @@ Multi-value: activado
 Include All option: activado
 ```
 
-## Actividades
+### Actividades
 
 1. Crea la variable `job`.
 2. Crea la variable `instance`.
@@ -431,7 +431,7 @@ Include All option: activado
 6. Selecciona `All`.
 7. Documenta el resultado.
 
-## Evidencia
+### Evidencia
 
 Guardar:
 
@@ -441,26 +441,26 @@ Guardar:
 
 ---
 
-# Fase 4: panel Text de portada
+## Fase 4: panel Text de portada
 
-## Objetivo
+### Objetivo
 
 Crear una portada que explique el dashboard.
 
-## Contenido
+### Contenido
 
 ```markdown
-# Laboratorio - Dashboards y visualización
+## Laboratorio - Dashboards y visualización
 
 Este dashboard permite analizar el estado y el rendimiento
 de los servidores Linux del entorno de prácticas.
 
-## Fuente de datos
+### Fuente de datos
 
 - Prometheus
 - Node Exporter
 
-## Métricas principales
+### Métricas principales
 
 - Disponibilidad.
 - CPU.
@@ -469,7 +469,7 @@ de los servidores Linux del entorno de prácticas.
 - Carga del sistema.
 - Tráfico de red.
 
-## Orden recomendado de lectura
+### Orden recomendado de lectura
 
 1. Comprobar la disponibilidad.
 2. Revisar los recursos actuales.
@@ -482,7 +482,7 @@ de los servidores Linux del entorno de prácticas.
 > No utilizar estos umbrales directamente en producción.
 ```
 
-## Pasos
+### Pasos
 
 1. Añadir un panel.
 2. Seleccionar `Text`.
@@ -492,7 +492,7 @@ de los servidores Linux del entorno de prácticas.
 6. Ajustar su anchura.
 7. Guardar el panel.
 
-## Actividades
+### Actividades
 
 1. Añade el nombre del alumno.
 2. Añade la instancia seleccionada:
@@ -504,7 +504,7 @@ de los servidores Linux del entorno de prácticas.
 3. Añade un enlace a la documentación de Grafana.
 4. Añade una tabla con la información del entorno.
 
-## Evidencia
+### Evidencia
 
 Guardar:
 
@@ -514,19 +514,19 @@ Guardar:
 
 ---
 
-# Fase 5: panel Stat de disponibilidad
+## Fase 5: panel Stat de disponibilidad
 
-## Objetivo
+### Objetivo
 
 Mostrar el número de objetivos disponibles.
 
-## Consulta
+### Consulta
 
 ```promql
 sum(up{job=~"$job"})
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Objetivos disponibles
@@ -534,7 +534,7 @@ Visualización: Stat
 Unidad: None
 ```
 
-## Umbrales conceptuales
+### Umbrales conceptuales
 
 ```text
 Verde: todos los objetivos disponibles
@@ -550,7 +550,7 @@ count(up{job=~"$job"})
 
 El resultado puede configurarse como texto auxiliar o utilizarse en un panel adicional.
 
-## Actividades
+### Actividades
 
 1. Crea el panel Stat.
 2. Utiliza la variable `$job`.
@@ -566,7 +566,7 @@ Número de objetivos disponibles para el job seleccionado.
 7. Observa el cambio.
 8. Inicia de nuevo el exporter.
 
-## Evidencia
+### Evidencia
 
 Guardar:
 
@@ -576,19 +576,19 @@ Guardar:
 
 ---
 
-# Fase 6: panel Stat de disponibilidad porcentual
+## Fase 6: panel Stat de disponibilidad porcentual
 
-## Objetivo
+### Objetivo
 
 Mostrar el porcentaje de objetivos disponibles.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * avg(up{job=~"$job"})
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Disponibilidad
@@ -596,7 +596,7 @@ Visualización: Stat
 Unidad: Percent (0-100)
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 Verde: 100
@@ -604,7 +604,7 @@ Amarillo: >= 90 y < 100
 Rojo: < 90
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Configura la unidad.
@@ -620,13 +620,13 @@ Porcentaje de objetivos disponibles para el job seleccionado.
 
 ---
 
-# Fase 7: panel Gauge de CPU
+## Fase 7: panel Gauge de CPU
 
-## Objetivo
+### Objetivo
 
 Mostrar el uso actual de CPU.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -641,7 +641,7 @@ Mostrar el uso actual de CPU.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de CPU
@@ -651,7 +651,7 @@ Min: 0
 Max: 100
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 Verde: 0 - 69
@@ -659,7 +659,7 @@ Amarillo: 70 - 89
 Rojo: 90 - 100
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Utiliza la variable `$instance`.
@@ -670,7 +670,7 @@ Rojo: 90 - 100
 7. Detén la carga.
 8. Observa la recuperación.
 
-## Carga controlada
+### Carga controlada
 
 Utilizar únicamente en un entorno autorizado.
 
@@ -682,7 +682,7 @@ stress-ng --cpu 1 --timeout 60s
 
 Si `stress-ng` no está instalado, seguir el procedimiento definido por el instructor.
 
-## Evidencias
+### Evidencias
 
 Guardar:
 
@@ -694,13 +694,13 @@ Guardar:
 
 ---
 
-# Fase 8: panel Bar Gauge de CPU por instancia
+## Fase 8: panel Bar Gauge de CPU por instancia
 
-## Objetivo
+### Objetivo
 
 Comparar el uso de CPU entre instancias.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -715,7 +715,7 @@ Comparar el uso de CPU entre instancias.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: CPU por instancia
@@ -724,7 +724,7 @@ Unidad: Percent (0-100)
 Orientación: Horizontal
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Mostrar el nombre de la instancia.
 - Ordenar de mayor a menor.
@@ -732,7 +732,7 @@ Orientación: Horizontal
 - Limitar el número de instancias si el entorno es grande.
 - Utilizar nombres legibles.
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Selecciona varias instancias.
@@ -743,13 +743,13 @@ Orientación: Horizontal
 
 ---
 
-# Fase 9: panel Gauge de memoria
+## Fase 9: panel Gauge de memoria
 
-## Objetivo
+### Objetivo
 
 Mostrar el porcentaje de memoria utilizada.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -766,7 +766,7 @@ Mostrar el porcentaje de memoria utilizada.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Memoria utilizada
@@ -776,7 +776,7 @@ Min: 0
 Max: 100
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 Verde: 0 - 69
@@ -784,7 +784,7 @@ Amarillo: 70 - 89
 Rojo: 90 - 100
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Configura los umbrales.
@@ -795,13 +795,13 @@ Rojo: 90 - 100
 
 ---
 
-# Fase 10: panel Bar Gauge de memoria por instancia
+## Fase 10: panel Bar Gauge de memoria por instancia
 
-## Objetivo
+### Objetivo
 
 Comparar el consumo de memoria.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -814,7 +814,7 @@ Comparar el consumo de memoria.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Memoria por instancia
@@ -822,7 +822,7 @@ Visualización: Bar Gauge
 Unidad: Percent (0-100)
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Ordena por valor descendente.
@@ -832,13 +832,13 @@ Unidad: Percent (0-100)
 
 ---
 
-# Fase 11: panel Time series de CPU
+## Fase 11: panel Time series de CPU
 
-## Objetivo
+### Objetivo
 
 Analizar la evolución temporal del uso de CPU.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -853,7 +853,7 @@ Analizar la evolución temporal del uso de CPU.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Evolución de CPU
@@ -862,7 +862,7 @@ Unidad: Percent (0-100)
 Rango temporal: Last 1 hour
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Utilizar una línea por instancia.
 - Configurar el eje vertical entre `0` y `100`.
@@ -871,7 +871,7 @@ Rango temporal: Last 1 hour
 - Mostrar puntos o líneas según el objetivo.
 - Revisar el intervalo de consulta.
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Selecciona varias instancias.
@@ -883,13 +883,13 @@ Rango temporal: Last 1 hour
 
 ---
 
-# Fase 12: panel Time series de memoria
+## Fase 12: panel Time series de memoria
 
-## Objetivo
+### Objetivo
 
 Analizar la evolución de la memoria utilizada.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -902,7 +902,7 @@ Analizar la evolución de la memoria utilizada.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Evolución de memoria
@@ -910,7 +910,7 @@ Visualización: Time series
 Unidad: Percent (0-100)
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Selecciona varias instancias.
@@ -921,13 +921,13 @@ Unidad: Percent (0-100)
 
 ---
 
-# Fase 13: panel Time series de almacenamiento
+## Fase 13: panel Time series de almacenamiento
 
-## Objetivo
+### Objetivo
 
 Analizar la evolución del uso de los sistemas de ficheros.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -944,7 +944,7 @@ Analizar la evolución del uso de los sistemas de ficheros.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de sistemas de ficheros
@@ -952,7 +952,7 @@ Visualización: Time series
 Unidad: Percent (0-100)
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 Filtrar, si es necesario:
 
@@ -979,7 +979,7 @@ Consulta para el sistema de ficheros raíz:
 )
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Muestra únicamente `/`.
@@ -989,13 +989,13 @@ Consulta para el sistema de ficheros raíz:
 
 ---
 
-# Fase 14: panel de red
+## Fase 14: panel de red
 
-## Objetivo
+### Objetivo
 
 Mostrar el tráfico recibido y transmitido.
 
-## Tráfico recibido
+### Tráfico recibido
 
 ```promql
 rate(
@@ -1006,7 +1006,7 @@ rate(
 )
 ```
 
-## Tráfico transmitido
+### Tráfico transmitido
 
 ```promql
 rate(
@@ -1017,7 +1017,7 @@ rate(
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Tráfico de red
@@ -1025,7 +1025,7 @@ Visualización: Time series
 Unidad: bytes/sec
 ```
 
-## Recomendaciones
+### Recomendaciones
 
 - Excluir la interfaz `lo`.
 - Filtrar interfaces virtuales si es necesario.
@@ -1033,7 +1033,7 @@ Unidad: bytes/sec
 - Revisar los nombres de las interfaces.
 - Utilizar una leyenda clara.
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Añade el tráfico recibido.
@@ -1044,25 +1044,25 @@ Unidad: bytes/sec
 
 ---
 
-# Fase 15: panel Table de disponibilidad
+## Fase 15: panel Table de disponibilidad
 
-## Objetivo
+### Objetivo
 
 Crear una tabla con el estado de cada objetivo.
 
-## Consulta
+### Consulta
 
 ```promql
 up{job=~"$job", instance=~"$instance"}
 ```
 
-## Visualización
+### Visualización
 
 ```text
 Table
 ```
 
-## Transformaciones
+### Transformaciones
 
 Aplicar:
 
@@ -1085,14 +1085,14 @@ Ocultar:
 Time
 ```
 
-## Resultado esperado
+### Resultado esperado
 
 | Instancia | Servicio | Estado |
 |---|---|---:|
 | server-01:9100 | node_exporter | 1 |
 | server-02:9100 | node_exporter | 1 |
 
-## Actividades
+### Actividades
 
 1. Crea el panel.
 2. Renombra los campos.
@@ -1110,13 +1110,13 @@ Time
 
 ---
 
-# Fase 16: tabla de CPU y memoria
+## Fase 16: tabla de CPU y memoria
 
-## Objetivo
+### Objetivo
 
 Crear una tabla operativa combinando dos consultas.
 
-## Consulta A: CPU
+### Consulta A: CPU
 
 ```promql
 100 - (
@@ -1126,7 +1126,7 @@ Crear una tabla operativa combinando dos consultas.
 )
 ```
 
-## Consulta B: memoria
+### Consulta B: memoria
 
 ```promql
 100 * (
@@ -1137,7 +1137,7 @@ Crear una tabla operativa combinando dos consultas.
 )
 ```
 
-## Transformaciones
+### Transformaciones
 
 ```text
 1. Labels to fields.
@@ -1147,14 +1147,14 @@ Crear una tabla operativa combinando dos consultas.
 5. Sort by CPU descendente.
 ```
 
-## Resultado esperado
+### Resultado esperado
 
 | Instancia | CPU | Memoria |
 |---|---:|---:|
 | server-02:9100 | 82.1 | 74.5 |
 | server-01:9100 | 42.3 | 61.2 |
 
-## Actividades
+### Actividades
 
 1. Crea las dos consultas.
 2. Une los resultados.
@@ -1170,27 +1170,27 @@ Promedio de recursos = (CPU + Memoria) / 2
 
 ---
 
-# Fase 17: panel Heatmap opcional
+## Fase 17: panel Heatmap opcional
 
-## Objetivo
+### Objetivo
 
 Crear un Heatmap a partir de una métrica de histograma.
 
 Este panel requiere que Prometheus disponga de una métrica con buckets.
 
-## Buscar histogramas
+### Buscar histogramas
 
 ```promql
 {__name__=~".*_bucket"}
 ```
 
-## Ejemplo de métrica
+### Ejemplo de métrica
 
 ```promql
 http_request_duration_seconds_bucket
 ```
 
-## Consulta
+### Consulta
 
 ```promql
 sum by (le) (
@@ -1200,7 +1200,7 @@ sum by (le) (
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Distribución de latencias
@@ -1208,7 +1208,7 @@ Visualización: Heatmap
 Unidad: Seconds
 ```
 
-## Actividades
+### Actividades
 
 1. Busca una métrica `_bucket`.
 2. Comprueba sus valores de `le`.
@@ -1235,13 +1235,13 @@ Si no existe una métrica de histograma, documentar la limitación y continuar c
 
 ---
 
-# Fase 18: panel Canvas
+## Fase 18: panel Canvas
 
-## Objetivo
+### Objetivo
 
 Crear una vista visual de la infraestructura.
 
-## Diseño propuesto
+### Diseño propuesto
 
 ```text
 +------------------------------------------------------+
@@ -1265,7 +1265,7 @@ Crear una vista visual de la infraestructura.
 +------------------------------------------------------+
 ```
 
-## Elementos
+### Elementos
 
 Añadir:
 
@@ -1277,7 +1277,7 @@ Añadir:
 - Valores de CPU.
 - Leyenda de colores.
 
-## Consultas
+### Consultas
 
 Estado de Prometheus:
 
@@ -1301,7 +1301,7 @@ CPU:
 )
 ```
 
-## Actividades
+### Actividades
 
 1. Crea el Canvas.
 2. Añade los componentes.
@@ -1315,18 +1315,18 @@ CPU:
 
 ---
 
-# Fase 19: panel Text de procedimiento
+## Fase 19: panel Text de procedimiento
 
-## Objetivo
+### Objetivo
 
 Añadir instrucciones operativas al dashboard.
 
-## Contenido
+### Contenido
 
 ```markdown
-# Procedimiento ante una incidencia
+## Procedimiento ante una incidencia
 
-## 1. Disponibilidad
+### 1. Disponibilidad
 
 Comprueba el panel de objetivos y la consulta:
 
@@ -1334,7 +1334,7 @@ Comprueba el panel de objetivos y la consulta:
 up
 ```
 
-## 2. Recursos
+### 2. Recursos
 
 Revisa:
 
@@ -1343,12 +1343,12 @@ Revisa:
 - Almacenamiento.
 - Red.
 
-## 3. Tendencia
+### 3. Tendencia
 
 Amplía el rango temporal para identificar
 cuándo comenzó el problema.
 
-## 4. Sistema
+### 4. Sistema
 
 Ejecuta únicamente las comprobaciones autorizadas:
 
@@ -1358,7 +1358,7 @@ free -h
 df -h
 ```
 
-## 5. Documentación
+### 5. Documentación
 
 Registra:
 
@@ -1370,7 +1370,7 @@ Registra:
 - Resultado.
 ```
 
-## Actividades
+### Actividades
 
 1. Añade el panel al final del dashboard.
 2. Colócalo cerca de los paneles de recursos.
@@ -1379,15 +1379,15 @@ Registra:
 
 ---
 
-# Fase 20: plugin de panel opcional
+## Fase 20: plugin de panel opcional
 
-## Objetivo
+### Objetivo
 
 Conocer cómo integrar un plugin de panel en un dashboard.
 
 Esta fase debe realizarse únicamente con un plugin aprobado por el instructor.
 
-## Actividades
+### Actividades
 
 1. Consultar los plugins disponibles.
 2. Seleccionar un plugin de panel aprobado.
@@ -1411,10 +1411,10 @@ Esta fase debe realizarse únicamente con un plugin aprobado por el instructor.
 10. Exportar el dashboard.
 11. Documentar la dependencia.
 
-## Información que debe registrarse
+### Información que debe registrarse
 
 ```markdown
-## Plugin utilizado
+### Plugin utilizado
 
 Nombre:
 
@@ -1441,9 +1441,9 @@ No instalar plugins no verificados en producción.
 
 ---
 
-# Fase 21: pruebas controladas
+## Fase 21: pruebas controladas
 
-## Objetivo
+### Objetivo
 
 Observar cómo responde el dashboard ante diferentes situaciones.
 
@@ -1451,7 +1451,7 @@ Todas las pruebas deben ejecutarse en un entorno autorizado.
 
 ---
 
-## Prueba A: detener Node Exporter
+### Prueba A: detener Node Exporter
 
 Detener:
 
@@ -1487,7 +1487,7 @@ sudo systemctl start node_exporter
 
 ---
 
-## Prueba B: carga de CPU
+### Prueba B: carga de CPU
 
 Ejecutar:
 
@@ -1505,7 +1505,7 @@ Comprobar:
 
 ---
 
-## Prueba C: tráfico de red
+### Prueba C: tráfico de red
 
 Generar tráfico únicamente según las reglas del laboratorio.
 
@@ -1518,7 +1518,7 @@ Observar:
 
 ---
 
-## Prueba D: cambio de rango temporal
+### Prueba D: cambio de rango temporal
 
 Comparar:
 
@@ -1538,13 +1538,13 @@ Documentar:
 
 ---
 
-# Fase 22: diagnóstico de un panel sin datos
+## Fase 22: diagnóstico de un panel sin datos
 
-## Objetivo
+### Objetivo
 
 Aprender a resolver problemas de visualización.
 
-## Procedimiento general
+### Procedimiento general
 
 1. Abrir el panel.
 2. Revisar la consulta.
@@ -1557,13 +1557,13 @@ Aprender a resolver problemas de visualización.
 9. Abrir el inspector.
 10. Revisar los logs si procede.
 
-## Ejemplo de consulta incorrecta
+### Ejemplo de consulta incorrecta
 
 ```promql
 metric_que_no_existe
 ```
 
-## Corrección
+### Corrección
 
 Utilizar una métrica real:
 
@@ -1571,7 +1571,7 @@ Utilizar una métrica real:
 up
 ```
 
-## Documentación del problema
+### Documentación del problema
 
 ```text
 Panel afectado:
@@ -1587,7 +1587,7 @@ Corrección aplicada:
 Resultado final:
 ```
 
-## Actividades
+### Actividades
 
 1. Crea una consulta incorrecta de forma intencionada.
 2. Observa el resultado.
@@ -1597,9 +1597,9 @@ Resultado final:
 
 ---
 
-# Fase 23: revisar el dashboard
+## Fase 23: revisar el dashboard
 
-## Lista de comprobación visual
+### Lista de comprobación visual
 
 Comprobar:
 
@@ -1617,7 +1617,7 @@ Comprobar:
 - No existen secretos.
 - No hay consultas innecesarias.
 
-## Lista de comprobación técnica
+### Lista de comprobación técnica
 
 Comprobar:
 
@@ -1634,13 +1634,13 @@ Comprobar:
 
 ---
 
-# Fase 24: exportar el dashboard
+## Fase 24: exportar el dashboard
 
-## Objetivo
+### Objetivo
 
 Guardar una copia del dashboard.
 
-## Pasos
+### Pasos
 
 1. Abrir el menú del dashboard.
 2. Seleccionar la opción de compartir o exportar.
@@ -1665,7 +1665,7 @@ jq empty \
   ~/laboratorio-grafana/evidencias/laboratorio-dashboards/laboratorio-dashboards-visualizacion.json
 ```
 
-## Comprobar referencias
+### Comprobar referencias
 
 Buscar paneles Canvas:
 
@@ -1690,13 +1690,13 @@ grep -n "ID_DEL_PLUGIN" \
 
 ---
 
-# Fase 25: importar una copia
+## Fase 25: importar una copia
 
-## Objetivo
+### Objetivo
 
 Comprobar que el dashboard puede restaurarse.
 
-## Pasos
+### Pasos
 
 1. Crear un dashboard nuevo o utilizar otra instancia de laboratorio.
 2. Seleccionar **Import dashboard**.
@@ -1709,7 +1709,7 @@ Comprobar que el dashboard puede restaurarse.
 9. Revisar el Canvas.
 10. Revisar los paneles que dependan de plugins.
 
-## Actividades
+### Actividades
 
 Comparar el dashboard original y el restaurado:
 
@@ -1728,33 +1728,33 @@ Comparar el dashboard original y el restaurado:
 
 ---
 
-# Fase 26: documentar el dashboard
+## Fase 26: documentar el dashboard
 
 Crear un panel Text o un fichero externo con las dependencias.
 
-## Contenido recomendado
+### Contenido recomendado
 
 ```markdown
-# Dependencias del dashboard
+## Dependencias del dashboard
 
-## Grafana
+### Grafana
 
 Versión utilizada:
 
-## Fuente de datos
+### Fuente de datos
 
 - Prometheus
 
-## Exporter
+### Exporter
 
 - Node Exporter
 
-## Variables
+### Variables
 
 - `job`
 - `instance`
 
-## Paneles
+### Paneles
 
 - Stat de disponibilidad.
 - Gauge de CPU.
@@ -1768,7 +1768,7 @@ Versión utilizada:
 - Canvas de infraestructura.
 - Text de documentación.
 
-## Transformaciones
+### Transformaciones
 
 - Labels to fields.
 - Organize fields by name.
@@ -1777,17 +1777,17 @@ Versión utilizada:
 - Limit.
 - Reduce.
 
-## Plugins
+### Plugins
 
 Indicar si se utiliza alguno.
 
-## Rango temporal recomendado
+### Rango temporal recomendado
 
 ```text
 Last 1 hour
 ```
 
-## Actualización
+### Actualización
 
 ```text
 30s
@@ -1796,13 +1796,13 @@ Last 1 hour
 
 ---
 
-# Sesión práctica completa 1: crear el dashboard mínimo
+## Sesión práctica completa 1: crear el dashboard mínimo
 
-## Objetivo
+### Objetivo
 
 Crear una primera versión funcional.
 
-## Tareas
+### Tareas
 
 1. Comprobar Prometheus.
 2. Crear el dashboard.
@@ -1814,7 +1814,7 @@ Crear una primera versión funcional.
 8. Crear un Gauge de memoria.
 9. Guardar el dashboard.
 
-## Resultado esperado
+### Resultado esperado
 
 ```text
 Dashboard funcional con:
@@ -1825,7 +1825,7 @@ Dashboard funcional con:
 - Memoria.
 ```
 
-## Evidencias
+### Evidencias
 
 ```text
 01-dashboard-minimo.png
@@ -1835,13 +1835,13 @@ Dashboard funcional con:
 
 ---
 
-# Sesión práctica completa 2: ampliar el dashboard
+## Sesión práctica completa 2: ampliar el dashboard
 
-## Objetivo
+### Objetivo
 
 Añadir tendencias y tablas operativas.
 
-## Tareas
+### Tareas
 
 1. Crear Time series de CPU.
 2. Crear Time series de memoria.
@@ -1854,7 +1854,7 @@ Añadir tendencias y tablas operativas.
 9. Limitar resultados.
 10. Guardar el dashboard.
 
-## Resultado esperado
+### Resultado esperado
 
 ```text
 Dashboard con:
@@ -1865,13 +1865,13 @@ Dashboard con:
 
 ---
 
-# Sesión práctica completa 3: crear el Canvas
+## Sesión práctica completa 3: crear el Canvas
 
-## Objetivo
+### Objetivo
 
 Representar visualmente la infraestructura.
 
-## Tareas
+### Tareas
 
 1. Crear un panel Canvas.
 2. Añadir Prometheus.
@@ -1885,7 +1885,7 @@ Representar visualmente la infraestructura.
 10. Probar un estado `DOWN`.
 11. Guardar el panel.
 
-## Resultado esperado
+### Resultado esperado
 
 ```text
 Vista visual de alto nivel de la infraestructura.
@@ -1893,17 +1893,17 @@ Vista visual de alto nivel de la infraestructura.
 
 ---
 
-# Sesión práctica completa 4: investigar una incidencia
+## Sesión práctica completa 4: investigar una incidencia
 
-## Objetivo
+### Objetivo
 
 Utilizar el dashboard para analizar una incidencia simulada.
 
-## Escenario
+### Escenario
 
 Uno de los objetivos deja de estar disponible.
 
-## Procedimiento
+### Procedimiento
 
 1. Detener Node Exporter:
 
@@ -1937,7 +1937,7 @@ sudo systemctl start node_exporter
 10. Confirmar la recuperación.
 11. Documentar el incidente.
 
-## Informe
+### Informe
 
 ```text
 Hora de inicio:
@@ -1959,13 +1959,13 @@ Resultado:
 
 ---
 
-# Sesión práctica completa 5: analizar carga de CPU
+## Sesión práctica completa 5: analizar carga de CPU
 
-## Objetivo
+### Objetivo
 
 Observar el comportamiento del dashboard ante una carga controlada.
 
-## Pasos
+### Pasos
 
 1. Registrar el valor inicial de CPU.
 2. Ejecutar:
@@ -1982,7 +1982,7 @@ stress-ng --cpu 1 --timeout 60s
 8. Observar la recuperación.
 9. Comparar los valores.
 
-## Preguntas
+### Preguntas
 
 1. ¿Qué panel muestra el valor actual?
 2. ¿Qué panel muestra la tendencia?
@@ -1993,17 +1993,17 @@ stress-ng --cpu 1 --timeout 60s
 
 ---
 
-# Sesión práctica completa 6: solucionar un panel incorrecto
+## Sesión práctica completa 6: solucionar un panel incorrecto
 
-## Objetivo
+### Objetivo
 
 Diagnosticar una consulta o transformación incorrecta.
 
-## Situación
+### Situación
 
 La tabla de CPU no muestra el nombre de las instancias.
 
-## Procedimiento
+### Procedimiento
 
 1. Abrir el panel.
 2. Revisar el resultado original.
@@ -2014,7 +2014,7 @@ La tabla de CPU no muestra el nombre de las instancias.
 7. Revisar la tabla.
 8. Guardar la corrección.
 
-## Informe
+### Informe
 
 ```text
 Problema:
@@ -2030,13 +2030,13 @@ Resultado:
 
 ---
 
-# Sesión práctica completa 7: comparar paneles
+## Sesión práctica completa 7: comparar paneles
 
-## Objetivo
+### Objetivo
 
 Comprender qué información aporta cada visualización.
 
-## Utilizar la métrica de CPU
+### Utilizar la métrica de CPU
 
 ```promql
 100 - (
@@ -2046,7 +2046,7 @@ Comprender qué información aporta cada visualización.
 )
 ```
 
-## Crear los paneles
+### Crear los paneles
 
 ```text
 Stat
@@ -2057,7 +2057,7 @@ Table
 Canvas
 ```
 
-## Comparar
+### Comparar
 
 | Panel | Información principal |
 |---|---|
@@ -2068,7 +2068,7 @@ Canvas
 | Table | Detalle estructurado |
 | Canvas | Contexto visual |
 
-## Actividades
+### Actividades
 
 1. Coloca los paneles en el mismo dashboard.
 2. Utiliza la misma unidad.
@@ -2079,43 +2079,43 @@ Canvas
 
 ---
 
-# Sesión práctica completa 8: evaluar la calidad del dashboard
+## Sesión práctica completa 8: evaluar la calidad del dashboard
 
-## Objetivo
+### Objetivo
 
 Revisar el dashboard como si fuera a entregarse a otro equipo.
 
-## Criterios
+### Criterios
 
-### Claridad
+#### Claridad
 
 - ¿Los títulos son comprensibles?
 - ¿Las unidades están visibles?
 - ¿Los colores tienen significado?
 - ¿El orden de los paneles es lógico?
 
-### Corrección
+#### Corrección
 
 - ¿Las consultas son válidas?
 - ¿Los cálculos son correctos?
 - ¿Las variables funcionan?
 - ¿Los umbrales coinciden?
 
-### Mantenibilidad
+#### Mantenibilidad
 
 - ¿Las consultas están documentadas?
 - ¿Las transformaciones están justificadas?
 - ¿Las dependencias están registradas?
 - ¿Los plugins están identificados?
 
-### Seguridad
+#### Seguridad
 
 - ¿Existen secretos?
 - ¿Los enlaces son adecuados?
 - ¿Las imágenes contienen información sensible?
 - ¿Los permisos son correctos?
 
-### Rendimiento
+#### Rendimiento
 
 - ¿Carga rápidamente?
 - ¿Hay demasiadas consultas?
@@ -2124,7 +2124,7 @@ Revisar el dashboard como si fuera a entregarse a otro equipo.
 
 ---
 
-# Rúbrica de evaluación
+## Rúbrica de evaluación
 
 | Criterio | Insuficiente | Básico | Correcto | Excelente |
 |---|---|---|---|---|
@@ -2145,7 +2145,7 @@ Revisar el dashboard como si fuera a entregarse a otro equipo.
 
 ---
 
-# Entregables
+## Entregables
 
 El alumno debe entregar:
 
@@ -2162,7 +2162,7 @@ El alumno debe entregar:
 10. Conclusiones.
 ```
 
-## Estructura recomendada
+### Estructura recomendada
 
 ```text
 entrega/
@@ -2188,27 +2188,27 @@ entrega/
 
 ---
 
-# Consultas de referencia
+## Consultas de referencia
 
-## Disponibilidad
+### Disponibilidad
 
 ```promql
 up
 ```
 
-## Objetivos disponibles
+### Objetivos disponibles
 
 ```promql
 sum(up)
 ```
 
-## Porcentaje de disponibilidad
+### Porcentaje de disponibilidad
 
 ```promql
 100 * avg(up)
 ```
 
-## CPU por instancia
+### CPU por instancia
 
 ```promql
 100 - (
@@ -2218,7 +2218,7 @@ sum(up)
 )
 ```
 
-## Memoria utilizada
+### Memoria utilizada
 
 ```promql
 100 * (
@@ -2229,7 +2229,7 @@ sum(up)
 )
 ```
 
-## Almacenamiento utilizado
+### Almacenamiento utilizado
 
 ```promql
 100 * (
@@ -2244,13 +2244,13 @@ sum(up)
 )
 ```
 
-## Carga del sistema
+### Carga del sistema
 
 ```promql
 node_load1
 ```
 
-## Tráfico recibido
+### Tráfico recibido
 
 ```promql
 rate(
@@ -2260,7 +2260,7 @@ rate(
 )
 ```
 
-## Tráfico transmitido
+### Tráfico transmitido
 
 ```promql
 rate(
@@ -2270,7 +2270,7 @@ rate(
 )
 ```
 
-## Buscar histogramas
+### Buscar histogramas
 
 ```promql
 {__name__=~".*_bucket"}
@@ -2278,7 +2278,7 @@ rate(
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2313,7 +2313,7 @@ rate(
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Un dashboard debe facilitar la interpretación de las métricas.
 - La fuente de datos debe comprobarse antes de crear paneles.
@@ -2341,7 +2341,7 @@ rate(
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué componentes forman la arquitectura del laboratorio?
 2. ¿Qué función cumple Prometheus?
@@ -2376,7 +2376,7 @@ rate(
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar el laboratorio, el alumno debe haber creado un dashboard funcional, documentado y reproducible.
 

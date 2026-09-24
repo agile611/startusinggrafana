@@ -20,7 +20,7 @@ Un Gauge no solo muestra el valor actual. También permite situarlo visualmente 
 
 ---
 
-## Objetivos
+### Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -44,7 +44,7 @@ Al finalizar esta sección, el alumno podrá:
 
 ---
 
-# Introducción
+## Introducción
 
 El panel Gauge muestra un valor dentro de una escala.
 
@@ -111,7 +111,7 @@ Esto permite interpretar rápidamente el estado del recurso.
 
 ---
 
-# Cuándo utilizar un panel Gauge
+## Cuándo utilizar un panel Gauge
 
 El Gauge es apropiado cuando:
 
@@ -122,7 +122,7 @@ El Gauge es apropiado cuando:
 - Se necesita una indicación visual inmediata.
 - Los umbrales tienen significado operativo.
 
-## Ejemplos adecuados
+### Ejemplos adecuados
 
 ```promql
 100 * avg(up)
@@ -170,7 +170,7 @@ Porcentaje de CPU utilizada.
 
 ---
 
-# Cuándo no utilizar un panel Gauge
+## Cuándo no utilizar un panel Gauge
 
 El Gauge no suele ser la mejor opción cuando se necesita:
 
@@ -195,7 +195,7 @@ En esos casos pueden ser más adecuadas otras visualizaciones:
 
 ---
 
-# Diferencia entre Gauge y Stat
+## Diferencia entre Gauge y Stat
 
 Ambos pueden mostrar un valor actual, pero el Gauge da más importancia a la relación entre el valor y su escala.
 
@@ -209,7 +209,7 @@ Ambos pueden mostrar un valor actual, pero el Gauge da más importancia a la rel
 | Mostrar muchos elementos | Limitado | Bar Gauge suele ser mejor |
 | Uso como indicador visual | Alto | Muy alto |
 
-## Ejemplo con el mismo dato
+### Ejemplo con el mismo dato
 
 Consulta:
 
@@ -241,13 +241,13 @@ El Gauge destaca la posición del número dentro de un rango.
 
 ---
 
-# Diferencia entre Gauge y Bar Gauge
+## Diferencia entre Gauge y Bar Gauge
 
 El Gauge suele estar orientado a un valor individual.
 
 El Bar Gauge es más adecuado para comparar varios valores.
 
-## Gauge
+### Gauge
 
 ```promql
 100 * (
@@ -264,7 +264,7 @@ Uso:
 Memoria utilizada en un servidor
 ```
 
-## Bar Gauge
+### Bar Gauge
 
 ```promql
 100 * (
@@ -285,7 +285,7 @@ Si la consulta devuelve varias series, un Bar Gauge puede ofrecer una comparaci�
 
 ---
 
-# Anatomía de un panel Gauge
+## Anatomía de un panel Gauge
 
 Un panel Gauge puede incluir:
 
@@ -300,7 +300,7 @@ Un panel Gauge puede incluir:
 +--------------------------------------+
 ```
 
-## Valor actual
+### Valor actual
 
 Es el resultado de la consulta.
 
@@ -310,7 +310,7 @@ Ejemplo:
 73.4
 ```
 
-## Unidad
+### Unidad
 
 Indica cómo debe interpretarse el valor.
 
@@ -320,7 +320,7 @@ Ejemplo:
 Percent (0-100)
 ```
 
-## Valor mínimo
+### Valor mínimo
 
 Define el inicio de la escala.
 
@@ -330,7 +330,7 @@ Para un porcentaje:
 0
 ```
 
-## Valor máximo
+### Valor máximo
 
 Define el final de la escala.
 
@@ -340,7 +340,7 @@ Para un porcentaje:
 100
 ```
 
-## Umbrales
+### Umbrales
 
 Dividen la escala en zonas.
 
@@ -352,7 +352,7 @@ Ejemplo:
 90     Rojo
 ```
 
-## Colores
+### Colores
 
 Representan visualmente el estado del valor.
 
@@ -364,7 +364,7 @@ Amarillo: advertencia
 Rojo: crítico
 ```
 
-## Decimales
+### Decimales
 
 Controlan la precisión mostrada.
 
@@ -382,9 +382,9 @@ en lugar de:
 
 ---
 
-# Crear un panel Gauge
+## Crear un panel Gauge
 
-## Procedimiento general
+### Procedimiento general
 
 1. Acceder a Grafana.
 2. Abrir un dashboard.
@@ -402,7 +402,7 @@ en lugar de:
 14. Guardar el panel.
 15. Guardar el dashboard.
 
-## Consulta inicial recomendada
+### Consulta inicial recomendada
 
 Para una primera prueba:
 
@@ -422,9 +422,9 @@ Máximo: 100
 
 ---
 
-# Configurar la escala
+## Configurar la escala
 
-## Escala de porcentaje
+### Escala de porcentaje
 
 Para valores expresados entre 0 y 100:
 
@@ -441,7 +441,7 @@ Ejemplos:
 - Disponibilidad.
 - Porcentaje de errores.
 
-## Escala de proporción
+### Escala de proporción
 
 Una consulta como esta devuelve un valor entre 0 y 1:
 
@@ -468,7 +468,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Escala de bytes
+### Escala de bytes
 
 Para mostrar memoria disponible:
 
@@ -486,7 +486,7 @@ Mínimo: 0
 Máximo: Automático
 ```
 
-## Escala de carga
+### Escala de carga
 
 Para la carga del sistema:
 
@@ -508,9 +508,9 @@ El máximo puede depender de la capacidad del sistema y del objetivo del dashboa
 
 ---
 
-# Configurar unidades
+## Configurar unidades
 
-## Uso de CPU
+### Uso de CPU
 
 Consulta:
 
@@ -528,7 +528,7 @@ Configuración:
 Unidad: Percent (0-100)
 ```
 
-## Uso de memoria
+### Uso de memoria
 
 Consulta:
 
@@ -547,7 +547,7 @@ Configuración:
 Unidad: Percent (0-100)
 ```
 
-## Uso de almacenamiento
+### Uso de almacenamiento
 
 Consulta:
 
@@ -572,7 +572,7 @@ Configuración:
 Unidad: Percent (0-100)
 ```
 
-## Disponibilidad
+### Disponibilidad
 
 Consulta:
 
@@ -586,7 +586,7 @@ Configuración:
 Unidad: Percent (0-100)
 ```
 
-## Temperatura
+### Temperatura
 
 Si existe una métrica de temperatura:
 
@@ -600,7 +600,7 @@ Configuración:
 Unidad: Celsius
 ```
 
-## Tráfico de red
+### Tráfico de red
 
 Consulta:
 
@@ -620,11 +620,11 @@ Unidad: bytes/sec
 
 ---
 
-# Configurar umbrales
+## Configurar umbrales
 
 Los umbrales determinan el estado visual del Gauge.
 
-## Uso de CPU
+### Uso de CPU
 
 Consulta:
 
@@ -652,7 +652,7 @@ Interpretación:
 90 - 100 %     Uso crítico
 ```
 
-## Uso de memoria
+### Uso de memoria
 
 Umbrales habituales:
 
@@ -662,7 +662,7 @@ Umbrales habituales:
 90     Rojo
 ```
 
-## Uso de almacenamiento
+### Uso de almacenamiento
 
 Los discos pueden requerir umbrales más estrictos:
 
@@ -672,7 +672,7 @@ Los discos pueden requerir umbrales más estrictos:
 90     Rojo
 ```
 
-## Disponibilidad
+### Disponibilidad
 
 Para una disponibilidad global:
 
@@ -682,7 +682,7 @@ Para una disponibilidad global:
 99     Verde
 ```
 
-## Importancia de documentar los umbrales
+### Importancia de documentar los umbrales
 
 Los valores deben estar justificados.
 
@@ -696,7 +696,7 @@ No siempre los mismos umbrales son válidos para todos los sistemas:
 
 ---
 
-# Configurar colores
+## Configurar colores
 
 Los colores deben expresar estados, no decorar el panel.
 
@@ -708,7 +708,7 @@ Amarillo: advertencia
 Rojo: situación crítica
 ```
 
-## Ejemplo
+### Ejemplo
 
 ```text
 Uso de memoria: 45 % → verde
@@ -716,7 +716,7 @@ Uso de memoria: 78 % → amarillo
 Uso de memoria: 94 % → rojo
 ```
 
-## Errores frecuentes
+### Errores frecuentes
 
 No se debe:
 
@@ -728,7 +728,7 @@ No se debe:
 
 ---
 
-# Configurar decimales
+## Configurar decimales
 
 Los decimales dependen de la métrica.
 
@@ -756,7 +756,7 @@ Uso de CPU: 73.438291 %
 
 ---
 
-# Configurar el modo de visualización
+## Configurar el modo de visualización
 
 El Gauge puede configurarse con distintos estilos visuales.
 
@@ -771,7 +771,7 @@ Según la versión de Grafana, pueden estar disponibles opciones como:
 
 La selección debe depender del espacio disponible y de la cantidad de información.
 
-## Gauge radial
+### Gauge radial
 
 Adecuado para:
 
@@ -780,7 +780,7 @@ Adecuado para:
 - Porcentajes.
 - Uso de memoria.
 
-## Barra horizontal
+### Barra horizontal
 
 Adecuada para:
 
@@ -788,7 +788,7 @@ Adecuada para:
 - Comparaciones sencillas.
 - Integración con otros indicadores.
 
-## Escala con valor
+### Escala con valor
 
 Adecuada cuando:
 
@@ -798,7 +798,7 @@ Adecuada cuando:
 
 ---
 
-# Configurar el texto del Gauge
+## Configurar el texto del Gauge
 
 El Gauge puede mostrar:
 
@@ -808,19 +808,19 @@ El Gauge puede mostrar:
 - Valor y nombre.
 - Texto personalizado mediante mapas de valores.
 
-## Solo valor
+### Solo valor
 
 ```text
 73.4 %
 ```
 
-## Valor y nombre
+### Valor y nombre
 
 ```text
 Memoria utilizada: 73.4 %
 ```
 
-## Nombre del campo
+### Nombre del campo
 
 Para una consulta agrupada:
 
@@ -842,21 +842,21 @@ Esto resulta útil cuando se trabaja con una instancia concreta.
 
 ---
 
-# Consultas PromQL para Gauge
+## Consultas PromQL para Gauge
 
-## Disponibilidad global
+### Disponibilidad global
 
 ```promql
 100 * avg(up)
 ```
 
-## Disponibilidad de Node Exporter
+### Disponibilidad de Node Exporter
 
 ```promql
 100 * avg(up{job="node_exporter"})
 ```
 
-## Uso de CPU
+### Uso de CPU
 
 ```promql
 100 - (
@@ -866,7 +866,7 @@ Esto resulta útil cuando se trabaja con una instancia concreta.
 )
 ```
 
-## Uso de memoria
+### Uso de memoria
 
 ```promql
 100 * (
@@ -877,7 +877,7 @@ Esto resulta útil cuando se trabaja con una instancia concreta.
 )
 ```
 
-## Uso de memoria por instancia
+### Uso de memoria por instancia
 
 ```promql
 100 * (
@@ -888,7 +888,7 @@ Esto resulta útil cuando se trabaja con una instancia concreta.
 )
 ```
 
-## Uso del sistema de ficheros raíz
+### Uso del sistema de ficheros raíz
 
 ```promql
 100 * (
@@ -905,13 +905,13 @@ Esto resulta útil cuando se trabaja con una instancia concreta.
 )
 ```
 
-## Carga del sistema
+### Carga del sistema
 
 ```promql
 node_load1
 ```
 
-## Temperatura
+### Temperatura
 
 Si Node Exporter expone la métrica:
 
@@ -919,7 +919,7 @@ Si Node Exporter expone la métrica:
 node_hwmon_temp_celsius
 ```
 
-## Tráfico recibido
+### Tráfico recibido
 
 ```promql
 sum(
@@ -931,19 +931,19 @@ sum(
 
 ---
 
-# Ejemplo completo 1: Gauge de disponibilidad
+## Ejemplo completo 1: Gauge de disponibilidad
 
-## Objetivo
+### Objetivo
 
 Mostrar el porcentaje global de objetivos disponibles.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * avg(up)
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Disponibilidad global
@@ -954,7 +954,7 @@ Máximo: 100
 Decimales: 1
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Rojo
@@ -962,14 +962,14 @@ Decimales: 1
 99     Verde
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje de objetivos disponibles en el último scraping.
 Los objetivos con valor 1 se consideran disponibles.
 ```
 
-## Resultado esperado
+### Resultado esperado
 
 Si todos los objetivos están activos:
 
@@ -979,13 +979,13 @@ Si todos los objetivos están activos:
 
 ---
 
-# Ejemplo completo 2: Gauge de CPU
+## Ejemplo completo 2: Gauge de CPU
 
-## Objetivo
+### Objetivo
 
 Mostrar el porcentaje de CPU utilizado.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -995,7 +995,7 @@ Mostrar el porcentaje de CPU utilizado.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de CPU
@@ -1006,7 +1006,7 @@ Máximo: 100
 Decimales: 1
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Verde
@@ -1014,14 +1014,14 @@ Decimales: 1
 90     Rojo
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje medio de CPU utilizada durante los últimos cinco minutos.
 El cálculo se realiza a partir del tiempo de CPU en modo idle.
 ```
 
-## Consideración
+### Consideración
 
 Si la consulta devuelve una serie por instancia, el Gauge puede mostrar varios resultados o aplicar una reducción.
 
@@ -1049,13 +1049,13 @@ Time series
 
 ---
 
-# Ejemplo completo 3: Gauge de memoria
+## Ejemplo completo 3: Gauge de memoria
 
-## Objetivo
+### Objetivo
 
 Mostrar el porcentaje de memoria utilizada.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1066,7 +1066,7 @@ Mostrar el porcentaje de memoria utilizada.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso de memoria
@@ -1077,7 +1077,7 @@ Máximo: 100
 Decimales: 1
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Verde
@@ -1085,7 +1085,7 @@ Decimales: 1
 90     Rojo
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje de memoria utilizada por el sistema.
@@ -1094,13 +1094,13 @@ Los valores superiores al 90 % deben investigarse.
 
 ---
 
-# Ejemplo completo 4: Gauge de almacenamiento
+## Ejemplo completo 4: Gauge de almacenamiento
 
-## Objetivo
+### Objetivo
 
 Mostrar el uso del sistema de ficheros raíz.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1117,7 +1117,7 @@ Mostrar el uso del sistema de ficheros raíz.
 )
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Uso del sistema de ficheros raíz
@@ -1128,7 +1128,7 @@ Máximo: 100
 Decimales: 1
 ```
 
-## Umbrales
+### Umbrales
 
 ```text
 0      Verde
@@ -1136,13 +1136,13 @@ Decimales: 1
 90     Rojo
 ```
 
-## Comparación con el sistema operativo
+### Comparación con el sistema operativo
 
 ```bash
 df -h /
 ```
 
-## Descripción
+### Descripción
 
 ```text
 Porcentaje de espacio utilizado en el sistema de ficheros raíz.
@@ -1151,11 +1151,11 @@ Se excluyen los tipos tmpfs y overlay.
 
 ---
 
-# Ejemplo completo 5: Gauge de capacidad disponible
+## Ejemplo completo 5: Gauge de capacidad disponible
 
 Un Gauge también puede utilizarse para mostrar capacidad disponible en vez de capacidad utilizada.
 
-## Consulta
+### Consulta
 
 ```promql
 100 *
@@ -1164,7 +1164,7 @@ node_memory_MemAvailable_bytes
 node_memory_MemTotal_bytes
 ```
 
-## Configuración
+### Configuración
 
 ```text
 Título: Memoria disponible
@@ -1173,7 +1173,7 @@ Mínimo: 0
 Máximo: 100
 ```
 
-## Umbrales
+### Umbrales
 
 En este caso, un valor alto suele ser positivo:
 
@@ -1213,13 +1213,13 @@ Disponibilidad
 
 ---
 
-# Ejemplo de sesión 1: crear un Gauge básico
+## Ejemplo de sesión 1: crear un Gauge básico
 
-## Objetivo
+### Objetivo
 
 Crear un Gauge para representar la disponibilidad global.
 
-## Pasos
+### Pasos
 
 1. Acceder a Grafana:
 
@@ -1258,7 +1258,7 @@ Decimales: 1
 9. Guardar el panel.
 10. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Anota el valor mostrado.
 2. Comprueba el resultado directamente en Prometheus.
@@ -1268,13 +1268,13 @@ Decimales: 1
 
 ---
 
-# Ejemplo de sesión 2: crear un Gauge de memoria
+## Ejemplo de sesión 2: crear un Gauge de memoria
 
-## Objetivo
+### Objetivo
 
 Representar el porcentaje de memoria utilizada.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * (
@@ -1285,7 +1285,7 @@ Representar el porcentaje de memoria utilizada.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel nuevo.
 2. Seleccionar Prometheus.
@@ -1312,7 +1312,7 @@ Decimales: 1
 7. Guardar el panel.
 8. Guardar el dashboard.
 
-## Actividades
+### Actividades
 
 1. Comprueba la memoria utilizada con:
 
@@ -1327,13 +1327,13 @@ free -h
 
 ---
 
-# Ejemplo de sesión 3: crear un Gauge de CPU
+## Ejemplo de sesión 3: crear un Gauge de CPU
 
-## Objetivo
+### Objetivo
 
 Representar el uso actual de CPU.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1343,7 +1343,7 @@ Representar el uso actual de CPU.
 )
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un Gauge.
 2. Introducir la consulta.
@@ -1367,7 +1367,7 @@ Decimales: 1
 
 5. Guardar el panel.
 
-## Generar carga
+### Generar carga
 
 Ejecutar:
 
@@ -1381,7 +1381,7 @@ Observar el Gauge y detener la carga:
 pkill yes
 ```
 
-## Actividades
+### Actividades
 
 1. Anota el valor inicial.
 2. Genera carga.
@@ -1393,13 +1393,13 @@ pkill yes
 
 ---
 
-# Ejemplo de sesión 4: crear un Gauge de almacenamiento
+## Ejemplo de sesión 4: crear un Gauge de almacenamiento
 
-## Objetivo
+### Objetivo
 
 Mostrar el porcentaje utilizado en `/`.
 
-## Pasos
+### Pasos
 
 1. Crear un panel Gauge.
 2. Introducir:
@@ -1443,7 +1443,7 @@ Decimales: 1
 df -h /
 ```
 
-## Actividades
+### Actividades
 
 1. Identifica el valor mostrado.
 2. Compara PromQL con `df -h`.
@@ -1453,19 +1453,19 @@ df -h /
 
 ---
 
-# Ejemplo de sesión 5: comparar escalas incorrectas y correctas
+## Ejemplo de sesión 5: comparar escalas incorrectas y correctas
 
-## Objetivo
+### Objetivo
 
 Observar los problemas producidos por una escala incorrecta.
 
-## Consulta
+### Consulta
 
 ```promql
 100 * avg(up)
 ```
 
-## Configuración incorrecta
+### Configuración incorrecta
 
 ```text
 Mínimo: 0
@@ -1475,7 +1475,7 @@ Unidad: Percent (0-100)
 
 El Gauge puede mostrar una representación incorrecta porque la consulta devuelve valores entre `0` y `100`, pero la escala termina en `1`.
 
-## Configuración correcta
+### Configuración correcta
 
 ```text
 Mínimo: 0
@@ -1483,7 +1483,7 @@ Máximo: 100
 Unidad: Percent (0-100)
 ```
 
-## Actividades
+### Actividades
 
 1. Configura intencionadamente la escala incorrecta.
 2. Observa el resultado.
@@ -1497,13 +1497,13 @@ Unidad: Percent (0-100)
 
 ---
 
-# Ejemplo de sesión 6: comparar uso y disponibilidad
+## Ejemplo de sesión 6: comparar uso y disponibilidad
 
-## Objetivo
+### Objetivo
 
 Comprender que una misma métrica puede tener interpretaciones diferentes según la consulta.
 
-## Panel 1: memoria utilizada
+### Panel 1: memoria utilizada
 
 ```promql
 100 * (
@@ -1528,7 +1528,7 @@ Umbrales:
 90     Rojo
 ```
 
-## Panel 2: memoria disponible
+### Panel 2: memoria disponible
 
 ```promql
 100 *
@@ -1551,7 +1551,7 @@ Umbrales:
 30     Verde
 ```
 
-## Actividades
+### Actividades
 
 1. Crea ambos Gauges.
 2. Colócalos juntos.
@@ -1562,13 +1562,13 @@ Umbrales:
 
 ---
 
-# Ejemplo de sesión 7: comparar Gauge y Bar Gauge
+## Ejemplo de sesión 7: comparar Gauge y Bar Gauge
 
-## Objetivo
+### Objetivo
 
 Determinar qué visualización es más adecuada para uno o varios servidores.
 
-## Consulta
+### Consulta
 
 ```promql
 100 - (
@@ -1578,7 +1578,7 @@ Determinar qué visualización es más adecuada para uno o varios servidores.
 )
 ```
 
-## Panel Gauge
+### Panel Gauge
 
 Utilizarlo cuando:
 
@@ -1586,7 +1586,7 @@ Utilizarlo cuando:
 Solo se necesita mostrar un valor agregado.
 ```
 
-## Panel Bar Gauge
+### Panel Bar Gauge
 
 Utilizarlo cuando:
 
@@ -1594,7 +1594,7 @@ Utilizarlo cuando:
 Se desea comparar el uso de CPU por instancia.
 ```
 
-## Actividades
+### Actividades
 
 1. Crea un Gauge con una consulta agregada.
 2. Crea un Bar Gauge con una serie por instancia.
@@ -1607,19 +1607,19 @@ Se desea comparar el uso de CPU por instancia.
 
 ---
 
-# Ejemplo de sesión 8: diagnosticar un Gauge sin datos
+## Ejemplo de sesión 8: diagnosticar un Gauge sin datos
 
-## Objetivo
+### Objetivo
 
 Identificar un problema de consulta o de conectividad.
 
-## Consulta incorrecta
+### Consulta incorrecta
 
 ```promql
 metrica_inexistente_para_gauge
 ```
 
-## Pasos
+### Pasos
 
 1. Crear un panel Gauge.
 2. Introducir la consulta incorrecta.
@@ -1640,7 +1640,7 @@ node_memory_MemAvailable_bytes
 
 8. Restaurar la consulta original.
 
-## Actividades
+### Actividades
 
 Diferenciar entre:
 
@@ -1661,9 +1661,9 @@ Documentar:
 
 ---
 
-# Ejemplo de sesión 9: crear un bloque de Gauges
+## Ejemplo de sesión 9: crear un bloque de Gauges
 
-## Objetivo
+### Objetivo
 
 Crear un resumen visual de los recursos principales.
 
@@ -1676,7 +1676,7 @@ Crear los siguientes paneles:
 | Uso de memoria | Consulta de memoria | Percent |
 | Uso de almacenamiento | Consulta de filesystem | Percent |
 
-## Distribución
+### Distribución
 
 ```text
 +----------------------+-------------------------------+
@@ -1686,7 +1686,7 @@ Crear los siguientes paneles:
 +----------------------+-------------------------------+
 ```
 
-## Actividades
+### Actividades
 
 1. Crea los cuatro Gauges.
 2. Utiliza una escala de 0 a 100.
@@ -1698,13 +1698,13 @@ Crear los siguientes paneles:
 
 ---
 
-# Ejemplo de sesión 10: verificar los valores mediante la API
+## Ejemplo de sesión 10: verificar los valores mediante la API
 
-## Objetivo
+### Objetivo
 
 Comparar el valor mostrado en Grafana con el valor devuelto por Prometheus.
 
-## Disponibilidad
+### Disponibilidad
 
 ```bash
 curl -sG \
@@ -1713,7 +1713,7 @@ curl -sG \
   | jq
 ```
 
-## Memoria utilizada
+### Memoria utilizada
 
 ```bash
 curl -sG \
@@ -1723,7 +1723,7 @@ curl -sG \
   | jq
 ```
 
-## Almacenamiento utilizado
+### Almacenamiento utilizado
 
 ```bash
 curl -sG \
@@ -1733,7 +1733,7 @@ curl -sG \
   | jq
 ```
 
-## Actividades
+### Actividades
 
 1. Ejecuta las consultas.
 2. Compara los valores con Grafana.
@@ -1743,9 +1743,9 @@ curl -sG \
 
 ---
 
-# Buenas prácticas
+## Buenas prácticas
 
-## Utilizar siempre una escala coherente
+### Utilizar siempre una escala coherente
 
 Si la consulta devuelve porcentajes entre `0` y `100`:
 
@@ -1754,7 +1754,7 @@ Mínimo: 0
 Máximo: 100
 ```
 
-## Explicar si el valor representa uso o disponibilidad
+### Explicar si el valor representa uso o disponibilidad
 
 No es lo mismo:
 
@@ -1770,7 +1770,7 @@ Memoria disponible
 
 Los umbrales pueden ser opuestos.
 
-## Configurar títulos descriptivos
+### Configurar títulos descriptivos
 
 Utilizar:
 
@@ -1781,7 +1781,7 @@ Uso del sistema de ficheros raíz
 Disponibilidad global
 ```
 
-## Mantener los mismos umbrales cuando las métricas sean comparables
+### Mantener los mismos umbrales cuando las métricas sean comparables
 
 Por ejemplo, CPU y memoria pueden utilizar:
 
@@ -1793,7 +1793,7 @@ Por ejemplo, CPU y memoria pueden utilizar:
 
 Aunque los umbrales deben ajustarse al contexto.
 
-## Combinar Gauges con Time series
+### Combinar Gauges con Time series
 
 El Gauge muestra el estado actual.
 
@@ -1806,13 +1806,13 @@ Gauge: uso actual
 Time series: tendencia de la última hora
 ```
 
-## Evitar demasiados Gauges
+### Evitar demasiados Gauges
 
 Un dashboard lleno de indicadores puede resultar visualmente pesado.
 
 Mostrar únicamente los indicadores principales.
 
-## Documentar la unidad
+### Documentar la unidad
 
 El usuario debe saber si el valor representa:
 
@@ -1823,7 +1823,7 @@ El usuario debe saber si el valor representa:
 - Carga.
 - Número absoluto.
 
-## Probar valores normales y críticos
+### Probar valores normales y críticos
 
 El panel debe revisarse con:
 
@@ -1835,9 +1835,9 @@ El panel debe revisarse con:
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
-## El Gauge aparece vacío
+### El Gauge aparece vacío
 
 Comprobar:
 
@@ -1861,7 +1861,7 @@ Revisar:
 - Etiquetas.
 - Inspector del panel.
 
-## El indicador supera el máximo
+### El indicador supera el máximo
 
 Posibles causas:
 
@@ -1887,7 +1887,7 @@ node_memory_MemAvailable_bytes
 node_memory_MemTotal_bytes
 ```
 
-## Todo aparece en rojo
+### Todo aparece en rojo
 
 Comprobar:
 
@@ -1898,7 +1898,7 @@ Comprobar:
 - Valor máximo.
 - Tipo de métrica.
 
-## El color parece invertido
+### El color parece invertido
 
 Puede ocurrir cuando se muestra disponibilidad en lugar de uso.
 
@@ -1916,7 +1916,7 @@ Valor alto: mejor
 
 Los umbrales deben adaptarse al sentido del indicador.
 
-## El Gauge muestra varias series
+### El Gauge muestra varias series
 
 La consulta devuelve varios resultados.
 
@@ -1938,7 +1938,7 @@ avg(
 )
 ```
 
-## La unidad no coincide con la consulta
+### La unidad no coincide con la consulta
 
 Revisar si la consulta devuelve:
 
@@ -1954,7 +1954,7 @@ o:
 
 No utilizar una unidad de porcentaje de 0 a 100 con una consulta que devuelve una proporción de 0 a 1 sin configurar correctamente la escala.
 
-## El Gauge no muestra una tendencia
+### El Gauge no muestra una tendencia
 
 El Gauge no está diseñado para mostrar una evolución temporal detallada.
 
@@ -1966,7 +1966,7 @@ Time series
 
 como complemento.
 
-## El valor parece antiguo
+### El valor parece antiguo
 
 Comprobar:
 
@@ -1979,7 +1979,7 @@ Comprobar:
 
 ---
 
-# Evidencias de la práctica
+## Evidencias de la práctica
 
 Crear el directorio:
 
@@ -2094,13 +2094,13 @@ Capturas recomendadas:
 
 ---
 
-# Práctica integradora
+## Práctica integradora
 
-## Objetivo
+### Objetivo
 
 Crear un dashboard compuesto por Gauges que muestre el estado actual de los principales recursos de un servidor Linux.
 
-## Panel 1: disponibilidad
+### Panel 1: disponibilidad
 
 Consulta:
 
@@ -2125,7 +2125,7 @@ Umbrales:
 99     Verde
 ```
 
-## Panel 2: CPU
+### Panel 2: CPU
 
 Consulta:
 
@@ -2154,7 +2154,7 @@ Umbrales:
 90     Rojo
 ```
 
-## Panel 3: memoria
+### Panel 3: memoria
 
 Consulta:
 
@@ -2184,7 +2184,7 @@ Umbrales:
 90     Rojo
 ```
 
-## Panel 4: almacenamiento
+### Panel 4: almacenamiento
 
 Consulta:
 
@@ -2220,7 +2220,7 @@ Umbrales:
 90     Rojo
 ```
 
-## Distribución propuesta
+### Distribución propuesta
 
 ```text
 +----------------------+-------------------------------+
@@ -2230,7 +2230,7 @@ Umbrales:
 +----------------------+-------------------------------+
 ```
 
-## Tareas
+### Tareas
 
 1. Crear los cuatro Gauges.
 2. Configurar las consultas.
@@ -2252,7 +2252,7 @@ Umbrales:
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -2275,7 +2275,7 @@ Umbrales:
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - El panel Gauge representa un valor dentro de un rango.
 - Es adecuado para porcentajes, capacidades y niveles de utilización.
@@ -2300,7 +2300,7 @@ Umbrales:
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué finalidad tiene un panel Gauge?
 2. ¿Qué diferencia existe entre un Gauge y un Stat?
@@ -2330,7 +2330,7 @@ Umbrales:
 
 ---
 
-# Resultado esperado
+## Resultado esperado
 
 Al finalizar esta sección, el alumno debe ser capaz de crear y configurar paneles Gauge coherentes y útiles.
 
