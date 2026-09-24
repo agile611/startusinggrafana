@@ -168,19 +168,16 @@ nav:
 
   - Proyecto final:
       - Introducción: 06-proyecto-final/01-index.md
-      - Escenario: 06-proyecto-final/escenario.md
-      - Requisitos: 06-proyecto-final/requisitos.md
-      - Tareas: 06-proyecto-final/tareas.md
-      - Entregables: 06-proyecto-final/entregables.md
-      - Criterios de evaluación: 06-proyecto-final/criterios-evaluacion.md
-
-  - Prácticas:
-      - Índice: practicas/index.md
-      - Práctica 1 - Primer dashboard: practicas/practica-01-primer-dashboard.md
-      - Práctica 2 - Node Exporter: practicas/practica-02-node-exporter.md
-      - Práctica 3 - PromQL: practicas/practica-03-promql.md
-      - Práctica 4 - Dashboard operativo: practicas/practica-04-dashboard-operativo.md
-      - Práctica 5 - Alertas: practicas/practica-05-alertas.md
+      - Escenario: 06-proyecto-final/02-escenario.md
+      - Requisitos: 06-proyecto-final/03-requisitos.md
+      - Tareas: 06-proyecto-final/04-tareas.md
+      - Práctica 1 - Primer dashboard: 06-proyecto-final/05-practica-01-primer-dashboard.md
+      - Práctica 2 - Node Exporter: 06-proyecto-final/06-practica-02-node-exporter.md
+      - Práctica 3 - PromQL: 06-proyecto-final/07-practica-03-promql.md
+      - Práctica 4 - Dashboard operativo: 06-proyecto-final/08-practica-04-dashboard-operativo.md
+      - Práctica 5 - Alertas: 06-proyecto-final/09-practica-05-alertas.md
+      - Entregables: 06-proyecto-final/10-entregables.md
+      - Criterios de evaluación: 06-proyecto-final/11-criterios-evaluacion.md
 
   - Referencia:
       - Índice: referencia/index.md
