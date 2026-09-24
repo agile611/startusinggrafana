@@ -101,7 +101,7 @@ curl -s http://localhost:3000/api/health | jq
 
 ---
 
-# Conceptos principales
+## Conceptos principales
 
 ## Dashboard
 
@@ -177,7 +177,7 @@ CPU superior al 90 %: crítico
 
 ---
 
-# Arquitectura del bloque
+## Arquitectura del bloque
 
 ```text
 04-dashboards-visualizacion/
@@ -200,7 +200,7 @@ CPU superior al 90 %: crítico
 
 ---
 
-# Contenidos
+## Contenidos
 
 ## 1. Conceptos de dashboards
 
@@ -513,7 +513,7 @@ El alumno deberá construir un dashboard de monitorización utilizando Prometheu
 
 ---
 
-# Sesión práctica 1: comprobar el entorno
+## Sesión práctica 1: comprobar el entorno
 
 ## Objetivo
 
@@ -560,7 +560,7 @@ up
 
 ---
 
-# Sesión práctica 2: crear el primer dashboard
+## Sesión práctica 2: crear el primer dashboard
 
 ## Objetivo
 
@@ -603,7 +603,7 @@ Estado de los objetivos
 
 ---
 
-# Sesión práctica 3: crear un dashboard de recursos
+## Sesión práctica 3: crear un dashboard de recursos
 
 ## Objetivo
 
@@ -739,7 +739,7 @@ Carga del sistema
 
 ---
 
-# Sesión práctica 4: configurar umbrales
+## Sesión práctica 4: configurar umbrales
 
 ## Objetivo
 
@@ -788,7 +788,7 @@ Configurar:
 
 ---
 
-# Sesión práctica 5: añadir un panel de texto
+## Sesión práctica 5: añadir un panel de texto
 
 ## Objetivo
 
@@ -797,7 +797,7 @@ Documentar el propósito y la interpretación del dashboard.
 Crear un panel de texto con:
 
 ```markdown
-# Monitorización del servidor
+## Monitorización del servidor
 
 Este dashboard muestra el estado general del servidor monitorizado mediante Prometheus y Node Exporter.
 
@@ -831,7 +831,7 @@ Prometheus.
 
 ---
 
-# Sesión práctica 6: observar una caída
+## Sesión práctica 6: observar una caída
 
 ## Objetivo
 
@@ -886,7 +886,7 @@ up{job="node_exporter"}
 
 ---
 
-# Sesión práctica 7: utilizar transformaciones
+## Sesión práctica 7: utilizar transformaciones
 
 ## Objetivo
 
@@ -920,7 +920,7 @@ Aplicar transformaciones para:
 
 ---
 
-# Sesión práctica 8: exportar el dashboard
+## Sesión práctica 8: exportar el dashboard
 
 ## Objetivo
 
@@ -964,7 +964,7 @@ Guardar el fichero:
 
 ---
 
-# Dashboard final recomendado
+## Dashboard final recomendado
 
 El dashboard final debe incluir al menos los siguientes paneles:
 
@@ -994,7 +994,7 @@ El dashboard final debe incluir al menos los siguientes paneles:
 
 ---
 
-# Buenas prácticas de diseño
+## Buenas prácticas de diseño
 
 ## Mostrar primero la información más importante
 
@@ -1075,7 +1075,7 @@ Añadir un panel de texto con:
 
 ---
 
-# Problemas habituales
+## Problemas habituales
 
 ## El panel no muestra datos
 
@@ -1170,7 +1170,7 @@ Revisar:
 
 ---
 
-# Evidencias del bloque
+## Evidencias del bloque
 
 Crear un directorio de evidencias:
 
@@ -1269,7 +1269,7 @@ curl -s http://localhost:9090/api/v1/status/config \
 
 ---
 
-# Práctica final del bloque
+## Práctica final del bloque
 
 ## Objetivo
 
@@ -1324,7 +1324,7 @@ Monitorización de servidor Linux
 
 ---
 
-# Criterios de evaluación
+## Criterios de evaluación
 
 | Criterio | Puntuación |
 |---|---:|
@@ -1356,7 +1356,7 @@ El dashboard debe:
 
 ---
 
-# Entregables
+## Entregables
 
 La entrega debe contener:
 
@@ -1391,7 +1391,7 @@ El informe debe incluir:
 
 ---
 
-# Preguntas de comprobación
+## Preguntas de comprobación
 
 1. ¿Qué diferencia existe entre un dashboard y un panel?
 2. ¿Qué función cumple una fuente de datos?
@@ -1421,7 +1421,7 @@ El informe debe incluir:
 
 ---
 
-# Puntos clave
+## Puntos clave
 
 - Un dashboard agrupa paneles relacionados.
 - Un panel representa una consulta o conjunto de datos.
@@ -1446,7 +1446,7 @@ El informe debe incluir:
 
 ---
 
-# Navegación del módulo
+## Navegación del módulo
 
 1. [Conceptos de dashboards](02-conceptos-dashboards.md)
 2. [Lista de dashboards](03-lista-dashboards.md)
@@ -1464,7 +1464,7 @@ El informe debe incluir:
 
 ---
 
-# Resultado final esperado
+## Resultado final esperado
 
 Al finalizar el bloque, el alumno debe comprender el siguiente flujo:
 
