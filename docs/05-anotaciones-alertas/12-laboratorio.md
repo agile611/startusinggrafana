@@ -39,7 +39,7 @@ El laboratorio está diseñado para realizarse en un entorno controlado. Las acc
 
 ---
 
-### Objetivos
+## Objetivos
 
 Al finalizar este laboratorio, el alumno podrá:
 
@@ -89,7 +89,7 @@ La observabilidad no consiste únicamente en mostrar gráficos. Una plataforma �
 
 En este laboratorio se utilizarán tres elementos principales:
 
-### Alertas
+## Alertas
 
 Detectan situaciones anómalas mediante reglas basadas en métricas.
 
@@ -100,7 +100,7 @@ Si la CPU supera el 90 % durante cinco minutos,
 activar una alerta.
 ```
 
-### Anotaciones
+## Anotaciones
 
 Registran acontecimientos operativos en una línea temporal.
 
@@ -113,7 +113,7 @@ Mantenimiento programado.
 Rollback de una aplicación.
 ```
 
-### Notificaciones
+## Notificaciones
 
 Informan al equipo responsable cuando una alerta cambia de estado.
 
@@ -141,7 +141,7 @@ La combinación de estos elementos permite construir una línea temporal complet
 
 El laboratorio utilizará un servidor de prácticas supervisado por Prometheus y visualizado en Grafana.
 
-### Componentes
+## Componentes
 
 ```text
 Node Exporter
@@ -156,7 +156,7 @@ Grafana
 Alertas y notificaciones
 ```
 
-### Servicios esperados
+## Servicios esperados
 
 | Componente | Función |
 |---|---|
@@ -185,7 +185,7 @@ Antes de comenzar, el alumno debe disponer de:
 - Una máquina de prácticas autorizada.
 - Acceso a una terminal, si se realizarán pruebas de servicio o carga.
 
-### Comprobar la versión
+## Comprobar la versión
 
 Desde Grafana:
 
@@ -215,7 +215,7 @@ La interfaz puede presentar diferencias según la versión instalada.
 
 Este laboratorio debe realizarse únicamente en un entorno autorizado.
 
-### No ejecutar sobre producción
+## No ejecutar sobre producción
 
 No detener servicios ni generar carga en sistemas reales.
 
@@ -233,7 +233,7 @@ Correcto:
 Ejecutar la acción únicamente en la máquina de laboratorio asignada.
 ```
 
-### No utilizar credenciales reales
+## No utilizar credenciales reales
 
 No incluir en la documentación:
 
@@ -246,7 +246,7 @@ URLs con credenciales
 Cabeceras de autenticación
 ```
 
-### No crear notificaciones reales sin autorización
+## No crear notificaciones reales sin autorización
 
 Utilizar:
 
@@ -256,7 +256,7 @@ Utilizar:
 - Canales controlados.
 - Sistemas ITSM de laboratorio.
 
-### No automatizar acciones destructivas
+## No automatizar acciones destructivas
 
 El laboratorio no debe ejecutar acciones como:
 
@@ -329,11 +329,11 @@ EOF
 
 ## Fase 1: comprobar el entorno
 
-### Objetivo
+## Objetivo
 
 Verificar que Grafana, Prometheus y Node Exporter funcionan antes de crear reglas.
 
-### Comprobar Node Exporter
+## Comprobar Node Exporter
 
 En la máquina de laboratorio:
 
@@ -351,7 +351,7 @@ ss -lntp
 
 La salida debe mostrar el puerto configurado para Node Exporter, habitualmente el `9100`.
 
-### Comprobar Prometheus
+## Comprobar Prometheus
 
 Si Prometheus se ejecuta como servicio:
 
@@ -366,7 +366,7 @@ docker ps
 docker logs prometheus --tail 50
 ```
 
-### Comprobar Grafana
+## Comprobar Grafana
 
 ```bash
 sudo systemctl status grafana-server
@@ -379,7 +379,7 @@ docker ps
 docker logs grafana --tail 50
 ```
 
-### Registrar el resultado
+## Registrar el resultado
 
 ```text
 Node Exporter:
@@ -397,11 +397,11 @@ Observaciones:
 
 ## Fase 2: validar la fuente de datos
 
-### Objetivo
+## Objetivo
 
 Comprobar que Grafana puede consultar Prometheus.
 
-### Pasos
+## Pasos
 
 1. Acceder a Grafana.
 2. Abrir **Connections** o **Data sources**.
@@ -409,7 +409,7 @@ Comprobar que Grafana puede consultar Prometheus.
 4. Ejecutar la prueba de conexión.
 5. Confirmar que la fuente está disponible.
 
-### Resultado esperado
+## Resultado esperado
 
 ```text
 Data source is working
@@ -417,7 +417,7 @@ Data source is working
 
 El texto exacto puede variar según la versión.
 
-### Si la prueba falla
+## Si la prueba falla
 
 Comprobar:
 
@@ -434,7 +434,7 @@ Comprobar:
 
 ## Fase 3: validar consultas PromQL
 
-### Objetivo
+## Objetivo
 
 Comprobar que las consultas devuelven datos antes de utilizarlas en reglas.
 
@@ -446,7 +446,7 @@ Explore → Prometheus
 
 ---
 
-### Consulta 1: disponibilidad
+## Consulta 1: disponibilidad
 
 ```promql
 up{job="node_exporter"}
@@ -473,7 +473,7 @@ Etiqueta instance:
 
 ---
 
-### Consulta 2: CPU utilizada
+## Consulta 2: CPU utilizada
 
 ```promql
 100 - (
@@ -503,7 +503,7 @@ Comprobar:
 
 ---
 
-### Consulta 3: memoria utilizada
+## Consulta 3: memoria utilizada
 
 ```promql
 100 * (
@@ -522,7 +522,7 @@ Porcentaje de memoria utilizada.
 
 ---
 
-### Consulta 4: memoria disponible
+## Consulta 4: memoria disponible
 
 ```promql
 100 * (
@@ -540,7 +540,7 @@ Porcentaje de memoria disponible.
 
 ---
 
-### Consulta 5: almacenamiento utilizado
+## Consulta 5: almacenamiento utilizado
 
 ```promql
 100 * (
@@ -565,7 +565,7 @@ Porcentaje utilizado del sistema de ficheros raíz.
 
 ---
 
-### Registrar las consultas
+## Registrar las consultas
 
 Guardar las consultas en un fichero:
 
@@ -616,7 +616,7 @@ EOF
 
 ## Fase 4: crear un dashboard de laboratorio
 
-### Objetivo
+## Objetivo
 
 Crear un dashboard que permita observar las métricas utilizadas por las alertas.
 
@@ -626,7 +626,7 @@ Crear un dashboard llamado:
 Laboratorio - Anotaciones y alertas
 ```
 
-### Panel 1: disponibilidad
+## Panel 1: disponibilidad
 
 Consulta:
 
@@ -649,7 +649,7 @@ Stat o Time series
 
 ---
 
-### Panel 2: CPU
+## Panel 2: CPU
 
 Consulta:
 
@@ -677,7 +677,7 @@ Umbral visual:
 
 ---
 
-### Panel 3: memoria
+## Panel 3: memoria
 
 Consulta:
 
@@ -702,7 +702,7 @@ Percent (0-100)
 
 ---
 
-### Panel 4: almacenamiento
+## Panel 4: almacenamiento
 
 Consulta:
 
@@ -733,7 +733,7 @@ Percent (0-100)
 
 ---
 
-### Guardar el dashboard
+## Guardar el dashboard
 
 Guardar el dashboard con:
 
@@ -754,7 +754,7 @@ La URL se utilizará posteriormente en las anotaciones y notificaciones.
 
 ## Fase 5: crear anotaciones manuales
 
-### Objetivo
+## Objetivo
 
 Registrar eventos operativos para relacionarlos con las métricas.
 
@@ -776,7 +776,7 @@ environment = laboratory
 team = training
 ```
 
-### Crear una anotación de prueba de carga
+## Crear una anotación de prueba de carga
 
 ```text
 Título:
@@ -793,7 +793,7 @@ event = load-test
 environment = laboratory
 ```
 
-### Crear una anotación de mantenimiento
+## Crear una anotación de mantenimiento
 
 ```text
 Título:
@@ -811,7 +811,7 @@ service = node_exporter
 environment = laboratory
 ```
 
-### Comprobar las anotaciones
+## Comprobar las anotaciones
 
 1. Abrir el dashboard.
 2. Seleccionar un rango temporal que incluya las anotaciones.
@@ -819,7 +819,7 @@ environment = laboratory
 4. Seleccionar una anotación.
 5. Revisar su título, descripción y etiquetas.
 
-### Registrar
+## Registrar
 
 ```text
 Anotación de inicio creada:
@@ -837,23 +837,23 @@ Observaciones:
 
 ## Fase 6: crear la alerta de disponibilidad
 
-### Objetivo
+## Objetivo
 
 Detectar que Node Exporter deja de responder.
 
-### Nombre
+## Nombre
 
 ```text
 NodeExporterDown-Laboratory
 ```
 
-### Consulta
+## Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### Expresión
+## Expresión
 
 Utilizar el último valor disponible:
 
@@ -862,13 +862,13 @@ Reduce:
 Last
 ```
 
-### Condición
+## Condición
 
 ```text
 Valor igual a 0
 ```
 
-### Evaluación
+## Evaluación
 
 ```text
 Intervalo:
@@ -878,7 +878,7 @@ Duración:
 1 minuto
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 alertname = NodeExporterDown-Laboratory
@@ -889,7 +889,7 @@ environment = laboratory
 resource = availability
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Node Exporter no disponible en {{ $labels.instance }}
@@ -903,7 +903,7 @@ dashboard_url = URL_DEL_DASHBOARD_DE_LABORATORIO
 
 Sustituir `URL_DEL_DASHBOARD_DE_LABORATORIO` por la URL real, si procede.
 
-### Ausencia de datos
+## Ausencia de datos
 
 Para esta alerta, decidir y documentar el comportamiento ante ausencia de datos:
 
@@ -914,7 +914,7 @@ Alerting o No data
 
 La elección depende del diseño del laboratorio. Lo importante es justificarla.
 
-### Crear la regla
+## Crear la regla
 
 1. Abrir **Alerting**.
 2. Seleccionar **Alert rules**.
@@ -931,17 +931,17 @@ La elección depende del diseño del laboratorio. Lo importante es justificarla.
 
 ## Fase 7: crear la alerta de CPU
 
-### Objetivo
+## Objetivo
 
 Detectar un uso sostenido de CPU superior al 90 %.
 
-### Nombre
+## Nombre
 
 ```text
 HighCPUUsage-Laboratory
 ```
 
-### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -951,19 +951,19 @@ HighCPUUsage-Laboratory
 )
 ```
 
-### Reducción
+## Reducción
 
 ```text
 Last
 ```
 
-### Condición
+## Condición
 
 ```text
 Mayor que 90
 ```
 
-### Evaluación
+## Evaluación
 
 ```text
 Intervalo:
@@ -973,7 +973,7 @@ Duración:
 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 alertname = HighCPUUsage-Laboratory
@@ -984,7 +984,7 @@ environment = laboratory
 resource = cpu
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = CPU elevada en {{ $labels.instance }}
@@ -996,7 +996,7 @@ runbook_url = https://example.com/runbooks/high-cpu
 dashboard_url = URL_DEL_DASHBOARD_DE_LABORATORIO
 ```
 
-### Crear la regla
+## Crear la regla
 
 1. Validar la consulta en Explore.
 2. Crear la regla.
@@ -1011,17 +1011,17 @@ dashboard_url = URL_DEL_DASHBOARD_DE_LABORATORIO
 
 ## Fase 8: crear la alerta de memoria
 
-### Objetivo
+## Objetivo
 
 Detectar un uso de memoria superior al 90 %.
 
-### Nombre
+## Nombre
 
 ```text
 HighMemoryUsage-Laboratory
 ```
 
-### Consulta
+## Consulta
 
 ```promql
 100 * (
@@ -1032,19 +1032,19 @@ HighMemoryUsage-Laboratory
 )
 ```
 
-### Reducción
+## Reducción
 
 ```text
 Last
 ```
 
-### Condición
+## Condición
 
 ```text
 Mayor que 90
 ```
 
-### Evaluación
+## Evaluación
 
 ```text
 Intervalo:
@@ -1054,7 +1054,7 @@ Duración:
 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 alertname = HighMemoryUsage-Laboratory
@@ -1065,7 +1065,7 @@ environment = laboratory
 resource = memory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Uso de memoria elevado en {{ $labels.instance }}
@@ -1081,17 +1081,17 @@ dashboard_url = URL_DEL_DASHBOARD_DE_LABORATORIO
 
 ## Fase 9: crear la alerta de almacenamiento
 
-### Objetivo
+## Objetivo
 
 Detectar una ocupación del sistema de ficheros superior al 80 %.
 
-### Nombre
+## Nombre
 
 ```text
 FilesystemUsageHigh-Laboratory
 ```
 
-### Consulta
+## Consulta
 
 ```promql
 100 * (
@@ -1108,19 +1108,19 @@ FilesystemUsageHigh-Laboratory
 )
 ```
 
-### Reducción
+## Reducción
 
 ```text
 Last
 ```
 
-### Condición
+## Condición
 
 ```text
 Mayor que 80
 ```
 
-### Evaluación
+## Evaluación
 
 ```text
 Intervalo:
@@ -1130,7 +1130,7 @@ Duración:
 10 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 alertname = FilesystemUsageHigh-Laboratory
@@ -1142,7 +1142,7 @@ resource = filesystem
 mountpoint = /
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Sistema de ficheros con ocupación elevada
@@ -1158,7 +1158,7 @@ dashboard_url = URL_DEL_DASHBOARD_DE_LABORATORIO
 
 ## Fase 10: revisar la lista de alertas
 
-### Objetivo
+## Objetivo
 
 Consultar el estado de todas las reglas creadas.
 
@@ -1177,7 +1177,7 @@ HighMemoryUsage-Laboratory
 FilesystemUsageHigh-Laboratory
 ```
 
-### Tabla de control
+## Tabla de control
 
 | Regla | Estado inicial | Consulta válida | Etiquetas completas | Anotaciones |
 |---|---|---|---|---|
@@ -1186,7 +1186,7 @@ FilesystemUsageHigh-Laboratory
 | HighMemoryUsage-Laboratory | | | | |
 | FilesystemUsageHigh-Laboratory | | | | |
 
-### Filtrar por estado
+## Filtrar por estado
 
 Probar los filtros:
 
@@ -1216,7 +1216,7 @@ Número de reglas con error:
 
 ## Fase 11: crear un contacto de notificación
 
-### Objetivo
+## Objetivo
 
 Crear un destino de laboratorio para recibir alertas.
 
@@ -1227,7 +1227,7 @@ Utilizar uno de los siguientes canales:
 - Canal colaborativo autorizado.
 - Sistema ITSM de prácticas.
 
-### Ejemplo de contacto
+## Ejemplo de contacto
 
 ```text
 Nombre:
@@ -1245,7 +1245,7 @@ Pruebas del laboratorio de alertas
 
 No utilizar contactos de producción.
 
-### Probar el contacto
+## Probar el contacto
 
 1. Crear el contacto.
 2. Guardar.
@@ -1271,23 +1271,23 @@ Problemas:
 
 ## Fase 12: crear políticas de notificación
 
-### Objetivo
+## Objetivo
 
 Enviar las alertas del laboratorio al contacto de formación.
 
-### Coincidencias
+## Coincidencias
 
 ```text
 environment = laboratory
 ```
 
-### Contacto
+## Contacto
 
 ```text
 laboratory-systems
 ```
 
-### Configuración de agrupación
+## Configuración de agrupación
 
 Para la primera prueba, utilizar:
 
@@ -1297,7 +1297,7 @@ group_by:
 - instance
 ```
 
-### Temporización de laboratorio
+## Temporización de laboratorio
 
 Utilizar valores breves únicamente en el entorno de prácticas:
 
@@ -1314,7 +1314,7 @@ repeat_interval:
 
 Estos valores son adecuados para acelerar las pruebas, pero no deben copiarse automáticamente a producción.
 
-### Crear la política
+## Crear la política
 
 1. Abrir **Alerting**.
 2. Acceder a las políticas.
@@ -1329,11 +1329,11 @@ Estos valores son adecuados para acelerar las pruebas, pero no deben copiarse au
 
 ## Fase 13: probar la alerta de disponibilidad
 
-### Objetivo
+## Objetivo
 
 Comprobar el ciclo completo de una alerta de disponibilidad.
 
-### Preparación
+## Preparación
 
 Crear una anotación:
 
@@ -1346,7 +1346,7 @@ Se detendrá Node Exporter de laboratorio
 para validar la alerta NodeExporterDown-Laboratory.
 ```
 
-### Comprobar el estado inicial
+## Comprobar el estado inicial
 
 ```text
 Regla:
@@ -1356,7 +1356,7 @@ Estado esperado:
 Normal
 ```
 
-### Detener Node Exporter
+## Detener Node Exporter
 
 Ejecutar únicamente en la máquina de laboratorio:
 
@@ -1364,7 +1364,7 @@ Ejecutar únicamente en la máquina de laboratorio:
 sudo systemctl stop node_exporter
 ```
 
-### Observar el ciclo
+## Observar el ciclo
 
 En Grafana:
 
@@ -1387,7 +1387,7 @@ Comprobar:
 - Anotaciones.
 - Notificación recibida.
 
-### Iniciar Node Exporter
+## Iniciar Node Exporter
 
 ```bash
 sudo systemctl start node_exporter
@@ -1402,7 +1402,7 @@ Alerting
 Normal
 ```
 
-### Registro
+## Registro
 
 ```text
 Hora de detención:
@@ -1426,11 +1426,11 @@ Resultado:
 
 ## Fase 14: probar la alerta de CPU
 
-### Objetivo
+## Objetivo
 
 Comprobar que la duración evita alertas por picos breves.
 
-### Preparación
+## Preparación
 
 Crear una anotación:
 
@@ -1442,7 +1442,7 @@ Descripción:
 Se ejecuta una carga controlada para probar HighCPUUsage-Laboratory.
 ```
 
-### Generar carga controlada
+## Generar carga controlada
 
 En la máquina de laboratorio:
 
@@ -1452,7 +1452,7 @@ stress-ng --cpu 1 --timeout 60s
 
 Si `stress-ng` no está instalado, utilizar el mecanismo aprobado por el instructor.
 
-### Observar el comportamiento
+## Observar el comportamiento
 
 La regla está configurada con:
 
@@ -1475,7 +1475,7 @@ CPU elevada durante un periodo breve
 
 Para una prueba de activación, utilizar una carga controlada y autorizada con una duración compatible con el laboratorio.
 
-### Registrar
+## Registrar
 
 ```text
 Valor máximo:
@@ -1495,13 +1495,13 @@ Resultado:
 
 ## Fase 15: comparar reducciones
 
-### Objetivo
+## Objetivo
 
 Comprender la diferencia entre `Last`, `Mean` y `Max`.
 
 Utilizar la consulta de CPU.
 
-### Configuraciones
+## Configuraciones
 
 Crear expresiones de prueba:
 
@@ -1519,7 +1519,7 @@ Reducción = Max
 Umbral = 95
 ```
 
-### Actividad
+## Actividad
 
 1. Ejecutar la consulta en Explore.
 2. Observar la serie.
@@ -1530,7 +1530,7 @@ Umbral = 95
 7. Comparar los estados.
 8. Explicar las diferencias.
 
-### Registro
+## Registro
 
 ```text
 Último valor:
@@ -1550,11 +1550,11 @@ Explicación:
 
 ## Fase 16: probar una alerta multidimensional
 
-### Objetivo
+## Objetivo
 
 Comprobar que una alerta identifica la instancia concreta afectada.
 
-### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -1564,7 +1564,7 @@ Comprobar que una alerta identifica la instancia concreta afectada.
 )
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre:
@@ -1577,7 +1577,7 @@ Duración:
 5 minutos
 ```
 
-### Anotación
+## Anotación
 
 ```text
 summary = CPU elevada en {{ $labels.instance }}
@@ -1586,7 +1586,7 @@ description = La instancia {{ $labels.instance }}
 supera el umbral configurado.
 ```
 
-### Actividades
+## Actividades
 
 1. Confirmar cuántas instancias devuelve la consulta.
 2. Activar carga en una instancia.
@@ -1595,7 +1595,7 @@ supera el umbral configurado.
 5. Revisar el mensaje recibido.
 6. Confirmar que la instancia aparece en la notificación.
 
-### Resultado esperado
+## Resultado esperado
 
 ```text
 server-01:9100 → Normal
@@ -1608,17 +1608,17 @@ La salida concreta depende de las instancias disponibles.
 
 ## Fase 17: probar una alerta `No data`
 
-### Objetivo
+## Objetivo
 
 Diferenciar entre un valor cero y la ausencia de datos.
 
-### Consulta
+## Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### Procedimiento
+## Procedimiento
 
 1. Ejecutar la consulta mientras Node Exporter funciona.
 2. Detener Node Exporter.
@@ -1628,7 +1628,7 @@ up{job="node_exporter"}
 6. Registrar el estado.
 7. Volver a iniciar el servicio.
 
-### Registro
+## Registro
 
 ```text
 Estado con servicio activo:
@@ -1650,11 +1650,11 @@ Interpretación:
 
 ## Fase 18: crear un silenciamiento
 
-### Objetivo
+## Objetivo
 
 Suprimir temporalmente las notificaciones durante una actividad conocida.
 
-### Preparación
+## Preparación
 
 Crear una anotación:
 
@@ -1667,7 +1667,7 @@ Se detendrá temporalmente Node Exporter
 para probar un silenciamiento.
 ```
 
-### Crear el silencio
+## Crear el silencio
 
 Coincidencias:
 
@@ -1691,7 +1691,7 @@ Práctica de mantenimiento autorizada.
 Se valida el silenciamiento de NodeExporterDown-Laboratory.
 ```
 
-### Activar la alerta
+## Activar la alerta
 
 ```bash
 sudo systemctl stop node_exporter
@@ -1706,13 +1706,13 @@ El silencio está activo.
 La notificación queda suprimida.
 ```
 
-### Recuperar
+## Recuperar
 
 ```bash
 sudo systemctl start node_exporter
 ```
 
-### Registrar
+## Registrar
 
 ```text
 Silencio:
@@ -1738,11 +1738,11 @@ Resultado:
 
 ## Fase 19: comprobar el alcance del silencio
 
-### Objetivo
+## Objetivo
 
 Comprobar que un silencio específico no afecta a otras instancias.
 
-### Preparación
+## Preparación
 
 Silenciar únicamente:
 
@@ -1750,7 +1750,7 @@ Silenciar únicamente:
 instance = server-01:9100
 ```
 
-### Actividad
+## Actividad
 
 1. Activar una alerta en `server-01`.
 2. Activar la misma alerta en `server-02`, si existe.
@@ -1759,7 +1759,7 @@ instance = server-01:9100
 5. Comprobar qué instancia quedó silenciada.
 6. Documentar el resultado.
 
-### Resultado esperado
+## Resultado esperado
 
 ```text
 server-01:
@@ -1775,11 +1775,11 @@ Si el entorno solo tiene una instancia, documentar la limitación.
 
 ## Fase 20: revisar anotaciones y alertas juntas
 
-### Objetivo
+## Objetivo
 
 Correlacionar eventos operativos con cambios en las métricas.
 
-### Línea temporal esperada
+## Línea temporal esperada
 
 ```text
 18:00 - Inicio de prueba de carga
@@ -1794,7 +1794,7 @@ Correlacionar eventos operativos con cambios en las métricas.
 18:17 - Alerta Normal
 ```
 
-### Actividad
+## Actividad
 
 1. Abrir el dashboard.
 2. Seleccionar el rango temporal completo.
@@ -1804,7 +1804,7 @@ Correlacionar eventos operativos con cambios en las métricas.
 6. Comparar los tiempos.
 7. Escribir una conclusión.
 
-### Conclusión
+## Conclusión
 
 ```text
 La anotación de la prueba de carga permite relacionar
@@ -1817,18 +1817,18 @@ durante el periodo configurado.
 
 ## Fase 21: diagnosticar una alerta que no se activa
 
-### Objetivo
+## Objetivo
 
 Investigar una regla que permanece en `Normal`.
 
-### Situación
+## Situación
 
 ```text
 El panel muestra CPU elevada,
 pero HighCPUUsage-Laboratory no se activa.
 ```
 
-### Procedimiento
+## Procedimiento
 
 1. Ejecutar la consulta en Explore.
 2. Comprobar la unidad.
@@ -1841,7 +1841,7 @@ pero HighCPUUsage-Laboratory no se activa.
 9. Revisar los logs si existe un error.
 10. Documentar la causa.
 
-### Causas posibles
+## Causas posibles
 
 ```text
 El valor no supera realmente el umbral.
@@ -1853,7 +1853,7 @@ El umbral utiliza una unidad incorrecta.
 La consulta no devuelve datos.
 ```
 
-### Registro
+## Registro
 
 ```text
 Regla:
@@ -1879,11 +1879,11 @@ Resultado posterior:
 
 ## Fase 22: diagnosticar una alerta sin notificación
 
-### Objetivo
+## Objetivo
 
 Investigar una alerta que aparece como `Alerting`, pero no genera ningún mensaje.
 
-### Procedimiento
+## Procedimiento
 
 1. Confirmar que la regla está activa.
 2. Revisar sus etiquetas.
@@ -1896,7 +1896,7 @@ Investigar una alerta que aparece como `Alerting`, pero no genera ningún mensaj
 9. Revisar los logs.
 10. Registrar la causa.
 
-### Posibles causas
+## Posibles causas
 
 ```text
 La alerta no coincide con la política.
@@ -1912,11 +1912,11 @@ La integración externa devuelve un error.
 
 ## Fase 23: probar una ruta sin coincidencia
 
-### Objetivo
+## Objetivo
 
 Comprobar el comportamiento de una alerta que no coincide con ninguna política específica.
 
-### Crear una alerta de prueba
+## Crear una alerta de prueba
 
 Utilizar etiquetas como:
 
@@ -1927,7 +1927,7 @@ environment = laboratory
 severity = warning
 ```
 
-### Actividad
+## Actividad
 
 1. Crear una política para `environment=laboratory`.
 2. Crear una alerta con `team=unknown`.
@@ -1938,7 +1938,7 @@ severity = warning
 7. Repetir la prueba.
 8. Comparar los resultados.
 
-### Registro
+## Registro
 
 ```text
 Política inicial:
@@ -1956,11 +1956,11 @@ Resultado:
 
 ## Fase 24: probar la recuperación
 
-### Objetivo
+## Objetivo
 
 Comprobar que el sistema informa tanto de la activación como de la resolución.
 
-### Procedimiento
+## Procedimiento
 
 1. Confirmar el estado `Normal`.
 2. Activar una condición.
@@ -1971,14 +1971,14 @@ Comprobar que el sistema informa tanto de la activación como de la resolución.
 7. Confirmar la notificación de recuperación.
 8. Comparar ambos mensajes.
 
-### Tabla
+## Tabla
 
 | Evento | Hora en Grafana | Hora de recepción | Resultado |
 |---|---|---|---|
 | Activación | | | |
 | Recuperación | | | |
 
-### Revisar en el mensaje
+## Revisar en el mensaje
 
 ```text
 Estado:
@@ -2003,11 +2003,11 @@ Runbook:
 
 ## Fase 25: revisar el historial de estados
 
-### Objetivo
+## Objetivo
 
 Reconstruir la evolución de una alerta.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 18:00 - Normal
@@ -2016,7 +2016,7 @@ Reconstruir la evolución de una alerta.
 18:16 - Normal
 ```
 
-### Actividad
+## Actividad
 
 Para cada alerta probada, registrar:
 
@@ -2038,7 +2038,7 @@ Silencio aplicado:
 Observaciones:
 ```
 
-### Análisis
+## Análisis
 
 Responder:
 
@@ -2060,7 +2060,7 @@ Responder:
 
 ## Fase 26: elaborar el informe operativo
 
-### Resumen general
+## Resumen general
 
 ```text
 Fecha:
@@ -2088,7 +2088,7 @@ Número de silenciamientos:
 Resultado general:
 ```
 
-### Incidencias observadas
+## Incidencias observadas
 
 | Alerta | Instancia | Inicio | Recuperación | Causa | Acción |
 |---|---|---|---|---|---|
@@ -2096,7 +2096,7 @@ Resultado general:
 | | | | | | |
 | | | | | | |
 
-### Problemas de configuración
+## Problemas de configuración
 
 | Problema | Causa | Corrección | Resultado |
 |---|---|---|---|
@@ -2104,7 +2104,7 @@ Resultado general:
 | | | | |
 | | | | |
 
-### Conclusión del alumno
+## Conclusión del alumno
 
 ```text
 ¿Qué regla fue más fácil de configurar?
@@ -2137,13 +2137,13 @@ Al finalizar:
 11. Informar al instructor.
 12. Confirmar que no quedan cambios no documentados.
 
-### Comprobar el servicio
+## Comprobar el servicio
 
 ```bash
 sudo systemctl status node_exporter
 ```
 
-### Comprobar la consulta
+## Comprobar la consulta
 
 ```promql
 up{job="node_exporter"}
@@ -2159,7 +2159,7 @@ Resultado esperado:
 
 ## Plantilla final de evaluación
 
-### Reglas
+## Reglas
 
 | Regla | Creada | Probada | Activación | Recuperación |
 |---|---|---|---|---|
@@ -2168,7 +2168,7 @@ Resultado esperado:
 | HighMemoryUsage-Laboratory | | | | |
 | FilesystemUsageHigh-Laboratory | | | | |
 
-### Anotaciones
+## Anotaciones
 
 | Anotación | Creada | Visible | Comentario |
 |---|---|---|---|
@@ -2176,7 +2176,7 @@ Resultado esperado:
 | Prueba de carga | | | |
 | Mantenimiento | | | |
 
-### Notificaciones
+## Notificaciones
 
 | Prueba | Contacto | Enviada | Recibida | Observaciones |
 |---|---|---|---|---|
@@ -2185,7 +2185,7 @@ Resultado esperado:
 | Disponibilidad | | | | |
 | Recuperación | | | | |
 
-### Silenciamientos
+## Silenciamientos
 
 | Silencio | Alcance | Activo | Suprimió | Revisado |
 |---|---|---|---|---|
@@ -2209,7 +2209,7 @@ Resultado esperado:
 | Documentación e informe final | 1 |
 | **Total** | **10** |
 
-### Indicadores de una práctica correcta
+## Indicadores de una práctica correcta
 
 - Las consultas devuelven datos válidos.
 - Las reglas tienen nombres descriptivos.

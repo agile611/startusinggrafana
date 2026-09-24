@@ -61,7 +61,7 @@ La alerta se envía al equipo de sistemas
 
 ---
 
-### Objetivos
+## Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -104,7 +104,7 @@ Contacto
 Canal funcional
 ```
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Regla:
@@ -132,7 +132,7 @@ Mensaje enviado al equipo de guardia
 
 Si alguno de estos elementos está mal configurado, la notificación puede no llegar.
 
-### Posibles problemas
+## Posibles problemas
 
 ```text
 La regla no se activa.
@@ -162,7 +162,7 @@ Destino de notificación
 Canal de notificación
 ```
 
-### Ejemplos
+## Ejemplos
 
 ```text
 Equipo de sistemas por correo
@@ -172,7 +172,7 @@ Equipo de guardia
 Canal de desarrollo
 ```
 
-### Información habitual
+## Información habitual
 
 Un contacto puede incluir:
 
@@ -200,7 +200,7 @@ La disponibilidad de estos campos depende del tipo de contacto.
 | Contacto | Definir el destino | `systems@example.com` |
 | Notificación | Mensaje enviado | Correo sobre CPU elevada |
 
-### Ejemplo completo
+## Ejemplo completo
 
 ```text
 La regla HighCPUUsage detecta CPU elevada.
@@ -229,7 +229,7 @@ El contacto entrega.
 
 ## Tipos de contactos
 
-### Correo electrónico
+## Correo electrónico
 
 Envía mensajes a una o varias direcciones.
 
@@ -248,7 +248,7 @@ Es útil para:
 - Alertas no urgentes.
 - Comunicaciones operativas.
 
-### Webhook
+## Webhook
 
 Envía una petición HTTP a un endpoint.
 
@@ -266,7 +266,7 @@ Es útil para:
 - Integraciones personalizadas.
 - Procesamiento automático de alertas.
 
-### Slack o Microsoft Teams
+## Slack o Microsoft Teams
 
 Envía mensajes a un canal colaborativo.
 
@@ -277,7 +277,7 @@ Es útil para:
 - Alertas de laboratorio.
 - Comunicación rápida.
 
-### PagerDuty u otras plataformas de guardia
+## PagerDuty u otras plataformas de guardia
 
 Integra las alertas con sistemas de guardia y escalado.
 
@@ -288,7 +288,7 @@ Es útil para:
 - Rotaciones de guardia.
 - Escalado automático.
 
-### Telegram u otros canales
+## Telegram u otros canales
 
 Puede utilizarse para laboratorios o equipos que hayan aprobado ese canal.
 
@@ -320,7 +320,7 @@ El procedimiento general es:
 11. Confirmar la recepción.
 12. Documentar el resultado.
 
-### Nombre recomendado
+## Nombre recomendado
 
 Ejemplos:
 
@@ -346,7 +346,7 @@ Un nombre claro facilita la administración y el diagnóstico.
 
 ## Contacto de correo electrónico
 
-### Requisitos
+## Requisitos
 
 Para enviar correo se necesita normalmente:
 
@@ -360,7 +360,7 @@ Para enviar correo se necesita normalmente:
 - Permisos de salida de red.
 - Certificados válidos, cuando se utilice TLS.
 
-### Datos conceptuales
+## Datos conceptuales
 
 ```text
 Servidor SMTP:
@@ -381,7 +381,7 @@ systems@example.com
 
 Los valores reales dependen del proveedor de correo y de la infraestructura.
 
-### Recomendación
+## Recomendación
 
 Utilizar una cuenta técnica específica para Grafana.
 
@@ -409,7 +409,7 @@ La configuración puede realizarse mediante:
 
 El método depende de cómo se haya instalado Grafana.
 
-### Ejemplo conceptual de configuración
+## Ejemplo conceptual de configuración
 
 ```ini
 [smtp]
@@ -426,7 +426,7 @@ Este ejemplo es ilustrativo. Los nombres exactos y las opciones disponibles depe
 
 **No se deben guardar contraseñas reales en documentación, capturas ni repositorios.**
 
-### Después de modificar SMTP
+## Después de modificar SMTP
 
 Normalmente es necesario:
 
@@ -441,11 +441,11 @@ Normalmente es necesario:
 
 ## Prueba de un contacto de correo
 
-### Objetivo
+## Objetivo
 
 Comprobar que Grafana puede enviar un mensaje al destinatario configurado.
 
-### Pasos
+## Pasos
 
 1. Crear un contacto de tipo correo.
 2. Introducir una dirección de laboratorio.
@@ -457,7 +457,7 @@ Comprobar que Grafana puede enviar un mensaje al destinatario configurado.
 8. Revisar los logs si el correo no llega.
 9. Registrar el resultado.
 
-### Registro
+## Registro
 
 ```text
 Nombre del contacto:
@@ -497,14 +497,14 @@ on-call@example.com
 operations@example.com
 ```
 
-### Ventajas
+## Ventajas
 
 - Permite avisar a un equipo.
 - Reduce la dependencia de una persona.
 - Facilita la continuidad operativa.
 - Permite incluir una dirección de guardia.
 
-### Precauciones
+## Precauciones
 
 - Evitar listas demasiado amplias.
 - Revisar quién debe recibir cada severidad.
@@ -518,7 +518,7 @@ operations@example.com
 
 Un webhook envía una petición HTTP a una URL.
 
-### Flujo conceptual
+## Flujo conceptual
 
 ```text
 Grafana
@@ -539,7 +539,7 @@ El receptor puede:
 - Guardar el evento.
 - Escalar la alerta.
 
-### Información habitual
+## Información habitual
 
 ```text
 URL:
@@ -557,7 +557,7 @@ Token o cabecera autorizada
 
 La configuración exacta depende del endpoint receptor.
 
-### Ejemplo conceptual de payload
+## Ejemplo conceptual de payload
 
 ```json
 {
@@ -577,7 +577,7 @@ El formato real puede incluir más campos y variar según Grafana y la integraci
 
 Un webhook debe protegerse adecuadamente.
 
-### Riesgos
+## Riesgos
 
 - URL expuesta.
 - Token incluido en una captura.
@@ -588,7 +588,7 @@ Un webhook debe protegerse adecuadamente.
 - Repetición de peticiones.
 - Falta de validación del origen.
 
-### Recomendaciones
+## Recomendaciones
 
 - Utilizar HTTPS.
 - Validar la autenticación.
@@ -600,13 +600,13 @@ Un webhook debe protegerse adecuadamente.
 - Rotar las credenciales.
 - No utilizar endpoints personales para alertas de producción.
 
-### Ejemplo incorrecto
+## Ejemplo incorrecto
 
 ```text
 https://example.com/hooks/grafana?token=secreto-real
 ```
 
-### Ejemplo preferible
+## Ejemplo preferible
 
 ```text
 https://example.com/hooks/grafana
@@ -630,7 +630,7 @@ Un endpoint puede devolver diferentes códigos.
 | `429` | Demasiadas peticiones |
 | `5xx` | Error del servidor |
 
-### Diagnóstico
+## Diagnóstico
 
 Si el webhook devuelve:
 
@@ -677,7 +677,7 @@ Revisar:
 
 Una organización puede utilizar contactos distintos según la severidad.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 severity=info
@@ -690,7 +690,7 @@ severity=critical
     → equipo de guardia
 ```
 
-### Etiquetas de las reglas
+## Etiquetas de las reglas
 
 ```text
 severity = warning
@@ -704,7 +704,7 @@ severity = critical
 team = on-call
 ```
 
-### Importante
+## Importante
 
 El contacto no realiza por sí solo el enrutamiento. La política debe reconocer las etiquetas y seleccionar el contacto correspondiente.
 
@@ -712,16 +712,16 @@ El contacto no realiza por sí solo el enrutamiento. La política debe reconocer
 
 ## Contactos y políticas
 
-### Ejemplo completo
+## Ejemplo completo
 
-#### Regla
+### Regla
 
 ```text
 Nombre:
 NodeExporterDown
 ```
 
-#### Etiquetas
+### Etiquetas
 
 ```text
 severity = critical
@@ -729,7 +729,7 @@ team = systems
 service = node_exporter
 ```
 
-#### Política
+### Política
 
 ```text
 Coincidencia:
@@ -737,7 +737,7 @@ team=systems
 severity=critical
 ```
 
-#### Contacto
+### Contacto
 
 ```text
 Nombre:
@@ -748,14 +748,14 @@ Destino:
 on-call@example.com
 ```
 
-#### Resultado
+### Resultado
 
 ```text
 La alerta crítica de Node Exporter
 se envía al equipo de guardia de sistemas.
 ```
 
-### Si no hay coincidencia
+## Si no hay coincidencia
 
 La alerta puede:
 
@@ -776,7 +776,7 @@ Etiquetas → Política → Contacto
 
 Algunas configuraciones pueden enviar notificaciones cuando una alerta se resuelve.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Alerta:
@@ -791,7 +791,7 @@ CPU vuelve a valores normales
 
 Las notificaciones de recuperación ayudan a saber que la condición dejó de cumplirse.
 
-### Debe documentarse
+## Debe documentarse
 
 ```text
 ¿Se notifican las activaciones?
@@ -813,7 +813,7 @@ El comportamiento depende de las políticas y de la configuración de la integra
 
 Cuando varias alertas se activan al mismo tiempo, Grafana puede agruparlas según la política.
 
-### Ejemplo
+## Ejemplo
 
 Tres instancias presentan CPU elevada:
 
@@ -832,13 +832,13 @@ HighCPUUsage:
 - server-03
 ```
 
-### Ventajas
+## Ventajas
 
 - Reduce el número de mensajes.
 - Facilita la identificación de un incidente común.
 - Evita saturar al destinatario.
 
-### Riesgos
+## Riesgos
 
 - Puede ocultar el detalle de una instancia.
 - Puede retrasar la entrega según la configuración.
@@ -852,7 +852,7 @@ La agrupación debe probarse con alertas de laboratorio.
 
 Los contactos pueden utilizar plantillas para personalizar los mensajes.
 
-### Contenido recomendado
+## Contenido recomendado
 
 Una notificación debería incluir:
 
@@ -870,7 +870,7 @@ Enlace al dashboard
 Enlace al runbook
 ```
 
-### Ejemplo conceptual
+## Ejemplo conceptual
 
 ```text
 Alerta: HighCPUUsage
@@ -895,7 +895,7 @@ Antes de utilizar una plantilla en producción, probarla con una alerta real de 
 
 No se deben mezclar sin control los destinos de laboratorio y producción.
 
-### Ejemplo de nombres
+## Ejemplo de nombres
 
 ```text
 laboratory-systems-email
@@ -904,7 +904,7 @@ production-systems-email
 production-on-call-webhook
 ```
 
-### Etiquetas de entorno
+## Etiquetas de entorno
 
 ```text
 environment = laboratory
@@ -912,7 +912,7 @@ environment = staging
 environment = production
 ```
 
-### Recomendaciones
+## Recomendaciones
 
 - Utilizar destinatarios diferentes.
 - Separar las políticas.
@@ -925,11 +925,11 @@ environment = production
 
 ## Crear un contacto de correo de laboratorio
 
-### Objetivo
+## Objetivo
 
 Configurar un contacto de correo para realizar pruebas sin afectar a destinatarios reales.
 
-### Datos de ejemplo
+## Datos de ejemplo
 
 ```text
 Nombre:
@@ -942,7 +942,7 @@ Destinatario:
 alumno@example.com
 ```
 
-### Pasos
+## Pasos
 
 1. Acceder a **Alerting**.
 2. Abrir **Contact points**.
@@ -955,7 +955,7 @@ alumno@example.com
 9. Revisar la recepción.
 10. Documentar el resultado.
 
-### Actividad
+## Actividad
 
 Completar:
 
@@ -977,11 +977,11 @@ Completar:
 
 ## Ejemplo de sesión 1: probar un contacto de correo
 
-### Objetivo
+## Objetivo
 
 Comprobar que Grafana puede enviar un mensaje mediante SMTP.
 
-### Pasos
+## Pasos
 
 1. Revisar que SMTP está habilitado.
 2. Crear el contacto:
@@ -999,7 +999,7 @@ laboratory-email
 9. Registrar el resultado.
 10. Eliminar o deshabilitar el contacto cuando termine el laboratorio.
 
-### Registro
+## Registro
 
 ```text
 Contacto:
@@ -1027,18 +1027,18 @@ No incluir contraseñas en este registro.
 
 ## Ejemplo de sesión 2: probar un webhook
 
-### Objetivo
+## Objetivo
 
 Comprobar que Grafana puede enviar una alerta a un endpoint autorizado.
 
-### Requisitos
+## Requisitos
 
 - Endpoint de laboratorio.
 - URL HTTPS.
 - Método de autenticación definido.
 - Permisos para probar la integración.
 
-### Pasos
+## Pasos
 
 1. Crear un contacto de tipo webhook.
 2. Introducir la URL del endpoint.
@@ -1051,7 +1051,7 @@ Comprobar que Grafana puede enviar una alerta a un endpoint autorizado.
 9. Activar una alerta de laboratorio.
 10. Comprobar la recepción.
 
-### Registro
+## Registro
 
 ```text
 Nombre del contacto:
@@ -1079,18 +1079,18 @@ Eliminar tokens y credenciales antes de guardar evidencias.
 
 ## Ejemplo de sesión 3: conectar una regla con un contacto
 
-### Objetivo
+## Objetivo
 
 Comprobar el flujo completo desde una regla hasta un destinatario.
 
-### Regla
+## Regla
 
 ```text
 Nombre:
 HighCPUUsage
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 team = systems
@@ -1098,14 +1098,14 @@ severity = warning
 environment = laboratory
 ```
 
-### Contacto
+## Contacto
 
 ```text
 Nombre:
 laboratory-systems-email
 ```
 
-### Política
+## Política
 
 ```text
 Coincidencia:
@@ -1113,7 +1113,7 @@ team=systems
 environment=laboratory
 ```
 
-### Pasos
+## Pasos
 
 1. Crear o revisar el contacto.
 2. Crear la política.
@@ -1126,7 +1126,7 @@ environment=laboratory
 9. Comprobar la recuperación.
 10. Revisar si se recibió el mensaje de resolución.
 
-### Flujo esperado
+## Flujo esperado
 
 ```text
 CPU elevada
@@ -1152,11 +1152,11 @@ Correo recibido
 
 ## Ejemplo de sesión 4: diagnosticar un correo que no llega
 
-### Objetivo
+## Objetivo
 
 Investigar un fallo de entrega.
 
-### Procedimiento
+## Procedimiento
 
 1. Comprobar que la regla está en `Alerting`.
 2. Comprobar que la política coincide.
@@ -1171,7 +1171,7 @@ Investigar un fallo de entrega.
 11. Revisar la bandeja de correo no deseado.
 12. Confirmar las restricciones de red.
 
-### Posibles errores
+## Posibles errores
 
 ```text
 Servidor SMTP incorrecto.
@@ -1185,7 +1185,7 @@ Alerta silenciada.
 Mensaje agrupado o retrasado.
 ```
 
-### Registro
+## Registro
 
 ```text
 Estado de la alerta:
@@ -1209,21 +1209,21 @@ Resultado de la nueva prueba:
 
 ## Ejemplo de sesión 5: diagnosticar un webhook con error 401
 
-### Objetivo
+## Objetivo
 
 Resolver un error de autenticación.
 
-### Situación
+## Situación
 
 ```text
 La prueba del webhook devuelve HTTP 401.
 ```
 
-### Interpretación
+## Interpretación
 
 El endpoint rechaza la petición porque la autenticación falta o no es válida.
 
-### Pasos
+## Pasos
 
 1. Revisar el método de autenticación.
 2. Comprobar el nombre de la cabecera.
@@ -1234,7 +1234,7 @@ El endpoint rechaza la petición porque la autenticación falta o no es válida.
 7. Consultar los logs del receptor.
 8. Rotar la credencial si ha sido expuesta.
 
-### Registro
+## Registro
 
 ```text
 Código inicial:
@@ -1256,18 +1256,18 @@ Observaciones:
 
 ## Ejemplo de sesión 6: probar diferentes severidades
 
-### Objetivo
+## Objetivo
 
 Enviar alertas de distinta severidad a contactos diferentes.
 
-### Contactos
+## Contactos
 
 ```text
 laboratory-warning-email
 laboratory-critical-email
 ```
 
-### Políticas conceptuales
+## Políticas conceptuales
 
 ```text
 severity=warning
@@ -1277,7 +1277,7 @@ severity=critical
     → laboratory-critical-email
 ```
 
-### Actividades
+## Actividades
 
 1. Crear ambos contactos.
 2. Crear o revisar las políticas.
@@ -1299,7 +1299,7 @@ severity = critical
 8. Comparar los resultados.
 9. Documentar las rutas.
 
-### Tabla
+## Tabla
 
 | Severidad | Contacto esperado | Contacto recibido | Resultado |
 |---|---|---|---|
@@ -1310,11 +1310,11 @@ severity = critical
 
 ## Ejemplo de sesión 7: probar una notificación de recuperación
 
-### Objetivo
+## Objetivo
 
 Comprobar el comportamiento cuando una alerta vuelve a estado normal.
 
-### Regla
+## Regla
 
 ```text
 Nombre:
@@ -1323,7 +1323,7 @@ Condición:
 up = 0 durante 1 minuto
 ```
 
-### Pasos
+## Pasos
 
 1. Comprobar que la regla está en `Normal`.
 2. Detener Node Exporter:
@@ -1344,7 +1344,7 @@ sudo systemctl start node_exporter
 7. Comprobar si se envía una notificación de resolución.
 8. Registrar ambos mensajes.
 
-### Registro
+## Registro
 
 ```text
 Hora de activación:
@@ -1364,11 +1364,11 @@ Observaciones:
 
 ## Ejemplo de sesión 8: revisar agrupación de notificaciones
 
-### Objetivo
+## Objetivo
 
 Comprobar cómo se agrupan varias alertas.
 
-### Escenario
+## Escenario
 
 Tres instancias presentan CPU elevada:
 
@@ -1378,7 +1378,7 @@ server-02
 server-03
 ```
 
-### Pasos
+## Pasos
 
 1. Crear una regla multidimensional.
 2. Configurar el contacto de laboratorio.
@@ -1389,7 +1389,7 @@ server-03
 7. Comprobar que cada instancia aparece en el contenido.
 8. Evaluar la legibilidad del mensaje.
 
-### Preguntas
+## Preguntas
 
 ```text
 ¿Se recibió un mensaje o varios?
@@ -1407,11 +1407,11 @@ server-03
 
 ## Ejemplo de sesión 9: revisar un contacto obsoleto
 
-### Objetivo
+## Objetivo
 
 Identificar contactos que ya no deben utilizarse.
 
-### Indicadores
+## Indicadores
 
 ```text
 Destinatario inexistente.
@@ -1423,7 +1423,7 @@ Canal no supervisado.
 Cuenta personal utilizada como destino.
 ```
 
-### Pasos
+## Pasos
 
 1. Listar los contactos existentes.
 2. Revisar su tipo.
@@ -1435,7 +1435,7 @@ Cuenta personal utilizada como destino.
 8. Eliminar o deshabilitar los que ya no deben utilizarse.
 9. Documentar el cambio.
 
-### Registro
+## Registro
 
 ```text
 Contacto:
@@ -1461,7 +1461,7 @@ Fecha:
 
 Los contactos pueden necesitar credenciales, tokens o claves.
 
-### Nunca incluir en documentación
+## Nunca incluir en documentación
 
 ```text
 Contraseñas
@@ -1472,7 +1472,7 @@ URLs con credenciales
 Cabeceras completas de autenticación
 ```
 
-### No almacenar en
+## No almacenar en
 
 ```text
 Repositorio Git
@@ -1483,7 +1483,7 @@ Mensajes de chat
 Scripts compartidos
 ```
 
-### Recomendaciones
+## Recomendaciones
 
 - Utilizar secretos gestionados.
 - Limitar los permisos.
@@ -1494,7 +1494,7 @@ Scripts compartidos
 - Revocar credenciales no utilizadas.
 - Registrar únicamente referencias no sensibles.
 
-### Ejemplo de documentación segura
+## Ejemplo de documentación segura
 
 ```text
 Contacto:
@@ -1525,7 +1525,7 @@ Los contactos pueden afectar a:
 - Automatizaciones.
 - Incidencias de producción.
 
-### Recomendaciones
+## Recomendaciones
 
 - Limitar permisos administrativos.
 - Separar creación y revisión.
@@ -1541,7 +1541,7 @@ Los contactos pueden afectar a:
 
 Cada contacto debería tener una ficha.
 
-### Plantilla
+## Plantilla
 
 ```text
 Nombre:
@@ -1575,7 +1575,7 @@ Responsable:
 
 No incluir credenciales ni tokens.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Nombre:
@@ -1610,7 +1610,7 @@ Correcto
 
 ## Problemas frecuentes
 
-### El contacto no aparece en la política
+## El contacto no aparece en la política
 
 Comprobar:
 
@@ -1620,7 +1620,7 @@ Comprobar:
 - Que se ha seleccionado el tipo correcto.
 - Que no existen filtros en la interfaz.
 
-### La prueba falla inmediatamente
+## La prueba falla inmediatamente
 
 Comprobar:
 
@@ -1632,7 +1632,7 @@ Comprobar:
 - Certificados.
 - Logs.
 
-### La alerta está activa, pero no se envía
+## La alerta está activa, pero no se envía
 
 Comprobar:
 
@@ -1645,7 +1645,7 @@ Comprobar:
 - Estado de la integración.
 - Errores de entrega.
 
-### El correo no llega
+## El correo no llega
 
 Comprobar:
 
@@ -1659,7 +1659,7 @@ Comprobar:
 - Correo no deseado.
 - Logs.
 
-### El webhook devuelve `401`
+## El webhook devuelve `401`
 
 Comprobar:
 
@@ -1669,7 +1669,7 @@ Comprobar:
 - Caducidad.
 - Método de autenticación.
 
-### El webhook devuelve `404`
+## El webhook devuelve `404`
 
 Comprobar:
 
@@ -1679,7 +1679,7 @@ Comprobar:
 - Servicio receptor.
 - Versión de la API.
 
-### El webhook devuelve `429`
+## El webhook devuelve `429`
 
 Comprobar:
 
@@ -1689,7 +1689,7 @@ Comprobar:
 - Número de alertas.
 - Capacidad del receptor.
 
-### Se reciben demasiados mensajes
+## Se reciben demasiados mensajes
 
 Comprobar:
 
@@ -1701,7 +1701,7 @@ Comprobar:
 - Número de instancias.
 - Severidad.
 
-### Se recibe un mensaje sin información útil
+## Se recibe un mensaje sin información útil
 
 Comprobar:
 
@@ -1825,11 +1825,11 @@ URLs con credenciales
 
 ## Práctica integradora
 
-### Objetivo
+## Objetivo
 
 Crear, probar y utilizar un contacto de notificación en un flujo completo de alertas.
 
-### Requisitos
+## Requisitos
 
 - Grafana funcionando.
 - Prometheus configurado.
@@ -1841,7 +1841,7 @@ Crear, probar y utilizar un contacto de notificación en un flujo completo de al
 
 ---
 
-### Tarea 1: crear el contacto
+## Tarea 1: crear el contacto
 
 Crear un contacto de correo electrónico:
 
@@ -1860,7 +1860,7 @@ Utilizar una dirección de pruebas autorizada.
 
 ---
 
-### Tarea 2: probar el contacto
+## Tarea 2: probar el contacto
 
 Ejecutar la prueba de entrega.
 
@@ -1882,7 +1882,7 @@ Problemas:
 
 ---
 
-### Tarea 3: crear o revisar la política
+## Tarea 3: crear o revisar la política
 
 Configurar una política que coincida con:
 
@@ -1899,7 +1899,7 @@ laboratory-systems-email
 
 ---
 
-### Tarea 4: preparar la regla
+## Tarea 4: preparar la regla
 
 Utilizar una regla de CPU:
 
@@ -1934,7 +1934,7 @@ Duración:
 
 ---
 
-### Tarea 5: activar la alerta
+## Tarea 5: activar la alerta
 
 Generar carga controlada:
 
@@ -1956,7 +1956,7 @@ Estado Normalizado
 
 ---
 
-### Tarea 6: comprobar la recepción
+## Tarea 6: comprobar la recepción
 
 Verificar:
 
@@ -1980,7 +1980,7 @@ Verificar:
 
 ---
 
-### Tarea 7: documentar el flujo
+## Tarea 7: documentar el flujo
 
 Completar:
 

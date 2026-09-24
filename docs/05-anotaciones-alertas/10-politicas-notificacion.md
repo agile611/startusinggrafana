@@ -59,7 +59,7 @@ Las opciones y nombres de la interfaz pueden variar según la versión de Grafan
 
 ---
 
-### Objetivos
+## Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -110,7 +110,7 @@ Alertas de laboratorio
 
 Una política de notificación permite expresar estas reglas de enrutamiento.
 
-### Ejemplo de clasificación
+## Ejemplo de clasificación
 
 ```text
 severity = info
@@ -162,7 +162,7 @@ Agrupación
 Temporización
 ```
 
-### Política raíz
+## Política raíz
 
 Es el punto de entrada del árbol de notificaciones.
 
@@ -173,7 +173,7 @@ Puede definir:
 - Rutas generales.
 - Comportamiento para alertas sin coincidencia.
 
-### Ruta o política hija
+## Ruta o política hija
 
 Es una regla más específica dentro del árbol.
 
@@ -184,7 +184,7 @@ Si team=systems
     → contacto-systems
 ```
 
-### Coincidencia
+## Coincidencia
 
 Define qué etiquetas debe tener una alerta para utilizar una ruta.
 
@@ -194,7 +194,7 @@ Ejemplo:
 team = systems
 ```
 
-### Contacto
+## Contacto
 
 Define el destino final:
 
@@ -202,7 +202,7 @@ Define el destino final:
 systems@example.com
 ```
 
-### Agrupación
+## Agrupación
 
 Determina qué alertas se envían juntas.
 
@@ -214,7 +214,7 @@ alertname
 instance
 ```
 
-### Temporización
+## Temporización
 
 Determina cuándo se envía la notificación y cuándo se repite.
 
@@ -230,15 +230,15 @@ Determina cuándo se envía la notificación y cuándo se repite.
 | Contacto | Define el destinatario | `systems@example.com` |
 | Notificación | Mensaje enviado | Correo de CPU elevada |
 
-### Ejemplo completo
+## Ejemplo completo
 
-#### Regla
+### Regla
 
 ```text
 HighCPUUsage
 ```
 
-#### Etiquetas
+### Etiquetas
 
 ```text
 severity = warning
@@ -246,20 +246,20 @@ team = systems
 environment = laboratory
 ```
 
-#### Política
+### Política
 
 ```text
 team = systems
 environment = laboratory
 ```
 
-#### Contacto
+### Contacto
 
 ```text
 laboratory-systems-email
 ```
 
-#### Resultado
+### Resultado
 
 ```text
 La alerta se entrega al contacto de laboratorio del equipo de sistemas.
@@ -271,7 +271,7 @@ La alerta se entrega al contacto de laboratorio del equipo de sistemas.
 
 Las etiquetas son la base del enrutamiento.
 
-### Etiquetas recomendadas
+## Etiquetas recomendadas
 
 ```text
 alertname
@@ -285,7 +285,7 @@ region
 notification
 ```
 
-### Ejemplo
+## Ejemplo
 
 ```text
 alertname = NodeExporterDown
@@ -297,7 +297,7 @@ resource = availability
 instance = server-01:9100
 ```
 
-### Convenciones
+## Convenciones
 
 Es recomendable utilizar valores consistentes:
 
@@ -331,7 +331,7 @@ Una convención común facilita:
 
 Una política puede coincidir utilizando diferentes operadores.
 
-### Igualdad
+## Igualdad
 
 ```text
 team = systems
@@ -339,7 +339,7 @@ team = systems
 
 La ruta coincide cuando la etiqueta `team` tiene exactamente el valor `systems`.
 
-### Desigualdad
+## Desigualdad
 
 ```text
 environment != laboratory
@@ -349,7 +349,7 @@ La ruta coincide cuando el entorno no es `laboratory`.
 
 Debe utilizarse con cuidado, porque puede incluir más alertas de las esperadas.
 
-### Expresión regular
+## Expresión regular
 
 Ejemplo conceptual:
 
@@ -359,7 +359,7 @@ service =~ api|frontend
 
 Coincide con servicios cuyo valor sea `api` o `frontend`.
 
-### Negación mediante expresión regular
+## Negación mediante expresión regular
 
 Ejemplo conceptual:
 
@@ -371,7 +371,7 @@ Excluye servicios cuyo nombre empiece por `test-`.
 
 La sintaxis concreta depende de la versión y de la interfaz de Grafana.
 
-### Recomendación
+## Recomendación
 
 Preferir coincidencias simples y explícitas:
 
@@ -398,7 +398,7 @@ environment = production
 
 La alerta debe cumplir todas las condiciones para coincidir con la ruta.
 
-### Ejemplo
+## Ejemplo
 
 Alerta:
 
@@ -448,7 +448,7 @@ Política raíz
 └── Aplicaciones
 ```
 
-### Ejemplo conceptual
+## Ejemplo conceptual
 
 ```text
 Política raíz
@@ -475,7 +475,7 @@ La estructura exacta debe probarse para confirmar cómo se comporta la evaluaci�
 
 Cuando existen varias rutas, es importante evitar ambigüedades.
 
-### Rutas generales y específicas
+## Rutas generales y específicas
 
 Ruta general:
 
@@ -493,7 +493,7 @@ environment = production
 
 La ruta específica debe evaluarse de forma que las alertas críticas de producción no terminen únicamente en la ruta general.
 
-### Recomendación
+## Recomendación
 
 Organizar las rutas desde las condiciones más específicas hasta las más generales:
 
@@ -519,7 +519,7 @@ Estas opciones deben comprenderse y probarse antes de utilizarlas.
 
 La política predeterminada se utiliza cuando una alerta no coincide con una ruta específica.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Política predeterminada:
@@ -536,7 +536,7 @@ environment = laboratory
 
 podría utilizar el contacto predeterminado.
 
-### Buenas prácticas
+## Buenas prácticas
 
 El contacto predeterminado debería:
 
@@ -546,7 +546,7 @@ El contacto predeterminado debería:
 - Estar documentado.
 - Tener un destinatario responsable.
 
-### Riesgo
+## Riesgo
 
 Si la política predeterminada es demasiado amplia, puede ocultar problemas de diseño.
 
@@ -572,7 +572,7 @@ Posibles comportamientos:
 - Se envía a un contacto incorrecto.
 - Se produce un error de configuración.
 
-### Diagnóstico
+## Diagnóstico
 
 1. Revisar las etiquetas de la alerta.
 2. Revisar los nombres de las etiquetas.
@@ -586,17 +586,17 @@ Posibles comportamientos:
 
 ## Enrutamiento por equipo
 
-### Objetivo
+## Objetivo
 
 Enviar las alertas al equipo responsable.
 
-#### Etiquetas
+### Etiquetas
 
 ```text
 team = systems
 ```
 
-#### Política
+### Política
 
 ```text
 Coincidencia:
@@ -606,13 +606,13 @@ Contacto:
 systems-email
 ```
 
-#### Otro equipo
+### Otro equipo
 
 ```text
 team = application
 ```
 
-#### Política
+### Política
 
 ```text
 Coincidencia:
@@ -622,14 +622,14 @@ Contacto:
 application-email
 ```
 
-### Ventajas
+## Ventajas
 
 - Responsabilidad clara.
 - Menos mensajes irrelevantes.
 - Mejor distribución del trabajo.
 - Facilita la investigación.
 
-### Riesgo
+## Riesgo
 
 Si una alerta no tiene la etiqueta `team`, puede utilizar el contacto predeterminado o una ruta incorrecta.
 
@@ -637,7 +637,7 @@ Si una alerta no tiene la etiqueta `team`, puede utilizar el contacto predetermi
 
 ## Enrutamiento por severidad
 
-### Ejemplo
+## Ejemplo
 
 ```text
 severity = info
@@ -650,7 +650,7 @@ severity = critical
     → on-call-system
 ```
 
-### Criterio operativo
+## Criterio operativo
 
 | Severidad | Significado | Contacto habitual |
 |---|---|---|
@@ -666,7 +666,7 @@ No se debe marcar todo como `critical`, porque se perdería la capacidad de prio
 
 ## Enrutamiento por entorno
 
-### Etiquetas
+## Etiquetas
 
 ```text
 environment = laboratory
@@ -674,7 +674,7 @@ environment = staging
 environment = production
 ```
 
-### Ejemplo
+## Ejemplo
 
 ```text
 environment= laboratory
@@ -687,7 +687,7 @@ environment=production
     → production-oncall
 ```
 
-### Importancia
+## Importancia
 
 Separar los entornos evita:
 
@@ -701,7 +701,7 @@ Separar los entornos evita:
 
 ## Enrutamiento por servicio
 
-### Ejemplo
+## Ejemplo
 
 ```text
 service = payments
@@ -714,7 +714,7 @@ service = database
     → database-team
 ```
 
-### Recomendación
+## Recomendación
 
 Utilizar nombres de servicio estables y documentados.
 
@@ -740,7 +740,7 @@ service = postgresql
 
 Una política puede usar varias dimensiones.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 team = application
@@ -757,7 +757,7 @@ payments-production-oncall
 
 Esto permite crear rutas muy precisas, pero aumenta la complejidad.
 
-### Recomendación
+## Recomendación
 
 Crear políticas específicas solo cuando exista una necesidad operativa clara.
 
@@ -775,7 +775,7 @@ Una estructura excesivamente compleja puede provocar:
 
 La agrupación permite enviar varias alertas en un mismo mensaje.
 
-### Ejemplo sin agrupación
+## Ejemplo sin agrupación
 
 ```text
 Mensaje 1:
@@ -788,7 +788,7 @@ Mensaje 3:
 CPU elevada en server-03
 ```
 
-### Ejemplo agrupado
+## Ejemplo agrupado
 
 ```text
 CPU elevada en varias instancias:
@@ -798,14 +798,14 @@ CPU elevada en varias instancias:
 - server-03
 ```
 
-### Ventajas
+## Ventajas
 
 - Reduce el ruido.
 - Facilita identificar incidentes comunes.
 - Evita saturar los canales.
 - Mejora la lectura de problemas relacionados.
 
-### Riesgos
+## Riesgos
 
 - Puede ocultar una instancia importante.
 - Puede retrasar el primer aviso.
@@ -818,7 +818,7 @@ CPU elevada en varias instancias:
 
 `group_by` define las etiquetas utilizadas para agrupar alertas.
 
-### Agrupar por alerta
+## Agrupar por alerta
 
 ```text
 group_by:
@@ -827,7 +827,7 @@ group_by:
 
 Todas las instancias de la misma alerta se agrupan.
 
-### Agrupar por alerta e instancia
+## Agrupar por alerta e instancia
 
 ```text
 group_by:
@@ -837,7 +837,7 @@ group_by:
 
 Cada instancia mantiene su propio grupo.
 
-### Agrupar por equipo y severidad
+## Agrupar por equipo y severidad
 
 ```text
 group_by:
@@ -847,7 +847,7 @@ group_by:
 
 Las alertas del mismo equipo y severidad se agrupan.
 
-### Elegir la agrupación
+## Elegir la agrupación
 
 | Objetivo | Agrupación posible |
 |---|---|
@@ -865,7 +865,7 @@ Las etiquetas elegidas deben conservar la información necesaria para actuar.
 
 Las políticas pueden incluir varios tiempos.
 
-### `group_wait`
+## `group_wait`
 
 Tiempo que Grafana espera antes de enviar el primer mensaje de un grupo.
 
@@ -880,7 +880,7 @@ Ejemplo:
 group_wait = 30 segundos
 ```
 
-### `group_interval`
+## `group_interval`
 
 Tiempo mínimo antes de enviar una actualización de un grupo existente.
 
@@ -895,7 +895,7 @@ Ejemplo:
 group_interval = 5 minutos
 ```
 
-### `repeat_interval`
+## `repeat_interval`
 
 Tiempo después del cual se puede repetir una alerta que continúa activa.
 
@@ -940,7 +940,7 @@ La secuencia exacta puede variar según la configuración y el estado del grupo.
 
 ## Elegir los tiempos
 
-### Alertas críticas
+## Alertas críticas
 
 Pueden utilizar:
 
@@ -958,7 +958,7 @@ group_interval = 1 minuto
 repeat_interval = 30 minutos
 ```
 
-### Alertas de advertencia
+## Alertas de advertencia
 
 Pueden utilizar:
 
@@ -976,7 +976,7 @@ group_interval = 10 minutos
 repeat_interval = 4 horas
 ```
 
-### Alertas informativas
+## Alertas informativas
 
 Pueden utilizar:
 
@@ -996,7 +996,7 @@ La configuración debe probarse para evitar tanto el silencio excesivo como la s
 
 Las políticas pueden incluir notificaciones cuando una alerta se resuelve.
 
-### Secuencia
+## Secuencia
 
 ```text
 Normal
@@ -1014,7 +1014,7 @@ Normal
 Notificación de recuperación
 ```
 
-### Comprobar
+## Comprobar
 
 ```text
 ¿La recuperación llega al mismo contacto?
@@ -1034,7 +1034,7 @@ La configuración exacta depende de la versión y de la integración.
 
 ## Políticas para laboratorio y producción
 
-### Ejemplo de árbol
+## Ejemplo de árbol
 
 ```text
 Política raíz
@@ -1051,7 +1051,7 @@ Política raíz
         └── production-team-email
 ```
 
-### Recomendaciones
+## Recomendaciones
 
 - Separar completamente los contactos.
 - Añadir siempre la etiqueta `environment`.
@@ -1064,7 +1064,7 @@ Política raíz
 
 ## Ejemplo completo de políticas
 
-### Contactos
+## Contactos
 
 ```text
 laboratory-email
@@ -1073,14 +1073,14 @@ production-oncall
 application-team-email
 ```
 
-### Política raíz
+## Política raíz
 
 ```text
 Contacto predeterminado:
 laboratory-email
 ```
 
-### Ruta de producción crítica
+## Ruta de producción crítica
 
 ```text
 environment = production
@@ -1090,7 +1090,7 @@ Contacto:
 production-oncall
 ```
 
-### Ruta de sistemas
+## Ruta de sistemas
 
 ```text
 team = systems
@@ -1100,7 +1100,7 @@ Contacto:
 systems-warning-email
 ```
 
-### Ruta de aplicaciones
+## Ruta de aplicaciones
 
 ```text
 team = application
@@ -1109,7 +1109,7 @@ Contacto:
 application-team-email
 ```
 
-### Tabla de resultados
+## Tabla de resultados
 
 | Etiquetas de la alerta | Contacto esperado |
 |---|---|
@@ -1124,13 +1124,13 @@ El orden y el comportamiento de las rutas deben verificarse en el entorno de Gra
 
 ## Ejemplo de política para disponibilidad
 
-### Regla
+## Regla
 
 ```text
 NodeExporterDown
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = critical
@@ -1140,7 +1140,7 @@ environment = production
 resource = availability
 ```
 
-### Política
+## Política
 
 ```text
 environment = production
@@ -1148,13 +1148,13 @@ severity = critical
 team = systems
 ```
 
-### Contacto
+## Contacto
 
 ```text
 production-oncall
 ```
 
-### Resultado
+## Resultado
 
 ```text
 La caída de Node Exporter en producción
@@ -1165,13 +1165,13 @@ se envía al sistema de guardia.
 
 ## Ejemplo de política para CPU
 
-### Regla
+## Regla
 
 ```text
 HighCPUUsage
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -1181,20 +1181,20 @@ environment = laboratory
 resource = cpu
 ```
 
-### Política
+## Política
 
 ```text
 environment = laboratory
 team = systems
 ```
 
-### Contacto
+## Contacto
 
 ```text
 laboratory-email
 ```
 
-### Resultado
+## Resultado
 
 ```text
 La alerta de CPU del laboratorio
@@ -1205,23 +1205,23 @@ se envía al contacto de formación.
 
 ## Ejemplo de sesión 1: crear una política por equipo
 
-### Objetivo
+## Objetivo
 
 Enviar las alertas del equipo de sistemas a un contacto concreto.
 
-### Contacto
+## Contacto
 
 ```text
 systems-laboratory-email
 ```
 
-### Etiqueta de la regla
+## Etiqueta de la regla
 
 ```text
 team = systems
 ```
 
-### Pasos
+## Pasos
 
 1. Crear o revisar el contacto.
 2. Acceder a la sección de políticas.
@@ -1239,7 +1239,7 @@ team = systems
 9. Comprobar el contacto que recibe la notificación.
 10. Documentar el resultado.
 
-### Registro
+## Registro
 
 ```text
 Regla:
@@ -1261,18 +1261,18 @@ Observaciones:
 
 ## Ejemplo de sesión 2: enrutar por severidad
 
-### Objetivo
+## Objetivo
 
 Enviar alertas `warning` y `critical` a destinos diferentes.
 
-### Contactos
+## Contactos
 
 ```text
 laboratory-warning
 laboratory-critical
 ```
 
-### Rutas
+## Rutas
 
 ```text
 severity = warning
@@ -1282,7 +1282,7 @@ severity = critical
     → laboratory-critical
 ```
 
-### Pasos
+## Pasos
 
 1. Crear los contactos.
 2. Probar cada contacto.
@@ -1305,7 +1305,7 @@ severity = critical
 9. Repetir la prueba.
 10. Comparar los resultados.
 
-### Tabla
+## Tabla
 
 | Severidad | Contacto esperado | Contacto recibido | Resultado |
 |---|---|---|---|
@@ -1316,18 +1316,18 @@ severity = critical
 
 ## Ejemplo de sesión 3: enrutar por entorno
 
-### Objetivo
+## Objetivo
 
 Evitar que una alerta de laboratorio llegue a producción.
 
-### Contactos
+## Contactos
 
 ```text
 laboratory-email
 production-oncall
 ```
 
-### Rutas
+## Rutas
 
 ```text
 environment = laboratory
@@ -1337,7 +1337,7 @@ environment = production
     → production-oncall
 ```
 
-### Pasos
+## Pasos
 
 1. Crear los contactos.
 2. Crear las rutas.
@@ -1359,7 +1359,7 @@ environment = production
 8. Confirmar el contacto de producción.
 9. Revisar que nunca se mezclan los destinos.
 
-### Resultado esperado
+## Resultado esperado
 
 ```text
 laboratory → laboratory-email
@@ -1370,11 +1370,11 @@ production → production-oncall
 
 ## Ejemplo de sesión 4: probar una política sin coincidencia
 
-### Objetivo
+## Objetivo
 
 Observar qué ocurre cuando ninguna ruta específica coincide.
 
-### Preparación
+## Preparación
 
 Crear un contacto predeterminado:
 
@@ -1389,7 +1389,7 @@ team = unknown
 environment = laboratory
 ```
 
-### Pasos
+## Pasos
 
 1. Revisar las rutas existentes.
 2. Confirmar que `team=unknown` no coincide.
@@ -1400,7 +1400,7 @@ environment = laboratory
 7. Añadir una ruta específica.
 8. Repetir la prueba.
 
-### Registro
+## Registro
 
 ```text
 Etiquetas:
@@ -1422,11 +1422,11 @@ Conclusión:
 
 ## Ejemplo de sesión 5: probar la agrupación
 
-### Objetivo
+## Objetivo
 
 Observar cómo se agrupan varias alertas.
 
-### Preparación
+## Preparación
 
 Crear una regla multidimensional de CPU:
 
@@ -1445,7 +1445,7 @@ group_by:
 - alertname
 ```
 
-### Pasos
+## Pasos
 
 1. Activar la alerta en varias instancias.
 2. Observar la lista de alertas.
@@ -1461,7 +1461,7 @@ instance
 6. Repetir la prueba.
 7. Comparar el número y el contenido de los mensajes.
 
-### Preguntas
+## Preguntas
 
 ```text
 ¿Cuántos mensajes se recibieron?
@@ -1477,11 +1477,11 @@ instance
 
 ## Ejemplo de sesión 6: probar los tiempos de agrupación
 
-### Objetivo
+## Objetivo
 
 Comprender `group_wait`, `group_interval` y `repeat_interval`.
 
-### Configuración de laboratorio
+## Configuración de laboratorio
 
 ```text
 group_wait = 10 segundos
@@ -1489,7 +1489,7 @@ group_interval = 1 minuto
 repeat_interval = 5 minutos
 ```
 
-### Pasos
+## Pasos
 
 1. Activar una alerta.
 2. Registrar la hora de activación.
@@ -1502,7 +1502,7 @@ repeat_interval = 5 minutos
 9. Resolver las alertas.
 10. Comprobar la recuperación.
 
-### Registro
+## Registro
 
 ```text
 Hora de activación:
@@ -1526,17 +1526,17 @@ Para una práctica real, utilizar tiempos breves únicamente en laboratorio.
 
 ## Ejemplo de sesión 7: diagnosticar una alerta enviada al contacto incorrecto
 
-### Objetivo
+## Objetivo
 
 Investigar un error de enrutamiento.
 
-### Situación
+## Situación
 
 ```text
 Una alerta de producción llega al contacto de laboratorio.
 ```
 
-### Procedimiento
+## Procedimiento
 
 1. Revisar las etiquetas de la alerta.
 2. Confirmar el valor de `environment`.
@@ -1549,7 +1549,7 @@ Una alerta de producción llega al contacto de laboratorio.
 9. Repetir la prueba.
 10. Documentar la causa.
 
-### Posibles causas
+## Posibles causas
 
 ```text
 Falta la etiqueta environment.
@@ -1564,17 +1564,17 @@ El orden de las políticas es incorrecto.
 
 ## Ejemplo de sesión 8: probar una ruta de recuperación
 
-### Objetivo
+## Objetivo
 
 Comprobar cómo se gestiona una alerta que vuelve a estado normal.
 
-### Regla
+## Regla
 
 ```text
 NodeExporterDown
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = critical
@@ -1582,7 +1582,7 @@ team = systems
 environment = laboratory
 ```
 
-### Pasos
+## Pasos
 
 1. Configurar la política.
 2. Activar la alerta.
@@ -1593,7 +1593,7 @@ environment = laboratory
 7. Comprobar si el sistema externo actualiza el evento.
 8. Documentar el resultado.
 
-### Registro
+## Registro
 
 ```text
 Contacto de activación:
@@ -1611,11 +1611,11 @@ Resultado:
 
 ## Ejemplo de sesión 9: revisar rutas solapadas
 
-### Objetivo
+## Objetivo
 
 Identificar políticas que pueden coincidir con la misma alerta.
 
-### Rutas
+## Rutas
 
 ```text
 Ruta A:
@@ -1629,7 +1629,7 @@ Ruta C:
 environment = production
 ```
 
-### Alerta
+## Alerta
 
 ```text
 team = systems
@@ -1639,7 +1639,7 @@ environment = production
 
 La alerta puede coincidir con varias rutas.
 
-### Actividades
+## Actividades
 
 1. Dibujar el árbol de políticas.
 2. Identificar todas las coincidencias.
@@ -1653,11 +1653,11 @@ La alerta puede coincidir con varias rutas.
 
 ## Ejemplo de sesión 10: diseñar una política completa
 
-### Objetivo
+## Objetivo
 
 Diseñar un árbol de políticas para una organización pequeña.
 
-### Requisitos
+## Requisitos
 
 - Alertas de laboratorio.
 - Alertas de staging.
@@ -1665,7 +1665,7 @@ Diseñar un árbol de políticas para una organización pequeña.
 - Dos equipos.
 - Dos severidades.
 
-### Propuesta
+## Propuesta
 
 ```text
 Política raíz
@@ -1689,7 +1689,7 @@ Política raíz
             └── application-email
 ```
 
-### Actividad
+## Actividad
 
 Crear una tabla con las combinaciones:
 
@@ -1704,7 +1704,7 @@ Crear una tabla con las combinaciones:
 
 ## Diagnóstico de políticas
 
-### La alerta no llega
+## La alerta no llega
 
 Comprobar:
 
@@ -1717,7 +1717,7 @@ Comprobar:
 - La política no está deshabilitada.
 - La agrupación no ha retrasado el mensaje.
 
-### La alerta llega al contacto predeterminado
+## La alerta llega al contacto predeterminado
 
 Comprobar:
 
@@ -1728,7 +1728,7 @@ Comprobar:
 - La expresión regular es válida.
 - No existe una ruta más específica o más general que cambie el resultado.
 
-### La alerta llega a varios contactos
+## La alerta llega a varios contactos
 
 Comprobar:
 
@@ -1739,7 +1739,7 @@ Comprobar:
 - Políticas heredadas.
 - Agrupación y repetición.
 
-### Se reciben demasiados mensajes
+## Se reciben demasiados mensajes
 
 Comprobar:
 
@@ -1752,7 +1752,7 @@ Comprobar:
 - Reglas duplicadas.
 - Severidades mal asignadas.
 
-### La alerta crítica no llega a la guardia
+## La alerta crítica no llega a la guardia
 
 Comprobar:
 
@@ -1769,7 +1769,7 @@ Comprobar:
 
 ## Buenas prácticas
 
-### Diseñar las políticas antes de crearlas
+## Diseñar las políticas antes de crearlas
 
 Representar el árbol en papel o en un diagrama:
 
@@ -1782,39 +1782,39 @@ Raíz
     └── Aplicaciones
 ```
 
-### Utilizar etiquetas estables
+## Utilizar etiquetas estables
 
 Las etiquetas deben tener significado operativo y mantenerse en el tiempo.
 
-### Evitar rutas excesivamente complejas
+## Evitar rutas excesivamente complejas
 
 Cada nueva condición aumenta la dificultad de diagnóstico.
 
-### Mantener una política predeterminada segura
+## Mantener una política predeterminada segura
 
 Debe permitir detectar alertas mal clasificadas sin generar una interrupción innecesaria.
 
-### Separar los entornos
+## Separar los entornos
 
 Nunca depender únicamente del nombre de la alerta para distinguir laboratorio y producción.
 
-### Definir la severidad con criterios claros
+## Definir la severidad con criterios claros
 
 Una severidad debe indicar una acción o prioridad concreta.
 
-### Probar las rutas con alertas reales de laboratorio
+## Probar las rutas con alertas reales de laboratorio
 
 No asumir que una política funciona solo porque se ha guardado.
 
-### Probar coincidencias y no coincidencias
+## Probar coincidencias y no coincidencias
 
 Ambos casos son importantes.
 
-### Probar agrupación y repetición
+## Probar agrupación y repetición
 
 Una ruta correcta puede seguir produciendo demasiados mensajes.
 
-### Documentar la finalidad de cada ruta
+## Documentar la finalidad de cada ruta
 
 Ejemplo:
 
@@ -1826,7 +1826,7 @@ Finalidad:
 Enviar incidentes críticos de producción al equipo de guardia.
 ```
 
-### Revisar periódicamente
+## Revisar periódicamente
 
 Comprobar:
 
@@ -1840,7 +1840,7 @@ Comprobar:
 - Tiempos.
 - Integraciones retiradas.
 
-### Aplicar cambios controlados
+## Aplicar cambios controlados
 
 Las modificaciones de políticas pueden afectar a la respuesta ante incidentes.
 
@@ -1972,11 +1972,11 @@ Capturas recomendadas:
 
 ## Práctica integradora
 
-### Objetivo
+## Objetivo
 
 Diseñar, configurar y probar un árbol de políticas para varios equipos y entornos.
 
-### Requisitos
+## Requisitos
 
 - Grafana funcionando.
 - Varias reglas de alerta.
@@ -1987,7 +1987,7 @@ Diseñar, configurar y probar un árbol de políticas para varios equipos y ento
 
 ---
 
-### Tarea 1: crear los contactos
+## Tarea 1: crear los contactos
 
 Crear o utilizar estos contactos:
 
@@ -2004,7 +2004,7 @@ Probar cada contacto de forma independiente.
 
 ---
 
-### Tarea 2: definir las rutas
+## Tarea 2: definir las rutas
 
 Utilizar la siguiente estructura:
 
@@ -2030,9 +2030,9 @@ environment=production, team=application, severity=critical
 
 ---
 
-### Tarea 3: preparar las reglas
+## Tarea 3: preparar las reglas
 
-#### Regla de CPU
+### Regla de CPU
 
 ```promql
 100 - (
@@ -2052,7 +2052,7 @@ environment = production
 resource = cpu
 ```
 
-#### Regla de disponibilidad
+### Regla de disponibilidad
 
 ```promql
 up{job="node_exporter"}
@@ -2070,7 +2070,7 @@ resource = availability
 
 ---
 
-### Tarea 4: probar la alerta de advertencia
+## Tarea 4: probar la alerta de advertencia
 
 1. Activar la regla de CPU en un entorno autorizado.
 2. Esperar el estado `Alerting`.
@@ -2082,7 +2082,7 @@ resource = availability
 
 ---
 
-### Tarea 5: probar la alerta crítica
+## Tarea 5: probar la alerta crítica
 
 1. Confirmar que Node Exporter funciona.
 2. Detenerlo en el laboratorio:
@@ -2105,7 +2105,7 @@ sudo systemctl start node_exporter
 
 ---
 
-### Tarea 6: probar una alerta sin coincidencia
+## Tarea 6: probar una alerta sin coincidencia
 
 Crear una alerta con:
 
@@ -2133,7 +2133,7 @@ Crear posteriormente una ruta específica y repetir la prueba.
 
 ---
 
-### Tarea 7: probar la agrupación
+## Tarea 7: probar la agrupación
 
 1. Activar la regla de CPU en varias instancias.
 2. Configurar:

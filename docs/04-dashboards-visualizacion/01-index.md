@@ -418,7 +418,7 @@ Este dashboard muestra:
 - Uso del sistema de ficheros.
 - Tráfico de red.
 
-### Interpretación de colores
+## Interpretación de colores
 
 - Verde: estado normal.
 - Amarillo: advertencia.

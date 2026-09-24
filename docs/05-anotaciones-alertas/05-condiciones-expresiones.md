@@ -54,7 +54,7 @@ Las opciones exactas pueden cambiar según la versión de Grafana y el tipo de r
 
 ---
 
-### Objetivos
+## Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -138,7 +138,7 @@ Cada opción responde a una pregunta diferente.
 
 ## Diferencia entre consulta, expresión y condición
 
-### Consulta
+## Consulta
 
 Obtiene datos desde una fuente como Prometheus.
 
@@ -148,7 +148,7 @@ Ejemplo:
 up{job="node_exporter"}
 ```
 
-### Expresión
+## Expresión
 
 Transforma uno o varios resultados.
 
@@ -164,7 +164,7 @@ Otro ejemplo:
 Consulta A / Consulta B * 100
 ```
 
-### Condición
+## Condición
 
 Determina si el resultado debe considerarse problemático.
 
@@ -174,7 +174,7 @@ Ejemplo:
 El resultado es mayor que 90
 ```
 
-### Regla completa
+## Regla completa
 
 ```text
 Consulta:
@@ -249,7 +249,7 @@ La nomenclatura exacta puede variar, pero la lógica es la misma.
 
 ## Series temporales y valores únicos
 
-### Serie temporal
+## Serie temporal
 
 Una serie temporal contiene valores asociados a instantes.
 
@@ -261,7 +261,7 @@ Una serie temporal contiene valores asociados a instantes.
 10:04 → 94
 ```
 
-### Valor único
+## Valor único
 
 Una condición suele necesitar un valor representativo.
 
@@ -276,7 +276,7 @@ Mínimo = 40
 
 La expresión de reducción transforma la serie temporal en un resultado evaluable.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Serie temporal:
@@ -303,7 +303,7 @@ La elección de la reducción cambia el comportamiento de la alerta.
 
 Una reducción resume varios valores en uno solo.
 
-### `Last`
+## `Last`
 
 Utiliza el último valor disponible.
 
@@ -320,7 +320,7 @@ Ejemplos:
 - Estado actual de un servicio.
 - Temperatura actual.
 
-### `Mean`
+## `Mean`
 
 Calcula el promedio.
 
@@ -337,7 +337,7 @@ Ejemplos:
 - Carga media.
 - Tasa media de errores.
 
-### `Max`
+## `Max`
 
 Selecciona el valor máximo.
 
@@ -354,7 +354,7 @@ Ejemplos:
 - Máximo número de errores.
 - Máxima utilización de una capacidad.
 
-### `Min`
+## `Min`
 
 Selecciona el valor mínimo.
 
@@ -371,7 +371,7 @@ Ejemplos:
 - Tasa de peticiones.
 - Nivel de batería.
 
-### `Sum`
+## `Sum`
 
 Suma los valores.
 
@@ -397,7 +397,7 @@ La pregunta operativa determina la reducción.
 | ¿Cuál fue el valor mínimo? | `Min` |
 | ¿Cuál es el total acumulado? | `Sum` |
 
-### Ejemplo: CPU
+## Ejemplo: CPU
 
 ```text
 Último valor > 90 %
@@ -425,7 +425,7 @@ No existe una reducción universalmente correcta. Debe elegirse según el proble
 
 Una condición compara un valor con otro.
 
-### Mayor que
+## Mayor que
 
 ```text
 Valor > 90
@@ -433,7 +433,7 @@ Valor > 90
 
 Se activa cuando el valor es superior a 90.
 
-### Mayor o igual que
+## Mayor o igual que
 
 ```text
 Valor >= 90
@@ -441,7 +441,7 @@ Valor >= 90
 
 Se activa cuando el valor es 90 o superior.
 
-### Menor que
+## Menor que
 
 ```text
 Valor < 10
@@ -449,7 +449,7 @@ Valor < 10
 
 Se activa cuando el valor es inferior a 10.
 
-### Menor o igual que
+## Menor o igual que
 
 ```text
 Valor <= 10
@@ -457,7 +457,7 @@ Valor <= 10
 
 Se activa cuando el valor es 10 o inferior.
 
-### Igual a
+## Igual a
 
 ```text
 Valor = 0
@@ -465,7 +465,7 @@ Valor = 0
 
 Se activa cuando el valor es exactamente cero.
 
-### Diferente de
+## Diferente de
 
 ```text
 Valor != 1
@@ -481,7 +481,7 @@ La disponibilidad exacta de algunos operadores depende de la interfaz y del tipo
 
 Uno de los errores más frecuentes consiste en utilizar un umbral con una unidad incorrecta.
 
-### Ejemplo de porcentaje
+## Ejemplo de porcentaje
 
 Consulta:
 
@@ -506,7 +506,7 @@ Umbral correcto:
 Mayor que 90
 ```
 
-### Ejemplo de proporción
+## Ejemplo de proporción
 
 Consulta:
 
@@ -532,7 +532,7 @@ Mayor que 0.90
 
 Estas dos consultas pueden representar lo mismo, pero utilizan escalas diferentes.
 
-### Ejemplo de segundos
+## Ejemplo de segundos
 
 Consulta:
 
@@ -571,9 +571,9 @@ B: reducción de A
 C: condición sobre B
 ```
 
-### Ejemplo
+## Ejemplo
 
-#### Consulta A
+### Consulta A
 
 ```promql
 100 - (
@@ -583,19 +583,19 @@ C: condición sobre B
 )
 ```
 
-#### Expresión B
+### Expresión B
 
 ```text
 Reduce A utilizando Last
 ```
 
-#### Condición C
+### Condición C
 
 ```text
 B > 90
 ```
 
-#### Resultado
+### Resultado
 
 ```text
 Si el último valor de CPU es superior a 90,
@@ -606,7 +606,7 @@ la condición es verdadera.
 
 ## Ejemplo con `Mean`
 
-### Consulta A
+## Consulta A
 
 ```promql
 100 - (
@@ -616,19 +616,19 @@ la condición es verdadera.
 )
 ```
 
-### Expresión B
+## Expresión B
 
 ```text
 Reduce A utilizando Mean
 ```
 
-### Condición C
+## Condición C
 
 ```text
 B > 80
 ```
 
-### Interpretación
+## Interpretación
 
 La alerta se activa cuando el promedio de la CPU evaluada supera el 80 %.
 
@@ -638,7 +638,7 @@ Esta configuración es menos sensible a un único pico, pero puede ocultar picos
 
 ## Ejemplo con `Max`
 
-### Consulta A
+## Consulta A
 
 ```promql
 100 - (
@@ -648,19 +648,19 @@ Esta configuración es menos sensible a un único pico, pero puede ocultar picos
 )
 ```
 
-### Expresión B
+## Expresión B
 
 ```text
 Reduce A utilizando Max
 ```
 
-### Condición C
+## Condición C
 
 ```text
 B > 95
 ```
 
-### Interpretación
+## Interpretación
 
 La alerta se activa si en el rango evaluado se alcanza un pico superior al 95 %.
 
@@ -672,7 +672,7 @@ Esta configuración puede generar más alertas si la métrica presenta picos bre
 
 Las expresiones matemáticas permiten combinar consultas.
 
-### Estructura general
+## Estructura general
 
 ```text
 Consulta A
@@ -681,7 +681,7 @@ Expresión C = A / B
 Condición D = C > umbral
 ```
 
-### Ejemplo: porcentaje de errores
+## Ejemplo: porcentaje de errores
 
 Consulta A: errores HTTP 5xx.
 
@@ -751,7 +751,7 @@ La alternativa de una sola consulta puede ser más compacta.
 
 Las expresiones permiten comparar dos valores.
 
-### Ejemplo: memoria disponible
+## Ejemplo: memoria disponible
 
 Consulta A:
 
@@ -783,7 +783,7 @@ Interpretación:
 Activar si la memoria disponible es inferior al 10 %.
 ```
 
-### Ejemplo: espacio libre
+## Ejemplo: espacio libre
 
 Consulta A:
 
@@ -839,7 +839,7 @@ instance=server-01
 
 Grafana y Prometheus deben poder identificar que ambas series pertenecen a la misma instancia.
 
-### Problema frecuente
+## Problema frecuente
 
 ```text
 Consulta A:
@@ -851,7 +851,7 @@ instance=server-01
 
 Las etiquetas no coinciden completamente. La operación puede producir resultados inesperados o no devolver datos.
 
-### Recomendación
+## Recomendación
 
 Antes de combinar consultas:
 
@@ -867,7 +867,7 @@ Antes de combinar consultas:
 
 Las agregaciones modifican las etiquetas de las series.
 
-### Ejemplo
+## Ejemplo
 
 ```promql
 sum by (instance) (
@@ -881,7 +881,7 @@ Conserva:
 instance
 ```
 
-### Otra agregación
+## Otra agregación
 
 ```promql
 sum (
@@ -891,11 +891,11 @@ sum (
 
 Elimina las dimensiones y produce un valor global.
 
-### Consecuencia
+## Consecuencia
 
 Si la alerta necesita identificar el servicio o la instancia, no se deben eliminar esas etiquetas sin necesidad.
 
-### Ejemplo recomendado
+## Ejemplo recomendado
 
 ```promql
 sum by (instance, service) (
@@ -939,7 +939,7 @@ El soporte exacto de operadores lógicos depende de la versión, la fuente de da
 
 Cuando la lógica es compleja, puede ser más sencillo expresar la condición directamente en PromQL.
 
-### Ejemplo conceptual en PromQL
+## Ejemplo conceptual en PromQL
 
 ```promql
 (
@@ -959,7 +959,7 @@ La sintaxis y la correspondencia entre series deben validarse en Prometheus ante
 
 A veces no se desea evaluar el valor de una métrica, sino comprobar si existe.
 
-### Ejemplo conceptual con `absent`
+## Ejemplo conceptual con `absent`
 
 ```promql
 absent(up{job="node_exporter"})
@@ -1009,7 +1009,7 @@ El rango `[5m]` indica la ventana utilizada para calcular la tasa.
 
 Esto no es necesariamente lo mismo que la duración de la alerta.
 
-### Diferencia
+## Diferencia
 
 ```text
 [5m] en PromQL:
@@ -1034,7 +1034,7 @@ Son dos configuraciones diferentes.
 
 ## Condiciones instantáneas y sostenidas
 
-### Condición instantánea
+## Condición instantánea
 
 Se evalúa el valor actual.
 
@@ -1044,7 +1044,7 @@ Last > 90
 
 Puede activarse rápidamente ante un pico.
 
-### Condición media
+## Condición media
 
 Se evalúa el promedio.
 
@@ -1054,7 +1054,7 @@ Mean > 90
 
 Es más estable, pero puede ocultar valores extremos.
 
-### Condición sostenida
+## Condición sostenida
 
 Se utiliza una condición instantánea junto con una duración:
 
@@ -1068,11 +1068,11 @@ Suele ser una alternativa equilibrada para muchos recursos.
 
 ## Ejemplo completo: alerta de CPU con reducción
 
-### Objetivo
+## Objetivo
 
 Activar una alerta si la CPU supera el 90 % durante cinco minutos.
 
-### Consulta A
+## Consulta A
 
 ```promql
 100 - (
@@ -1082,26 +1082,26 @@ Activar una alerta si la CPU supera el 90 % durante cinco minutos.
 )
 ```
 
-### Expresión B
+## Expresión B
 
 ```text
 Reducir A utilizando Last
 ```
 
-### Condición C
+## Condición C
 
 ```text
 B > 90
 ```
 
-### Configuración temporal
+## Configuración temporal
 
 ```text
 Intervalo de evaluación: 1 minuto
 Duración: 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -1110,7 +1110,7 @@ resource = cpu
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = CPU elevada en {{ $labels.instance }}
@@ -1119,7 +1119,7 @@ description = La CPU de {{ $labels.instance }}
 supera el 90 % durante cinco minutos.
 ```
 
-### Interpretación
+## Interpretación
 
 ```text
 A obtiene la serie de CPU.
@@ -1132,11 +1132,11 @@ La duración evita alertar por un pico aislado.
 
 ## Ejemplo completo: porcentaje de errores
 
-### Objetivo
+## Objetivo
 
 Activar una alerta si el porcentaje de respuestas HTTP 5xx supera el 5 %.
 
-### Consulta A: errores
+## Consulta A: errores
 
 ```promql
 sum by (service) (
@@ -1144,7 +1144,7 @@ sum by (service) (
 )
 ```
 
-### Consulta B: total de peticiones
+## Consulta B: total de peticiones
 
 ```promql
 sum by (service) (
@@ -1152,26 +1152,26 @@ sum by (service) (
 )
 ```
 
-### Expresión C
+## Expresión C
 
 ```text
 100 * A / B
 ```
 
-### Condición D
+## Condición D
 
 ```text
 D > 5
 ```
 
-### Configuración temporal
+## Configuración temporal
 
 ```text
 Intervalo de evaluación: 1 minuto
 Duración: 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = critical
@@ -1179,7 +1179,7 @@ team = application
 resource = error-rate
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Tasa de errores elevada en {{ $labels.service }}
@@ -1188,7 +1188,7 @@ description = El servicio {{ $labels.service }}
 supera el 5 % de respuestas HTTP 5xx.
 ```
 
-### Precaución
+## Precaución
 
 Si `B` es cero, la división puede producir un resultado no válido. Debe comprobarse el comportamiento de la consulta y de la fuente de datos.
 
@@ -1196,42 +1196,42 @@ Si `B` es cero, la división puede producir un resultado no válido. Debe compro
 
 ## Ejemplo completo: memoria disponible
 
-### Objetivo
+## Objetivo
 
 Activar una alerta si queda menos del 10 % de memoria disponible.
 
-### Consulta A
+## Consulta A
 
 ```promql
 node_memory_MemAvailable_bytes
 ```
 
-### Consulta B
+## Consulta B
 
 ```promql
 node_memory_MemTotal_bytes
 ```
 
-### Expresión C
+## Expresión C
 
 ```text
 100 * A / B
 ```
 
-### Condición D
+## Condición D
 
 ```text
 D < 10
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Intervalo de evaluación: 1 minuto
 Duración: 5 minutos
 ```
 
-### Interpretación
+## Interpretación
 
 ```text
 A = memoria disponible
@@ -1240,7 +1240,7 @@ C = porcentaje disponible
 D = condición de memoria insuficiente
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -1252,11 +1252,11 @@ resource = memory
 
 ## Ejemplo completo: almacenamiento libre
 
-### Objetivo
+## Objetivo
 
 Activar una alerta si queda menos del 20 % de espacio libre.
 
-### Consulta A
+## Consulta A
 
 ```promql
 node_filesystem_avail_bytes{
@@ -1265,7 +1265,7 @@ node_filesystem_avail_bytes{
 }
 ```
 
-### Consulta B
+## Consulta B
 
 ```promql
 node_filesystem_size_bytes{
@@ -1274,19 +1274,19 @@ node_filesystem_size_bytes{
 }
 ```
 
-### Expresión C
+## Expresión C
 
 ```text
 100 * A / B
 ```
 
-### Condición D
+## Condición D
 
 ```text
 D < 20
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Poco espacio libre en {{ $labels.instance }}
@@ -1322,11 +1322,11 @@ Mayor que 80
 
 ## Ejemplo de sesión 1: comparar reducciones
 
-### Objetivo
+## Objetivo
 
 Observar cómo cambia una alerta según la reducción seleccionada.
 
-### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -1336,7 +1336,7 @@ Observar cómo cambia una alerta según la reducción seleccionada.
 )
 ```
 
-### Configuraciones
+## Configuraciones
 
 Crear tres reglas de laboratorio o tres expresiones de prueba:
 
@@ -1354,7 +1354,7 @@ Reducción = Max
 Umbral = 95
 ```
 
-### Pasos
+## Pasos
 
 1. Ejecutar la consulta en Explore.
 2. Revisar la serie temporal.
@@ -1367,7 +1367,7 @@ Umbral = 95
 9. Registrar qué regla se activa primero.
 10. Explicar el motivo.
 
-### Registro
+## Registro
 
 ```text
 Valor máximo observado:
@@ -1389,11 +1389,11 @@ Explicación:
 
 ## Ejemplo de sesión 2: calcular un porcentaje con dos consultas
 
-### Objetivo
+## Objetivo
 
 Crear una condición basada en la relación entre errores y peticiones totales.
 
-### Consulta A
+## Consulta A
 
 ```promql
 sum by (service) (
@@ -1401,7 +1401,7 @@ sum by (service) (
 )
 ```
 
-### Consulta B
+## Consulta B
 
 ```promql
 sum by (service) (
@@ -1409,19 +1409,19 @@ sum by (service) (
 )
 ```
 
-### Expresión C
+## Expresión C
 
 ```text
 100 * A / B
 ```
 
-### Condición
+## Condición
 
 ```text
 C > 5
 ```
 
-### Pasos
+## Pasos
 
 1. Validar la consulta de errores.
 2. Validar la consulta total.
@@ -1434,7 +1434,7 @@ C > 5
 9. Probar con tráfico de laboratorio.
 10. Revisar el resultado.
 
-### Preguntas de análisis
+## Preguntas de análisis
 
 ```text
 ¿Qué valor devuelve A?
@@ -1454,18 +1454,18 @@ C > 5
 
 ## Ejemplo de sesión 3: investigar un error de unidad
 
-### Objetivo
+## Objetivo
 
 Diagnosticar una alerta que se activa con demasiada frecuencia.
 
-### Situación
+## Situación
 
 ```text
 La alerta de memoria se activa aunque la memoria utilizada
 parece estar alrededor del 70 %.
 ```
 
-### Consulta utilizada
+## Consulta utilizada
 
 ```promql
 1 - (
@@ -1475,19 +1475,19 @@ parece estar alrededor del 70 %.
 )
 ```
 
-### Umbral configurado
+## Umbral configurado
 
 ```text
 Mayor que 70
 ```
 
-### Problema
+## Problema
 
 La consulta devuelve una proporción entre `0` y `1`, pero el umbral se ha configurado como si el resultado fuese un porcentaje entre `0` y `100`.
 
-### Correcciones posibles
+## Correcciones posibles
 
-#### Opción A: cambiar la consulta
+### Opción A: cambiar la consulta
 
 ```promql
 100 * (
@@ -1505,7 +1505,7 @@ Mantener:
 Umbral = 70
 ```
 
-#### Opción B: cambiar el umbral
+### Opción B: cambiar el umbral
 
 Mantener la consulta original y utilizar:
 
@@ -1513,7 +1513,7 @@ Mantener la consulta original y utilizar:
 Umbral = 0.70
 ```
 
-### Actividades
+## Actividades
 
 1. Ejecutar la consulta.
 2. Observar su rango de valores.
@@ -1526,18 +1526,18 @@ Umbral = 0.70
 
 ## Ejemplo de sesión 4: comparar `Last`, `Mean` y `Max`
 
-### Objetivo
+## Objetivo
 
 Comprender qué pregunta responde cada reducción.
 
-### Datos de ejemplo
+## Datos de ejemplo
 
 ```text
 Valores:
 40, 42, 44, 95, 45
 ```
 
-### Resultados
+## Resultados
 
 ```text
 Last = 45
@@ -1546,7 +1546,7 @@ Max = 95
 Min = 40
 ```
 
-### Actividades
+## Actividades
 
 1. Calcular manualmente cada reducción.
 2. Configurar una condición `> 90`.
@@ -1554,7 +1554,7 @@ Min = 40
 4. Explicar por qué.
 5. Relacionar cada reducción con un caso operativo.
 
-### Resultado esperado
+## Resultado esperado
 
 ```text
 Last:
@@ -1567,7 +1567,7 @@ Max:
 Activa, porque el máximo es 95.
 ```
 
-### Debate técnico
+## Debate técnico
 
 ```text
 ¿Es correcto alertar por un único pico?
@@ -1583,17 +1583,17 @@ Activa, porque el máximo es 95.
 
 ## Ejemplo de sesión 5: detectar ausencia de datos
 
-### Objetivo
+## Objetivo
 
 Diferenciar un valor cero de la ausencia de una serie.
 
-### Consulta
+## Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### Casos
+## Casos
 
 ```text
 Caso A:
@@ -1606,7 +1606,7 @@ Caso C:
 No existe ninguna serie
 ```
 
-### Actividades
+## Actividades
 
 1. Ejecutar la consulta con el objetivo funcionando.
 2. Detener Node Exporter.
@@ -1619,7 +1619,7 @@ No existe ninguna serie
    - Ausencia de datos.
 7. Documentar qué política corresponde a cada caso.
 
-### Registro
+## Registro
 
 ```text
 Estado del servicio:
@@ -1637,29 +1637,29 @@ Acción recomendada:
 
 ## Ejemplo de sesión 6: combinar series por instancia
 
-### Objetivo
+## Objetivo
 
 Comprobar que dos consultas pueden combinarse correctamente.
 
-### Consulta A
+## Consulta A
 
 ```promql
 node_memory_MemAvailable_bytes
 ```
 
-### Consulta B
+## Consulta B
 
 ```promql
 node_memory_MemTotal_bytes
 ```
 
-### Expresión C
+## Expresión C
 
 ```text
 100 * A / B
 ```
 
-### Pasos
+## Pasos
 
 1. Ejecutar A.
 2. Revisar sus etiquetas.
@@ -1671,7 +1671,7 @@ node_memory_MemTotal_bytes
 8. Añadir la condición `< 10`.
 9. Verificar que la alerta identifica la instancia correcta.
 
-### Error inducido
+## Error inducido
 
 Modificar una de las consultas para agregar por una etiqueta diferente:
 
@@ -1681,7 +1681,7 @@ sum(node_memory_MemAvailable_bytes) by (job)
 
 Observar qué ocurre al combinarla con una consulta agrupada por `instance`.
 
-### Conclusión
+## Conclusión
 
 Las consultas que se combinan deben tener una estructura compatible y conservar dimensiones comunes.
 
@@ -1689,17 +1689,17 @@ Las consultas que se combinan deben tener una estructura compatible y conservar 
 
 ## Ejemplo de sesión 7: crear una expresión de carga relativa
 
-### Objetivo
+## Objetivo
 
 Comparar la carga del sistema con el número de CPUs.
 
-### Consulta A
+## Consulta A
 
 ```promql
 node_load1
 ```
 
-### Consulta B
+## Consulta B
 
 ```promql
 count by (instance) (
@@ -1707,25 +1707,25 @@ count by (instance) (
 )
 ```
 
-### Expresión C
+## Expresión C
 
 ```text
 A / B
 ```
 
-### Condición
+## Condición
 
 ```text
 C > 1
 ```
 
-### Interpretación
+## Interpretación
 
 La carga de un minuto supera aproximadamente la capacidad equivalente a una CPU por unidad disponible.
 
 La consulta puede necesitar ajustes según las etiquetas del entorno.
 
-### Actividades
+## Actividades
 
 1. Ejecutar A.
 2. Ejecutar B.
@@ -1740,11 +1740,11 @@ La consulta puede necesitar ajustes según las etiquetas del entorno.
 
 ## Ejemplo de sesión 8: combinar una condición con una duración
 
-### Objetivo
+## Objetivo
 
 Diferenciar la expresión que evalúa el valor de la duración de la regla.
 
-### Configuración
+## Configuración
 
 ```text
 Consulta:
@@ -1763,7 +1763,7 @@ Duración:
 5 minutos
 ```
 
-### Secuencia
+## Secuencia
 
 ```text
 10:00 → 92 % → Pending
@@ -1772,7 +1772,7 @@ Duración:
 10:03 → 89 % → Normal
 ```
 
-### Actividades
+## Actividades
 
 1. Crear la regla.
 2. Generar un pico breve.
@@ -1785,11 +1785,11 @@ Duración:
 
 ## Ejemplo de sesión 9: diagnosticar una expresión incorrecta
 
-### Objetivo
+## Objetivo
 
 Corregir una expresión que produce un resultado inesperado.
 
-### Situación
+## Situación
 
 Se desea calcular el porcentaje de errores:
 
@@ -1797,13 +1797,13 @@ Se desea calcular el porcentaje de errores:
 Errores / Peticiones totales * 100
 ```
 
-### Expresión incorrecta
+## Expresión incorrecta
 
 ```text
 A / B
 ```
 
-### Problema
+## Problema
 
 El resultado es una proporción entre `0` y `1`, pero el umbral está configurado como:
 
@@ -1811,9 +1811,9 @@ El resultado es una proporción entre `0` y `1`, pero el umbral está configurad
 Mayor que 5
 ```
 
-### Correcciones posibles
+## Correcciones posibles
 
-#### Opción A
+### Opción A
 
 ```text
 100 * A / B
@@ -1825,7 +1825,7 @@ Umbral:
 Mayor que 5
 ```
 
-#### Opción B
+### Opción B
 
 ```text
 A / B
@@ -1837,7 +1837,7 @@ Umbral:
 Mayor que 0.05
 ```
 
-### Actividades
+## Actividades
 
 1. Ejecutar ambas expresiones.
 2. Comparar los valores.
@@ -1859,7 +1859,7 @@ Una expresión puede encontrarse con:
 - Datos retrasados.
 - Valores no numéricos.
 
-### Recomendaciones
+## Recomendaciones
 
 - Validar cada consulta por separado.
 - Comprobar el resultado de cada expresión.
@@ -1869,7 +1869,7 @@ Una expresión puede encontrarse con:
 - Probar periodos con y sin datos.
 - Documentar el comportamiento esperado.
 
-### Ejemplo de riesgo
+## Ejemplo de riesgo
 
 ```text
 A = 0
@@ -1895,7 +1895,7 @@ Una consulta puede devolver una serie por:
 - Región.
 - Entorno.
 
-### Ejemplo
+## Ejemplo
 
 ```promql
 sum by (instance, service) (
@@ -1913,7 +1913,7 @@ server-02, api → 95 req/s
 
 Una expresión debe conservar la dimensión necesaria para identificar el resultado.
 
-### Preguntas
+## Preguntas
 
 ```text
 ¿La alerta debe generarse por instancia?
@@ -1931,7 +1931,7 @@ Una expresión debe conservar la dimensión necesaria para identificar el result
 
 ## Alerta global frente a alerta por instancia
 
-### Alerta global
+## Alerta global
 
 ```promql
 sum(
@@ -1949,7 +1949,7 @@ Desventaja:
 
 - Puede ocultar qué servicio o instancia origina el problema.
 
-### Alerta por instancia
+## Alerta por instancia
 
 ```promql
 sum by (instance) (
@@ -1973,7 +1973,7 @@ La elección depende del objetivo operativo.
 
 ## Buenas prácticas
 
-### Validar cada paso por separado
+## Validar cada paso por separado
 
 Probar:
 
@@ -1986,7 +1986,7 @@ Condición D
 
 No intentar diagnosticar toda la cadena al mismo tiempo.
 
-### Documentar las unidades
+## Documentar las unidades
 
 Ejemplo:
 
@@ -1997,11 +1997,11 @@ Expresión C: porcentaje
 Condición D: menor que 10 %
 ```
 
-### Conservar etiquetas necesarias
+## Conservar etiquetas necesarias
 
 No agregar todas las series si la alerta necesita identificar una instancia.
 
-### Elegir la reducción según el objetivo
+## Elegir la reducción según el objetivo
 
 ```text
 Estado actual → Last
@@ -2010,15 +2010,15 @@ Pico → Max
 Valor mínimo → Min
 ```
 
-### Evitar expresiones innecesariamente complejas
+## Evitar expresiones innecesariamente complejas
 
 Una expresión difícil de entender también será difícil de mantener.
 
-### Proteger las divisiones
+## Proteger las divisiones
 
 Comprobar qué ocurre cuando el denominador vale cero.
 
-### Probar escenarios anómalos
+## Probar escenarios anómalos
 
 Probar:
 
@@ -2030,11 +2030,11 @@ Probar:
 - Varias series.
 - Etiquetas incompatibles.
 
-### Separar la consulta de la duración
+## Separar la consulta de la duración
 
 La ventana de PromQL y la duración de la alerta responden a preguntas diferentes.
 
-### Utilizar nombres claros
+## Utilizar nombres claros
 
 Ejemplo:
 
@@ -2046,7 +2046,7 @@ C = error_percentage
 
 Cuando la interfaz permite asignar nombres descriptivos, utilizarlos.
 
-### Revisar los resultados en Explore
+## Revisar los resultados en Explore
 
 Explore es útil para comprobar el comportamiento de las consultas antes de convertirlas en reglas.
 
@@ -2054,7 +2054,7 @@ Explore es útil para comprobar el comportamiento de las consultas antes de conv
 
 ## Errores frecuentes
 
-### El umbral utiliza una unidad incorrecta
+## El umbral utiliza una unidad incorrecta
 
 Problema:
 
@@ -2068,7 +2068,7 @@ Solución:
 - Multiplicar por 100, o
 - Cambiar el umbral a `0.90`.
 
-### La expresión devuelve un resultado vacío
+## La expresión devuelve un resultado vacío
 
 Posibles causas:
 
@@ -2078,7 +2078,7 @@ Posibles causas:
 - Filtros demasiado restrictivos.
 - Fuente de datos sin información.
 
-### Se pierde la instancia afectada
+## Se pierde la instancia afectada
 
 Causa habitual:
 
@@ -2100,7 +2100,7 @@ sum by (instance) (
 
 La consulta exacta debe adaptarse al caso de uso.
 
-### La alerta se activa por un pico breve
+## La alerta se activa por un pico breve
 
 Posibles soluciones:
 
@@ -2110,7 +2110,7 @@ Posibles soluciones:
 - Revisar el umbral.
 - Suavizar la consulta.
 
-### La alerta no se activa aunque el valor parece elevado
+## La alerta no se activa aunque el valor parece elevado
 
 Comprobar:
 
@@ -2122,7 +2122,7 @@ Comprobar:
 - Duración.
 - Estado de la regla.
 
-### Se combinan series incompatibles
+## Se combinan series incompatibles
 
 Comprobar:
 
@@ -2132,17 +2132,17 @@ Comprobar:
 - Cardinalidad.
 - Correspondencia entre instancias.
 
-### Se confunde `[5m]` con la duración de la alerta
+## Se confunde `[5m]` con la duración de la alerta
 
 `[5m]` es una ventana utilizada por PromQL.
 
 La duración indica cuánto tiempo debe cumplirse la condición.
 
-### Se utiliza `Max` sin evaluar el ruido
+## Se utiliza `Max` sin evaluar el ruido
 
 `Max` detecta picos, pero puede generar alertas por eventos breves y normales.
 
-### Se utiliza `Mean` para detectar situaciones críticas
+## Se utiliza `Mean` para detectar situaciones críticas
 
 Un promedio puede ocultar un pico grave.
 
@@ -2248,13 +2248,13 @@ Capturas recomendadas:
 
 ## Práctica integradora
 
-### Objetivo
+## Objetivo
 
 Crear una regla de alerta utilizando dos consultas, una expresión matemática, una reducción y una condición.
 
 El escenario será el cálculo del porcentaje de errores HTTP.
 
-### Requisitos
+## Requisitos
 
 - Grafana funcionando.
 - Prometheus configurado.
@@ -2265,7 +2265,7 @@ El escenario será el cálculo del porcentaje de errores HTTP.
 
 ---
 
-### Tarea 1: crear la consulta de errores
+## Tarea 1: crear la consulta de errores
 
 ```promql
 sum by (service) (
@@ -2287,7 +2287,7 @@ Validar:
 
 ---
 
-### Tarea 2: crear la consulta total
+## Tarea 2: crear la consulta total
 
 ```promql
 sum by (service) (
@@ -2307,7 +2307,7 @@ Validar:
 
 ---
 
-### Tarea 3: crear la expresión matemática
+## Tarea 3: crear la expresión matemática
 
 ```text
 100 * A / B
@@ -2334,7 +2334,7 @@ Validar:
 
 ---
 
-### Tarea 4: configurar la condición
+## Tarea 4: configurar la condición
 
 ```text
 Condición:
@@ -2350,7 +2350,7 @@ Duración: 5 minutos
 
 ---
 
-### Tarea 5: añadir etiquetas
+## Tarea 5: añadir etiquetas
 
 ```text
 severity = critical
@@ -2361,7 +2361,7 @@ environment = laboratory
 
 ---
 
-### Tarea 6: añadir anotaciones
+## Tarea 6: añadir anotaciones
 
 ```text
 summary = Tasa de errores elevada en {{ $labels.service }}
@@ -2374,7 +2374,7 @@ runbook_url = https://example.com/runbooks/http-error-rate
 
 ---
 
-### Tarea 7: probar la regla
+## Tarea 7: probar la regla
 
 1. Validar las consultas.
 2. Crear la expresión.
@@ -2393,35 +2393,35 @@ runbook_url = https://example.com/runbooks/http-error-rate
 
 ## Práctica adicional: comparación de memoria disponible
 
-### Objetivo
+## Objetivo
 
 Crear una alerta calculando el porcentaje de memoria disponible mediante dos consultas.
 
-### Consulta A
+## Consulta A
 
 ```promql
 node_memory_MemAvailable_bytes
 ```
 
-### Consulta B
+## Consulta B
 
 ```promql
 node_memory_MemTotal_bytes
 ```
 
-### Expresión C
+## Expresión C
 
 ```text
 100 * A / B
 ```
 
-### Condición
+## Condición
 
 ```text
 C < 10
 ```
 
-### Actividades
+## Actividades
 
 1. Validar A.
 2. Validar B.

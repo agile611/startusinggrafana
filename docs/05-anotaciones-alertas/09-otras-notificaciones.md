@@ -48,7 +48,7 @@ Una integración no debe seleccionarse únicamente porque sea técnicamente posi
 
 ---
 
-### Objetivos
+## Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -84,7 +84,7 @@ Una alerta crítica de disponibilidad puede necesitar un sistema de escalado que
 
 Una alerta destinada a generar una tarea puede enviarse mediante un webhook a una plataforma de incidencias.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 severity=info
@@ -112,7 +112,7 @@ La política de notificación utiliza esas etiquetas para seleccionar el contact
 
 ## Tipos de notificación
 
-### Webhook
+## Webhook
 
 Un webhook envía una petición HTTP a una URL.
 
@@ -133,7 +133,7 @@ Puede utilizarse para:
 - Activar procesos internos.
 - Integrar herramientas propias.
 
-### Canales colaborativos
+## Canales colaborativos
 
 Algunas organizaciones utilizan herramientas colaborativas para comunicar alertas a equipos.
 
@@ -153,7 +153,7 @@ Son adecuados para:
 - Comunicación entre equipos.
 - Seguimiento de problemas no urgentes.
 
-### Sistemas de guardia
+## Sistemas de guardia
 
 Las plataformas de guardia permiten avisar a personas según turnos y reglas de escalado.
 
@@ -170,7 +170,7 @@ Son adecuados para:
 - Alertas que requieren respuesta inmediata.
 - Escalado si la primera persona no responde.
 
-### Sistemas de gestión de incidencias
+## Sistemas de gestión de incidencias
 
 Permiten crear, actualizar y cerrar incidencias.
 
@@ -189,7 +189,7 @@ Son adecuados para:
 - Gestionar acuerdos de nivel de servicio.
 - Documentar acciones y resolución.
 
-### Integraciones personalizadas
+## Integraciones personalizadas
 
 Una organización puede disponer de un receptor propio.
 
@@ -222,7 +222,7 @@ La elección correcta depende del contexto operativo y no solo de las funciones 
 
 ## Webhooks
 
-### Qué es un webhook
+## Qué es un webhook
 
 Un webhook es un mecanismo mediante el cual Grafana envía información a una aplicación externa cuando una alerta cumple una condición.
 
@@ -237,7 +237,7 @@ Authorization: Bearer TOKEN
 
 El contenido suele enviarse en formato JSON.
 
-### Flujo de un webhook
+## Flujo de un webhook
 
 ```text
 Alerta activa
@@ -258,7 +258,7 @@ Servidor externo
 Respuesta HTTP
 ```
 
-### Respuestas habituales
+## Respuestas habituales
 
 | Código | Interpretación |
 |---|---|
@@ -284,7 +284,7 @@ Un payload es el contenido que Grafana envía al receptor.
 
 El formato puede variar según la integración.
 
-### Ejemplo conceptual
+## Ejemplo conceptual
 
 ```json
 {
@@ -312,7 +312,7 @@ El formato puede variar según la integración.
 
 El payload real puede tener más campos.
 
-### Información útil
+## Información útil
 
 Un receptor suele necesitar:
 
@@ -333,7 +333,7 @@ Un receptor suele necesitar:
 
 Los webhooks deben considerarse interfaces externas.
 
-### Riesgos
+## Riesgos
 
 - URL expuesta.
 - Token robado.
@@ -345,7 +345,7 @@ Los webhooks deben considerarse interfaces externas.
 - Falta de validación del origen.
 - Permisos excesivos.
 
-### Buenas prácticas
+## Buenas prácticas
 
 - Utilizar HTTPS.
 - Autenticar las peticiones.
@@ -358,13 +358,13 @@ Los webhooks deben considerarse interfaces externas.
 - Controlar el tamaño del payload.
 - Proteger el endpoint frente a abusos.
 
-### Ejemplo incorrecto
+## Ejemplo incorrecto
 
 ```text
 https://example.com/hooks/grafana?token=secreto-real
 ```
 
-### Ejemplo preferible
+## Ejemplo preferible
 
 ```text
 https://example.com/hooks/grafana
@@ -376,11 +376,11 @@ La credencial debe configurarse mediante cabeceras o un mecanismo seguro.
 
 ## Probar un webhook
 
-### Objetivo
+## Objetivo
 
 Comprobar que Grafana puede comunicarse con un receptor autorizado.
 
-### Pasos
+## Pasos
 
 1. Crear un endpoint de laboratorio.
 2. Crear el contacto webhook.
@@ -395,7 +395,7 @@ Comprobar que Grafana puede comunicarse con un receptor autorizado.
 11. Confirmar la recepción.
 12. Registrar el resultado.
 
-### Registro
+## Registro
 
 ```text
 Nombre del contacto:
@@ -427,7 +427,7 @@ No guardar tokens ni cabeceras sensibles en el registro.
 
 Los canales colaborativos permiten que un equipo vea las alertas en una conversación compartida.
 
-### Ejemplo conceptual
+## Ejemplo conceptual
 
 ```text
 Canal:
@@ -438,7 +438,7 @@ Mensaje:
 server-01:9100 supera el 90 % de CPU.
 ```
 
-### Ventajas
+## Ventajas
 
 - Visibilidad compartida.
 - Respuesta rápida del equipo.
@@ -446,7 +446,7 @@ server-01:9100 supera el 90 % de CPU.
 - Posibilidad de añadir comentarios.
 - Integración con herramientas de trabajo.
 
-### Riesgos
+## Riesgos
 
 - Exceso de mensajes.
 - Alertas importantes mezcladas con avisos menores.
@@ -454,7 +454,7 @@ server-01:9100 supera el 90 % de CPU.
 - Información sensible expuesta.
 - Dependencia de una plataforma externa.
 
-### Recomendaciones
+## Recomendaciones
 
 - Crear canales separados por equipo o entorno.
 - No enviar todas las alertas al mismo canal.
@@ -469,7 +469,7 @@ server-01:9100 supera el 90 % de CPU.
 
 La configuración concreta depende de la integración disponible.
 
-### Procedimiento general
+## Procedimiento general
 
 1. Crear un canal de destino.
 2. Obtener el mecanismo de integración autorizado.
@@ -482,7 +482,7 @@ La configuración concreta depende de la integración disponible.
 9. Revisar el formato.
 10. Documentar el resultado.
 
-### Información que debe aparecer
+## Información que debe aparecer
 
 ```text
 Estado:
@@ -510,7 +510,7 @@ Los nombres de los campos y el aspecto visual dependen de la plataforma.
 
 ## Sistemas de guardia
 
-### Qué es un sistema de guardia
+## Qué es un sistema de guardia
 
 Un sistema de guardia administra turnos, escalados y confirmaciones.
 
@@ -532,7 +532,7 @@ Segundo nivel
 Equipo responsable
 ```
 
-### Cuándo utilizarlo
+## Cuándo utilizarlo
 
 - Caídas de servicios críticos.
 - Pérdida de disponibilidad.
@@ -541,7 +541,7 @@ Equipo responsable
 - Incumplimiento de un SLA.
 - Alertas que requieren respuesta fuera del horario laboral.
 
-### Cuándo no utilizarlo
+## Cuándo no utilizarlo
 
 - Métricas informativas.
 - Picos breves.
@@ -549,7 +549,7 @@ Equipo responsable
 - Alertas de laboratorio.
 - Problemas que pueden revisarse durante el horario normal.
 
-### Fatiga de alertas
+## Fatiga de alertas
 
 Si el sistema de guardia recibe demasiadas alertas, las personas pueden:
 
@@ -574,7 +574,7 @@ Una integración con un sistema ITSM puede:
 - Cambiar su estado.
 - Cerrar la incidencia al recuperarse la alerta.
 
-### Flujo de ejemplo
+## Flujo de ejemplo
 
 ```text
 Alerta activa
@@ -598,7 +598,7 @@ Añadir comentario de recuperación
 Cerrar o resolver INC-1042
 ```
 
-### Precaución: duplicados
+## Precaución: duplicados
 
 Si Grafana reenvía una alerta o la integración no reconoce el identificador, pueden crearse varias incidencias para el mismo problema.
 
@@ -616,7 +616,7 @@ alertname + instance + service
 
 Una alerta puede enviarse a varios destinos.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 severity=critical
@@ -634,7 +634,7 @@ No es necesario enviar cada alerta a todos los canales.
 
 La política debe evitar duplicar mensajes innecesariamente.
 
-### Ejemplo de rutas
+## Ejemplo de rutas
 
 | Condición | Destino |
 |---|---|
@@ -649,7 +649,7 @@ La política debe evitar duplicar mensajes innecesariamente.
 
 Las etiquetas deben representar información útil para seleccionar el canal.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 severity = critical
@@ -668,7 +668,7 @@ environment = production
 
 y enviar la alerta al sistema de guardia.
 
-### Etiquetas recomendadas
+## Etiquetas recomendadas
 
 ```text
 severity
@@ -680,7 +680,7 @@ notification
 urgency
 ```
 
-### No utilizar etiquetas ambiguas
+## No utilizar etiquetas ambiguas
 
 Evitar:
 
@@ -701,7 +701,7 @@ notification = oncall
 
 ## Notificaciones según la severidad
 
-### Información
+## Información
 
 ```text
 severity = info
@@ -714,7 +714,7 @@ Canales adecuados:
 - Resumen por correo.
 - Registro interno.
 
-### Advertencia
+## Advertencia
 
 ```text
 severity = warning
@@ -727,7 +727,7 @@ Canales adecuados:
 - Sistema de seguimiento.
 - Incidencia no urgente.
 
-### Crítica
+## Crítica
 
 ```text
 severity = critical
@@ -748,7 +748,7 @@ La severidad debe corresponder a una acción concreta.
 
 Un mensaje consistente facilita la lectura en cualquier canal.
 
-### Plantilla conceptual
+## Plantilla conceptual
 
 ```text
 Estado: {{ estado }}
@@ -777,7 +777,7 @@ Runbook:
 
 La sintaxis real de las variables depende de Grafana y del tipo de integración.
 
-### Mensaje breve para chat
+## Mensaje breve para chat
 
 ```text
 [FIRING] HighCPUUsage
@@ -787,7 +787,7 @@ Severidad: warning
 Runbook: https://example.com/runbooks/high-cpu
 ```
 
-### Mensaje para una incidencia
+## Mensaje para una incidencia
 
 ```text
 Título:
@@ -815,7 +815,7 @@ Consultar el runbook de disponibilidad.
 
 Cuando se activan varias alertas, Grafana puede agruparlas.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 HighCPUUsage:
@@ -824,20 +824,20 @@ HighCPUUsage:
 - server-03
 ```
 
-### Ventajas
+## Ventajas
 
 - Reduce mensajes.
 - Facilita identificar un incidente común.
 - Evita saturar los canales.
 
-### Riesgos
+## Riesgos
 
 - Puede ocultar una alerta concreta.
 - Puede retrasar la entrega.
 - Puede dificultar la correlación.
 - Puede crear una incidencia demasiado amplia.
 
-### Pruebas necesarias
+## Pruebas necesarias
 
 Comprobar:
 
@@ -859,19 +859,19 @@ Comprobar:
 
 Una integración puede recibir tanto activaciones como recuperaciones.
 
-### Activación
+## Activación
 
 ```text
 [FIRING] HighApplicationLatency
 ```
 
-### Recuperación
+## Recuperación
 
 ```text
 [RESOLVED] HighApplicationLatency
 ```
 
-### Sistemas de incidencias
+## Sistemas de incidencias
 
 La recuperación puede:
 
@@ -889,7 +889,7 @@ La acción debe definirse con cuidado. No siempre es adecuado cerrar automática
 
 Un webhook puede activar una automatización.
 
-### Ejemplos
+## Ejemplos
 
 - Crear una incidencia.
 - Publicar un mensaje.
@@ -899,7 +899,7 @@ Un webhook puede activar una automatización.
 - Registrar un evento.
 - Activar una función interna.
 
-### Precaución
+## Precaución
 
 Una alerta no debería ejecutar automáticamente acciones destructivas sin controles.
 
@@ -926,11 +926,11 @@ Antes de automatizar una acción se deben considerar:
 
 ## Ejemplo de sesión 1: crear un webhook de laboratorio
 
-### Objetivo
+## Objetivo
 
 Enviar una alerta a un receptor HTTP controlado.
 
-### Requisitos
+## Requisitos
 
 - Endpoint de laboratorio.
 - URL HTTPS.
@@ -938,7 +938,7 @@ Enviar una alerta a un receptor HTTP controlado.
 - Acceso al receptor.
 - Permisos para crear contactos.
 
-### Pasos
+## Pasos
 
 1. Preparar el endpoint.
 2. Crear un contacto de tipo webhook.
@@ -952,7 +952,7 @@ Enviar una alerta a un receptor HTTP controlado.
 10. Confirmar la recepción.
 11. Documentar el resultado.
 
-### Registro
+## Registro
 
 ```text
 Nombre del contacto:
@@ -978,17 +978,17 @@ No guardar el token.
 
 ## Ejemplo de sesión 2: diagnosticar un webhook con error `401`
 
-### Objetivo
+## Objetivo
 
 Investigar un error de autenticación.
 
-### Situación
+## Situación
 
 ```text
 La prueba del webhook devuelve HTTP 401.
 ```
 
-### Pasos
+## Pasos
 
 1. Confirmar la URL.
 2. Revisar el mecanismo de autenticación.
@@ -1001,7 +1001,7 @@ La prueba del webhook devuelve HTTP 401.
 9. Rotar la credencial si se ha expuesto.
 10. Documentar la corrección.
 
-### Registro
+## Registro
 
 ```text
 Código inicial:
@@ -1023,17 +1023,17 @@ Resultado:
 
 ## Ejemplo de sesión 3: diagnosticar un webhook con error `404`
 
-### Objetivo
+## Objetivo
 
 Corregir una URL de endpoint incorrecta.
 
-### Situación
+## Situación
 
 ```text
 La prueba devuelve HTTP 404.
 ```
 
-### Posibles causas
+## Posibles causas
 
 ```text
 Ruta incorrecta.
@@ -1043,7 +1043,7 @@ Endpoint eliminado.
 Versión incorrecta de la API.
 ```
 
-### Pasos
+## Pasos
 
 1. Revisar el host.
 2. Revisar la ruta.
@@ -1058,11 +1058,11 @@ Versión incorrecta de la API.
 
 ## Ejemplo de sesión 4: enviar alertas a un canal colaborativo
 
-### Objetivo
+## Objetivo
 
 Publicar una alerta de laboratorio en un canal compartido.
 
-### Configuración conceptual
+## Configuración conceptual
 
 ```text
 Canal:
@@ -1080,7 +1080,7 @@ team = systems
 severity = warning
 ```
 
-### Pasos
+## Pasos
 
 1. Crear el canal.
 2. Obtener el mecanismo de integración autorizado.
@@ -1093,7 +1093,7 @@ severity = warning
 9. Resolver la alerta.
 10. Revisar el mensaje de recuperación.
 
-### Preguntas de análisis
+## Preguntas de análisis
 
 ```text
 ¿El mensaje se entiende sin abrir Grafana?
@@ -1111,11 +1111,11 @@ severity = warning
 
 ## Ejemplo de sesión 5: enrutar por severidad
 
-### Objetivo
+## Objetivo
 
 Enviar cada severidad a un canal distinto.
 
-### Contactos
+## Contactos
 
 ```text
 laboratory-info-channel
@@ -1123,7 +1123,7 @@ laboratory-warning-channel
 laboratory-critical-channel
 ```
 
-### Políticas
+## Políticas
 
 ```text
 severity=info
@@ -1136,7 +1136,7 @@ severity=critical
     → laboratory-critical-channel
 ```
 
-### Pasos
+## Pasos
 
 1. Crear los contactos.
 2. Probar cada contacto.
@@ -1149,7 +1149,7 @@ severity=critical
 9. Comprobar el canal.
 10. Documentar el resultado.
 
-### Tabla
+## Tabla
 
 | Severidad | Contacto esperado | Contacto recibido | Resultado |
 |---|---|---|---|
@@ -1161,11 +1161,11 @@ severity=critical
 
 ## Ejemplo de sesión 6: crear una incidencia mediante webhook
 
-### Objetivo
+## Objetivo
 
 Enviar una alerta a un sistema de gestión de incidencias de laboratorio.
 
-### Escenario
+## Escenario
 
 ```text
 Alerta:
@@ -1178,7 +1178,7 @@ Acción esperada:
 Crear una incidencia
 ```
 
-### Pasos
+## Pasos
 
 1. Preparar un proyecto de laboratorio.
 2. Crear un contacto webhook.
@@ -1193,7 +1193,7 @@ Crear una incidencia
 11. Comprobar si se añade un comentario o se actualiza el ticket.
 12. Documentar el resultado.
 
-### Registro
+## Registro
 
 ```text
 Identificador de la incidencia:
@@ -1217,15 +1217,15 @@ Resultado:
 
 ## Ejemplo de sesión 7: evitar incidencias duplicadas
 
-### Objetivo
+## Objetivo
 
 Comprobar que una misma alerta no crea varias incidencias innecesarias.
 
-### Escenario
+## Escenario
 
 La alerta permanece activa y se envían varias notificaciones de repetición.
 
-### Actividades
+## Actividades
 
 1. Activar una alerta de laboratorio.
 2. Observar el primer evento.
@@ -1235,7 +1235,7 @@ La alerta permanece activa y se envían varias notificaciones de repetición.
 6. Revisar la lógica del receptor.
 7. Proponer un mecanismo de deduplicación.
 
-### Claves posibles
+## Claves posibles
 
 ```text
 alertname + instance + service
@@ -1247,7 +1247,7 @@ o:
 fingerprint de la instancia de alerta
 ```
 
-### Resultado esperado
+## Resultado esperado
 
 Las repeticiones deben actualizar la incidencia existente o ignorarse de forma controlada, no crear una incidencia nueva para el mismo problema.
 
@@ -1255,11 +1255,11 @@ Las repeticiones deben actualizar la incidencia existente o ignorarse de forma c
 
 ## Ejemplo de sesión 8: probar una alerta crítica en un sistema de guardia
 
-### Objetivo
+## Objetivo
 
 Comprobar el camino de una alerta crítica.
 
-### Configuración conceptual
+## Configuración conceptual
 
 ```text
 Regla:
@@ -1275,7 +1275,7 @@ Contacto:
 laboratory-oncall
 ```
 
-### Pasos
+## Pasos
 
 1. Crear el contacto de laboratorio.
 2. Configurar la política de severidad crítica.
@@ -1294,11 +1294,11 @@ No realizar pruebas de escalado en producción sin autorización.
 
 ## Ejemplo de sesión 9: revisar una automatización peligrosa
 
-### Objetivo
+## Objetivo
 
 Identificar riesgos en una integración que ejecuta acciones automáticas.
 
-### Situación
+## Situación
 
 ```text
 Alerta de espacio insuficiente
@@ -1310,7 +1310,7 @@ Webhook
 Borrado automático de archivos
 ```
 
-### Preguntas
+## Preguntas
 
 ```text
 ¿Qué ocurre si la métrica es incorrecta?
@@ -1328,7 +1328,7 @@ Borrado automático de archivos
 ¿La automatización tiene permisos excesivos?
 ```
 
-### Conclusión
+## Conclusión
 
 Las acciones automáticas deben diseñarse con:
 
@@ -1344,11 +1344,11 @@ Las acciones automáticas deben diseñarse con:
 
 ## Ejemplo de sesión 10: comparar canales
 
-### Objetivo
+## Objetivo
 
 Elegir el canal más adecuado para diferentes situaciones.
 
-### Situaciones
+## Situaciones
 
 ```text
 1. CPU al 75 % durante dos minutos.
@@ -1359,7 +1359,7 @@ Elegir el canal más adecuado para diferentes situaciones.
 6. Creación automática de un ticket.
 ```
 
-### Actividad
+## Actividad
 
 Asignar un canal:
 
@@ -1372,7 +1372,7 @@ Asignar un canal:
 | Informe diario | | |
 | Creación automática de ticket | | |
 
-### Resultado esperado
+## Resultado esperado
 
 El alumno debe justificar la elección según:
 
@@ -1387,7 +1387,7 @@ El alumno debe justificar la elección según:
 
 ## Diagnóstico general
 
-### La integración no recibe nada
+## La integración no recibe nada
 
 Comprobar:
 
@@ -1399,7 +1399,7 @@ Comprobar:
 - El endpoint es accesible.
 - La configuración se guardó.
 
-### El canal recibe demasiados mensajes
+## El canal recibe demasiados mensajes
 
 Comprobar:
 
@@ -1411,7 +1411,7 @@ Comprobar:
 - Severidad.
 - Reglas duplicadas.
 
-### El mensaje no tiene contexto
+## El mensaje no tiene contexto
 
 Comprobar:
 
@@ -1422,7 +1422,7 @@ Comprobar:
 - Enlaces.
 - Nombre de la instancia.
 
-### El sistema externo crea duplicados
+## El sistema externo crea duplicados
 
 Comprobar:
 
@@ -1433,7 +1433,7 @@ Comprobar:
 - Reintentos.
 - Comportamiento del receptor.
 
-### El canal rechaza la petición
+## El canal rechaza la petición
 
 Comprobar:
 
@@ -1445,7 +1445,7 @@ Comprobar:
 - Restricciones de red.
 - Estado del servicio receptor.
 
-### La alerta crítica llega a un canal incorrecto
+## La alerta crítica llega a un canal incorrecto
 
 Comprobar:
 
@@ -1462,7 +1462,7 @@ Comprobar:
 
 Las notificaciones pueden contener información operativa sensible.
 
-### Datos que deben revisarse
+## Datos que deben revisarse
 
 - Nombres de servidores.
 - Direcciones IP.
@@ -1474,7 +1474,7 @@ Las notificaciones pueden contener información operativa sensible.
 - Rutas internas.
 - Identificadores de incidencias.
 
-### Recomendaciones
+## Recomendaciones
 
 - Enviar solo la información necesaria.
 - Utilizar canales aprobados.
@@ -1487,7 +1487,7 @@ Las notificaciones pueden contener información operativa sensible.
 - Auditar integraciones.
 - Rotar credenciales.
 
-### No incluir en una alerta
+## No incluir en una alerta
 
 ```text
 Contraseñas
@@ -1512,7 +1512,7 @@ Las integraciones pueden utilizar:
 - Certificados.
 - Secretos compartidos.
 
-### Buenas prácticas
+## Buenas prácticas
 
 - Utilizar un almacén de secretos.
 - Aplicar permisos mínimos.
@@ -1523,7 +1523,7 @@ Las integraciones pueden utilizar:
 - Registrar la fecha de rotación.
 - Auditar el uso.
 
-### Documentación segura
+## Documentación segura
 
 Correcto:
 
@@ -1672,11 +1672,11 @@ Datos personales innecesarios
 
 ## Práctica integradora
 
-### Objetivo
+## Objetivo
 
 Configurar varias rutas de notificación y comprobar que cada alerta utiliza el canal adecuado.
 
-### Requisitos
+## Requisitos
 
 - Grafana funcionando.
 - Prometheus configurado.
@@ -1688,7 +1688,7 @@ Configurar varias rutas de notificación y comprobar que cada alerta utiliza el 
 
 ---
 
-### Tarea 1: crear contactos
+## Tarea 1: crear contactos
 
 Crear tres contactos:
 
@@ -1713,7 +1713,7 @@ Webhook de gestión de incidencias
 
 ---
 
-### Tarea 2: crear políticas
+## Tarea 2: crear políticas
 
 Configurar las rutas:
 
@@ -1736,9 +1736,9 @@ environment = laboratory
 
 ---
 
-### Tarea 3: preparar las reglas
+## Tarea 3: preparar las reglas
 
-#### Regla de CPU
+### Regla de CPU
 
 ```promql
 100 - (
@@ -1757,7 +1757,7 @@ environment = laboratory
 resource = cpu
 ```
 
-#### Regla de disponibilidad
+### Regla de disponibilidad
 
 ```promql
 up{job="node_exporter"}
@@ -1780,7 +1780,7 @@ resource = availability
 
 ---
 
-### Tarea 4: probar la alerta de CPU
+## Tarea 4: probar la alerta de CPU
 
 1. Confirmar la regla.
 2. Activar una carga controlada.
@@ -1792,7 +1792,7 @@ resource = availability
 
 ---
 
-### Tarea 5: probar la alerta crítica
+## Tarea 5: probar la alerta crítica
 
 1. Confirmar que Node Exporter está funcionando.
 2. Detener el servicio:
@@ -1815,7 +1815,7 @@ sudo systemctl start node_exporter
 
 ---
 
-### Tarea 6: revisar las rutas
+## Tarea 6: revisar las rutas
 
 Para cada alerta, verificar:
 
@@ -1869,31 +1869,31 @@ Acción de recuperación:
 
 ## Buenas prácticas
 
-### Elegir el canal según la urgencia
+## Elegir el canal según la urgencia
 
 No todas las alertas necesitan interrumpir a una persona de guardia.
 
-### Mantener las rutas simples
+## Mantener las rutas simples
 
 Una ruta clara es más fácil de entender y diagnosticar.
 
-### Evitar duplicados
+## Evitar duplicados
 
 No enviar la misma alerta a demasiados canales sin una razón operativa.
 
-### Utilizar etiquetas consistentes
+## Utilizar etiquetas consistentes
 
 Las políticas dependen de las etiquetas.
 
-### Probar los contactos individualmente
+## Probar los contactos individualmente
 
 Antes de investigar una regla, comprobar que el contacto funciona.
 
-### Probar el flujo completo
+## Probar el flujo completo
 
 Una prueba de contacto no sustituye una prueba de regla, política y canal.
 
-### Incluir contexto
+## Incluir contexto
 
 El receptor debe saber:
 
@@ -1903,35 +1903,35 @@ El receptor debe saber:
 - Qué severidad tiene.
 - Qué debe revisar.
 
-### Utilizar runbooks
+## Utilizar runbooks
 
 Un enlace a un procedimiento reduce el tiempo de respuesta.
 
-### Configurar recuperaciones
+## Configurar recuperaciones
 
 La resolución permite confirmar que la situación ha mejorado.
 
-### Controlar la agrupación
+## Controlar la agrupación
 
 Agrupar reduce el ruido, pero no debe ocultar recursos afectados.
 
-### Proteger los secretos
+## Proteger los secretos
 
 Nunca incluir tokens ni claves en capturas o documentos.
 
-### Revisar integraciones externas
+## Revisar integraciones externas
 
 Los servicios cambian sus APIs, permisos y formatos.
 
-### Documentar propietarios
+## Documentar propietarios
 
 Cada integración debe tener una persona o equipo responsable.
 
-### Revisar contactos obsoletos
+## Revisar contactos obsoletos
 
 Eliminar endpoints retirados y rotar credenciales antiguas.
 
-### No automatizar acciones destructivas sin control
+## No automatizar acciones destructivas sin control
 
 Toda automatización debe ser reversible, auditable y limitada.
 
@@ -1939,7 +1939,7 @@ Toda automatización debe ser reversible, auditable y limitada.
 
 ## Errores frecuentes
 
-### La alerta no llega al canal esperado
+## La alerta no llega al canal esperado
 
 Comprobar:
 
@@ -1951,7 +1951,7 @@ Comprobar:
 - Silenciamientos.
 - Agrupación.
 
-### El webhook devuelve `401`
+## El webhook devuelve `401`
 
 Comprobar:
 
@@ -1961,7 +1961,7 @@ Comprobar:
 - Caducidad.
 - Método de autenticación.
 
-### El webhook devuelve `404`
+## El webhook devuelve `404`
 
 Comprobar:
 
@@ -1971,7 +1971,7 @@ Comprobar:
 - Servicio receptor.
 - Versión de la API.
 
-### El webhook devuelve `429`
+## El webhook devuelve `429`
 
 Comprobar:
 
@@ -1981,7 +1981,7 @@ Comprobar:
 - Agrupación.
 - Capacidad del receptor.
 
-### El webhook devuelve `500`
+## El webhook devuelve `500`
 
 Comprobar:
 
@@ -1991,7 +1991,7 @@ Comprobar:
 - Dependencias externas.
 - Estado del servicio.
 
-### Se crean incidencias duplicadas
+## Se crean incidencias duplicadas
 
 Comprobar:
 
@@ -2001,7 +2001,7 @@ Comprobar:
 - Agrupación.
 - Lógica del receptor.
 
-### El mensaje contiene datos sensibles
+## El mensaje contiene datos sensibles
 
 Comprobar:
 
@@ -2012,7 +2012,7 @@ Comprobar:
 - Datos incluidos por defecto.
 - Permisos del canal.
 
-### El sistema de guardia genera demasiado ruido
+## El sistema de guardia genera demasiado ruido
 
 Comprobar:
 
@@ -2023,7 +2023,7 @@ Comprobar:
 - Reglas no accionables.
 - Agrupación.
 
-### La incidencia no se actualiza al recuperarse
+## La incidencia no se actualiza al recuperarse
 
 Comprobar:
 

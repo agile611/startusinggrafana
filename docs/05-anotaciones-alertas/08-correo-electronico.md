@@ -39,7 +39,7 @@ Una alerta puede estar correctamente configurada y, aun así, no llegar al desti
 
 ---
 
-### Objetivos
+## Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -86,7 +86,7 @@ Servidor receptor
 Buzón del destinatario
 ```
 
-### Ejemplo conceptual
+## Ejemplo conceptual
 
 ```text
 Grafana:
@@ -135,7 +135,7 @@ Servidor de correo = servidor SMTP
 
 Grafana se conecta al servidor SMTP y le solicita enviar un mensaje.
 
-### Operaciones habituales
+## Operaciones habituales
 
 Durante una conexión SMTP pueden realizarse operaciones equivalentes a:
 
@@ -171,7 +171,7 @@ Una configuración SMTP suele incluir los siguientes parámetros:
 
 Los nombres exactos pueden variar según la versión y el método de configuración.
 
-### Ejemplo conceptual
+## Ejemplo conceptual
 
 ```ini
 [smtp]
@@ -190,7 +190,7 @@ Este ejemplo no contiene credenciales reales.
 
 ## Puertos SMTP habituales
 
-### Puerto 25
+## Puerto 25
 
 Tradicionalmente se utiliza para el intercambio de correo entre servidores.
 
@@ -201,7 +201,7 @@ Características:
 - No suele ser la primera opción para clientes de aplicaciones.
 - Puede funcionar en entornos internos controlados.
 
-### Puerto 465
+## Puerto 465
 
 Se utiliza habitualmente para SMTP con TLS implícito.
 
@@ -211,7 +211,7 @@ Características:
 - La configuración debe coincidir con el servidor.
 - No debe confundirse con STARTTLS.
 
-### Puerto 587
+## Puerto 587
 
 Se utiliza habitualmente para el envío autenticado desde aplicaciones y clientes.
 
@@ -222,7 +222,7 @@ Características:
 - Normalmente requiere autenticación.
 - El proveedor debe indicar la política exacta.
 
-### Resumen
+## Resumen
 
 | Puerto | Uso habitual | Cifrado |
 |---|---|---|
@@ -236,13 +236,13 @@ El puerto correcto debe confirmarse con el administrador o proveedor del correo.
 
 ## Cifrado SMTP
 
-### SMTP sin cifrado
+## SMTP sin cifrado
 
 La comunicación no está protegida.
 
 No debe utilizarse para credenciales ni contenido sensible salvo en un entorno controlado y autorizado.
 
-### STARTTLS
+## STARTTLS
 
 La conexión comienza inicialmente sin cifrado y se actualiza a una conexión cifrada mediante TLS.
 
@@ -263,13 +263,13 @@ Autenticación y envío cifrados
 
 Es habitual en el puerto `587`.
 
-### TLS implícito
+## TLS implícito
 
 La conexión comienza cifrada desde el primer momento.
 
 Es habitual en el puerto `465`.
 
-### Buenas prácticas
+## Buenas prácticas
 
 - Utilizar cifrado siempre que sea posible.
 - Validar los certificados.
@@ -282,7 +282,7 @@ Es habitual en el puerto `465`.
 
 ## Remitente y destinatario
 
-### Remitente
+## Remitente
 
 Es la dirección desde la que parece enviarse el mensaje.
 
@@ -299,7 +299,7 @@ El servidor SMTP puede exigir que el remitente:
 - Coincida con el usuario autenticado.
 - Esté validado por el proveedor.
 
-### Nombre del remitente
+## Nombre del remitente
 
 Es el texto visible junto a la dirección.
 
@@ -309,7 +309,7 @@ Ejemplo:
 Grafana Monitoring <grafana@example.com>
 ```
 
-### Destinatario
+## Destinatario
 
 Es la dirección que recibirá el mensaje.
 
@@ -326,7 +326,7 @@ systems@example.com
 on-call@example.com
 ```
 
-### Recomendación
+## Recomendación
 
 Utilizar una cuenta técnica específica:
 
@@ -348,7 +348,7 @@ Una cuenta personal puede provocar problemas cuando la persona cambia de equipo,
 
 Una cuenta técnica es una identidad utilizada por una aplicación o servicio.
 
-### Características recomendadas
+## Características recomendadas
 
 - Nombre descriptivo.
 - Propietario definido.
@@ -359,7 +359,7 @@ Una cuenta técnica es una identidad utilizada por una aplicación o servicio.
 - Dirección remitente autorizada.
 - Uso limitado al envío de alertas.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Cuenta:
@@ -394,7 +394,7 @@ La configuración puede realizarse de varias formas:
 
 El método concreto depende de la instalación.
 
-### Ejemplo mediante archivo de configuración
+## Ejemplo mediante archivo de configuración
 
 ```ini
 [smtp]
@@ -407,7 +407,7 @@ from_name = Grafana Monitoring
 startTLS_policy = MandatoryStartTLS
 ```
 
-### Ejemplo mediante variables de entorno
+## Ejemplo mediante variables de entorno
 
 ```bash
 GF_SMTP_ENABLED=true
@@ -420,7 +420,7 @@ GF_SMTP_FROM_NAME="Grafana Monitoring"
 
 Los nombres de las variables deben comprobarse para la versión instalada.
 
-### Importante
+## Importante
 
 No guardar valores reales en:
 
@@ -439,7 +439,7 @@ Mensajes de chat
 
 Después de modificar la configuración SMTP, puede ser necesario reiniciar Grafana.
 
-### Instalación mediante servicio
+## Instalación mediante servicio
 
 ```bash
 sudo systemctl restart grafana-server
@@ -459,7 +459,7 @@ sudo journalctl -u grafana-server -n 100 --no-pager
 
 El nombre del servicio puede variar según la instalación.
 
-### Instalación mediante contenedor
+## Instalación mediante contenedor
 
 Consultar los contenedores:
 
@@ -502,7 +502,7 @@ El procedimiento general es:
 13. Comprobar la notificación.
 14. Documentar el resultado.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Nombre:
@@ -532,7 +532,7 @@ El asunto debe permitir reconocer rápidamente:
 - El entorno.
 - La severidad.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 [FIRING] [critical] NodeExporterDown - laboratory
@@ -573,7 +573,7 @@ Enlace al dashboard
 Enlace al runbook
 ```
 
-### Ejemplo conceptual
+## Ejemplo conceptual
 
 ```text
 Alerta: HighCPUUsage
@@ -596,7 +596,7 @@ Las variables disponibles dependen de Grafana y de la plantilla utilizada.
 
 ## Notificaciones de activación y recuperación
 
-### Activación
+## Activación
 
 Se envía cuando la alerta pasa a un estado activo.
 
@@ -606,7 +606,7 @@ Normal → Pending → Alerting
 
 Dependiendo de la configuración, la notificación puede generarse al entrar en `Alerting`.
 
-### Recuperación
+## Recuperación
 
 Se envía cuando la condición deja de cumplirse.
 
@@ -614,7 +614,7 @@ Se envía cuando la condición deja de cumplirse.
 Alerting → Normal
 ```
 
-### Ejemplo
+## Ejemplo
 
 Mensaje de activación:
 
@@ -628,7 +628,7 @@ Mensaje de recuperación:
 [RESOLVED] HighCPUUsage en server-01
 ```
 
-### Comprobar
+## Comprobar
 
 ```text
 ¿Se recibe la activación?
@@ -652,14 +652,14 @@ El contacto de correo no decide qué alertas recibe.
 
 La política de notificación utiliza las etiquetas de la alerta para seleccionar el contacto.
 
-### Regla
+## Regla
 
 ```text
 Nombre:
 HighCPUUsage
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 team = systems
@@ -667,20 +667,20 @@ severity = warning
 environment = laboratory
 ```
 
-### Política
+## Política
 
 ```text
 team = systems
 environment = laboratory
 ```
 
-### Contacto
+## Contacto
 
 ```text
 laboratory-email
 ```
 
-### Resultado
+## Resultado
 
 ```text
 La alerta coincide con la política
@@ -700,7 +700,7 @@ Si las etiquetas no coinciden, el mensaje puede:
 
 Un contacto puede utilizar varias direcciones, dependiendo de la configuración disponible.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 systems@example.com
@@ -708,7 +708,7 @@ on-call@example.com
 operations@example.com
 ```
 
-### Criterios para elegir destinatarios
+## Criterios para elegir destinatarios
 
 - Responsabilidad sobre el servicio.
 - Horario de guardia.
@@ -717,7 +717,7 @@ operations@example.com
 - Nivel de urgencia.
 - Requisitos de privacidad.
 
-### Evitar
+## Evitar
 
 - Enviar todas las alertas a toda la organización.
 - Utilizar listas sin propietario.
@@ -730,7 +730,7 @@ operations@example.com
 
 Las alertas de laboratorio, pruebas y producción deben diferenciarse.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 laboratory-email
@@ -739,7 +739,7 @@ production-email
 production-on-call-email
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 environment = laboratory
@@ -747,7 +747,7 @@ environment = staging
 environment = production
 ```
 
-### Recomendaciones
+## Recomendaciones
 
 - Utilizar destinatarios diferentes.
 - Añadir el entorno al asunto.
@@ -795,11 +795,11 @@ La configuración real puede tener campos adicionales.
 
 ## Ejemplo de sesión 1: configurar SMTP en laboratorio
 
-### Objetivo
+## Objetivo
 
 Preparar Grafana para enviar mensajes desde una cuenta de laboratorio.
 
-### Requisitos
+## Requisitos
 
 - Grafana instalado.
 - Cuenta SMTP autorizada.
@@ -808,7 +808,7 @@ Preparar Grafana para enviar mensajes desde una cuenta de laboratorio.
 - Credencial gestionada de forma segura.
 - Destinatario de pruebas.
 
-### Datos de ejemplo
+## Datos de ejemplo
 
 ```text
 Servidor:
@@ -830,7 +830,7 @@ Destinatario:
 alumno@example.com
 ```
 
-### Pasos
+## Pasos
 
 1. Confirmar los datos proporcionados por el administrador.
 2. Configurar SMTP mediante el mecanismo aprobado.
@@ -843,7 +843,7 @@ alumno@example.com
 9. Confirmar la recepción.
 10. Registrar el resultado sin incluir secretos.
 
-### Registro
+## Registro
 
 ```text
 Servidor SMTP:
@@ -871,11 +871,11 @@ Corrección aplicada:
 
 ## Ejemplo de sesión 2: probar un contacto de correo
 
-### Objetivo
+## Objetivo
 
 Verificar que el contacto puede entregar un mensaje.
 
-### Pasos
+## Pasos
 
 1. Abrir **Alerting**.
 2. Acceder a **Contact points**.
@@ -888,7 +888,7 @@ Verificar que el contacto puede entregar un mensaje.
 9. Comprobar el contenido.
 10. Registrar la hora de recepción.
 
-### Lista de comprobación
+## Lista de comprobación
 
 ```text
 [ ] La prueba se ejecutó correctamente.
@@ -905,11 +905,11 @@ Verificar que el contacto puede entregar un mensaje.
 
 ## Ejemplo de sesión 3: conectar una alerta con el correo
 
-### Objetivo
+## Objetivo
 
 Comprobar el flujo completo entre una alerta y un buzón.
 
-### Regla
+## Regla
 
 ```text
 Nombre:
@@ -925,7 +925,7 @@ Duración:
 1 minuto
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 team = systems
@@ -933,20 +933,20 @@ severity = critical
 environment = laboratory
 ```
 
-### Contacto
+## Contacto
 
 ```text
 laboratory-systems-email
 ```
 
-### Política
+## Política
 
 ```text
 team = systems
 environment = laboratory
 ```
 
-### Pasos
+## Pasos
 
 1. Confirmar que el contacto funciona.
 2. Confirmar que la política coincide con las etiquetas.
@@ -970,7 +970,7 @@ sudo systemctl start node_exporter
 10. Comprobar el mensaje de resolución.
 11. Registrar los tiempos.
 
-### Registro
+## Registro
 
 ```text
 Hora de detención:
@@ -992,11 +992,11 @@ Observaciones:
 
 ## Ejemplo de sesión 4: probar alertas de CPU
 
-### Objetivo
+## Objetivo
 
 Enviar por correo una alerta de CPU elevada.
 
-### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -1006,7 +1006,7 @@ Enviar por correo una alerta de CPU elevada.
 )
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre:
@@ -1022,7 +1022,7 @@ Duración:
 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 team = systems
@@ -1031,7 +1031,7 @@ environment = laboratory
 resource = cpu
 ```
 
-### Pasos
+## Pasos
 
 1. Validar la consulta en Explore.
 2. Comprobar que devuelve un porcentaje.
@@ -1055,11 +1055,11 @@ El comando debe utilizarse solo en un entorno autorizado.
 
 ## Ejemplo de sesión 5: investigar un correo que no llega
 
-### Objetivo
+## Objetivo
 
 Diagnosticar una notificación que aparece como activa en Grafana, pero no se recibe.
 
-### Procedimiento
+## Procedimiento
 
 1. Comprobar que la regla está en `Alerting`.
 2. Comprobar las etiquetas de la alerta.
@@ -1074,7 +1074,7 @@ Diagnosticar una notificación que aparece como activa en Grafana, pero no se re
 11. Repetir la prueba.
 12. Documentar la causa.
 
-### Posibles causas
+## Posibles causas
 
 ```text
 La regla no coincide con la política.
@@ -1089,7 +1089,7 @@ La alerta está silenciada.
 El mensaje se ha agrupado o retrasado.
 ```
 
-### Registro
+## Registro
 
 ```text
 Regla:
@@ -1117,11 +1117,11 @@ Corrección:
 
 ## Ejemplo de sesión 6: diagnosticar un error de autenticación
 
-### Situación
+## Situación
 
 Grafana no puede autenticarse contra el servidor SMTP.
 
-### Síntomas
+## Síntomas
 
 ```text
 La prueba falla.
@@ -1129,7 +1129,7 @@ Los logs muestran un error de autenticación.
 No se entrega ningún mensaje.
 ```
 
-### Pasos
+## Pasos
 
 1. Confirmar el usuario SMTP.
 2. Confirmar que la cuenta está activa.
@@ -1142,7 +1142,7 @@ No se entrega ningún mensaje.
 9. Rotar la credencial si ha sido expuesta.
 10. Documentar el resultado.
 
-### Registro
+## Registro
 
 ```text
 Usuario SMTP:
@@ -1168,11 +1168,11 @@ Nunca guardar la contraseña en el registro.
 
 ## Ejemplo de sesión 7: diagnosticar un error de certificado
 
-### Situación
+## Situación
 
 El servidor SMTP utiliza un certificado que Grafana no puede validar.
 
-### Posibles causas
+## Posibles causas
 
 ```text
 Certificado caducado.
@@ -1183,7 +1183,7 @@ Cadena de certificados incompleta.
 Configuración TLS incompatible.
 ```
 
-### Procedimiento
+## Procedimiento
 
 1. Revisar la fecha y hora del servidor.
 2. Confirmar el nombre del host SMTP.
@@ -1194,7 +1194,7 @@ Configuración TLS incompatible.
 7. Repetir la prueba.
 8. Evitar desactivar la validación como solución permanente.
 
-### Advertencia
+## Advertencia
 
 No utilizar una opción equivalente a:
 
@@ -1208,18 +1208,18 @@ en producción salvo una excepción documentada, aprobada y temporal.
 
 ## Ejemplo de sesión 8: probar activación y recuperación
 
-### Objetivo
+## Objetivo
 
 Comprobar que se reciben los dos eventos.
 
-### Regla
+## Regla
 
 ```text
 Nombre:
 NodeExporterDown
 ```
 
-### Pasos
+## Pasos
 
 1. Confirmar el estado `Normal`.
 2. Detener el servicio.
@@ -1231,7 +1231,7 @@ NodeExporterDown
 8. Comparar el contenido de ambos mensajes.
 9. Registrar los tiempos.
 
-### Tabla
+## Tabla
 
 | Evento | Hora en Grafana | Hora de recepción | Resultado |
 |---|---|---|---|
@@ -1242,18 +1242,18 @@ NodeExporterDown
 
 ## Ejemplo de sesión 9: comparar destinatarios por severidad
 
-### Objetivo
+## Objetivo
 
 Enviar alertas de advertencia y críticas a destinos diferentes.
 
-### Contactos
+## Contactos
 
 ```text
 laboratory-warning-email
 laboratory-critical-email
 ```
 
-### Políticas
+## Políticas
 
 ```text
 severity=warning
@@ -1263,7 +1263,7 @@ severity=critical
     → laboratory-critical-email
 ```
 
-### Pasos
+## Pasos
 
 1. Crear ambos contactos.
 2. Probar ambos contactos.
@@ -1276,7 +1276,7 @@ severity=critical
 9. Confirmar el segundo destinatario.
 10. Documentar las rutas.
 
-### Registro
+## Registro
 
 | Severidad | Contacto esperado | Contacto recibido | Resultado |
 |---|---|---|---|
@@ -1287,11 +1287,11 @@ severity=critical
 
 ## Ejemplo de sesión 10: revisar un correo agrupado
 
-### Objetivo
+## Objetivo
 
 Comprobar cómo se recibe un mensaje cuando varias alertas se activan simultáneamente.
 
-### Escenario
+## Escenario
 
 ```text
 server-01 → CPU elevada
@@ -1299,7 +1299,7 @@ server-02 → CPU elevada
 server-03 → CPU elevada
 ```
 
-### Pasos
+## Pasos
 
 1. Crear una regla multidimensional.
 2. Configurar el contacto de correo.
@@ -1311,7 +1311,7 @@ server-03 → CPU elevada
 8. Evaluar si el formato es comprensible.
 9. Proponer mejoras.
 
-### Preguntas
+## Preguntas
 
 ```text
 ¿El asunto indica que hay varias alertas?
@@ -1331,7 +1331,7 @@ server-03 → CPU elevada
 
 Antes de revisar Grafana, puede ser útil comprobar si el servidor es accesible desde el equipo donde se ejecuta Grafana.
 
-### Comprobar resolución DNS
+## Comprobar resolución DNS
 
 ```bash
 getent hosts smtp.example.com
@@ -1344,7 +1344,7 @@ Si no devuelve una dirección, revisar:
 - Configuración de red.
 - Dominio utilizado.
 
-### Comprobar conectividad TCP
+## Comprobar conectividad TCP
 
 ```bash
 nc -vz smtp.example.com 587
@@ -1364,7 +1364,7 @@ Un resultado negativo puede indicar:
 - Servidor inaccesible.
 - Restricción del proveedor.
 
-### Probar STARTTLS
+## Probar STARTTLS
 
 En un entorno autorizado, puede utilizarse:
 
@@ -1389,19 +1389,19 @@ Los logs pueden indicar:
 - Error del destinatario.
 - Fallo interno de la integración.
 
-### Servicio del sistema
+## Servicio del sistema
 
 ```bash
 sudo journalctl -u grafana-server -n 100 --no-pager
 ```
 
-### Contenedor
+## Contenedor
 
 ```bash
 docker logs grafana --tail 100
 ```
 
-### Buscar mensajes relacionados
+## Buscar mensajes relacionados
 
 ```bash
 sudo journalctl -u grafana-server --no-pager | grep -i smtp
@@ -1422,7 +1422,7 @@ Los comandos dependen del sistema operativo y del método de instalación.
 
 ## Errores frecuentes
 
-### SMTP está deshabilitado
+## SMTP está deshabilitado
 
 Síntoma:
 
@@ -1436,7 +1436,7 @@ Revisar:
 enabled
 ```
 
-### Servidor incorrecto
+## Servidor incorrecto
 
 Síntoma:
 
@@ -1451,7 +1451,7 @@ Revisar:
 - DNS.
 - Entorno.
 
-### Puerto incorrecto
+## Puerto incorrecto
 
 Síntoma:
 
@@ -1466,7 +1466,7 @@ Revisar:
 - Cifrado esperado.
 - Documentación del proveedor.
 
-### Credenciales incorrectas
+## Credenciales incorrectas
 
 Síntoma:
 
@@ -1482,7 +1482,7 @@ Revisar:
 - Contraseña de aplicación.
 - Método de autenticación.
 
-### Remitente no autorizado
+## Remitente no autorizado
 
 Síntoma:
 
@@ -1497,7 +1497,7 @@ Revisar:
 - Coincidencia con el usuario SMTP.
 - Políticas SPF, DKIM o DMARC, si aplican.
 
-### Certificado no válido
+## Certificado no válido
 
 Síntoma:
 
@@ -1513,7 +1513,7 @@ Revisar:
 - Cadena de certificados.
 - Reloj del sistema.
 
-### El correo llega como spam
+## El correo llega como spam
 
 Revisar:
 
@@ -1526,7 +1526,7 @@ Revisar:
 - Contenido del mensaje.
 - Configuración del servidor receptor.
 
-### La alerta está activa, pero no llega el mensaje
+## La alerta está activa, pero no llega el mensaje
 
 Revisar:
 
@@ -1539,7 +1539,7 @@ Revisar:
 - Logs.
 - Estado del buzón.
 
-### El correo llega sin información
+## El correo llega sin información
 
 Revisar:
 
@@ -1554,7 +1554,7 @@ Revisar:
 
 ## Seguridad
 
-### No almacenar contraseñas en texto plano
+## No almacenar contraseñas en texto plano
 
 Incorrecto:
 
@@ -1564,7 +1564,7 @@ password = MiContraseñaReal
 
 en un repositorio o documento compartido.
 
-### Utilizar secretos gestionados
+## Utilizar secretos gestionados
 
 La credencial debe almacenarse en:
 
@@ -1574,11 +1574,11 @@ La credencial debe almacenarse en:
 - Bóveda corporativa.
 - Mecanismo seguro de la plataforma.
 
-### Principio de mínimo privilegio
+## Principio de mínimo privilegio
 
 La cuenta SMTP debería tener únicamente los permisos necesarios para enviar mensajes.
 
-### Rotación
+## Rotación
 
 Establecer un procedimiento para:
 
@@ -1588,7 +1588,7 @@ Establecer un procedimiento para:
 - Actualizar Grafana.
 - Ejecutar una prueba posterior.
 
-### Protección de los destinatarios
+## Protección de los destinatarios
 
 No enviar información sensible a listas amplias.
 
@@ -1601,7 +1601,7 @@ Revisar:
 - Detalles de seguridad.
 - Contenido de logs.
 
-### Separación por entorno
+## Separación por entorno
 
 Utilizar cuentas y contactos independientes:
 
@@ -1741,11 +1741,11 @@ Información personal no necesaria
 
 ## Práctica integradora
 
-### Objetivo
+## Objetivo
 
 Configurar y probar una notificación de correo desde la activación de una alerta hasta su recuperación.
 
-### Requisitos
+## Requisitos
 
 - Grafana funcionando.
 - Prometheus configurado.
@@ -1757,7 +1757,7 @@ Configurar y probar una notificación de correo desde la activación de una aler
 
 ---
 
-### Tarea 1: revisar SMTP
+## Tarea 1: revisar SMTP
 
 Registrar:
 
@@ -1781,7 +1781,7 @@ No registrar la contraseña.
 
 ---
 
-### Tarea 2: crear el contacto
+## Tarea 2: crear el contacto
 
 Crear:
 
@@ -1800,7 +1800,7 @@ Ejecutar una prueba directa.
 
 ---
 
-### Tarea 3: crear la política
+## Tarea 3: crear la política
 
 Utilizar las etiquetas:
 
@@ -1817,7 +1817,7 @@ laboratory-systems-email
 
 ---
 
-### Tarea 4: preparar la regla
+## Tarea 4: preparar la regla
 
 Utilizar la regla de disponibilidad:
 
@@ -1861,7 +1861,7 @@ no responde a Prometheus.
 
 ---
 
-### Tarea 5: probar la activación
+## Tarea 5: probar la activación
 
 1. Confirmar que la alerta está en `Normal`.
 2. Detener Node Exporter:
@@ -1877,7 +1877,7 @@ sudo systemctl stop node_exporter
 
 ---
 
-### Tarea 6: probar la recuperación
+## Tarea 6: probar la recuperación
 
 1. Iniciar Node Exporter:
 
@@ -1892,7 +1892,7 @@ sudo systemctl start node_exporter
 
 ---
 
-### Tarea 7: elaborar el informe
+## Tarea 7: elaborar el informe
 
 ```text
 Contacto utilizado:

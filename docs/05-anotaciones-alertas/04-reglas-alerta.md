@@ -52,7 +52,7 @@ La interfaz exacta puede variar según la versión de Grafana, pero los concepto
 
 ---
 
-### Objetivos
+## Objetivos
 
 Al finalizar esta sección, el alumno podrá:
 
@@ -139,7 +139,7 @@ La regla responde:
 
 Una regla de alerta es una definición que combina una consulta, una condición y una política de evaluación.
 
-### Estructura conceptual
+## Estructura conceptual
 
 ```text
 Nombre
@@ -159,7 +159,7 @@ Etiquetas
 Anotaciones
 ```
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Nombre:
@@ -183,7 +183,7 @@ Alerta de CPU elevada
 
 Una regla debe representar una situación concreta y accionable.
 
-### Regla accionable
+## Regla accionable
 
 Una regla es accionable cuando el equipo que recibe la alerta sabe:
 
@@ -211,7 +211,7 @@ Revisar los procesos activos y el runbook de CPU elevada.
 
 ## Componentes de una regla
 
-### Nombre
+## Nombre
 
 El nombre debe describir el problema detectado.
 
@@ -235,7 +235,7 @@ Prueba
 Problema
 ```
 
-### Consulta
+## Consulta
 
 La consulta obtiene o calcula el valor que será evaluado.
 
@@ -245,7 +245,7 @@ Ejemplo:
 up{job="node_exporter"}
 ```
 
-### Expresión o reducción
+## Expresión o reducción
 
 Convierte el resultado en un valor evaluable.
 
@@ -267,7 +267,7 @@ Reducción → último valor
 Condición → último valor igual a 0
 ```
 
-### Condición
+## Condición
 
 Compara el resultado con un criterio.
 
@@ -280,7 +280,7 @@ Igual a 0
 Mayor o igual que 1
 ```
 
-### Intervalo de evaluación
+## Intervalo de evaluación
 
 Indica cada cuánto se evalúa la regla.
 
@@ -292,7 +292,7 @@ Cada 1 minuto
 Cada 5 minutos
 ```
 
-### Duración
+## Duración
 
 Indica cuánto tiempo debe mantenerse la condición antes de activar la alerta.
 
@@ -304,7 +304,7 @@ Durante 5 minutos
 Durante 10 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 Clasifican y permiten enrutar la alerta.
 
@@ -317,7 +317,7 @@ service = node_exporter
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 Proporcionan información legible para las personas.
 
@@ -366,7 +366,7 @@ Condición resuelta
 Normal
 ```
 
-### Ejemplo temporal
+## Ejemplo temporal
 
 Configuración:
 
@@ -394,7 +394,7 @@ La duración evita que un pico aislado genere una alerta.
 
 ## Estados de una regla
 
-### Normal
+## Normal
 
 La condición no se cumple.
 
@@ -404,7 +404,7 @@ Umbral: 90 %
 Estado: Normal
 ```
 
-### Pending
+## Pending
 
 La condición se cumple, pero todavía no ha transcurrido la duración configurada.
 
@@ -415,7 +415,7 @@ Tiempo transcurrido: 2 minutos
 Estado: Pending
 ```
 
-### Alerting o Firing
+## Alerting o Firing
 
 La condición se ha mantenido durante el tiempo necesario.
 
@@ -426,7 +426,7 @@ Tiempo transcurrido: 6 minutos
 Estado: Alerting
 ```
 
-### No data
+## No data
 
 La regla no obtiene datos suficientes para realizar la evaluación.
 
@@ -439,7 +439,7 @@ Posibles causas:
 - Existe un filtro incorrecto.
 - El rango temporal no es adecuado.
 
-### Error
+## Error
 
 La evaluación no puede completarse por un problema técnico.
 
@@ -457,7 +457,7 @@ Posibles causas:
 
 Estos conceptos suelen confundirse.
 
-### Intervalo de evaluación
+## Intervalo de evaluación
 
 Indica cada cuánto se ejecuta la regla.
 
@@ -465,7 +465,7 @@ Indica cada cuánto se ejecuta la regla.
 Evaluar cada 1 minuto
 ```
 
-### Duración
+## Duración
 
 Indica cuánto tiempo debe mantenerse la condición.
 
@@ -473,7 +473,7 @@ Indica cuánto tiempo debe mantenerse la condición.
 La condición debe permanecer activa durante 5 minutos
 ```
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Intervalo: 1 minuto
@@ -521,7 +521,7 @@ Antes de guardar, comprobar que la consulta devuelve datos con las etiquetas esp
 
 No se debe crear una alerta sobre una consulta que no se ha probado.
 
-### Procedimiento
+## Procedimiento
 
 1. Abrir **Explore**.
 2. Seleccionar Prometheus.
@@ -534,7 +534,7 @@ No se debe crear una alerta sobre una consulta que no se ha probado.
 9. Probar distintos rangos temporales.
 10. Ajustar la consulta si es necesario.
 
-### Consulta de ejemplo
+## Consulta de ejemplo
 
 ```promql
 up{job="node_exporter"}
@@ -549,7 +549,7 @@ Comprobar:
 ¿Existen varias instancias?
 ```
 
-### Consulta de CPU
+## Consulta de CPU
 
 ```promql
 100 - (
@@ -572,23 +572,23 @@ Comprobar:
 
 ## Ejemplo 1: alerta de disponibilidad
 
-### Objetivo
+## Objetivo
 
 Detectar que un objetivo supervisado deja de responder.
 
-### Consulta
+## Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### Condición
+## Condición
 
 ```text
 Valor igual a 0
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: NodeExporterDown
@@ -596,7 +596,7 @@ Intervalo: 30 segundos
 Duración: 1 minuto
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = critical
@@ -606,7 +606,7 @@ resource = availability
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Node Exporter no disponible en {{ $labels.instance }}
@@ -617,14 +617,14 @@ no está respondiendo a Prometheus.
 runbook_url = https://example.com/runbooks/node-exporter-down
 ```
 
-### Interpretación
+## Interpretación
 
 ```text
 up = 1 → objetivo disponible
 up = 0 → objetivo no disponible
 ```
 
-### Configuración ante ausencia de datos
+## Configuración ante ausencia de datos
 
 Para una alerta de disponibilidad, la ausencia de datos puede considerarse un problema. La decisión depende de la arquitectura y debe documentarse.
 
@@ -632,11 +632,11 @@ Para una alerta de disponibilidad, la ausencia de datos puede considerarse un pr
 
 ## Ejemplo 2: alerta de CPU
 
-### Objetivo
+## Objetivo
 
 Detectar un uso sostenido de CPU superior al límite establecido.
 
-### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -646,13 +646,13 @@ Detectar un uso sostenido de CPU superior al límite establecido.
 )
 ```
 
-### Condición
+## Condición
 
 ```text
 Valor mayor que 90
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: HighCPUUsage
@@ -660,7 +660,7 @@ Intervalo: 1 minuto
 Duración: 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -670,7 +670,7 @@ resource = cpu
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Uso de CPU elevado en {{ $labels.instance }}
@@ -681,7 +681,7 @@ supera el 90 % durante cinco minutos.
 runbook_url = https://example.com/runbooks/high-cpu
 ```
 
-### Consideración operativa
+## Consideración operativa
 
 Un uso alto de CPU no siempre indica una incidencia. Puede producirse durante:
 
@@ -698,11 +698,11 @@ Por este motivo, es recomendable utilizar una duración adecuada y consultar las
 
 ## Ejemplo 3: alerta de memoria
 
-### Objetivo
+## Objetivo
 
 Detectar un uso elevado de memoria.
 
-### Consulta
+## Consulta
 
 ```promql
 100 * (
@@ -713,13 +713,13 @@ Detectar un uso elevado de memoria.
 )
 ```
 
-### Condición
+## Condición
 
 ```text
 Valor mayor que 90
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: HighMemoryUsage
@@ -727,7 +727,7 @@ Intervalo: 1 minuto
 Duración: 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -736,7 +736,7 @@ resource = memory
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Uso de memoria elevado en {{ $labels.instance }}
@@ -747,7 +747,7 @@ supera el 90 % durante cinco minutos.
 runbook_url = https://example.com/runbooks/high-memory
 ```
 
-### Alternativa: memoria disponible
+## Alternativa: memoria disponible
 
 También se puede evaluar directamente la memoria disponible:
 
@@ -771,11 +771,11 @@ Ambas estrategias pueden ser válidas. Lo importante es que la unidad y el umbra
 
 ## Ejemplo 4: alerta de almacenamiento
 
-### Objetivo
+## Objetivo
 
 Detectar un sistema de ficheros con ocupación elevada.
 
-### Consulta
+## Consulta
 
 ```promql
 100 * (
@@ -792,13 +792,13 @@ Detectar un sistema de ficheros con ocupación elevada.
 )
 ```
 
-### Condición
+## Condición
 
 ```text
 Valor mayor que 80
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: FilesystemUsageHigh
@@ -806,7 +806,7 @@ Intervalo: 5 minutos
 Duración: 10 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -816,7 +816,7 @@ mountpoint = /
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Sistema de ficheros con ocupación elevada
@@ -827,7 +827,7 @@ de {{ $labels.instance }} supera el 80 % de uso.
 runbook_url = https://example.com/runbooks/filesystem-full
 ```
 
-### Precauciones
+## Precauciones
 
 - Excluir sistemas temporales.
 - Filtrar puntos de montaje relevantes.
@@ -841,7 +841,7 @@ runbook_url = https://example.com/runbooks/filesystem-full
 
 Si la aplicación expone métricas de histograma, puede calcularse un percentil.
 
-### Consulta
+## Consulta
 
 ```promql
 histogram_quantile(
@@ -854,7 +854,7 @@ histogram_quantile(
 )
 ```
 
-### Condición
+## Condición
 
 ```text
 Valor mayor que 1
@@ -862,7 +862,7 @@ Valor mayor que 1
 
 El resultado representa una latencia aproximada en segundos.
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: HighApplicationLatency
@@ -870,7 +870,7 @@ Intervalo: 1 minuto
 Duración: 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -879,7 +879,7 @@ resource = latency
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Latencia p95 elevada
@@ -898,7 +898,7 @@ La consulta debe adaptarse a los nombres reales de las métricas y etiquetas de 
 
 Las etiquetas sirven para clasificar, buscar y enrutar alertas.
 
-### Etiquetas recomendadas
+## Etiquetas recomendadas
 
 ```text
 alertname
@@ -910,7 +910,7 @@ instance
 resource
 ```
 
-### Ejemplo
+## Ejemplo
 
 ```text
 alertname = HighCPUUsage
@@ -921,7 +921,7 @@ environment = laboratory
 resource = cpu
 ```
 
-### Severidad
+## Severidad
 
 Una convención habitual es:
 
@@ -941,7 +941,7 @@ La organización debe establecer el significado de cada nivel.
 
 No se debe utilizar `critical` para todas las reglas. Si todo se marca como crítico, se pierde la capacidad de priorizar.
 
-### Buenas prácticas
+## Buenas prácticas
 
 - Utilizar nombres consistentes.
 - Mantener una convención común.
@@ -956,7 +956,7 @@ No se debe utilizar `critical` para todas las reglas. Si todo se marca como crí
 
 Las anotaciones proporcionan contexto a la persona que recibe la alerta.
 
-### `summary`
+## `summary`
 
 Texto breve:
 
@@ -964,7 +964,7 @@ Texto breve:
 summary = CPU elevada en {{ $labels.instance }}
 ```
 
-### `description`
+## `description`
 
 Descripción ampliada:
 
@@ -973,7 +973,7 @@ description = La CPU de {{ $labels.instance }}
 supera el 90 % durante cinco minutos.
 ```
 
-### `runbook_url`
+## `runbook_url`
 
 Enlace al procedimiento:
 
@@ -981,7 +981,7 @@ Enlace al procedimiento:
 runbook_url = https://example.com/runbooks/high-cpu
 ```
 
-### Ejemplo completo
+## Ejemplo completo
 
 ```text
 summary = Sistema de ficheros casi lleno en {{ $labels.instance }}
@@ -1008,7 +1008,7 @@ Normal
 Alerting
 ```
 
-### `No data`
+## `No data`
 
 La regla pasa a un estado de ausencia de datos.
 
@@ -1018,7 +1018,7 @@ Adecuado cuando:
 - La ausencia puede indicar una caída.
 - Se necesita diferenciar la ausencia de datos del estado normal.
 
-### `Normal`
+## `Normal`
 
 La ausencia no genera una alerta.
 
@@ -1028,7 +1028,7 @@ Adecuado cuando:
 - La ausencia es esperada.
 - La consulta solo devuelve series en determinadas circunstancias.
 
-### `Alerting`
+## `Alerting`
 
 La ausencia se considera un problema.
 
@@ -1046,7 +1046,7 @@ La elección debe documentarse para evitar interpretaciones ambiguas.
 
 Un error no significa necesariamente que la condición sea verdadera.
 
-### Causas habituales
+## Causas habituales
 
 - Error de sintaxis PromQL.
 - Prometheus inaccesible.
@@ -1055,7 +1055,7 @@ Un error no significa necesariamente que la condición sea verdadera.
 - Permisos insuficientes.
 - Consulta incompatible con el tipo de datos.
 
-### Procedimiento de diagnóstico
+## Procedimiento de diagnóstico
 
 1. Ejecutar la consulta en Explore.
 2. Revisar el mensaje de error.
@@ -1081,7 +1081,7 @@ Un grupo puede compartir:
 - Organización lógica.
 - Contexto operativo.
 
-### Ejemplo
+## Ejemplo
 
 ```text
 Grupo: Infraestructura - cada 1 minuto
@@ -1140,7 +1140,7 @@ Es importante no eliminar las etiquetas necesarias mediante agregaciones excesiv
 
 ## Crear una regla multidimensional
 
-### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -1150,13 +1150,13 @@ Es importante no eliminar las etiquetas necesarias mediante agregaciones excesiv
 )
 ```
 
-### Condición
+## Condición
 
 ```text
 Mayor que 90
 ```
 
-### Resultado esperado
+## Resultado esperado
 
 ```text
 server-01 → Normal
@@ -1164,7 +1164,7 @@ server-02 → Alerting
 server-03 → Normal
 ```
 
-### Actividades
+## Actividades
 
 1. Ejecutar la consulta.
 2. Identificar las series devueltas.
@@ -1177,11 +1177,11 @@ server-03 → Normal
 
 ## Ejemplo de sesión 1: crear una regla de disponibilidad
 
-### Objetivo
+## Objetivo
 
 Crear y probar una regla que detecte la caída de Node Exporter.
 
-### Requisitos
+## Requisitos
 
 - Grafana funcionando.
 - Prometheus configurado.
@@ -1189,13 +1189,13 @@ Crear y probar una regla que detecte la caída de Node Exporter.
 - Permisos para crear reglas.
 - Entorno de laboratorio.
 
-### Consulta
+## Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: NodeExporterDown
@@ -1204,7 +1204,7 @@ Evaluación: cada 30 segundos
 Duración: 1 minuto
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = critical
@@ -1213,7 +1213,7 @@ service = node_exporter
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = Node Exporter no disponible en {{ $labels.instance }}
@@ -1222,7 +1222,7 @@ description = El objetivo {{ $labels.instance }}
 no responde a Prometheus.
 ```
 
-### Pasos
+## Pasos
 
 1. Validar la consulta en Explore.
 2. Crear la regla.
@@ -1249,7 +1249,7 @@ sudo systemctl start node_exporter
 13. Comprobar la recuperación.
 14. Registrar los tiempos.
 
-### Registro
+## Registro
 
 ```text
 Hora de detención:
@@ -1271,11 +1271,11 @@ Observaciones:
 
 ## Ejemplo de sesión 2: crear una regla de CPU
 
-### Objetivo
+## Objetivo
 
 Detectar un uso sostenido de CPU superior al 90 %.
 
-### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -1285,7 +1285,7 @@ Detectar un uso sostenido de CPU superior al 90 %.
 )
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: HighCPUUsage
@@ -1294,7 +1294,7 @@ Evaluación: cada 1 minuto
 Duración: 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -1303,7 +1303,7 @@ resource = cpu
 environment = laboratory
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = CPU elevada en {{ $labels.instance }}
@@ -1314,7 +1314,7 @@ durante cinco minutos.
 runbook_url = https://example.com/runbooks/high-cpu
 ```
 
-### Pasos
+## Pasos
 
 1. Ejecutar la consulta en Explore.
 2. Comprobar la unidad.
@@ -1342,18 +1342,18 @@ Este comando debe utilizarse únicamente en un entorno autorizado de laboratorio
 
 ## Ejemplo de sesión 3: diagnosticar una regla que no se activa
 
-### Objetivo
+## Objetivo
 
 Investigar una regla que permanece en `Normal` aunque aparentemente se cumple la condición.
 
-### Situación
+## Situación
 
 ```text
 La CPU muestra un valor superior al 90 %,
 pero la regla HighCPUUsage no se activa.
 ```
 
-### Procedimiento
+## Procedimiento
 
 1. Ejecutar la consulta en Explore.
 2. Comprobar el valor real.
@@ -1368,7 +1368,7 @@ pero la regla HighCPUUsage no se activa.
 11. Revisar si la consulta devuelve varias series.
 12. Revisar el comportamiento ante errores.
 
-### Errores posibles
+## Errores posibles
 
 ```text
 Umbral configurado como 0.90 en lugar de 90.
@@ -1379,7 +1379,7 @@ La consulta no devuelve datos.
 La expresión utiliza una reducción incorrecta.
 ```
 
-### Registro
+## Registro
 
 ```text
 Nombre de la regla:
@@ -1411,11 +1411,11 @@ Estado final:
 
 ## Ejemplo de sesión 4: configurar una regla multidimensional
 
-### Objetivo
+## Objetivo
 
 Detectar qué instancia presenta un uso elevado de CPU.
 
-### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -1425,7 +1425,7 @@ Detectar qué instancia presenta un uso elevado de CPU.
 )
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: HighCPUUsageByInstance
@@ -1433,7 +1433,7 @@ Condición: mayor que 90
 Duración: 5 minutos
 ```
 
-### Anotaciones
+## Anotaciones
 
 ```text
 summary = CPU elevada en {{ $labels.instance }}
@@ -1442,7 +1442,7 @@ description = La instancia {{ $labels.instance }}
 supera el 90 % de uso de CPU.
 ```
 
-### Actividades
+## Actividades
 
 1. Identificar todas las instancias.
 2. Comprobar que cada serie conserva `instance`.
@@ -1456,11 +1456,11 @@ supera el 90 % de uso de CPU.
 
 ## Ejemplo de sesión 5: crear una regla de memoria
 
-### Objetivo
+## Objetivo
 
 Detectar un uso elevado de memoria durante un periodo continuado.
 
-### Consulta
+## Consulta
 
 ```promql
 100 * (
@@ -1471,7 +1471,7 @@ Detectar un uso elevado de memoria durante un periodo continuado.
 )
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: HighMemoryUsage
@@ -1480,7 +1480,7 @@ Evaluación: cada 1 minuto
 Duración: 5 minutos
 ```
 
-### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -1489,7 +1489,7 @@ resource = memory
 environment = laboratory
 ```
 
-### Actividades
+## Actividades
 
 1. Validar la consulta.
 2. Revisar el valor en porcentaje.
@@ -1504,17 +1504,17 @@ environment = laboratory
 
 ## Ejemplo de sesión 6: configurar ausencia de datos
 
-### Objetivo
+## Objetivo
 
 Observar cómo cambia una regla según la política de ausencia de datos.
 
-### Consulta
+## Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-### Pasos
+## Pasos
 
 1. Crear una regla de disponibilidad.
 2. Configurar inicialmente el comportamiento como `No data`.
@@ -1527,7 +1527,7 @@ up{job="node_exporter"}
 9. Elegir la configuración apropiada para el laboratorio.
 10. Documentar la decisión.
 
-### Registro
+## Registro
 
 ```text
 Configuración utilizada:
@@ -1547,11 +1547,11 @@ Conclusión:
 
 ## Ejemplo de sesión 7: revisar etiquetas y enrutamiento
 
-### Objetivo
+## Objetivo
 
 Comprobar que una regla contiene las etiquetas que necesita una política de notificación.
 
-### Etiquetas de la regla
+## Etiquetas de la regla
 
 ```text
 severity = critical
@@ -1559,14 +1559,14 @@ team = systems
 service = node_exporter
 ```
 
-### Coincidencia de la política
+## Coincidencia de la política
 
 ```text
 team = systems
 severity = critical
 ```
 
-### Actividades
+## Actividades
 
 1. Crear o revisar la regla.
 2. Comprobar las etiquetas.
@@ -1582,11 +1582,11 @@ severity = critical
 
 ## Ejemplo de sesión 8: crear una regla de almacenamiento
 
-### Objetivo
+## Objetivo
 
 Detectar una ocupación elevada del sistema de ficheros raíz.
 
-### Consulta
+## Consulta
 
 ```promql
 100 * (
@@ -1603,7 +1603,7 @@ Detectar una ocupación elevada del sistema de ficheros raíz.
 )
 ```
 
-### Configuración
+## Configuración
 
 ```text
 Nombre: FilesystemUsageHigh
@@ -1612,7 +1612,7 @@ Evaluación: cada 5 minutos
 Duración: 10 minutos
 ```
 
-### Actividades
+## Actividades
 
 1. Validar la consulta.
 2. Revisar la etiqueta `mountpoint`.
@@ -1626,15 +1626,15 @@ Duración: 10 minutos
 
 ## Buenas prácticas
 
-### Validar siempre las consultas
+## Validar siempre las consultas
 
 Una consulta debe funcionar correctamente antes de formar parte de una regla.
 
-### Elegir nombres descriptivos
+## Elegir nombres descriptivos
 
 El nombre debe identificar el problema y no solo la métrica.
 
-### Utilizar umbrales coherentes
+## Utilizar umbrales coherentes
 
 El umbral debe utilizar la misma unidad que el resultado de la consulta.
 
@@ -1652,27 +1652,27 @@ No confundir:
 90
 ```
 
-### Configurar una duración adecuada
+## Configurar una duración adecuada
 
 La duración debe evitar falsos positivos sin retrasar demasiado la respuesta.
 
-### Conservar las etiquetas útiles
+## Conservar las etiquetas útiles
 
 Las etiquetas como `instance`, `service` y `environment` suelen ser necesarias para identificar el origen.
 
-### Añadir contexto
+## Añadir contexto
 
 Una alerta sin descripción obliga al operador a investigar desde cero.
 
-### Añadir runbooks
+## Añadir runbooks
 
 Cuando exista un procedimiento, incluir un enlace accesible para el equipo destinatario.
 
-### Configurar explícitamente `No data`
+## Configurar explícitamente `No data`
 
 La ausencia de datos debe ser una decisión consciente, no una configuración olvidada.
 
-### Probar activación y recuperación
+## Probar activación y recuperación
 
 Una regla debe probarse en ambos sentidos:
 
@@ -1681,15 +1681,15 @@ Normal → Alerting
 Alerting → Normal
 ```
 
-### Evitar alertas demasiado sensibles
+## Evitar alertas demasiado sensibles
 
 Una regla que se activa ante cualquier fluctuación produce ruido.
 
-### Evitar alertas demasiado permisivas
+## Evitar alertas demasiado permisivas
 
 Una regla que tarda demasiado puede retrasar la respuesta.
 
-### Revisar las reglas periódicamente
+## Revisar las reglas periódicamente
 
 Analizar:
 
@@ -1701,7 +1701,7 @@ Analizar:
 - Contactos incorrectos.
 - Runbooks inexistentes.
 
-### Mantener las reglas documentadas
+## Mantener las reglas documentadas
 
 Cada regla debería tener:
 
@@ -1718,7 +1718,7 @@ Cada regla debería tener:
 
 ## Errores frecuentes
 
-### La consulta no devuelve datos
+## La consulta no devuelve datos
 
 Comprobar:
 
@@ -1729,7 +1729,7 @@ Comprobar:
 - Disponibilidad de Prometheus.
 - Existencia de la serie.
 
-### El resultado está en una unidad inesperada
+## El resultado está en una unidad inesperada
 
 Comprobar:
 
@@ -1739,7 +1739,7 @@ Comprobar:
 - Agregaciones.
 - Funciones utilizadas.
 
-### La regla no pasa de `Pending`
+## La regla no pasa de `Pending`
 
 Comprobar:
 
@@ -1750,7 +1750,7 @@ Comprobar:
 - Reinicios de la regla.
 - Cambios de etiquetas.
 
-### La regla nunca se activa
+## La regla nunca se activa
 
 Comprobar:
 
@@ -1762,7 +1762,7 @@ Comprobar:
 - Consulta.
 - Expresión o reducción.
 
-### La alerta se activa con demasiada frecuencia
+## La alerta se activa con demasiada frecuencia
 
 Comprobar:
 
@@ -1773,7 +1773,7 @@ Comprobar:
 - Varias series duplicadas.
 - Reglas duplicadas.
 
-### La notificación no identifica el recurso
+## La notificación no identifica el recurso
 
 Comprobar:
 
@@ -1782,7 +1782,7 @@ Comprobar:
 - Que no se ha aplicado una agregación que elimina `instance`.
 - Que el filtro identifica el servicio correcto.
 
-### La alerta aparece como `No data`
+## La alerta aparece como `No data`
 
 Comprobar:
 
@@ -1793,7 +1793,7 @@ Comprobar:
 - Filtros.
 - Política de ausencia de datos.
 
-### La alerta aparece como `Error`
+## La alerta aparece como `Error`
 
 Comprobar:
 
@@ -1921,19 +1921,19 @@ Capturas recomendadas:
 
 ## Práctica integradora
 
-### Objetivo
+## Objetivo
 
 Crear, probar y documentar un conjunto de reglas para un servidor de laboratorio.
 
-### Regla 1: disponibilidad
+## Regla 1: disponibilidad
 
-#### Consulta
+## Consulta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-#### Configuración
+## Configuración
 
 ```text
 Nombre: NodeExporterDown
@@ -1942,7 +1942,7 @@ Intervalo: 30 segundos
 Duración: 1 minuto
 ```
 
-#### Etiquetas
+## Etiquetas
 
 ```text
 severity = critical
@@ -1953,9 +1953,9 @@ environment = laboratory
 
 ---
 
-### Regla 2: CPU
+## Regla 2: CPU
 
-#### Consulta
+## Consulta
 
 ```promql
 100 - (
@@ -1965,7 +1965,7 @@ environment = laboratory
 )
 ```
 
-#### Configuración
+## Configuración
 
 ```text
 Nombre: HighCPUUsage
@@ -1974,7 +1974,7 @@ Intervalo: 1 minuto
 Duración: 5 minutos
 ```
 
-#### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -1985,9 +1985,9 @@ environment = laboratory
 
 ---
 
-### Regla 3: memoria
+## Regla 3: memoria
 
-#### Consulta
+## Consulta
 
 ```promql
 100 * (
@@ -1998,7 +1998,7 @@ environment = laboratory
 )
 ```
 
-#### Configuración
+## Configuración
 
 ```text
 Nombre: HighMemoryUsage
@@ -2007,7 +2007,7 @@ Intervalo: 1 minuto
 Duración: 5 minutos
 ```
 
-#### Etiquetas
+## Etiquetas
 
 ```text
 severity = warning
@@ -2018,7 +2018,7 @@ environment = laboratory
 
 ---
 
-### Actividades
+## Actividades
 
 1. Validar las tres consultas en Explore.
 2. Crear las tres reglas.
