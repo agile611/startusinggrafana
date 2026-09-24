@@ -829,4 +829,3 @@ El navegador debe mostrar la pantalla de inicio de sesión de Grafana mediante H
 18. ¿Qué reglas de firewall aplicarías para permitir acceso únicamente a una red concreta?
 19. ¿Qué información consultarías en los logs si Grafana no inicia?
 20. Describe el procedimiento completo para verificar que un usuario remoto puede acceder a Grafana.
-```

@@ -868,4 +868,3 @@ En este escenario:
 18. ¿Qué consulta permite detectar objetivos que no responden?
 19. ¿Por qué una métrica basada en un contador puede ser útil para detectar actividad entre muestras?
 20. ¿Qué criterios utilizarías para elegir el intervalo de muestreo de una aplicación crítica?
-```

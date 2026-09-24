@@ -880,4 +880,3 @@ La elección de la unidad es importante. Una consulta que devuelve bytes no debe
 18. ¿Por qué es importante configurar correctamente la unidad de un panel?
 19. ¿Qué problema puede aparecer si se conservan durante mucho tiempo métricas de alta resolución?
 20. ¿Qué relación existe entre una métrica, sus etiquetas y la cardinalidad?
-```

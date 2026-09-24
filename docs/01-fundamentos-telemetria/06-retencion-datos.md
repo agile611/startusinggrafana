@@ -967,4 +967,3 @@ Antes de ampliar la retención:
 18. ¿Por qué es recomendable configurar una alerta sobre el espacio disponible?
 19. ¿Qué estrategia utilizarías para conservar datos recientes y datos históricos?
 20. ¿Qué periodo de retención elegirías para un laboratorio y qué factores tendrías en cuenta?
-```

@@ -1083,4 +1083,3 @@ Al acceder a Grafana, la fuente de datos debería aparecer configurada automáti
 18. ¿Qué unidad utilizarías para una consulta que devuelve un porcentaje?
 19. ¿Por qué es útil utilizar nombres descriptivos para las fuentes de datos?
 20. ¿Qué ventajas proporciona gestionar Grafana mediante configuración como código?
-```

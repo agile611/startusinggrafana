@@ -1548,4 +1548,3 @@ Antes de finalizar, comprueba:
 18. ¿Qué elementos revisarías antes de duplicar un panel?
 19. ¿Cómo organizarías un dashboard de infraestructura Linux?
 20. ¿Qué pasos seguirías para validar un dashboard antes de ponerlo a disposición de otros usuarios?
-```

@@ -1401,4 +1401,3 @@ laboratorio-fundamentos-telemetria/
 23. ¿Qué diferencia existe entre la fuente de datos de Grafana y un panel?
 24. ¿Qué precauciones deben tomarse al detener un exporter para probar una alerta?
 25. Describe el recorrido de una métrica desde Node Exporter hasta un panel de Grafana.
-```

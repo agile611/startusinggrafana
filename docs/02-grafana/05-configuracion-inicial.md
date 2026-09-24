@@ -978,4 +978,3 @@ Este procedimiento permite validar que los permisos siguen el principio de míni
 18. ¿Qué canales pueden utilizarse para enviar notificaciones?
 19. ¿Qué comprobarías si Prometheus aparece configurado, pero la prueba de conexión falla?
 20. ¿Qué pasos seguirías para validar que la configuración inicial de Grafana está completa?
-```

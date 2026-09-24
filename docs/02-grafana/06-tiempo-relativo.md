@@ -1044,4 +1044,3 @@ El rango temporal debe ser suficientemente amplio para detectar tendencias, pero
 18. ¿Qué elementos deben mantenerse iguales al comparar dos periodos?
 19. ¿Qué rango usarías para analizar el periodo comprendido entre hace dos horas y hace una hora?
 20. ¿Qué comprobaciones realizarías si un panel con desplazamiento no muestra datos?
-```

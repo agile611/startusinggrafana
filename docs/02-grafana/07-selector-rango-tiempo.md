@@ -955,4 +955,3 @@ sudo journalctl -u grafana-server -n 50 --no-pager
 18. ¿Qué información debe documentarse al analizar un incidente?
 19. ¿Por qué un panel puede necesitar un rango diferente al del dashboard?
 20. ¿Qué pasos seguirías para diagnosticar un panel sin datos?
-```

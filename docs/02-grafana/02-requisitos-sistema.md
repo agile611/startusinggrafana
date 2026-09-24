@@ -955,4 +955,3 @@ La configuración mínima puede funcionar, pero disponer de recursos adicionales
 18. ¿Qué función puede cumplir un proxy inverso?
 19. ¿Qué ventajas aporta utilizar HTTPS?
 20. ¿Qué comprobaciones realizarías antes de instalar Grafana?
-```

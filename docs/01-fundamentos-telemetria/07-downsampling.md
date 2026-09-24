@@ -1075,4 +1075,3 @@ La función `clamp_min` evita que el denominador sea inferior a uno.
 18. ¿Qué diferencia existe entre una ventana de consulta y la retención de datos?
 19. ¿Puede el *downsampling* recuperar un pico que nunca fue registrado?
 20. ¿Qué estrategia de *downsampling* aplicarías a un entorno de laboratorio?
-```
