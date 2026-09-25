@@ -1298,13 +1298,13 @@ cd /tmp
 Descargar Node Exporter:
 
 ```bash
-wget https://github.com/prometheus/node_exporter/releases/latest/download/node_exporter-linux-amd64.tar.gz
+wget https://github.com/prometheus/node_exporter/releases/download/v1.12.1/node_exporter-1.12.1.linux-amd64.tar.gz
 ```
 
 Extraer el archivo:
 
 ```bash
-tar xvf node_exporter-linux-amd64.tar.gz
+tar xvf node_exporter-1.12.1.linux-amd64.tar.gz
 ```
 
 Copiar el binario:
