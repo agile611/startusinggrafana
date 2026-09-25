@@ -36,53 +36,50 @@
     }
   ];
 
-  function getSelectedModule() {
-    const currentPath = window.location.pathname;
+  function getModuleTitle() {
+    const path = window.location.pathname;
 
-    return modules.find(function (module) {
-      return currentPath.indexOf("/" + module.path + "/") !== -1 ||
-             currentPath.endsWith("/" + module.path);
+    const selectedModule = modules.find(function (module) {
+      return path.includes("/" + module.path + "/");
     });
+
+    return selectedModule ? selectedModule.title : "Curso de Grafana";
   }
 
   function updateSidebarTitle() {
-    const selectedModule = getSelectedModule();
+    const title = getModuleTitle();
 
-    if (!selectedModule) {
+    /*
+     * En Material for MkDocs, el primer .md-nav__title
+     * corresponde normalmente a la navegación lateral.
+     */
+    const sidebarTitles = document.querySelectorAll(".md-sidebar--primary .md-nav__title");
+
+    if (sidebarTitles.length > 0) {
+      sidebarTitles[0].textContent = title;
       return;
     }
 
-    const selectors = [
-      ".bs-sidebar .navbar-brand",
-      ".bs-sidebar .navbar-header .navbar-brand",
-      ".bs-sidebar a.navbar-brand",
-      ".bs-sidebar div.navbar-brand"
-    ];
+    /*
+     * Compatibilidad con páginas o versiones donde el título
+     * se encuentra directamente dentro del menú principal.
+     */
+    const primaryNavigation = document.querySelector(".md-sidebar--primary");
 
-    let sidebarTitle = null;
+    if (primaryNavigation) {
+      const fallbackTitle = primaryNavigation.querySelector(".md-nav__title");
 
-    for (const selector of selectors) {
-      sidebarTitle = document.querySelector(selector);
-
-      if (sidebarTitle) {
-        break;
+      if (fallbackTitle) {
+        fallbackTitle.textContent = title;
       }
     }
-
-    if (!sidebarTitle) {
-      console.warn("No se encontró el título de la columna lateral.");
-      return;
-    }
-
-    sidebarTitle.textContent = selectedModule.title;
   }
 
   function initialize() {
     updateSidebarTitle();
 
     /*
-     * Algunos temas terminan de construir la barra lateral
-     * después de cargar el documento.
+     * Material puede actualizar la navegación después de cargar la página.
      */
     setTimeout(updateSidebarTitle, 100);
     setTimeout(updateSidebarTitle, 500);

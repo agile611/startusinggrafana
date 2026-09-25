@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: github-pages
   cancel-in-progress: true
 
 jobs:
@@ -37,7 +37,6 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Configurar GitHub Pages
-        id: pages
         uses: actions/configure-pages@v5
 
       - name: Construir documentación
@@ -47,8 +46,9 @@ jobs:
             --site-dir site
 
       - name: Comprobar sitio generado
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
 
           test -f site/index.html
           test -f site/sitemap.xml
@@ -56,14 +56,10 @@ jobs:
           test -f site/assets/css/custom.css
           test -f site/assets/js/custom.js
 
-          grep -R "custom.css" site/*.html site/**/*.html
-          ! grep -R "assets/css/style.css" site/*.html site/**/*.html
+          grep -R "custom.css" site
+          ! grep -R "assets/css/style.css" site
 
           echo "Sitio generado correctamente."
-          echo
-          echo "Referencia CSS encontrada:"
-          grep -R "custom.css" site/*.html site/**/*.html | head -20
-
           echo
           echo "Archivos principales:"
           find site -maxdepth 3 -type f | sort | head -100
@@ -71,7 +67,7 @@ jobs:
       - name: Subir artefacto de GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: site
 
   deploy:
     name: Publicar documentación
