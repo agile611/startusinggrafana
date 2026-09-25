@@ -1086,6 +1086,7 @@ Crear un fichero:
 
 ```bash
 cat > ~/laboratorio-grafana/configuracion/ejemplo.yml <<'EOF'
+---
 global:
   scrape_interval: 15s
 
