@@ -1368,6 +1368,10 @@ Consultar métricas:
 ```bash
 curl http://localhost:9100/metrics
 ```
+o
+```bash
+curl http://IP_DE_TU_HOST:9100/metrics
+```
 
 ### Filtrar métricas concretas
 
@@ -1419,71 +1423,331 @@ node_filesystem_size_bytes{device="/dev/sda2",fstype="ext4",mountpoint="/"} 4.29
 4. Explica qué representa `node_memory_MemTotal_bytes`.
 5. Explica por qué el endpoint `/metrics` es importante.
 
-## Sesión 12: instalar Prometheus
+## Sesión 12: instalar Prometheus y Node Exporter en Ubuntu
 
 ### Objetivo
 
-Instalar Prometheus y preparar su configuración.
+Instalar Prometheus y Node Exporter mediante los paquetes disponibles en Ubuntu, comprobar los servicios y verificar que las cuentas de servicio se crean correctamente.
 
-Crear un usuario de servicio:
+> **Importante:** no ejecutes `useradd prometheus` antes de instalar el paquete. Ubuntu crea automáticamente el usuario y el grupo `prometheus`.
 
-```bash
-sudo useradd \
-  --no-create-home \
-  --shell /usr/sbin/nologin \
-  prometheus
-```
-
-Crear directorios básicos:
+### Comprobar la versión de Ubuntu
 
 ```bash
-sudo mkdir -p /etc/prometheus
-sudo mkdir -p /var/lib/prometheus
+lsb_release -a
 ```
 
-Asignar propietarios:
+También puedes utilizar:
 
 ```bash
-sudo chown prometheus:prometheus /var/lib/prometheus
+cat /etc/os-release
 ```
 
-La instalación concreta puede realizarse mediante los paquetes disponibles en el entorno de laboratorio o mediante el procedimiento definido por el instructor.
+### Actualizar el índice de paquetes
 
-Comprobar que el binario está disponible:
+```bash
+sudo apt update
+```
+
+### Instalar Prometheus y Node Exporter
+
+```bash
+sudo apt install -y \
+  prometheus \
+  prometheus-node-exporter
+```
+
+Durante la instalación se crearán, normalmente, los servicios:
+
+```text
+prometheus.service
+prometheus-node-exporter.service
+```
+
+También se crearán las cuentas de servicio correspondientes.
+
+### Comprobar los usuarios de servicio
+
+```bash
+getent passwd prometheus
+```
+
+```bash
+getent passwd prometheus-node-exporter
+```
+
+Comprobar el usuario de Prometheus:
+
+```bash
+id prometheus
+```
+
+Comprobar el usuario de Node Exporter:
+
+```bash
+id prometheus-node-exporter
+```
+
+Los usuarios de servicio deben tener:
+
+- Un identificador de usuario del sistema.
+- Un shell no interactivo o deshabilitado.
+- Ningún uso previsto para iniciar sesión manualmente.
+
+### Comprobar los paquetes instalados
+
+```bash
+dpkg -l | grep -E \
+  'prometheus|node-exporter'
+```
+
+También puedes comprobar si existen paquetes pendientes de configurar:
+
+```bash
+sudo dpkg --audit
+```
+
+Si la instalación ha quedado interrumpida, repara los paquetes con:
+
+```bash
+sudo dpkg --configure -a
+```
+
+Después:
+
+```bash
+sudo apt-get -f install
+```
+
+### Comprobar los servicios
+
+```bash
+systemctl status prometheus
+```
+
+```bash
+systemctl status prometheus-node-exporter
+```
+
+Comprobar únicamente si están activos:
+
+```bash
+systemctl is-active prometheus
+```
+
+```bash
+systemctl is-active prometheus-node-exporter
+```
+
+### Activar los servicios al arrancar
+
+```bash
+sudo systemctl enable --now prometheus
+```
+
+```bash
+sudo systemctl enable --now prometheus-node-exporter
+```
+
+### Comprobar los puertos
+
+Prometheus utiliza normalmente el puerto `9090` y Node Exporter el puerto `9100`.
+
+```bash
+sudo ss -lntp | grep -E ':9090|:9100'
+```
+
+Resultado esperado, de forma aproximada:
+
+```text
+LISTEN ... 0.0.0.0:9090 ...
+LISTEN ... 0.0.0.0:9100 ...
+```
+
+La dirección exacta puede variar según la configuración del sistema.
+
+### Comprobar la ubicación de los binarios
 
 ```bash
 command -v prometheus
 ```
 
-Consultar la versión:
+```bash
+command -v promtool
+```
+
+```bash
+command -v node_exporter
+```
+
+### Consultar las versiones
 
 ```bash
 prometheus --version
 ```
 
-Consultar la ruta de configuración utilizada por el servicio:
+```bash
+promtool --version
+```
+
+```bash
+node_exporter --version
+```
+
+### Consultar la configuración del servicio
 
 ```bash
 sudo systemctl cat prometheus
 ```
 
+También puedes consultar los parámetros de inicio:
+
+```bash
+systemctl show prometheus \
+  -p ExecStart
+```
+
+Busca especialmente:
+
+```text
+--config.file
+--storage.tsdb.path
+```
+
+En una instalación habitual de Ubuntu, las rutas suelen ser:
+
+```text
+Configuración: /etc/prometheus/prometheus.yml
+Datos:         /var/lib/prometheus
+```
+
+### Comprobar directorios importantes
+
+```bash
+sudo ls -ld \
+  /etc/prometheus \
+  /var/lib/prometheus
+```
+
+Comprobar el propietario del directorio de datos:
+
+```bash
+sudo stat -c '%U:%G %n' \
+  /var/lib/prometheus
+```
+
+El propietario habitual debe ser:
+
+```text
+prometheus:prometheus
+```
+
+### Comprobar la interfaz HTTP de Prometheus
+
+```bash
+curl -I http://localhost:9090
+```
+
+### Comprobar la salud de Prometheus
+
+```bash
+curl -s http://localhost:9090/-/healthy
+```
+
+Resultado esperado:
+
+```text
+Prometheus is Healthy.
+```
+
+### Comprobar Node Exporter
+
+```bash
+curl -s http://localhost:9100/metrics \
+  | head
+```
+
+La respuesta debe contener métricas con nombres similares a:
+
+```text
+node_uname_info
+node_cpu_seconds_total
+node_memory_MemTotal_bytes
+```
+
+### Consultar los logs
+
+Logs de Prometheus:
+
+```bash
+sudo journalctl -u prometheus \
+  -n 100 \
+  --no-pager
+```
+
+Logs de Node Exporter:
+
+```bash
+sudo journalctl -u prometheus-node-exporter \
+  -n 100 \
+  --no-pager
+```
+
+### Actividades
+
+1. Identifica el paquete responsable del servidor Prometheus.
+2. Identifica el paquete responsable de Node Exporter.
+3. Comprueba qué usuario ejecuta cada servicio.
+4. Comprueba los puertos `9090` y `9100`.
+5. Consulta la versión de Prometheus.
+6. Consulta la ruta del fichero de configuración.
+7. Consulta los logs de ambos servicios.
+8. Explica por qué no debe crearse manualmente el usuario `prometheus` antes de instalar el paquete.
+
+---
+
 ## Sesión 13: configurar Prometheus para recopilar métricas
 
 ### Objetivo
 
-Configurar Prometheus para realizar *scraping* de Node Exporter.
+Configurar Prometheus para recopilar métricas del propio Prometheus y de Node Exporter.
 
-Editar el fichero:
+### Crear una copia de seguridad
+
+Antes de modificar la configuración original:
+
+```bash
+sudo cp \
+  /etc/prometheus/prometheus.yml \
+  /etc/prometheus/prometheus.yml.bak
+```
+
+Comprobar la copia:
+
+```bash
+sudo ls -l \
+  /etc/prometheus/prometheus.yml*
+```
+
+### Consultar la configuración actual
+
+```bash
+sudo cat /etc/prometheus/prometheus.yml
+```
+
+### Editar el fichero
 
 ```bash
 sudo nano /etc/prometheus/prometheus.yml
 ```
 
-Configuración básica:
+Utiliza una configuración como esta:
 
 ```yaml
+---
 global:
   scrape_interval: 15s
+  evaluation_interval: 15s
 
 scrape_configs:
   - job_name: prometheus
@@ -1497,10 +1761,37 @@ scrape_configs:
           - localhost:9100
 ```
 
-Ejemplo con etiquetas:
+La línea inicial:
 
 ```yaml
+---
+```
+
+indica explícitamente el inicio del documento YAML y evita el aviso habitual de `yamllint`:
+
+```text
+missing document start "---"
+```
+
+### Configuración con etiquetas
+
+También puedes añadir etiquetas al target de Node Exporter:
+
+```yaml
+---
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
 scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+        labels:
+          environment: laboratorio
+          role: monitorizacion
+
   - job_name: node_exporter
     static_configs:
       - targets:
@@ -1510,44 +1801,562 @@ scrape_configs:
           role: servidor
 ```
 
-Reiniciar Prometheus:
+Las etiquetas estarán disponibles en las consultas PromQL.
+
+Ejemplo:
+
+```promql
+up{
+  job="node_exporter"
+}
+```
+
+### Comprobar la sintaxis YAML
+
+Si `yamllint` no está instalado:
+
+```bash
+sudo apt install -y yamllint
+```
+
+Validar el fichero:
+
+```bash
+yamllint /etc/prometheus/prometheus.yml
+```
+
+También puedes validar el fichero de práctica que tengas en tu directorio de trabajo:
+
+```bash
+yamllint \
+  ~/laboratorio-grafana/configuracion/ejemplo.yml
+```
+
+Una configuración correcta no debería mostrar errores. Los avisos dependerán de las reglas configuradas en `yamllint`.
+
+### Validar la configuración con `promtool`
+
+La validación más importante para Prometheus es:
+
+```bash
+promtool check config \
+  /etc/prometheus/prometheus.yml
+```
+
+Resultado esperado, aproximadamente:
+
+```text
+Checking /etc/prometheus/prometheus.yml
+ SUCCESS: 0 rule files found
+```
+
+`yamllint` comprueba la sintaxis YAML general, mientras que `promtool` comprueba que el contenido sea válido para Prometheus.
+
+### Comprobar la configuración con el usuario del servicio
+
+Puedes verificar que el fichero sea legible:
+
+```bash
+sudo -u prometheus test -r \
+  /etc/prometheus/prometheus.yml \
+  && echo "Configuración legible" \
+  || echo "Configuración no legible"
+```
+
+### Reiniciar Prometheus
 
 ```bash
 sudo systemctl restart prometheus
 ```
 
-Comprobar el estado:
+### Comprobar el estado
 
 ```bash
-systemctl status prometheus
+sudo systemctl status prometheus
 ```
 
-Comprobar si está activo:
+### Comprobar si está activo
 
 ```bash
 systemctl is-active prometheus
 ```
 
-Probar la interfaz:
+Resultado esperado:
+
+```text
+active
+```
+
+### Consultar los últimos logs
+
+```bash
+sudo journalctl -u prometheus \
+  -n 100 \
+  --no-pager
+```
+
+Para observar los logs en tiempo real:
+
+```bash
+sudo journalctl -u prometheus \
+  -f
+```
+
+Pulsa:
+
+```text
+Ctrl + C
+```
+
+para salir.
+
+### Probar la interfaz web
 
 ```bash
 curl -I http://localhost:9090
 ```
 
-Consultar la salud:
+### Consultar la salud
 
 ```bash
-curl http://localhost:9090/-/healthy
+curl -s http://localhost:9090/-/healthy
+```
+
+Resultado esperado:
+
+```text
+Prometheus is Healthy.
+```
+
+### Consultar la API de consultas
+
+Ejecuta la consulta `up`:
+
+```bash
+curl -s http://localhost:9090/api/v1/query \
+  --data-urlencode 'query=up'
+```
+
+Si tienes instalado `jq`, puedes mostrar el resultado con formato legible:
+
+```bash
+sudo apt install -y jq
+```
+
+```bash
+curl -s http://localhost:9090/api/v1/query \
+  --data-urlencode 'query=up' \
+  | jq
+```
+
+### Consultar los targets
+
+```bash
+curl -s http://localhost:9090/api/v1/targets \
+  | jq
+```
+
+También puedes abrir en el navegador:
+
+```text
+http://localhost:9090/targets
+```
+
+Los targets deberían aparecer con estado:
+
+```text
+UP
+```
+
+### Consultar los valores de `up`
+
+```bash
+curl -s http://localhost:9090/api/v1/query \
+  --data-urlencode 'query=up' \
+  | jq '.data.result[] | {
+      metric: .metric,
+      value: .value
+    }'
+```
+
+Una respuesta simplificada puede incluir:
+
+```text
+job: prometheus
+value: 1
+
+job: node_exporter
+value: 1
+```
+
+### Consultar mediante PromQL
+
+Desde la interfaz web de Prometheus:
+
+```text
+http://localhost:9090/graph
+```
+
+Ejecuta:
+
+```promql
+up
+```
+
+Después:
+
+```promql
+up{
+  job="prometheus"
+}
+```
+
+Y finalmente:
+
+```promql
+up{
+  job="node_exporter"
+}
+```
+
+### Interpretar `up = 1`
+
+```text
+up = 1
+```
+
+Significa que Prometheus ha podido realizar correctamente el scraping del target.
+
+### Interpretar `up = 0`
+
+```text
+up = 0
+```
+
+Significa que Prometheus conoce el target, pero no ha podido recopilar sus métricas.
+
+Posibles causas:
+
+- Servicio detenido.
+- Puerto incorrecto.
+- Firewall.
+- URL incorrecta.
+- Error de red.
+- Node Exporter no está escuchando.
+- Problema de permisos o configuración.
+
+### Probar Node Exporter directamente
+
+```bash
+curl -I http://localhost:9100/metrics
+```
+
+Consultar algunas métricas:
+
+```bash
+curl -s http://localhost:9100/metrics \
+  | grep -E \
+  'node_uname_info|node_memory_MemTotal_bytes|node_cpu_seconds_total' \
+  | head
+```
+
+### Consultar una métrica del sistema
+
+Desde Prometheus:
+
+```promql
+node_load1
+```
+
+Consultar memoria total:
+
+```promql
+node_memory_MemTotal_bytes
+```
+
+Consultar información del sistema:
+
+```promql
+node_uname_info
+```
+
+### Configurar una dirección remota
+
+Si Node Exporter está en otro servidor, no utilices:
+
+```yaml
+- targets:
+    - localhost:9100
+```
+
+Utiliza la dirección real:
+
+```yaml
+- targets:
+    - 192.168.1.30:9100
+```
+
+Ejemplo:
+
+```yaml
+---
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: node_exporter
+    static_configs:
+      - targets:
+          - 192.168.1.30:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+```
+
+Desde el servidor Prometheus, prueba primero la conectividad:
+
+```bash
+curl -I http://192.168.1.30:9100/metrics
+```
+
+Después valida y reinicia:
+
+```bash
+promtool check config \
+  /etc/prometheus/prometheus.yml
+```
+
+```bash
+sudo systemctl restart prometheus
+```
+
+### Problemas habituales
+
+#### El servicio no arranca
+
+Consulta:
+
+```bash
+sudo systemctl status prometheus
+```
+
+```bash
+sudo journalctl -u prometheus \
+  -n 100 \
+  --no-pager
+```
+
+Valida la configuración:
+
+```bash
+promtool check config \
+  /etc/prometheus/prometheus.yml
+```
+
+#### Error de YAML
+
+Comprueba:
+
+- Sangría.
+- Espacios en lugar de tabuladores.
+- Dos puntos.
+- Guiones.
+- Comillas.
+- Nombres de propiedades.
+- Inicio del documento `---`.
+
+Ejemplo correcto:
+
+```yaml
+scrape_configs:
+  - job_name: node_exporter
+    static_configs:
+      - targets:
+          - localhost:9100
+```
+
+#### El target aparece como `DOWN`
+
+Comprueba Node Exporter:
+
+```bash
+systemctl is-active prometheus-node-exporter
+```
+
+Comprueba el puerto:
+
+```bash
+sudo ss -lntp | grep ':9100'
+```
+
+Prueba directamente:
+
+```bash
+curl -I http://localhost:9100/metrics
+```
+
+Consulta los detalles de los targets:
+
+```bash
+curl -s http://localhost:9090/api/v1/targets \
+  | jq '.data.activeTargets[] | {
+      job: .labels.job,
+      instance: .labels.instance,
+      health: .health,
+      lastError: .lastError
+    }'
+```
+
+#### El target no aparece
+
+Comprueba:
+
+- Que esté dentro de `scrape_configs`.
+- Que la configuración guardada sea la que utiliza el servicio.
+- Que Prometheus se haya reiniciado.
+- Que `promtool` no muestre errores.
+- Que no haya otro fichero de configuración activo.
+
+Consulta los parámetros del servicio:
+
+```bash
+systemctl show prometheus \
+  -p ExecStart
+```
+
+#### `localhost` apunta al equipo equivocado
+
+Si Prometheus y Node Exporter están en equipos diferentes, `localhost` apunta al servidor donde se ejecuta Prometheus.
+
+Ejemplo:
+
+```text
+Prometheus:    192.168.1.20
+Node Exporter: 192.168.1.30
+```
+
+Configuración incorrecta:
+
+```yaml
+targets:
+  - localhost:9100
+```
+
+Configuración correcta:
+
+```yaml
+targets:
+  - 192.168.1.30:9100
+```
+
+### Restaurar la configuración original
+
+Si necesitas volver a la copia de seguridad:
+
+```bash
+sudo cp \
+  /etc/prometheus/prometheus.yml.bak \
+  /etc/prometheus/prometheus.yml
+```
+
+Valida:
+
+```bash
+promtool check config \
+  /etc/prometheus/prometheus.yml
+```
+
+Reinicia:
+
+```bash
+sudo systemctl restart prometheus
 ```
 
 ### Actividades
 
-1. Añade Node Exporter como objetivo.
-2. Comprueba la sintaxis YAML.
-3. Reinicia Prometheus.
-4. Comprueba que el servicio está activo.
-5. Consulta los objetivos.
-6. Explica la diferencia entre `up = 1` y `up = 0`.
+1. Instala Prometheus mediante `apt`.
+2. Instala Node Exporter mediante `apt`.
+3. Comprueba los usuarios de servicio creados.
+4. Consulta la configuración actual de Prometheus.
+5. Crea una copia de seguridad.
+6. Configura los jobs `prometheus` y `node_exporter`.
+7. Valida el YAML con `yamllint`.
+8. Valida la configuración con `promtool`.
+9. Reinicia Prometheus.
+10. Comprueba el estado del servicio.
+11. Consulta la página `/targets`.
+12. Ejecuta la consulta `up`.
+13. Explica la diferencia entre `up = 1` y `up = 0`.
+14. Detén Node Exporter y observa el cambio.
+15. Inicia Node Exporter y comprueba la recuperación.
+16. Consulta `node_load1`.
+17. Documenta el resultado.
+
+## Nota sobre una instalación interrumpida
+
+Si anteriormente ejecutaste:
+
+```bash
+sudo useradd \
+  --no-create-home \
+  --shell /usr/sbin/nologin \
+  prometheus
+```
+
+y posteriormente `apt install prometheus` muestra:
+
+```text
+The user `prometheus' already exists, but is not a system user
+```
+
+no repitas la instalación sin corregir primero la cuenta.
+
+En un laboratorio sin datos importantes, puedes comprobar y corregir el usuario siguiendo estos pasos:
+
+```bash
+getent passwd prometheus
+```
+
+```bash
+id prometheus
+```
+
+Si confirmas que la cuenta fue creada únicamente para la práctica y no contiene datos necesarios:
+
+```bash
+sudo systemctl stop prometheus 2>/dev/null || true
+sudo userdel prometheus
+```
+
+Si existe un grupo independiente:
+
+```bash
+getent group prometheus
+```
+
+```bash
+sudo groupdel prometheus
+```
+
+Después repara la instalación:
+
+```bash
+sudo dpkg --configure -a
+```
+
+```bash
+sudo apt-get -f install
+```
+
+Finalmente:
+
+```bash
+sudo apt install --reinstall prometheus
+```
+
+En producción, **no elimines la cuenta sin revisar antes sus procesos, archivos, UID, GID y permisos**.
+
 
 ## Sesión 14: comprobar los objetivos de Prometheus
 
