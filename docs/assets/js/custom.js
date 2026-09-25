@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
+  "use strict";
+
   const modules = [
     {
       path: "00-el-curso",
@@ -34,31 +36,61 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   ];
 
-  const currentPath = window.location.pathname;
+  function getSelectedModule() {
+    const currentPath = window.location.pathname;
 
-  const selectedModule = modules.find(function (module) {
-    return currentPath.includes("/" + module.path + "/");
-  });
-
-  if (!selectedModule) {
-    return;
+    return modules.find(function (module) {
+      return currentPath.indexOf("/" + module.path + "/") !== -1 ||
+             currentPath.endsWith("/" + module.path);
+    });
   }
 
-  /*
-   * Selector utilizado por el tema MkDocs clásico.
-   * Se incluyen varias alternativas para facilitar la compatibilidad
-   * con distintas versiones o temas derivados.
-   */
-  const sidebarTitle = document.querySelector(
-    ".bs-sidebar .navbar-brand, " +
-    ".bs-sidebar h1, " +
-    ".sidebar .navbar-brand, " +
-    ".sidebar h1, " +
-    "aside .navbar-brand, " +
-    "aside h1"
-  );
+  function updateSidebarTitle() {
+    const selectedModule = getSelectedModule();
 
-  if (sidebarTitle) {
+    if (!selectedModule) {
+      return;
+    }
+
+    const selectors = [
+      ".bs-sidebar .navbar-brand",
+      ".bs-sidebar .navbar-header .navbar-brand",
+      ".bs-sidebar a.navbar-brand",
+      ".bs-sidebar div.navbar-brand"
+    ];
+
+    let sidebarTitle = null;
+
+    for (const selector of selectors) {
+      sidebarTitle = document.querySelector(selector);
+
+      if (sidebarTitle) {
+        break;
+      }
+    }
+
+    if (!sidebarTitle) {
+      console.warn("No se encontró el título de la columna lateral.");
+      return;
+    }
+
     sidebarTitle.textContent = selectedModule.title;
   }
-});
+
+  function initialize() {
+    updateSidebarTitle();
+
+    /*
+     * Algunos temas terminan de construir la barra lateral
+     * después de cargar el documento.
+     */
+    setTimeout(updateSidebarTitle, 100);
+    setTimeout(updateSidebarTitle, 500);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialize);
+  } else {
+    initialize();
+  }
+})();
