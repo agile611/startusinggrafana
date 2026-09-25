@@ -186,18 +186,18 @@ Utiliza esta página cuando existan problemas durante:
 
 [Resolver problemas de instalación](resolucion-problemas/01-instalacion.md)
 
-### Node Exporter
+### Acceso a Grafana
 
 Utiliza esta página cuando:
 
-- El servicio no arranca.
-- El puerto `9100` no está disponible.
-- El endpoint `/metrics` no responde.
-- Prometheus muestra el target como `DOWN`.
-- Faltan métricas del sistema.
-- El usuario de servicio tiene permisos incorrectos.
+- Grafana no responde.
+- El puerto `3000` no está disponible.
+- La interfaz muestra un error.
+- El servicio está detenido.
+- El navegador no puede acceder al servidor.
+- Existen problemas de red o cortafuegos.
 
-[Resolver problemas de Node Exporter](resolucion-problemas/04-node-exporter.md)
+[Resolver problemas de acceso a Grafana](resolucion-problemas/02-acceso-grafana.md)
 
 ### Prometheus
 
@@ -213,18 +213,18 @@ Utiliza esta página cuando:
 
 [Resolver problemas de Prometheus](resolucion-problemas/03-prometheus.md)
 
-### Acceso a Grafana
+### Node Exporter
 
 Utiliza esta página cuando:
 
-- Grafana no responde.
-- El puerto `3000` no está disponible.
-- La interfaz muestra un error.
-- El servicio está detenido.
-- El navegador no puede acceder al servidor.
-- Existen problemas de red o cortafuegos.
+- El servicio no arranca.
+- El puerto `9100` no está disponible.
+- El endpoint `/metrics` no responde.
+- Prometheus muestra el target como `DOWN`.
+- Faltan métricas del sistema.
+- El usuario de servicio tiene permisos incorrectos.
 
-[Resolver problemas de acceso a Grafana](resolucion-problemas/02-acceso-grafana.md)
+[Resolver problemas de Node Exporter](resolucion-problemas/04-node-exporter.md)
 
 ### Fuentes de datos
 
@@ -314,7 +314,7 @@ Documentar la solución
 
 ## Comprobaciones iniciales
 
-Antes de analizar un problema específico, ejecutar las comprobaciones básicas.
+Antes de analizar un problema específico, ejecuta las comprobaciones básicas.
 
 ### Comprobar el sistema
 
@@ -507,7 +507,7 @@ Durante el diagnóstico:
 - No compartas contraseñas.
 - No incluyas tokens en capturas.
 - No publiques claves API.
-- Revisa las URLs antes de compartirlas.
+- Revisa las URL antes de compartirlas.
 - Utiliza usuarios de servicio.
 - Evita ejecutar aplicaciones como `root`.
 - Documenta los cambios temporales.
@@ -520,18 +520,18 @@ Al finalizar las prácticas, el entorno debería cumplir estas condiciones:
 ```text
 Grafana:
     activo
-    puerto 3000 disponible
+    escuchando en el puerto 3000
     interfaz accesible
 
 Prometheus:
     activo
-    puerto 9090 disponible
+    escuchando en el puerto 9090
     API accesible
     configuración válida
 
 Node Exporter:
     activo
-    puerto 9100 disponible
+    escuchando en el puerto 9100
     endpoint /metrics accesible
 
 Prometheus:
@@ -546,14 +546,58 @@ Grafana:
 
 ### Curso
 
+- [Introducción al curso](../00-el-curso/00-index.md)
 - [Objetivos del curso](../00-el-curso/01-objetivos.md)
 - [Requisitos previos](../00-el-curso/02-requisitos-previos.md)
 - [Entorno de laboratorio](../00-el-curso/03-entorno-laboratorio.md)
 
-### Prácticas
+### Fundamentos de telemetría
 
-- [Práctica 3 - Consultas PromQL](../03-promql/index.md)
-- [Práctica 4 - Dashboard operativo](../04-dashboard/index.md)
-- [Práctica 5 - Alertas](../05-alertas/index.md)
-- [Entregables](../06-entregables/index.md)
-- [Criterios de evaluación](../06-entregables/criterios-evaluacion.md)
+- [Introducción a la telemetría](../01-fundamentos-telemetria/01-index.md)
+- [Modelo push y pull](../01-fundamentos-telemetria/03-modelo-push-pull.md)
+- [Series temporales](../01-fundamentos-telemetria/04-series-temporales.md)
+
+### Grafana
+
+- [Introducción a Grafana](../02-grafana/01-index.md)
+- [Instalación de Grafana](../02-grafana/03-instalacion-ubuntu.md)
+- [Acceso a Grafana](../02-grafana/04-acceso-grafana.md)
+- [Dashboards, filas y paneles](../02-grafana/08-dashboards-filas-paneles.md)
+
+### Prometheus y fuentes de datos
+
+- [Introducción a Prometheus](../03-prometheus-fuentes-datos/01-index.md)
+- [Instalación de Prometheus](../03-prometheus-fuentes-datos/04-instalacion-prometheus.md)
+- [Instalación de Node Exporter](../03-prometheus-fuentes-datos/06-instalacion-node-exporter.md)
+- [Configuración del scraping](../03-prometheus-fuentes-datos/07-configuracion-scrape.md)
+- [Consultas PromQL](../03-prometheus-fuentes-datos/08-consultas-promql.md)
+- [Añadir una fuente de datos](../03-prometheus-fuentes-datos/09-anadir-fuente-datos.md)
+
+### Dashboards y visualización
+
+- [Introducción a los dashboards](../04-dashboards-visualizacion/01-index.md)
+- [Conceptos de dashboards](../04-dashboards-visualizacion/02-conceptos-dashboards.md)
+- [Transformaciones](../04-dashboards-visualizacion/12-transformaciones.md)
+- [Laboratorio de dashboards](../04-dashboards-visualizacion/14-laboratorio.md)
+
+### Anotaciones y alertas
+
+- [Introducción a las alertas](../05-anotaciones-alertas/01-index.md)
+- [Reglas de alerta](../05-anotaciones-alertas/04-reglas-alerta.md)
+- [Contactos de notificación](../05-anotaciones-alertas/07-contactos-notificacion.md)
+- [Políticas de notificación](../05-anotaciones-alertas/10-politicas-notificacion.md)
+- [Silenciados](../05-anotaciones-alertas/11-silenciados.md)
+
+### Proyecto final
+
+- [Introducción al proyecto final](../06-proyecto-final/01-index.md)
+- [Escenario](../06-proyecto-final/02-escenario.md)
+- [Requisitos](../06-proyecto-final/03-requisitos.md)
+- [Tareas](../06-proyecto-final/04-tareas.md)
+- [Práctica 1 - Primer dashboard](../06-proyecto-final/05-practica-01-primer-dashboard.md)
+- [Práctica 2 - Node Exporter](../06-proyecto-final/06-practica-02-node-exporter.md)
+- [Práctica 3 - Consultas PromQL](../06-proyecto-final/07-practica-03-promql.md)
+- [Práctica 4 - Dashboard operativo](../06-proyecto-final/08-practica-04-dashboard-operativo.md)
+- [Práctica 5 - Alertas](../06-proyecto-final/09-practica-05-alertas.md)
+- [Entregables](../06-proyecto-final/10-entregables.md)
+- [Criterios de evaluación](../06-proyecto-final/11-criterios-evaluacion.md)
