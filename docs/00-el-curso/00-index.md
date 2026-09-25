@@ -1705,6 +1705,139 @@ sudo journalctl -u prometheus-node-exporter \
 7. Consulta los logs de ambos servicios.
 8. Explica por qué no debe crearse manualmente el usuario `prometheus` antes de instalar el paquete.
 
+### Si existe un problema en node exporter y no inicia
+El problema del puerto `9100` se debe a que hay **dos servicios de Node Exporter** intentando utilizar el mismo puerto:
+
+- `node_exporter.service`: activo y ocupando `9100`.
+- `prometheus-node-exporter.service`: también intenta arrancar y falla con `address already in use`.
+
+La solución es dejar **un único servicio activo**.
+
+#### Solución recomendada
+
+Conserva el servicio instalado mediante APT:
+
+```bash
+prometheus-node-exporter.service
+```
+
+##### 1. Detener el servicio duplicado
+
+```bash
+sudo systemctl disable --now node_exporter.service
+```
+
+Comprueba que está detenido:
+
+```bash
+systemctl is-active node_exporter.service
+```
+
+Resultado esperado:
+
+```text
+inactive
+```
+
+##### 2. Verificar que el puerto está libre
+
+```bash
+sudo ss -lntp | grep ':9100'
+```
+
+No debería aparecer ninguna salida.
+
+Si todavía aparece un proceso, identifícalo:
+
+```bash
+sudo lsof -nP -iTCP:9100 -sTCP:LISTEN
+```
+
+##### 3. Iniciar el servicio correcto
+
+```bash
+sudo systemctl reset-failed prometheus-node-exporter.service
+```
+
+```bash
+sudo systemctl enable --now prometheus-node-exporter.service
+```
+
+Comprueba su estado:
+
+```bash
+systemctl is-active prometheus-node-exporter.service
+```
+
+Resultado esperado:
+
+```text
+active
+```
+
+##### 4. Verificar que Node Exporter responde
+
+```bash
+sudo ss -lntp | grep ':9100'
+```
+
+```bash
+curl -I http://localhost:9100/metrics
+```
+
+Resultado esperado:
+
+```text
+HTTP/1.1 200 OK
+```
+
+##### 5. Comprobar los servicios
+
+```bash
+systemctl list-units --type=service --all \
+  | grep -Ei 'node_exporter|prometheus-node-exporter'
+```
+
+Debe quedar:
+
+```text
+node_exporter.service                  inactive
+prometheus-node-exporter.service      active
+```
+
+#### Si el servicio antiguo vuelve a arrancar
+
+Bloquéalo temporalmente:
+
+```bash
+sudo systemctl mask node_exporter.service
+```
+
+Después reinicia el servicio correcto:
+
+```bash
+sudo systemctl reset-failed prometheus-node-exporter.service
+sudo systemctl restart prometheus-node-exporter.service
+```
+
+#### Secuencia completa
+
+```bash
+sudo systemctl disable --now node_exporter.service
+sudo ss -lntp | grep ':9100'
+sudo systemctl reset-failed prometheus-node-exporter.service
+sudo systemctl enable --now prometheus-node-exporter.service
+systemctl is-active prometheus-node-exporter.service
+curl -I http://localhost:9100/metrics
+```
+
+El resultado final debe ser:
+
+- `node_exporter.service`: detenido.
+- `prometheus-node-exporter.service`: activo.
+- Puerto `9100`: utilizado por una sola instancia.
+- `/metrics`: responde correctamente.
+
 ---
 
 ## Sesión 13: configurar Prometheus para recopilar métricas
