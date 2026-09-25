@@ -1454,7 +1454,8 @@ sudo apt update
 ```bash
 sudo apt install -y \
   prometheus \
-  prometheus-node-exporter
+  prometheus-node-exporter \
+  prometheus-node-exporter-collectors
 ```
 
 Durante la instalación se crearán, normalmente, los servicios:
