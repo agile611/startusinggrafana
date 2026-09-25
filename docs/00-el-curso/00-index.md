@@ -1266,9 +1266,13 @@ LISTEN 0 4096 0.0.0.0:3000 0.0.0.0:* users:(("grafana",pid=1234,fd=9))
 ```text
 http://localhost:3000
 ```
+o
+```text
+http://IP_DE_TU_HOST:3000
+```
 
-5. Consulta los registros.
-6. Registra la versión instalada.
+5. Entra con el usuario `admin` y password `admin`.
+6. Agrega password nuevo de no por defecto a la versión instalada.
 
 ## Sesión 11: instalar Node Exporter
 
