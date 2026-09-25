@@ -94,6 +94,9 @@ plugins:
 extra_css:
   - assets/css/custom.css
 
+extra_javascript:
+  - assets/js/custom.js
+
 nav:
   - Inicio: index.md
 
