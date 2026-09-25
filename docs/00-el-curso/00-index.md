@@ -2839,7 +2839,6 @@ Ejecutar una comprobación general antes de continuar con el resto del curso.
 Crear un script:
 
 ```bash
-cat > ~/laboratorio-grafana/scripts/comprobar-entorno.sh <<'EOF'
 #!/usr/bin/env bash
 
 set -u
@@ -2875,10 +2874,20 @@ hostname -I
 
 echo
 echo "== Servicios =="
-for service in grafana-server prometheus node_exporter; do
-  printf "%-20s" "$service"
 
-  if systemctl is-active --quiet "$service"; then
+servicios=(
+  "grafana-server|Grafana"
+  "prometheus|Prometheus"
+  "prometheus-node-exporter|Node Exporter"
+)
+
+for entrada in "${servicios[@]}"; do
+  unidad="${entrada%%|*}"
+  nombre="${entrada##*|}"
+
+  printf "%-20s" "$nombre"
+
+  if systemctl is-active --quiet "$unidad"; then
     echo "activo"
   else
     echo "no activo"
@@ -2891,6 +2900,7 @@ sudo ss -lntp | grep -E ':(3000|9090|9100)\b' || true
 
 echo
 echo "== HTTP =="
+
 curl -s -o /dev/null -w "Grafana: HTTP %{http_code}\n" \
   http://localhost:3000
 
@@ -2899,7 +2909,6 @@ curl -s -o /dev/null -w "Prometheus: HTTP %{http_code}\n" \
 
 curl -s -o /dev/null -w "Node Exporter: HTTP %{http_code}\n" \
   http://localhost:9100/metrics
-EOF
 ```
 
 Dar permisos de ejecución:
