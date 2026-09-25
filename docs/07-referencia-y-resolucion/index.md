@@ -549,7 +549,6 @@ Grafana:
 - [Introducción al curso](../00-el-curso/00-index.md)
 - [Objetivos del curso](../00-el-curso/01-objetivos.md)
 - [Requisitos previos](../00-el-curso/02-requisitos-previos.md)
-- [Entorno de laboratorio](../00-el-curso/03-entorno-laboratorio.md)
 
 ### Fundamentos de telemetría
 
