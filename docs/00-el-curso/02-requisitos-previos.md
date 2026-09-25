@@ -1,12 +1,3 @@
-A continuación tienes una página completa para sustituir el contenido de:
-
-```text
-docs/00-el-curso/02-requisitos-previos.md
-```
-
-Está pensada para preparar al alumnado antes de comenzar la instalación y configuración de Grafana, Prometheus y Node Exporter.
-
-```markdown
 # Requisitos previos
 
 Esta sección describe los conocimientos, herramientas y condiciones necesarias para realizar correctamente el curso de Grafana, Prometheus y Node Exporter.

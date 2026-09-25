@@ -179,23 +179,22 @@ nav:
       - Entregables: 06-proyecto-final/10-entregables.md
       - Criterios de evaluación: 06-proyecto-final/11-criterios-evaluacion.md
 
-  - Referencia:
-      - Índice: referencia/index.md
-      - Comandos de Ubuntu: referencia/comandos-ubuntu.md
-      - Consultas PromQL: referencia/promql.md
-      - Servicios y puertos: referencia/servicios-puertos.md
-      - Rutas y ficheros: referencia/rutas-ficheros.md
-      - Variables y etiquetas: referencia/variables-etiquetas.md
-      - Enlaces útiles: referencia/enlaces-utiles.md
-
-  - Resolución de problemas:
-      - Índice: resolucion-problemas/index.md
-      - Instalación: resolucion-problemas/instalacion.md
-      - Acceso a Grafana: resolucion-problemas/acceso-grafana.md
-      - Prometheus: resolucion-problemas/prometheus.md
-      - Node Exporter: resolucion-problemas/node-exporter.md
-      - Fuentes de datos: resolucion-problemas/fuentes-datos.md
-      - Dashboards: resolucion-problemas/dashboards.md
-      - Alertas: resolucion-problemas/alertas.md
+  - Referencia y resolución:
+      - Introducción: 07-referencia-y-resolucion/index.md
+      - Referencia rápida:
+          - Comandos de Ubuntu: 07-referencia-y-resolucion/referencia/01-comandos-ubuntu.md
+          - Servicios y puertos: 07-referencia-y-resolucion/referencia/02-servicios-puertos.md
+          - Rutas de ficheros: 07-referencia-y-resolucion/referencia/03-rutas-ficheros.md
+          - Consultas PromQL: 07-referencia-y-resolucion/referencia/04-promql.md
+          - Variables y etiquetas: 07-referencia-y-resolucion/referencia/05-variables-etiquetas.md
+          - Enlaces útiles: 07-referencia-y-resolucion/referencia/06-enlaces-utiles.md
+      - Resolución de problemas:
+          - Instalación: 07-referencia-y-resolucion/resolucion-problemas/01-instalacion.md
+          - Node Exporter: 07-referencia-y-resolucion/resolucion-problemas/04-node-exporter.md
+          - Prometheus: 07-referencia-y-resolucion/resolucion-problemas/03-prometheus.md
+          - Acceso a Grafana: 07-referencia-y-resolucion/resolucion-problemas/02-acceso-grafana.md
+          - Fuentes de datos: 07-referencia-y-resolucion/resolucion-problemas/05-fuentes-datos.md
+          - Dashboards: 07-referencia-y-resolucion/resolucion-problemas/06-dashboards.md
+          - Alertas: 07-referencia-y-resolucion/resolucion-problemas/07-alertas.md
 
 copyright: "© Agile611 · Licencia CC BY-NC 4.0 · Guillem Hernández Sola"
