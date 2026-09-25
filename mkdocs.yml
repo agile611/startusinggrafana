@@ -97,14 +97,15 @@ extra_css:
 nav:
   - Inicio: index.md
 
-  - Curso y laboratorio:
-      - Objetivos: 00-el-curso/01-objetivos.md
+  - El curso:
+      - Introducción: 00-el-curso/00-index.md
+      - Objetivos del curso: 00-el-curso/01-objetivos.md
       - Requisitos previos: 00-el-curso/02-requisitos-previos.md
       - Entorno de laboratorio: 00-el-curso/03-entorno-laboratorio.md
 
   - Fundamentos de telemetría:
       - Introducción: 01-fundamentos-telemetria/01-index.md
-      - Conceptos de telemetría: 01-fundamentos-telemetria/02-telemetria.md
+      - Telemetría: 01-fundamentos-telemetria/02-telemetria.md
       - Modelo push y pull: 01-fundamentos-telemetria/03-modelo-push-pull.md
       - Series temporales: 01-fundamentos-telemetria/04-series-temporales.md
       - Muestreo: 01-fundamentos-telemetria/05-muestreo.md
@@ -120,7 +121,7 @@ nav:
       - Acceso a Grafana: 02-grafana/04-acceso-grafana.md
       - Configuración inicial: 02-grafana/05-configuracion-inicial.md
       - Tiempo relativo: 02-grafana/06-tiempo-relativo.md
-      - Selector de rango de tiempo: 02-grafana/07-selector-rango-tiempo.md
+      - Selector de rango temporal: 02-grafana/07-selector-rango-tiempo.md
       - Dashboards, filas y paneles: 02-grafana/08-dashboards-filas-paneles.md
       - Laboratorio: 02-grafana/09-laboratorio.md
 
@@ -133,24 +134,24 @@ nav:
       - Instalación de Node Exporter: 03-prometheus-fuentes-datos/06-instalacion-node-exporter.md
       - Configuración del scraping: 03-prometheus-fuentes-datos/07-configuracion-scrape.md
       - Consultas PromQL: 03-prometheus-fuentes-datos/08-consultas-promql.md
-      - Añadir fuente de datos: 03-prometheus-fuentes-datos/09-anadir-fuente-datos.md
-      - Laboratorio práctico: 03-prometheus-fuentes-datos/10-laboratorio.md
+      - Añadir una fuente de datos: 03-prometheus-fuentes-datos/09-anadir-fuente-datos.md
+      - Laboratorio: 03-prometheus-fuentes-datos/10-laboratorio.md
 
   - Dashboards y visualización:
-      - Introducción al bloque: 04-dashboards-visualizacion/01-index.md
+      - Introducción: 04-dashboards-visualizacion/01-index.md
       - Conceptos de dashboards: 04-dashboards-visualizacion/02-conceptos-dashboards.md
       - Lista de dashboards: 04-dashboards-visualizacion/03-lista-dashboards.md
       - Manipulación de paneles: 04-dashboards-visualizacion/04-manipulacion-paneles.md
       - Panel Stat: 04-dashboards-visualizacion/05-panel-stat.md
       - Panel Gauge: 04-dashboards-visualizacion/06-panel-gauge.md
-      - Panel Bar Gauge: 04-dashboards-visualizacion/07-panel-bar-gauge.md
+      - Panel Bar gauge: 04-dashboards-visualizacion/07-panel-bar-gauge.md
       - Panel Time series: 04-dashboards-visualizacion/08-panel-time-series.md
       - Panel Heatmap: 04-dashboards-visualizacion/09-panel-heatmap.md
       - Panel de texto: 04-dashboards-visualizacion/10-panel-texto.md
       - Panel Canvas: 04-dashboards-visualizacion/11-panel-canvas.md
       - Transformaciones: 04-dashboards-visualizacion/12-transformaciones.md
       - Plugins de paneles: 04-dashboards-visualizacion/13-plugins-paneles.md
-      - Laboratorio integrador: 04-dashboards-visualizacion/14-laboratorio.md
+      - Laboratorio: 04-dashboards-visualizacion/14-laboratorio.md
 
   - Anotaciones y alertas:
       - Introducción: 05-anotaciones-alertas/01-index.md
@@ -173,14 +174,15 @@ nav:
       - Tareas: 06-proyecto-final/04-tareas.md
       - Práctica 1 - Primer dashboard: 06-proyecto-final/05-practica-01-primer-dashboard.md
       - Práctica 2 - Node Exporter: 06-proyecto-final/06-practica-02-node-exporter.md
-      - Práctica 3 - PromQL: 06-proyecto-final/07-practica-03-promql.md
+      - Práctica 3 - Consultas PromQL: 06-proyecto-final/07-practica-03-promql.md
       - Práctica 4 - Dashboard operativo: 06-proyecto-final/08-practica-04-dashboard-operativo.md
       - Práctica 5 - Alertas: 06-proyecto-final/09-practica-05-alertas.md
       - Entregables: 06-proyecto-final/10-entregables.md
       - Criterios de evaluación: 06-proyecto-final/11-criterios-evaluacion.md
 
-  - Referencia y resolución:
+  - Referencia y resolución de problemas:
       - Introducción: 07-referencia-y-resolucion/index.md
+
       - Referencia rápida:
           - Comandos de Ubuntu: 07-referencia-y-resolucion/referencia/01-comandos-ubuntu.md
           - Servicios y puertos: 07-referencia-y-resolucion/referencia/02-servicios-puertos.md
@@ -188,11 +190,12 @@ nav:
           - Consultas PromQL: 07-referencia-y-resolucion/referencia/04-promql.md
           - Variables y etiquetas: 07-referencia-y-resolucion/referencia/05-variables-etiquetas.md
           - Enlaces útiles: 07-referencia-y-resolucion/referencia/06-enlaces-utiles.md
+
       - Resolución de problemas:
           - Instalación: 07-referencia-y-resolucion/resolucion-problemas/01-instalacion.md
-          - Node Exporter: 07-referencia-y-resolucion/resolucion-problemas/04-node-exporter.md
-          - Prometheus: 07-referencia-y-resolucion/resolucion-problemas/03-prometheus.md
           - Acceso a Grafana: 07-referencia-y-resolucion/resolucion-problemas/02-acceso-grafana.md
+          - Prometheus: 07-referencia-y-resolucion/resolucion-problemas/03-prometheus.md
+          - Node Exporter: 07-referencia-y-resolucion/resolucion-problemas/04-node-exporter.md
           - Fuentes de datos: 07-referencia-y-resolucion/resolucion-problemas/05-fuentes-datos.md
           - Dashboards: 07-referencia-y-resolucion/resolucion-problemas/06-dashboards.md
           - Alertas: 07-referencia-y-resolucion/resolucion-problemas/07-alertas.md
