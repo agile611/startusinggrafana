@@ -1,12 +1,15 @@
-# Instalación de Prometheus
+# Instalación de Prometheus mediante binarios
 
 Prometheus es el componente central del sistema de monitorización que se construirá durante este bloque.
 
-En esta práctica se instalará Prometheus como un servicio de `systemd`, se configurará su almacenamiento local y se comprobará que responde correctamente mediante la interfaz web, la API HTTP y el endpoint de salud.
+En esta práctica se instalará Prometheus como un servicio de `systemd`, se configurará su almacenamiento local y se comprobará que responde correctamente mediante la interfaz web, la API HTTP y los endpoints de salud.
 
 La instalación seguirá este recorrido:
 
 ```text
+Comprobación del sistema
+        |
+        v
 Descarga del binario
         |
         v
@@ -14,6 +17,9 @@ Creación del usuario de servicio
         |
         v
 Creación de directorios
+        |
+        v
+Instalación de los binarios
         |
         v
 Instalación de la configuración
@@ -47,6 +53,7 @@ Al finalizar esta práctica, el alumno podrá:
 - Habilitar Prometheus para que se inicie automáticamente.
 - Comprobar el puerto de escucha.
 - Consultar el endpoint de salud.
+- Consultar el endpoint de preparación.
 - Acceder a la interfaz web.
 - Consultar los registros del servicio.
 - Diagnosticar errores básicos de instalación y configuración.
@@ -80,6 +87,9 @@ La instalación resultante tendrá esta estructura:
 
 /var/lib/prometheus/
 └── Datos de series temporales
+
+/etc/systemd/system/
+└── prometheus.service
 ```
 
 El servicio se ejecutará con el usuario:
@@ -102,7 +112,7 @@ http://localhost:9090
 
 ---
 
-# Arquitectura de la instalación
+## Arquitectura de la instalación
 
 ```text
 +------------------------------------------------------+
@@ -121,7 +131,7 @@ http://localhost:9090
 +------------------------------------------------------+
 ```
 
-## Directorios principales
+### Directorios principales
 
 | Directorio | Función |
 |---|---|
@@ -132,7 +142,7 @@ http://localhost:9090
 
 ---
 
-# Requisitos previos
+## Requisitos previos
 
 Antes de comenzar, comprobar que se dispone de:
 
@@ -145,13 +155,19 @@ Antes de comenzar, comprobar que se dispone de:
 - Puerto `9090` disponible.
 - Hora del sistema sincronizada.
 
-## Comprobar la distribución
+### Comprobar la distribución
 
 ```bash
 lsb_release -ds
 ```
 
-## Comprobar la arquitectura
+También puede utilizarse:
+
+```bash
+cat /etc/os-release
+```
+
+### Comprobar la arquitectura
 
 ```bash
 uname -m
@@ -175,27 +191,27 @@ Prometheus utiliza nombres de arquitectura diferentes para los paquetes:
 
 En esta práctica se utilizará principalmente `amd64`.
 
-## Comprobar permisos administrativos
+### Comprobar permisos administrativos
 
 ```bash
 sudo -v
 ```
 
-## Comprobar el espacio disponible
+### Comprobar el espacio disponible
 
 ```bash
 df -h /
 ```
 
-## Comprobar el puerto
+### Comprobar el puerto
 
 ```bash
-sudo ss -lntp | grep ':9090'
+sudo ss -lntp | grep ':9090' || true
 ```
 
 Si no aparece ninguna salida, el puerto probablemente está disponible.
 
-## Comprobar la hora
+### Comprobar la hora
 
 ```bash
 timedatectl status
@@ -215,7 +231,7 @@ yes
 
 ---
 
-# Preparar variables de instalación
+## Preparar las variables de instalación
 
 Para evitar repetir valores, se definirán algunas variables.
 
@@ -227,6 +243,7 @@ export PROMETHEUS_ARCH="amd64"
 export PROMETHEUS_PLATFORM="linux-${PROMETHEUS_ARCH}"
 export PROMETHEUS_PACKAGE="prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_PLATFORM}.tar.gz"
 export PROMETHEUS_URL="https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/${PROMETHEUS_PACKAGE}"
+export PROMETHEUS_DIR="/tmp/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_PLATFORM}"
 ```
 
 Comprobar las variables:
@@ -236,6 +253,7 @@ echo "$PROMETHEUS_VERSION"
 echo "$PROMETHEUS_PLATFORM"
 echo "$PROMETHEUS_PACKAGE"
 echo "$PROMETHEUS_URL"
+echo "$PROMETHEUS_DIR"
 ```
 
 Ejemplo:
@@ -245,15 +263,15 @@ $ echo "$PROMETHEUS_PACKAGE"
 prometheus-3.5.0.linux-amd64.tar.gz
 ```
 
-## Descargar la versión aprobada
-
-La URL de descarga debe verificarse antes de ejecutar el comando:
+### Comprobar la URL de descarga
 
 ```bash
 curl -I "$PROMETHEUS_URL"
 ```
 
-Descargar el paquete:
+La respuesta debe indicar que el recurso existe. Si devuelve un error `404`, revisa la versión, la arquitectura y el nombre del archivo.
+
+### Descargar el paquete
 
 ```bash
 cd /tmp
@@ -268,21 +286,23 @@ ls -lh "/tmp/$PROMETHEUS_PACKAGE"
 
 ---
 
-# Crear el usuario de servicio
+## Crear el usuario de servicio
 
 Prometheus no debería ejecutarse con el usuario personal del alumno ni como `root`.
 
-Crear el usuario:
+Crear el usuario de forma segura:
 
 ```bash
-sudo useradd \
-  --system \
-  --no-create-home \
-  --shell /usr/sbin/nologin \
-  prometheus
+if ! getent passwd prometheus >/dev/null; then
+  sudo useradd \
+    --system \
+    --no-create-home \
+    --shell /usr/sbin/nologin \
+    prometheus
+fi
 ```
 
-Si el usuario ya existe, el comando puede mostrar un error. Comprobarlo:
+Comprobar la cuenta:
 
 ```bash
 getent passwd prometheus
@@ -295,7 +315,7 @@ $ getent passwd prometheus
 prometheus:x:995:995::/home/prometheus:/usr/sbin/nologin
 ```
 
-## Explicación de las opciones
+### Explicación de las opciones
 
 | Opción | Función |
 |---|---|
@@ -315,9 +335,21 @@ Resultado esperado:
 uid=995(prometheus) gid=995(prometheus) groups=995(prometheus)
 ```
 
+Comprobar el shell:
+
+```bash
+getent passwd prometheus | cut -d: -f7
+```
+
+Resultado esperado:
+
+```text
+/usr/sbin/nologin
+```
+
 ---
 
-# Crear directorios
+## Crear los directorios
 
 Crear el directorio de configuración:
 
@@ -331,7 +363,7 @@ Crear el directorio de datos:
 sudo mkdir -p /var/lib/prometheus
 ```
 
-Crear directorios para las plantillas y consolas:
+Crear los directorios para las plantillas y las consolas:
 
 ```bash
 sudo mkdir -p \
@@ -339,7 +371,7 @@ sudo mkdir -p \
   /etc/prometheus/console_libraries
 ```
 
-## Función de cada directorio
+### Función de cada directorio
 
 | Directorio | Uso |
 |---|---|
@@ -350,26 +382,25 @@ sudo mkdir -p \
 
 ---
 
-# Extraer el paquete
+## Extraer el paquete
 
 Extraer el archivo descargado:
 
 ```bash
 cd /tmp
-
 tar -xzf "$PROMETHEUS_PACKAGE"
 ```
 
 Comprobar el directorio creado:
 
 ```bash
-ls -ld "/tmp/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_PLATFORM}"
+ls -ld "$PROMETHEUS_DIR"
 ```
 
 Listar su contenido:
 
 ```bash
-find "/tmp/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_PLATFORM}" \
+find "$PROMETHEUS_DIR" \
   -maxdepth 2 \
   -type f \
   -printf '%P\n'
@@ -389,13 +420,7 @@ NOTICE
 
 ---
 
-# Instalar los binarios
-
-Definir el directorio extraído:
-
-```bash
-export PROMETHEUS_DIR="/tmp/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_PLATFORM}"
-```
+## Instalar los binarios
 
 Instalar el binario de Prometheus:
 
@@ -454,7 +479,7 @@ Resultado esperado:
 
 ---
 
-# Instalar los recursos de configuración
+## Instalar los recursos de configuración
 
 Copiar el fichero de configuración de ejemplo:
 
@@ -489,11 +514,11 @@ sudo find /etc/prometheus -maxdepth 2 -type f
 
 ---
 
-# Crear una configuración inicial
+## Crear una configuración inicial
 
-Antes de conectar Node Exporter, se puede utilizar una configuración mínima.
+Antes de conectar Node Exporter, se utilizará una configuración mínima.
 
-Crear una copia de seguridad:
+### Crear una copia de seguridad
 
 ```bash
 sudo cp \
@@ -501,10 +526,11 @@ sudo cp \
   /etc/prometheus/prometheus.yml.orig
 ```
 
-Crear la configuración:
+### Crear la configuración
 
 ```bash
 sudo tee /etc/prometheus/prometheus.yml > /dev/null <<'EOF'
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -523,9 +549,10 @@ Mostrar el contenido:
 sudo cat /etc/prometheus/prometheus.yml
 ```
 
-El resultado será:
+La configuración será:
 
 ```yaml
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -537,9 +564,9 @@ scrape_configs:
           - localhost:9090
 ```
 
-## Explicación de la configuración
+### Explicación de la configuración
 
-### `global`
+#### Bloque `global`
 
 ```yaml
 global:
@@ -550,7 +577,7 @@ global:
 - `scrape_interval`: intervalo entre recopilaciones.
 - `evaluation_interval`: intervalo de evaluación de reglas.
 
-### `scrape_configs`
+#### Bloque `scrape_configs`
 
 ```yaml
 scrape_configs:
@@ -558,15 +585,15 @@ scrape_configs:
 
 Contiene los trabajos de recopilación.
 
-### `job_name`
+#### Propiedad `job_name`
 
 ```yaml
 job_name: prometheus
 ```
 
-Identifica el trabajo.
+Identifica el trabajo de monitorización.
 
-### `targets`
+#### Propiedad `targets`
 
 ```yaml
 targets:
@@ -577,7 +604,7 @@ Define el endpoint que Prometheus debe consultar.
 
 ---
 
-# Validar la configuración
+## Validar la configuración
 
 Antes de iniciar el servicio, validar el fichero:
 
@@ -592,11 +619,21 @@ Checking /etc/prometheus/prometheus.yml
  SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
 ```
 
-Si la versión utilizada muestra un mensaje ligeramente diferente, lo importante es que indique que la configuración es válida.
+El mensaje exacto puede variar según la versión, pero debe indicar que la configuración es válida.
 
-## Error intencionado de YAML
+### Validar también la sintaxis YAML
 
-Para practicar, crear temporalmente una copia incorrecta:
+Si `yamllint` está instalado:
+
+```bash
+yamllint /etc/prometheus/prometheus.yml
+```
+
+`yamllint` comprueba la sintaxis general de YAML. `promtool` comprueba además que la estructura sea válida para Prometheus.
+
+### Practicar con un error de YAML
+
+Crear una copia incorrecta:
 
 ```bash
 sudo cp \
@@ -604,9 +641,16 @@ sudo cp \
   /tmp/prometheus.yml.incorrecto
 ```
 
-Añadir una línea con una indentación incorrecta:
+Editar la copia:
+
+```bash
+sudo nano /tmp/prometheus.yml.incorrecto
+```
+
+Introducir, por ejemplo, una indentación incorrecta:
 
 ```yaml
+---
 global:
   scrape_interval: 15s
  evaluation_interval: 15s
@@ -628,7 +672,7 @@ sudo cp \
   /etc/prometheus/prometheus.yml
 ```
 
-Después, volver a validar:
+Volver a validar:
 
 ```bash
 promtool check config /etc/prometheus/prometheus.yml
@@ -636,11 +680,11 @@ promtool check config /etc/prometheus/prometheus.yml
 
 ---
 
-# Configurar permisos
+## Configurar los permisos
 
 El usuario `prometheus` debe poder leer la configuración y escribir en el directorio de datos.
 
-Asignar la propiedad de los datos:
+### Asignar la propiedad de los datos
 
 ```bash
 sudo chown -R \
@@ -648,7 +692,7 @@ sudo chown -R \
   /var/lib/prometheus
 ```
 
-Asignar la propiedad de la configuración:
+### Asignar la propiedad de la configuración
 
 ```bash
 sudo chown -R \
@@ -656,12 +700,18 @@ sudo chown -R \
   /etc/prometheus
 ```
 
-Permitir que el grupo pueda leer la configuración:
+### Configurar los permisos
 
 ```bash
-sudo chmod -R \
-  u=rwX,g=rX,o= \
-  /etc/prometheus
+sudo find /etc/prometheus \
+  -type d \
+  -exec chmod 0750 {} \;
+```
+
+```bash
+sudo find /etc/prometheus \
+  -type f \
+  -exec chmod 0640 {} \;
 ```
 
 Comprobar los permisos:
@@ -678,7 +728,7 @@ Comprobar el fichero principal:
 sudo ls -l /etc/prometheus/prometheus.yml
 ```
 
-Comprobar el directorio de datos:
+Comprobar que el usuario puede escribir en el directorio de datos:
 
 ```bash
 sudo -u prometheus test -w /var/lib/prometheus \
@@ -686,7 +736,7 @@ sudo -u prometheus test -w /var/lib/prometheus \
   || echo "El usuario no puede escribir en el directorio de datos"
 ```
 
-Comprobar la lectura de configuración:
+Comprobar que puede leer la configuración:
 
 ```bash
 sudo -u prometheus test -r /etc/prometheus/prometheus.yml \
@@ -696,7 +746,7 @@ sudo -u prometheus test -r /etc/prometheus/prometheus.yml \
 
 ---
 
-# Crear el servicio systemd
+## Crear el servicio de systemd
 
 Crear la unidad:
 
@@ -712,6 +762,7 @@ After=network-online.target
 User=prometheus
 Group=prometheus
 Type=simple
+
 ExecStart=/usr/local/bin/prometheus \
   --config.file=/etc/prometheus/prometheus.yml \
   --storage.tsdb.path=/var/lib/prometheus \
@@ -731,27 +782,27 @@ WantedBy=multi-user.target
 EOF
 ```
 
-## Explicación de las opciones
+### Explicación de las opciones
 
 | Opción | Función |
 |---|---|
 | `User=prometheus` | Ejecuta el proceso con el usuario de servicio |
 | `Group=prometheus` | Utiliza el grupo del servicio |
 | `ExecStart` | Define el comando de inicio |
-| `--config.file` | Indica la configuración |
+| `--config.file` | Indica el fichero de configuración |
 | `--storage.tsdb.path` | Indica dónde guardar los datos |
 | `--web.console.templates` | Indica las plantillas web |
 | `--web.console.libraries` | Indica las bibliotecas web |
 | `Restart=on-failure` | Reinicia el servicio si termina con error |
-| `ProtectSystem=strict` | Reduce las posibilidades de modificación del sistema |
+| `ProtectSystem=strict` | Reduce las posibilidades de modificar el sistema |
 | `ProtectHome=true` | Protege los directorios personales |
 | `ReadWritePaths` | Permite escribir en el directorio de datos |
 
-> Las opciones de protección de `systemd` pueden variar según la distribución y la versión. Si el servicio no inicia, se deben revisar los registros antes de modificar la unidad.
+> Las opciones de protección de `systemd` pueden variar según la distribución y su versión. Si el servicio no inicia, consulta primero los registros antes de modificar la unidad.
 
 ---
 
-# Recargar systemd
+## Recargar la configuración de systemd
 
 Después de crear o modificar una unidad, recargar la configuración:
 
@@ -777,7 +828,7 @@ systemctl show prometheus \
 
 ---
 
-# Iniciar Prometheus
+## Iniciar Prometheus
 
 Iniciar el servicio:
 
@@ -788,7 +839,7 @@ sudo systemctl start prometheus
 Consultar el estado:
 
 ```bash
-sudo systemctl status prometheus
+sudo systemctl status prometheus --no-pager
 ```
 
 Resultado esperado:
@@ -811,7 +862,7 @@ Resultado esperado:
 active
 ```
 
-## Habilitar el inicio automático
+### Habilitar el inicio automático
 
 ```bash
 sudo systemctl enable prometheus
@@ -829,7 +880,7 @@ Resultado esperado:
 enabled
 ```
 
-## Comandos habituales
+### Comandos habituales
 
 Detener:
 
@@ -857,7 +908,7 @@ sudo systemctl status prometheus
 
 ---
 
-# Verificar el puerto
+## Verificar el puerto de escucha
 
 Comprobar que Prometheus escucha en el puerto `9090`:
 
@@ -885,15 +936,15 @@ prometheus  1234  1  0 16:20 ?  00:00:02 /usr/local/bin/prometheus ...
 
 ---
 
-# Comprobar los endpoints HTTP
+## Comprobar los endpoints HTTP
 
-## Endpoint principal
+### Endpoint principal
 
 ```bash
 curl -I http://localhost:9090
 ```
 
-## Endpoint de salud
+### Endpoint de salud
 
 ```bash
 curl http://localhost:9090/-/healthy
@@ -905,7 +956,7 @@ Resultado esperado:
 Prometheus is Healthy.
 ```
 
-## Endpoint de preparación
+### Endpoint de preparación
 
 ```bash
 curl http://localhost:9090/-/ready
@@ -917,19 +968,21 @@ Resultado esperado:
 Prometheus is Ready.
 ```
 
-## Información de versión
+### Información de versión
+
+Si `jq` está instalado:
 
 ```bash
 curl -s http://localhost:9090/api/v1/status/buildinfo | jq
 ```
 
-Si `jq` no está instalado:
+Sin `jq`:
 
 ```bash
 curl -s http://localhost:9090/api/v1/status/buildinfo
 ```
 
-## Consultar la métrica `up`
+### Consultar la métrica `up`
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -945,7 +998,7 @@ up{instance="localhost:9090",job="prometheus"} 1
 
 ---
 
-# Acceder a la interfaz web
+## Acceder a la interfaz web
 
 Abrir desde el propio servidor:
 
@@ -956,7 +1009,7 @@ http://localhost:9090
 Desde otro equipo de la red:
 
 ```text
-http://<IP-DEL-SERVIDOR>:9090
+http://IP_DEL_SERVIDOR:9090
 ```
 
 Ejemplo:
@@ -975,7 +1028,7 @@ Desde la interfaz web se pueden consultar:
 - Estado del servicio.
 - Información de compilación.
 
-## Primera consulta
+### Primera consulta
 
 Ejecutar:
 
@@ -999,7 +1052,7 @@ prometheus_tsdb_head_series
 
 ---
 
-# Consultar los registros
+## Consultar los registros
 
 Consultar los últimos registros:
 
@@ -1016,7 +1069,7 @@ sudo journalctl -u prometheus -f
 Consultar los registros desde el último arranque:
 
 ```bash
-sudo journalctl -u prometheus -b
+sudo journalctl -u prometheus -b --no-pager
 ```
 
 Mostrar únicamente los errores:
@@ -1033,6 +1086,77 @@ Consultar los registros de los últimos diez minutos:
 sudo journalctl -u prometheus \
   --since "10 minutes ago" \
   --no-pager
+```
+
+---
+
+## Añadir Node Exporter posteriormente
+
+En esta práctica se instala inicialmente Prometheus con su propio objetivo.
+
+Cuando Node Exporter esté instalado, se añadirá un segundo trabajo.
+
+### Configuración
+
+```yaml
+---
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+
+  - job_name: node_exporter
+    static_configs:
+      - targets:
+          - localhost:9100
+```
+
+### Validar y aplicar la configuración
+
+```bash
+promtool check config /etc/prometheus/prometheus.yml
+```
+
+```bash
+sudo systemctl restart prometheus
+```
+
+### Comprobar los objetivos
+
+```bash
+curl -s http://localhost:9090/api/v1/targets \
+  | jq -r '
+    .data.activeTargets[]
+    | [
+        .labels.job,
+        .labels.instance,
+        .health,
+        .lastError
+      ]
+    | @tsv
+  '
+```
+
+Resultado esperado:
+
+```text
+prometheus      localhost:9090  up
+node_exporter   localhost:9100  up
+```
+
+Comprobar desde PromQL:
+
+```promql
+up
+```
+
+```promql
+up{job="node_exporter"}
 ```
 
 ---
@@ -1078,11 +1202,13 @@ Crear la base de la instalación.
 ### Comandos
 
 ```bash
-sudo useradd \
-  --system \
-  --no-create-home \
-  --shell /usr/sbin/nologin \
-  prometheus
+if ! getent passwd prometheus >/dev/null; then
+  sudo useradd \
+    --system \
+    --no-create-home \
+    --shell /usr/sbin/nologin \
+    prometheus
+fi
 ```
 
 ```bash
@@ -1133,6 +1259,7 @@ export PROMETHEUS_ARCH="amd64"
 export PROMETHEUS_PLATFORM="linux-${PROMETHEUS_ARCH}"
 export PROMETHEUS_PACKAGE="prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_PLATFORM}.tar.gz"
 export PROMETHEUS_URL="https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/${PROMETHEUS_PACKAGE}"
+export PROMETHEUS_DIR="/tmp/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_PLATFORM}"
 ```
 
 ```bash
@@ -1142,10 +1269,6 @@ curl -fLO "$PROMETHEUS_URL"
 
 ```bash
 tar -xzf "$PROMETHEUS_PACKAGE"
-```
-
-```bash
-export PROMETHEUS_DIR="/tmp/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_PLATFORM}"
 ```
 
 ```bash
@@ -1199,6 +1322,7 @@ Crear una configuración mínima y comprobar su sintaxis.
 
 ```bash
 sudo tee /etc/prometheus/prometheus.yml > /dev/null <<'EOF'
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -1248,6 +1372,7 @@ After=network-online.target
 User=prometheus
 Group=prometheus
 Type=simple
+
 ExecStart=/usr/local/bin/prometheus \
   --config.file=/etc/prometheus/prometheus.yml \
   --storage.tsdb.path=/var/lib/prometheus \
@@ -1292,7 +1417,7 @@ systemctl is-active prometheus
 ```
 
 ```bash
-sudo systemctl status prometheus
+sudo systemctl status prometheus --no-pager
 ```
 
 ### Actividades
@@ -1354,8 +1479,8 @@ Prometheus is Ready.
 
 $ curl -sG http://localhost:9090/api/v1/query \
     --data-urlencode 'query=up' \
-    | jq -r '.data.result[] | [.metric.job, .metric.instance, .value[1]] | @tsv'
-prometheus      localhost:9090  1
+    | jq -r '.data.result[] | [.metric.job, .value[1]] | @tsv'
+prometheus      1
 ```
 
 ### Actividades
@@ -1426,72 +1551,6 @@ sudo journalctl -u prometheus \
 
 ---
 
-# Añadir Node Exporter posteriormente
-
-En esta práctica se instala inicialmente Prometheus con su propio objetivo.
-
-Cuando Node Exporter esté instalado, se añadirá un segundo trabajo:
-
-```yaml
-scrape_configs:
-  - job_name: prometheus
-    static_configs:
-      - targets:
-          - localhost:9090
-
-  - job_name: node_exporter
-    static_configs:
-      - targets:
-          - localhost:9100
-```
-
-Después de modificar la configuración:
-
-```bash
-promtool check config /etc/prometheus/prometheus.yml
-```
-
-Reiniciar:
-
-```bash
-sudo systemctl restart prometheus
-```
-
-Comprobar los objetivos:
-
-```bash
-curl -s http://localhost:9090/api/v1/targets \
-  | jq -r '
-    .data.activeTargets[]
-    | [
-        .labels.job,
-        .labels.instance,
-        .health,
-        .lastError
-      ]
-    | @tsv
-  '
-```
-
-Resultado esperado:
-
-```text
-prometheus      localhost:9090  up
-node_exporter   localhost:9100  up
-```
-
-Comprobar desde PromQL:
-
-```promql
-up
-```
-
-```promql
-up{job="node_exporter"}
-```
-
----
-
 # Diagnóstico de problemas
 
 ## El servicio no inicia
@@ -1499,7 +1558,7 @@ up{job="node_exporter"}
 Consultar el estado:
 
 ```bash
-sudo systemctl status prometheus
+sudo systemctl status prometheus --no-pager
 ```
 
 Consultar los registros:
@@ -1548,7 +1607,7 @@ sudo chown -R \
   /var/lib/prometheus
 ```
 
-Comprobar escritura:
+Comprobar la escritura:
 
 ```bash
 sudo -u prometheus \
@@ -1559,7 +1618,7 @@ sudo -u prometheus \
 
 ## Error de permisos en la configuración
 
-Comprobar lectura:
+Comprobar la lectura:
 
 ```bash
 sudo -u prometheus \
@@ -1591,10 +1650,10 @@ sudo ss -lntp | grep ':9090'
 También:
 
 ```bash
-sudo lsof -iTCP:9090 -sTCP:LISTEN
+sudo lsof -nP -iTCP:9090 -sTCP:LISTEN
 ```
 
-No detener el proceso sin identificarlo previamente.
+No detengas el proceso sin identificarlo previamente.
 
 ## El servicio aparece activo, pero no responde
 
@@ -1643,7 +1702,7 @@ Posibles causas:
 
 - Versión inexistente.
 - Arquitectura incorrecta.
-- Error de escritura en el nombre del paquete.
+- Error en el nombre del paquete.
 - Problemas de conectividad.
 - Red corporativa o proxy.
 - URL no autorizada en el laboratorio.
@@ -1670,7 +1729,8 @@ Revisar especialmente:
 - Espacios.
 - Nombres de propiedades.
 - Dirección de los targets.
-- Comillas innecesarias o incompletas.
+- Comillas incompletas.
+- Tabuladores.
 
 ---
 
@@ -1692,9 +1752,7 @@ systemctl show prometheus -p User -p Group
 
 ## Proteger el fichero de configuración
 
-El fichero puede contener información sensible en algunas configuraciones futuras.
-
-Comprobar permisos:
+Comprobar los permisos:
 
 ```bash
 sudo stat -c '%A %U:%G %n' \
@@ -1714,10 +1772,11 @@ Recomendaciones:
 - No incluir credenciales en ficheros públicos.
 - Mantener el software actualizado.
 - Revisar los registros.
+- Utilizar una VPN cuando corresponda.
 
 ## Crear copias de seguridad
 
-Configuración:
+Copia de la configuración:
 
 ```bash
 sudo cp \
@@ -1725,7 +1784,7 @@ sudo cp \
   ~/prometheus.yml.backup
 ```
 
-Unidad de servicio:
+Copia de la unidad de servicio:
 
 ```bash
 sudo cp \
@@ -1763,14 +1822,17 @@ Generar un informe:
   promtool --version 2>&1
   echo
   echo "===== SERVICIO ====="
-  systemctl is-enabled prometheus
-  systemctl is-active prometheus
+  echo "Inicio automático: $(systemctl is-enabled prometheus 2>/dev/null || echo no-disponible)"
+  echo "Estado: $(systemctl is-active prometheus 2>/dev/null || echo no-disponible)"
   echo
   echo "===== PUERTO ====="
   sudo ss -lntp | grep ':9090' || true
   echo
   echo "===== SALUD ====="
   curl -s http://localhost:9090/-/healthy || true
+  echo
+  echo "===== PREPARACIÓN ====="
+  curl -s http://localhost:9090/-/ready || true
   echo
   echo "===== CONFIGURACIÓN ====="
   promtool check config /etc/prometheus/prometheus.yml 2>&1
@@ -1785,9 +1847,55 @@ cat ~/laboratorio-grafana/evidencias/instalacion-prometheus.txt
 
 ---
 
+# Actividad integradora
+
+## Objetivo
+
+Instalar Prometheus como servicio y demostrar que funciona correctamente.
+
+## Tareas
+
+1. Comprobar los requisitos previos.
+2. Crear el usuario `prometheus`.
+3. Crear los directorios de configuración y datos.
+4. Descargar la versión indicada.
+5. Instalar `prometheus` y `promtool`.
+6. Copiar los recursos de configuración.
+7. Crear el fichero `prometheus.yml`.
+8. Validar la configuración.
+9. Configurar los permisos.
+10. Crear la unidad de `systemd`.
+11. Recargar la configuración de `systemd`.
+12. Habilitar el inicio automático.
+13. Iniciar Prometheus.
+14. Comprobar el estado del servicio.
+15. Comprobar el puerto `9090`.
+16. Comprobar `/-/healthy`.
+17. Comprobar `/-/ready`.
+18. Acceder a la interfaz web.
+19. Ejecutar la consulta `up`.
+20. Consultar los registros.
+21. Guardar las evidencias.
+
+## Resultado esperado
+
+El alumno debe obtener:
+
+```text
+Servicio: activo
+Inicio automático: habilitado
+Puerto: 9090
+Endpoint de salud: correcto
+Endpoint de preparación: correcto
+Interfaz web: accesible
+Consulta up: devuelve el objetivo de Prometheus
+```
+
+---
+
 # Ejemplo de sesión completa
 
-La siguiente sesión resume una instalación funcional.
+La siguiente sesión resume una instalación funcional:
 
 ```console
 $ uname -m
@@ -1804,6 +1912,7 @@ $ prometheus --version
 prometheus, version 3.5.0
 
 $ sudo tee /etc/prometheus/prometheus.yml > /dev/null <<'EOF'
+---
 global:
   scrape_interval: 15s
 
@@ -1842,54 +1951,11 @@ prometheus      1
 
 ---
 
-# Actividad integradora
-
-## Objetivo
-
-Instalar Prometheus como servicio y demostrar que funciona correctamente.
-
-## Tareas
-
-1. Comprobar los requisitos previos.
-2. Crear el usuario `prometheus`.
-3. Crear los directorios de configuración y datos.
-4. Descargar la versión indicada.
-5. Instalar `prometheus` y `promtool`.
-6. Crear el fichero `prometheus.yml`.
-7. Validar la configuración.
-8. Crear la unidad de `systemd`.
-9. Habilitar el inicio automático.
-10. Iniciar Prometheus.
-11. Comprobar el estado del servicio.
-12. Comprobar el puerto `9090`.
-13. Comprobar `/-/healthy`.
-14. Comprobar `/-/ready`.
-15. Acceder a la interfaz web.
-16. Ejecutar la consulta `up`.
-17. Consultar los registros.
-18. Guardar las evidencias.
-
-## Resultado esperado
-
-El alumno debe obtener:
-
-```text
-Servicio: activo
-Inicio automático: habilitado
-Puerto: 9090
-Endpoint de salud: correcto
-Endpoint de preparación: correcto
-Interfaz web: accesible
-Consulta up: devuelve el objetivo de Prometheus
-```
-
----
-
 # Puntos clave
 
 - Prometheus se instalará como un servicio de `systemd`.
 - El binario principal se instalará en `/usr/local/bin/prometheus`.
-- `promtool` permite validar configuraciones y reglas.
+- `promtool` permite validar configuraciones.
 - La configuración principal estará en `/etc/prometheus/prometheus.yml`.
 - Los datos se almacenarán en `/var/lib/prometheus`.
 - El servicio debe ejecutarse con el usuario `prometheus`.
@@ -1898,13 +1964,13 @@ Consulta up: devuelve el objetivo de Prometheus
 - `systemctl` permite gestionar el servicio.
 - `journalctl` permite revisar los registros.
 - `/-/healthy` comprueba la salud básica.
-- `/-/ready` comprueba si Prometheus está preparado para atender peticiones.
+- `/-/ready` comprueba si Prometheus está preparado.
 - La consulta `up` permite comprobar los objetivos recopilados.
 - Los permisos de configuración y datos son fundamentales.
 - Un error de YAML puede impedir el inicio del servicio.
 - El puerto `9090` debe estar disponible.
-- La versión y arquitectura del paquete deben coincidir con el sistema.
-- Las copias de seguridad de la configuración facilitan la recuperación.
+- La versión y la arquitectura deben coincidir con el sistema.
+- Las copias de seguridad facilitan la recuperación.
 - Prometheus no debe exponerse directamente a Internet sin protección.
 - La instalación debe documentarse mediante evidencias reproducibles.
 
@@ -1914,7 +1980,7 @@ Consulta up: devuelve el objetivo de Prometheus
 
 1. ¿Qué función cumple Prometheus?
 2. ¿Qué función cumple `promtool`?
-3. ¿Dónde se instala normalmente el binario de Prometheus en esta práctica?
+3. ¿Dónde se instala el binario de Prometheus en esta práctica?
 4. ¿Dónde se almacena la configuración?
 5. ¿Dónde se almacenan los datos de Prometheus?
 6. ¿Qué usuario debe ejecutar el servicio?
@@ -1963,7 +2029,7 @@ La instalación se considera correcta cuando:
 - Los registros no contienen errores críticos.
 - Se ha guardado el informe de evidencias.
 
-La comprobación final puede ejecutarse con:
+## Comprobación final
 
 ```bash
 printf '%-35s %s\n' \
@@ -1976,6 +2042,7 @@ printf '%-35s %s\n' \
 
 printf '%-35s ' \
   "Configuración válida"
+
 promtool check config /etc/prometheus/prometheus.yml \
   >/dev/null 2>&1 \
   && echo "sí" \
@@ -1983,6 +2050,7 @@ promtool check config /etc/prometheus/prometheus.yml \
 
 printf '%-35s ' \
   "Endpoint saludable"
+
 curl -fsS http://localhost:9090/-/healthy \
   >/dev/null \
   && echo "sí" \
@@ -1990,6 +2058,7 @@ curl -fsS http://localhost:9090/-/healthy \
 
 printf '%-35s ' \
   "Endpoint preparado"
+
 curl -fsS http://localhost:9090/-/ready \
   >/dev/null \
   && echo "sí" \
@@ -1997,6 +2066,7 @@ curl -fsS http://localhost:9090/-/ready \
 
 printf '%-35s ' \
   "Puerto 9090"
+
 sudo ss -lnt '( sport = :9090 )' \
   | grep -q LISTEN \
   && echo "en escucha" \
