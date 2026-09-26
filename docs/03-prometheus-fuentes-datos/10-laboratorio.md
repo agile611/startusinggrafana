@@ -59,7 +59,7 @@ Al finalizar este laboratorio, el alumno podrá:
 
 ---
 
-# Arquitectura y componentes
+## Arquitectura y componentes
 
 ## Introducción
 
