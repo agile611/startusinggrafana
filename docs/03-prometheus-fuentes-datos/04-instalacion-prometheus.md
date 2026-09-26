@@ -118,12 +118,12 @@ http://localhost:9090
 +------------------------------------------------------+
 | Servidor Ubuntu                                      |
 |                                                      |
-|  Usuario de servicio: prometheus                    |
+|  Usuario de servicio: prometheus                     |
 |                                                      |
 |  /usr/local/bin/prometheus                           |
 |  /usr/local/bin/promtool                             |
 |                                                      |
-|  Configuración: /etc/prometheus/prometheus.yml      |
+|  Configuración: /etc/prometheus/prometheus.yml       |
 |  Datos:        /var/lib/prometheus                   |
 |                                                      |
 |  Servicio systemd: prometheus.service                |
