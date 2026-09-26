@@ -98,11 +98,11 @@ Una consulta PromQL puede devolver:
 
 ---
 
-# Requisitos previos
+## Requisitos previos
 
 Antes de comenzar, Prometheus debe estar activo y debe haber objetivos disponibles.
 
-## Comprobar Prometheus
+### Comprobar Prometheus
 
 ```bash
 systemctl is-active prometheus
@@ -114,10 +114,18 @@ Resultado esperado:
 active
 ```
 
-## Comprobar Node Exporter
+### Comprobar Node Exporter
+
+Si Node Exporter se instaló manualmente:
 
 ```bash
 systemctl is-active node_exporter
+```
+
+Si se instaló mediante el paquete de Ubuntu:
+
+```bash
+systemctl is-active prometheus-node-exporter
 ```
 
 Resultado esperado:
@@ -126,7 +134,7 @@ Resultado esperado:
 active
 ```
 
-## Comprobar los objetivos
+### Comprobar los objetivos
 
 ```bash
 curl -s http://localhost:9090/api/v1/targets \
@@ -149,7 +157,7 @@ prometheus      localhost:9090  up
 node_exporter   localhost:9100  up
 ```
 
-## Comprobar la consulta básica
+### Comprobar la consulta básica
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -159,7 +167,7 @@ curl -sG http://localhost:9090/api/v1/query \
 
 ---
 
-# Acceder al editor de PromQL
+## Acceder al editor de PromQL
 
 Abrir la interfaz web:
 
@@ -184,9 +192,9 @@ up
 
 ---
 
-# Tipos de consultas
+## Tipos de consultas
 
-## Consulta de una métrica
+### Consulta de una métrica
 
 Una consulta sencilla consiste en escribir el nombre de una métrica:
 
@@ -206,7 +214,7 @@ node_load1
 node_filesystem_avail_bytes
 ```
 
-## Consulta instantánea
+### Consulta instantánea
 
 Una consulta instantánea devuelve el valor más reciente disponible.
 
@@ -223,7 +231,7 @@ up{instance="localhost:9090",job="prometheus"} 1
 up{instance="localhost:9100",job="node_exporter"} 1
 ```
 
-## Consulta de rango
+### Consulta de rango
 
 Una consulta de rango devuelve la evolución temporal de una o varias series.
 
@@ -242,13 +250,13 @@ La consulta puede ser la misma:
 node_memory_MemAvailable_bytes
 ```
 
-La diferencia está en el tipo de ejecución y el intervalo temporal seleccionado.
+La diferencia está en el tipo de ejecución y en el intervalo temporal seleccionado.
 
 ---
 
-# Selectores de métricas
+## Selectores de métricas
 
-## Selector simple
+### Selector simple
 
 ```promql
 up
@@ -256,7 +264,7 @@ up
 
 Este selector devuelve todas las series cuyo nombre de métrica es `up`.
 
-## Selector con etiquetas
+### Selector con etiquetas
 
 ```promql
 up{
@@ -270,7 +278,7 @@ También puede escribirse en una sola línea:
 up{job="node_exporter"}
 ```
 
-## Varias etiquetas
+### Varias etiquetas
 
 ```promql
 node_cpu_seconds_total{
@@ -279,7 +287,7 @@ node_cpu_seconds_total{
 }
 ```
 
-## Seleccionar una instancia
+### Seleccionar una instancia
 
 ```promql
 up{
@@ -287,7 +295,7 @@ up{
 }
 ```
 
-## Seleccionar un dispositivo
+### Seleccionar un dispositivo
 
 ```promql
 node_network_receive_bytes_total{
@@ -297,7 +305,7 @@ node_network_receive_bytes_total{
 
 ---
 
-# Operadores de etiquetas
+## Operadores de etiquetas
 
 PromQL admite cuatro operadores principales para seleccionar etiquetas.
 
@@ -308,13 +316,13 @@ PromQL admite cuatro operadores principales para seleccionar etiquetas.
 | `=~` | Coincide con una expresión regular | `device=~"en.*"` |
 | `!~` | No coincide con una expresión regular | `device!~"lo|docker.*"` |
 
-## Igual
+### Igualdad exacta
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Distinto
+### Desigualdad
 
 ```promql
 node_network_receive_bytes_total{
@@ -322,7 +330,7 @@ node_network_receive_bytes_total{
 }
 ```
 
-## Expresión regular
+### Expresión regular
 
 ```promql
 node_network_receive_bytes_total{
@@ -330,7 +338,7 @@ node_network_receive_bytes_total{
 }
 ```
 
-## Exclusión mediante expresión regular
+### Exclusión mediante expresión regular
 
 ```promql
 node_network_receive_bytes_total{
@@ -340,7 +348,7 @@ node_network_receive_bytes_total{
 
 ---
 
-# Etiquetas habituales de Node Exporter
+## Etiquetas habituales de Node Exporter
 
 | Etiqueta | Significado |
 |---|---|
@@ -372,7 +380,7 @@ node_filesystem_size_bytes
 
 ---
 
-# La métrica `up`
+## La métrica `up`
 
 La métrica `up` indica si Prometheus pudo realizar correctamente el último *scraping*.
 
@@ -387,49 +395,51 @@ Interpretación:
 | `1` | El objetivo respondió correctamente |
 | `0` | El objetivo no respondió correctamente |
 
-## Consultar todos los objetivos
+### Consultar todos los objetivos
 
 ```promql
 up
 ```
 
-## Consultar Node Exporter
+### Consultar Node Exporter
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Consultar Prometheus
+### Consultar Prometheus
 
 ```promql
 up{job="prometheus"}
 ```
 
-## Buscar objetivos caídos
+### Buscar objetivos caídos
 
 ```promql
 up == 0
 ```
 
-## Contar objetivos
+Esta expresión devuelve únicamente las series cuyo valor sea `0`.
+
+### Contar objetivos
 
 ```promql
 count(up)
 ```
 
-## Contar objetivos disponibles
+### Contar objetivos disponibles
 
 ```promql
 sum(up)
 ```
 
-## Calcular el porcentaje de disponibilidad
+### Calcular el porcentaje de disponibilidad
 
 ```promql
 100 * avg(up)
 ```
 
-## Consultar un objetivo concreto
+### Consultar un objetivo concreto
 
 ```promql
 up{instance="localhost:9100"}
@@ -437,9 +447,9 @@ up{instance="localhost:9100"}
 
 ---
 
-# Tipos de métricas
+## Tipos de métricas
 
-## Gauge
+### Gauge
 
 Un `gauge` representa un valor que puede aumentar o disminuir.
 
@@ -463,7 +473,7 @@ process_resident_memory_bytes
 
 Estos valores pueden cambiar en cualquier dirección.
 
-## Counter
+### Counter
 
 Un `counter` representa un valor acumulativo.
 
@@ -499,7 +509,7 @@ irate()
 
 ---
 
-# Rangos temporales
+## Rangos temporales
 
 Las funciones que calculan cambios necesitan un rango temporal.
 
@@ -544,7 +554,7 @@ Un rango demasiado corto puede producir resultados inestables o insuficientes. U
 
 ---
 
-# Operadores aritméticos
+## Operadores aritméticos
 
 PromQL permite realizar cálculos con métricas.
 
@@ -559,7 +569,7 @@ Operadores principales:
 | `%` | Módulo |
 | `^` | Potencia |
 
-## Restar métricas
+### Restar métricas
 
 ```promql
 node_memory_MemTotal_bytes
@@ -567,7 +577,7 @@ node_memory_MemTotal_bytes
 node_memory_MemAvailable_bytes
 ```
 
-## Dividir métricas
+### Dividir métricas
 
 ```promql
 node_memory_MemAvailable_bytes
@@ -575,7 +585,7 @@ node_memory_MemAvailable_bytes
 node_memory_MemTotal_bytes
 ```
 
-## Convertir a porcentaje
+### Convertir a porcentaje
 
 ```promql
 100 *
@@ -584,7 +594,7 @@ node_memory_MemAvailable_bytes
 node_memory_MemTotal_bytes
 ```
 
-## Calcular memoria utilizada
+### Calcular memoria utilizada
 
 ```promql
 node_memory_MemTotal_bytes
@@ -592,7 +602,7 @@ node_memory_MemTotal_bytes
 node_memory_MemAvailable_bytes
 ```
 
-## Calcular el porcentaje utilizado
+### Calcular el porcentaje utilizado
 
 ```promql
 100 * (
@@ -605,9 +615,9 @@ node_memory_MemAvailable_bytes
 
 ---
 
-# Operadores de comparación
+## Operadores de comparación
 
-PromQL admite comparaciones:
+PromQL admite las siguientes comparaciones:
 
 | Operador | Función |
 |---|---|
@@ -618,13 +628,13 @@ PromQL admite comparaciones:
 | `>=` | Mayor o igual |
 | `<=` | Menor o igual |
 
-## Objetivos caídos
+### Objetivos caídos
 
 ```promql
 up == 0
 ```
 
-## Memoria superior al 80 %
+### Memoria superior al 80 %
 
 ```promql
 100 * (
@@ -635,30 +645,28 @@ up == 0
 ) > 80
 ```
 
-## Sistema de ficheros superior al 90 %
+### Sistemas de ficheros superiores al 90 %
 
 ```promql
 100 * (
   1 -
   node_filesystem_avail_bytes{
-    mountpoint="/",
     fstype!~"tmpfs|overlay"
   }
   /
   node_filesystem_size_bytes{
-    mountpoint="/",
     fstype!~"tmpfs|overlay"
   }
 ) > 90
 ```
 
-Estas consultas pueden devolver únicamente las series que cumplen la condición.
+Estas consultas devuelven únicamente las series que cumplen la condición.
 
 ---
 
-# Funciones de agregación
+## Funciones de agregación
 
-## `sum()`
+### `sum()`
 
 Suma los valores de varias series.
 
@@ -666,7 +674,7 @@ Suma los valores de varias series.
 sum(node_network_receive_bytes_total)
 ```
 
-Suma el tráfico recibido por interfaz:
+Suma el tráfico recibido por instancia:
 
 ```promql
 sum by (instance) (
@@ -676,7 +684,7 @@ sum by (instance) (
 )
 ```
 
-## `avg()`
+### `avg()`
 
 Calcula la media:
 
@@ -684,7 +692,7 @@ Calcula la media:
 avg(node_load1)
 ```
 
-Media del uso de CPU por instancia:
+Media del tiempo de CPU inactiva por instancia:
 
 ```promql
 avg by (instance) (
@@ -692,7 +700,7 @@ avg by (instance) (
 )
 ```
 
-## `min()`
+### `min()`
 
 Devuelve el valor mínimo:
 
@@ -700,7 +708,7 @@ Devuelve el valor mínimo:
 min(node_memory_MemAvailable_bytes)
 ```
 
-## `max()`
+### `max()`
 
 Devuelve el valor máximo:
 
@@ -708,7 +716,7 @@ Devuelve el valor máximo:
 max(node_memory_MemAvailable_bytes)
 ```
 
-## `count()`
+### `count()`
 
 Cuenta las series:
 
@@ -724,11 +732,11 @@ count(node_cpu_seconds_total)
 
 ---
 
-# Agrupación con `by`
+## Agrupación con `by`
 
 La cláusula `by` permite definir las etiquetas que deben conservarse en el resultado.
 
-## Media por instancia
+### Media por instancia
 
 ```promql
 avg by (instance) (
@@ -736,7 +744,7 @@ avg by (instance) (
 )
 ```
 
-## Suma por interfaz
+### Suma por interfaz
 
 ```promql
 sum by (device) (
@@ -744,7 +752,7 @@ sum by (device) (
 )
 ```
 
-## Suma por instancia y dispositivo
+### Suma por instancia y dispositivo
 
 ```promql
 sum by (instance, device) (
@@ -752,7 +760,7 @@ sum by (instance, device) (
 )
 ```
 
-## Media por modo de CPU
+### Media por modo de CPU
 
 ```promql
 avg by (mode) (
@@ -762,7 +770,7 @@ avg by (mode) (
 
 ---
 
-# Agrupación con `without`
+## Agrupación con `without`
 
 `without` elimina determinadas etiquetas del resultado y conserva las demás.
 
@@ -794,7 +802,7 @@ Ambas consultas pueden producir resultados parecidos, pero `by` y `without` expr
 
 ---
 
-# Uso de CPU
+## Uso de CPU
 
 La métrica principal es:
 
@@ -813,7 +821,7 @@ Esta métrica es un contador y se divide por modo:
 - `steal`
 - Otros modos disponibles
 
-## Tiempo de CPU inactiva
+### Tiempo de CPU inactiva
 
 ```promql
 node_cpu_seconds_total{
@@ -821,7 +829,7 @@ node_cpu_seconds_total{
 }
 ```
 
-## Porcentaje de CPU inactiva
+### Porcentaje de CPU inactiva
 
 ```promql
 100 * (
@@ -831,7 +839,7 @@ node_cpu_seconds_total{
 )
 ```
 
-## Porcentaje de CPU utilizada
+### Porcentaje de CPU utilizada
 
 ```promql
 100 - (
@@ -841,19 +849,7 @@ node_cpu_seconds_total{
 )
 ```
 
-## Uso de CPU excluyendo algunos modos
-
-```promql
-100 - (
-  avg by (instance) (
-    rate(node_cpu_seconds_total{
-      mode="idle"
-    }[5m])
-  ) * 100
-)
-```
-
-## Uso de CPU por núcleo
+### Uso de CPU por núcleo
 
 ```promql
 100 - (
@@ -865,7 +861,7 @@ node_cpu_seconds_total{
 
 Esta consulta conserva las etiquetas de cada CPU.
 
-## Uso de CPU del sistema
+### Uso de CPU del sistema
 
 ```promql
 100 * avg by (instance) (
@@ -875,7 +871,7 @@ Esta consulta conserva las etiquetas de cada CPU.
 )
 ```
 
-## Uso de CPU de usuario
+### Uso de CPU de usuario
 
 ```promql
 100 * avg by (instance) (
@@ -887,27 +883,27 @@ Esta consulta conserva las etiquetas de cada CPU.
 
 ---
 
-# Uso de memoria
+## Uso de memoria
 
-## Memoria total
+### Memoria total
 
 ```promql
 node_memory_MemTotal_bytes
 ```
 
-## Memoria disponible
+### Memoria disponible
 
 ```promql
 node_memory_MemAvailable_bytes
 ```
 
-## Memoria libre
+### Memoria libre
 
 ```promql
 node_memory_MemFree_bytes
 ```
 
-## Memoria utilizada en bytes
+### Memoria utilizada en bytes
 
 ```promql
 node_memory_MemTotal_bytes
@@ -915,7 +911,7 @@ node_memory_MemTotal_bytes
 node_memory_MemAvailable_bytes
 ```
 
-## Porcentaje de memoria utilizado
+### Porcentaje de memoria utilizado
 
 ```promql
 100 * (
@@ -926,7 +922,7 @@ node_memory_MemAvailable_bytes
 )
 ```
 
-## Porcentaje de memoria disponible
+### Porcentaje de memoria disponible
 
 ```promql
 100 *
@@ -935,9 +931,7 @@ node_memory_MemAvailable_bytes
 node_memory_MemTotal_bytes
 ```
 
-## Memoria utilizada en gigabytes
-
-PromQL no utiliza normalmente sufijos de unidades para la conversión. Se divide entre la potencia correspondiente:
+### Memoria utilizada en gibibytes
 
 ```promql
 (
@@ -961,27 +955,27 @@ gibibytes
 
 ---
 
-# Uso de sistemas de ficheros
+## Uso de sistemas de ficheros
 
-## Tamaño total
+### Tamaño total
 
 ```promql
 node_filesystem_size_bytes
 ```
 
-## Espacio disponible
+### Espacio disponible
 
 ```promql
 node_filesystem_avail_bytes
 ```
 
-## Espacio libre
+### Espacio libre
 
 ```promql
 node_filesystem_free_bytes
 ```
 
-## Consultar la raíz
+### Consultar la raíz
 
 ```promql
 node_filesystem_avail_bytes{
@@ -989,7 +983,7 @@ node_filesystem_avail_bytes{
 }
 ```
 
-## Excluir sistemas virtuales
+### Excluir sistemas virtuales
 
 ```promql
 node_filesystem_avail_bytes{
@@ -998,7 +992,7 @@ node_filesystem_avail_bytes{
 }
 ```
 
-## Uso en bytes
+### Uso en bytes
 
 ```promql
 node_filesystem_size_bytes{
@@ -1012,7 +1006,7 @@ node_filesystem_avail_bytes{
 }
 ```
 
-## Porcentaje utilizado
+### Porcentaje utilizado
 
 ```promql
 100 * (
@@ -1029,7 +1023,7 @@ node_filesystem_avail_bytes{
 )
 ```
 
-## Sistemas de ficheros con más del 80 % de uso
+### Sistemas de ficheros con más del 80 % de uso
 
 ```promql
 100 * (
@@ -1044,7 +1038,7 @@ node_filesystem_avail_bytes{
 ) > 80
 ```
 
-## Agrupar por punto de montaje
+### Agrupar por punto de montaje
 
 ```promql
 max by (instance, mountpoint) (
@@ -1063,35 +1057,35 @@ max by (instance, mountpoint) (
 
 ---
 
-# Tráfico de red
+## Tráfico de red
 
 Las métricas de tráfico son contadores.
 
-## Bytes recibidos
+### Bytes recibidos
 
 ```promql
 node_network_receive_bytes_total
 ```
 
-## Bytes enviados
+### Bytes enviados
 
 ```promql
 node_network_transmit_bytes_total
 ```
 
-## Tráfico recibido por segundo
+### Tráfico recibido por segundo
 
 ```promql
 rate(node_network_receive_bytes_total[5m])
 ```
 
-## Tráfico enviado por segundo
+### Tráfico enviado por segundo
 
 ```promql
 rate(node_network_transmit_bytes_total[5m])
 ```
 
-## Excluir loopback
+### Excluir loopback
 
 ```promql
 rate(node_network_receive_bytes_total{
@@ -1099,7 +1093,7 @@ rate(node_network_receive_bytes_total{
 }[5m])
 ```
 
-## Sumar tráfico recibido por instancia
+### Sumar tráfico recibido por instancia
 
 ```promql
 sum by (instance) (
@@ -1109,7 +1103,7 @@ sum by (instance) (
 )
 ```
 
-## Sumar tráfico enviado por instancia
+### Sumar tráfico enviado por instancia
 
 ```promql
 sum by (instance) (
@@ -1119,7 +1113,7 @@ sum by (instance) (
 )
 ```
 
-## Tráfico total recibido y enviado
+### Tráfico total recibido y enviado
 
 ```promql
 sum by (instance) (
@@ -1137,9 +1131,9 @@ sum by (instance) (
 
 ---
 
-# `rate()` e `irate()`
+## `rate()` e `irate()`
 
-## `rate()`
+### `rate()`
 
 `rate()` calcula la velocidad media de cambio de un contador durante un intervalo.
 
@@ -1154,7 +1148,7 @@ Es apropiada para:
 - Consultas de tendencias.
 - Reglas de alerta.
 
-## `irate()`
+### `irate()`
 
 `irate()` calcula una velocidad utilizando las muestras más recientes del rango.
 
@@ -1164,7 +1158,7 @@ irate(node_network_receive_bytes_total[5m])
 
 Es más sensible a cambios rápidos y puede resultar más irregular.
 
-## Comparación
+### Comparación
 
 | Función | Comportamiento | Uso habitual |
 |---|---|---|
@@ -1173,9 +1167,9 @@ Es más sensible a cambios rápidos y puede resultar más irregular.
 
 ---
 
-# Tiempo de actividad
+## Tiempo de actividad
 
-## Tiempo de actividad en segundos
+### Tiempo de actividad en segundos
 
 ```promql
 node_time_seconds
@@ -1183,7 +1177,7 @@ node_time_seconds
 node_boot_time_seconds
 ```
 
-## Tiempo de actividad en días
+### Tiempo de actividad en días
 
 ```promql
 (
@@ -1193,37 +1187,37 @@ node_boot_time_seconds
 ) / 86400
 ```
 
-## Tiempo de actividad de Prometheus
+### Tiempo de actividad de Prometheus
 
 ```promql
 time()
 -
-process_start_time_seconds
+process_start_time_seconds{job="prometheus"}
 ```
 
 ---
 
-# Carga del sistema
+## Carga del sistema
 
-## Carga a un minuto
+### Carga a un minuto
 
 ```promql
 node_load1
 ```
 
-## Carga a cinco minutos
+### Carga a cinco minutos
 
 ```promql
 node_load5
 ```
 
-## Carga a quince minutos
+### Carga a quince minutos
 
 ```promql
 node_load15
 ```
 
-## Comparar la carga con el número de CPUs
+### Comparar la carga con el número de CPUs
 
 ```promql
 node_load1
@@ -1239,7 +1233,7 @@ La interpretación de la carga depende del número de CPUs disponibles. Una carg
 
 ---
 
-# Operadores lógicos y de conjunto
+## Operadores lógicos y de conjunto
 
 PromQL permite utilizar operadores como:
 
@@ -1247,19 +1241,19 @@ PromQL permite utilizar operadores como:
 - `or`
 - `unless`
 
-## Objetivos disponibles de Node Exporter
+### Objetivos disponibles de Node Exporter
 
 ```promql
 up{job="node_exporter"} == 1
 ```
 
-## Objetivos caídos de Node Exporter
+### Objetivos caídos de Node Exporter
 
 ```promql
 up{job="node_exporter"} == 0
 ```
 
-## Combinar condiciones
+### Combinar condiciones
 
 ```promql
 (
@@ -1271,7 +1265,7 @@ and
 )
 ```
 
-## Utilizar `or`
+### Utilizar `or`
 
 ```promql
 up{job="node_exporter"} == 0
@@ -1279,7 +1273,7 @@ or
 up{job="prometheus"} == 0
 ```
 
-## Utilizar `unless`
+### Utilizar `unless`
 
 ```promql
 up unless up{job="node_exporter"}
@@ -1289,11 +1283,11 @@ Los operadores de conjunto deben utilizarse comprendiendo las etiquetas de las s
 
 ---
 
-# Comparación entre series
+## Comparación entre series
 
 Cuando se combinan métricas, PromQL utiliza las etiquetas para relacionar las series.
 
-## División directa
+### División directa
 
 ```promql
 node_memory_MemAvailable_bytes
@@ -1303,7 +1297,7 @@ node_memory_MemTotal_bytes
 
 Ambas métricas deben compartir etiquetas compatibles.
 
-## Agrupación previa
+### Agrupación previa
 
 ```promql
 sum by (instance) (
@@ -1311,9 +1305,9 @@ sum by (instance) (
 )
 ```
 
-La agrupación permite obtener un resultado con etiquetas conocidas y facilitar operaciones posteriores.
+La agrupación permite obtener un resultado con etiquetas conocidas y facilita operaciones posteriores.
 
-## Ignorar etiquetas
+### Ignorar etiquetas
 
 En casos más avanzados pueden utilizarse modificadores como:
 
@@ -1341,51 +1335,53 @@ Estos modificadores deben utilizarse con cuidado, porque una combinación incorr
 
 ---
 
-# Métricas de Prometheus
+## Métricas de Prometheus
 
-## Información de compilación
+### Información de compilación
 
 ```promql
 prometheus_build_info
 ```
 
-## Series actuales
+### Series actuales
 
 ```promql
 prometheus_tsdb_head_series
 ```
 
-## Muestras añadidas
+### Muestras añadidas
 
 ```promql
 prometheus_tsdb_head_samples_appended_total
 ```
 
-## Memoria del proceso
+### Memoria del proceso
 
 ```promql
-process_resident_memory_bytes
+process_resident_memory_bytes{job="prometheus"}
 ```
 
-## CPU del proceso
+### CPU del proceso
 
 ```promql
-rate(process_cpu_seconds_total[5m])
+rate(process_cpu_seconds_total{job="prometheus"}[5m])
 ```
 
-## Tiempo de actividad de Prometheus
+### Tiempo de actividad de Prometheus
 
 ```promql
-time() - process_start_time_seconds
+time()
+-
+process_start_time_seconds{job="prometheus"}
 ```
 
-## Objetivos disponibles
+### Objetivos disponibles
 
 ```promql
 sum(up)
 ```
 
-## Objetivos totales
+### Objetivos totales
 
 ```promql
 count(up)
@@ -1393,11 +1389,11 @@ count(up)
 
 ---
 
-# Consultas para Grafana
+## Consultas para Grafana
 
 Las siguientes consultas pueden utilizarse como base para paneles.
 
-## Panel de disponibilidad
+### Panel de disponibilidad
 
 ```promql
 up{job="node_exporter"}
@@ -1415,7 +1411,7 @@ Unidad:
 none
 ```
 
-## Panel de CPU
+### Panel de CPU
 
 ```promql
 100 - (
@@ -1437,7 +1433,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Panel de memoria
+### Panel de memoria
 
 ```promql
 100 * (
@@ -1460,7 +1456,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Panel de almacenamiento
+### Panel de almacenamiento
 
 ```promql
 100 * (
@@ -1489,7 +1485,7 @@ Unidad:
 Percent (0-100)
 ```
 
-## Panel de tráfico recibido
+### Panel de tráfico recibido
 
 ```promql
 sum by (instance) (
@@ -1511,7 +1507,7 @@ Unidad:
 bytes/sec
 ```
 
-## Panel de carga
+### Panel de carga
 
 ```promql
 node_load1
@@ -1531,9 +1527,9 @@ none
 
 ---
 
-# Consultar PromQL mediante la API
+## Consultar PromQL mediante la API
 
-## Consulta instantánea
+### Consulta instantánea
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -1541,7 +1537,7 @@ curl -sG http://localhost:9090/api/v1/query \
   | jq
 ```
 
-## Mostrar solo job, instancia y valor
+### Mostrar job, instancia y valor
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -1557,7 +1553,7 @@ curl -sG http://localhost:9090/api/v1/query \
   '
 ```
 
-## Consultar uso de memoria
+### Consultar el uso de memoria
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -1566,7 +1562,7 @@ curl -sG http://localhost:9090/api/v1/query \
   | jq
 ```
 
-## Consultar un rango temporal
+### Consultar un rango temporal
 
 ```bash
 START=$(date -d '15 minutes ago' +%s)
@@ -1580,7 +1576,7 @@ curl -sG http://localhost:9090/api/v1/query_range \
   | jq
 ```
 
-## Guardar una consulta
+### Guardar una consulta
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -1610,7 +1606,7 @@ prometheus_build_info
 ```
 
 ```promql
-process_resident_memory_bytes
+process_resident_memory_bytes{job="prometheus"}
 ```
 
 ```promql
@@ -1623,7 +1619,7 @@ node_memory_MemAvailable_bytes
 2. Cambia entre tabla y gráfico.
 3. Anota cuántas series devuelve cada una.
 4. Identifica las etiquetas.
-5. Indica si la métrica es de Prometheus o de Node Exporter.
+5. Indica si la métrica procede de Prometheus o de Node Exporter.
 
 Completar:
 
@@ -1669,7 +1665,7 @@ node_network_receive_bytes_total{device=~"en.*"}
 1. Ejecuta la consulta sin filtros.
 2. Añade un filtro por `job`.
 3. Añade un filtro por `mode`.
-4. Excluye `lo`.
+4. Excluye la interfaz `lo`.
 5. Utiliza una expresión regular.
 6. Explica la diferencia entre `=` y `=~`.
 
@@ -1718,20 +1714,32 @@ sum(up)
 sudo systemctl stop node_exporter
 ```
 
-5. Espera varios intervalos de *scraping*.
-6. Ejecuta:
+5. Si utilizas el paquete de Ubuntu, ejecuta:
+
+```bash
+sudo systemctl stop prometheus-node-exporter
+```
+
+6. Espera varios intervalos de *scraping*.
+7. Ejecuta:
 
 ```promql
 up{job="node_exporter"}
 ```
 
-7. Inicia de nuevo el servicio:
+8. Inicia de nuevo el servicio:
 
 ```bash
 sudo systemctl start node_exporter
 ```
 
-8. Comprueba la recuperación.
+9. Si utilizas el paquete de Ubuntu:
+
+```bash
+sudo systemctl start prometheus-node-exporter
+```
+
+10. Comprueba la recuperación.
 
 ---
 
@@ -1783,17 +1791,7 @@ Porcentaje utilizado:
 )
 ```
 
-### Actividades
-
-1. Ejecuta cada consulta.
-2. Compara el resultado con:
-
-```bash
-free -h
-```
-
-3. Comprueba las unidades.
-4. Redondea el resultado si es necesario:
+Porcentaje redondeado:
 
 ```promql
 round(
@@ -1806,6 +1804,19 @@ round(
   0.1
 )
 ```
+
+### Actividades
+
+1. Ejecuta cada consulta.
+2. Compara el resultado con:
+
+```bash
+free -h
+```
+
+3. Comprueba las unidades.
+4. Explica la diferencia entre memoria libre y memoria disponible.
+5. Indica qué consulta utilizarías en un panel de Grafana.
 
 ---
 
@@ -2005,8 +2016,8 @@ sum by (device) (
 
 1. Identifica las interfaces.
 2. Excluye `lo`.
-3. Calcula tráfico recibido.
-4. Calcula tráfico enviado.
+3. Calcula el tráfico recibido.
+4. Calcula el tráfico enviado.
 5. Genera tráfico mediante una descarga o navegación controlada.
 6. Observa el cambio en el gráfico.
 7. Compara con:
@@ -2189,6 +2200,8 @@ Posibles causas:
 - El objetivo todavía no ha sido consultado.
 - La métrica no está disponible en esa versión.
 
+---
+
 ## Comprobar las métricas disponibles
 
 Desde Node Exporter:
@@ -2212,7 +2225,9 @@ curl -s http://localhost:9090/api/v1/label/__name__/values \
   | grep '^node_memory_'
 ```
 
-## Comprobar etiquetas
+---
+
+## Comprobar las etiquetas
 
 Consultar una métrica amplia:
 
@@ -2222,9 +2237,9 @@ node_network_receive_bytes_total
 
 Observar las etiquetas devueltas:
 
-- `device`
-- `instance`
-- `job`
+- `device`.
+- `instance`.
+- `job`.
 
 Si una consulta utiliza:
 
@@ -2233,6 +2248,8 @@ device="eth0"
 ```
 
 pero el sistema utiliza `ens33`, el resultado puede estar vacío.
+
+---
 
 ## El resultado contiene demasiadas series
 
@@ -2255,6 +2272,8 @@ sum by (instance) (
 )
 ```
 
+---
+
 ## El resultado parece incorrecto
 
 Comprobar:
@@ -2274,12 +2293,14 @@ No se debe aplicar `rate()` a una métrica que ya representa un valor instantán
 node_memory_MemAvailable_bytes
 ```
 
+---
+
 ## El gráfico aparece vacío
 
 Comprobar:
 
 - El rango temporal.
-- El intervalo de scraping.
+- El intervalo de *scraping*.
 - El estado del target.
 - La sintaxis de la consulta.
 - La existencia de la métrica.
@@ -2446,7 +2467,7 @@ sum by (instance) (
 
 ---
 
-# Guardar evidencias
+## Guardar evidencias
 
 Crear el directorio:
 
@@ -2523,7 +2544,7 @@ EOF
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Consulta | ¿Devuelve datos? | Unidad | Tipo de métrica | Observaciones |
 |---|---|---|---|---|

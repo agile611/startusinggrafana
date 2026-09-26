@@ -38,7 +38,7 @@ Al finalizar esta práctica, el alumno podrá:
 - Acceder al menú de fuentes de datos.
 - Añadir Prometheus como fuente de datos.
 - Configurar correctamente la URL de Prometheus.
-- Diferenciar entre `localhost` del navegador y `localhost` del servidor Grafana.
+- Diferenciar entre `localhost` del navegador, del servidor de Grafana y de un contenedor.
 - Probar la conexión entre Grafana y Prometheus.
 - Interpretar los errores habituales de conexión.
 - Ejecutar una consulta PromQL desde Grafana.
@@ -46,6 +46,7 @@ Al finalizar esta práctica, el alumno podrá:
 - Definir una fuente de datos predeterminada.
 - Consultar la configuración mediante la API de Grafana.
 - Utilizar el aprovisionamiento mediante ficheros YAML.
+- Diagnosticar problemas de conectividad.
 - Documentar las evidencias de la configuración.
 
 ---
@@ -83,11 +84,47 @@ Grafana no copia normalmente todas las métricas de Prometheus. Cuando un usuari
 
 ---
 
-# Requisitos previos
+## Arquitectura del laboratorio
+
+```text
++---------------------+
+| Servidor Linux      |
+|                     |
+|  Prometheus         |
+|  Puerto 9090        |
+|                     |
+|  Grafana            |
+|  Puerto 3000        |
+|                     |
+|  Node Exporter      |
+|  Puerto 9100        |
++---------------------+
+```
+
+### Flujo de una consulta
+
+```text
+Navegador del usuario
+          |
+          v
+       Grafana
+          |
+          | API HTTP
+          v
+      Prometheus
+          |
+          | Consulta PromQL
+          v
+  Series temporales
+```
+
+---
+
+## Requisitos previos
 
 Antes de comenzar, deben estar activos Grafana y Prometheus.
 
-## Comprobar Prometheus
+### Comprobar Prometheus
 
 ```bash
 systemctl is-active prometheus
@@ -115,10 +152,11 @@ Comprobar que Prometheus responde a una consulta:
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
-  --data-urlencode 'query=up'
+  --data-urlencode 'query=up' \
+  | jq
 ```
 
-## Comprobar Grafana
+### Comprobar Grafana
 
 ```bash
 systemctl is-active grafana-server
@@ -145,17 +183,37 @@ curl -I http://localhost:3000/api/health
 Consultar el estado:
 
 ```bash
-curl -s http://localhost:3000/api/health
+curl -s http://localhost:3000/api/health | jq
 ```
 
 Resultado conceptual:
 
 ```json
 {
-  "commit": "...",
   "database": "ok",
-  "version": "..."
+  "version": "...",
+  "commit": "..."
 }
+```
+
+### Comprobar Node Exporter
+
+Si se instaló manualmente:
+
+```bash
+systemctl is-active node_exporter
+```
+
+Si se instaló mediante un paquete de Ubuntu:
+
+```bash
+systemctl is-active prometheus-node-exporter
+```
+
+Comprobar el endpoint:
+
+```bash
+curl -I http://localhost:9100/metrics
 ```
 
 ---
@@ -201,13 +259,34 @@ Ejemplo conceptual:
 ```text
 Grafana
    |
-   | HTTP API
+   | API HTTP
    v
 Prometheus
    |
    | Resultado PromQL
    v
 Grafana
+```
+
+## ¿Qué significa el modo de acceso?
+
+El modo de acceso determina desde dónde se conecta Grafana a la fuente de datos.
+
+| Modo | Lugar desde el que se realiza la conexión |
+|---|---|
+| `Server` o `Proxy` | Servidor de Grafana |
+| `Browser` o `Direct` | Navegador del usuario |
+
+Para esta práctica se utilizará el modo:
+
+```text
+Server
+```
+
+o, según la versión de Grafana:
+
+```text
+Proxy
 ```
 
 ---
@@ -223,7 +302,7 @@ http://localhost:3000
 Si Grafana está instalado en otro servidor:
 
 ```text
-http://<IP-DEL-SERVIDOR>:3000
+http://IP_DEL_SERVIDOR:3000
 ```
 
 Ejemplo:
@@ -238,7 +317,7 @@ Iniciar sesión con la cuenta de administración definida durante la instalació
 
 ---
 
-# Ubicación del menú de fuentes de datos
+## Ubicación del menú de fuentes de datos
 
 Según la versión y el diseño de Grafana, la opción puede encontrarse en:
 
@@ -293,7 +372,7 @@ Buscar:
 Prometheus
 ```
 
-Seleccionar el tipo de fuente.
+Seleccionar el tipo de fuente de datos correspondiente.
 
 ## Paso 3: configurar la URL
 
@@ -308,9 +387,9 @@ La configuración mínima será:
 | Campo | Valor |
 |---|---|
 | Name | `Prometheus` |
-| Type | `Prometheus |
+| Type | `Prometheus` |
 | URL | `http://localhost:9090` |
-| Access | `Server` |
+| Access | `Server` o `Proxy` |
 | Default | Activado |
 
 ## Paso 4: guardar y probar
@@ -331,11 +410,9 @@ El texto puede variar ligeramente según la versión de Grafana, pero debe indic
 
 ---
 
-# Configuración de acceso
+# Configuración del modo de acceso
 
-Grafana puede conectarse a una fuente de datos utilizando diferentes modos de acceso.
-
-## Server
+## Server o Proxy
 
 En este modo, Grafana realiza la conexión desde el servidor donde se ejecuta.
 
@@ -343,6 +420,12 @@ Es el modo recomendado para esta práctica:
 
 ```text
 Access: Server
+```
+
+o:
+
+```text
+Access: Proxy
 ```
 
 Flujo:
@@ -357,7 +440,14 @@ Grafana
 Prometheus
 ```
 
-## Browser
+Ventajas:
+
+- Evita problemas habituales de CORS.
+- La URL solo debe ser accesible desde Grafana.
+- Es adecuado para redes internas.
+- Funciona correctamente con contenedores y servidores separados.
+
+## Browser o Direct
 
 En este modo, algunas peticiones pueden realizarse desde el navegador del usuario.
 
@@ -367,11 +457,19 @@ Puede provocar problemas relacionados con:
 - Resolución de nombres.
 - Redes privadas.
 - Direcciones no accesibles desde el equipo del alumno.
+- Certificados TLS.
+- Firewalls.
 
 Para el laboratorio se utilizará:
 
 ```text
 Access: Server
+```
+
+o:
+
+```text
+Access: Proxy
 ```
 
 ---
@@ -380,7 +478,7 @@ Access: Server
 
 `localhost` siempre hace referencia al equipo que realiza la conexión.
 
-## Caso 1: Grafana y Prometheus en el mismo servidor
+## Grafana y Prometheus en el mismo servidor
 
 Esta configuración es correcta:
 
@@ -394,7 +492,7 @@ El flujo es:
 Grafana ───> localhost:9090 ───> Prometheus
 ```
 
-## Caso 2: Grafana y Prometheus en servidores diferentes
+## Grafana y Prometheus en servidores diferentes
 
 Si Grafana está en `grafana-01` y Prometheus en `prometheus-01`, esta configuración puede ser incorrecta:
 
@@ -416,7 +514,7 @@ o:
 http://192.168.1.50:9090
 ```
 
-## Caso 3: Grafana y Prometheus en contenedores
+## Grafana y Prometheus en contenedores
 
 Si ambos servicios están en la misma red Docker, normalmente se utiliza el nombre del servicio:
 
@@ -432,6 +530,27 @@ http://localhost:9090
 
 Dentro de un contenedor, `localhost` hace referencia al propio contenedor.
 
+## Ejemplo con Docker Compose
+
+```yaml
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+```
+
+Desde Grafana, la URL interna será normalmente:
+
+```text
+http://prometheus:9090
+```
+
 ---
 
 # Configuración recomendada según el entorno
@@ -439,11 +558,11 @@ Dentro de un contenedor, `localhost` hace referencia al propio contenedor.
 | Entorno | URL habitual |
 |---|---|
 | Mismo servidor físico o virtual | `http://localhost:9090` |
-| Prometheus en otro servidor | `http://IP:9090` |
+| Prometheus en otro servidor | `http://IP_DEL_SERVIDOR:9090` |
 | Resolución DNS disponible | `http://prometheus.example.local:9090` |
 | Docker Compose | `http://prometheus:9090` |
 | Kubernetes | URL del Service de Prometheus |
-| HTTPS con proxy | `https://prometheus.example.local` |
+| HTTPS mediante proxy | `https://prometheus.example.local` |
 
 La URL correcta depende de dónde se ejecuten Grafana y Prometheus.
 
@@ -455,17 +574,13 @@ La fuente de datos de Prometheus puede incluir opciones adicionales.
 
 ## HTTP method
 
-Normalmente se utiliza:
+Grafana puede utilizar peticiones `GET` o `POST` según la consulta y la versión instalada.
 
-```text
-POST
-```
-
-Grafana puede utilizar peticiones GET o POST según la consulta y la versión.
+En la mayoría de los casos se puede mantener el valor predeterminado.
 
 ## Scrape interval
 
-Grafana puede utilizar un intervalo mínimo relacionado con el intervalo de scraping de Prometheus.
+Grafana puede utilizar un intervalo mínimo relacionado con el intervalo de *scraping* de Prometheus.
 
 Ejemplo:
 
@@ -485,11 +600,11 @@ Ejemplo:
 Query timeout: 60s
 ```
 
-Un tiempo de espera excesivo puede ocultar problemas de rendimiento. Un tiempo demasiado pequeño puede provocar errores en consultas complejas.
+Un tiempo demasiado pequeño puede provocar errores en consultas complejas. Un tiempo excesivo puede ocultar problemas de rendimiento.
 
 ## Prometheus type
 
-Según la versión de Grafana, puede aparecer una opción para indicar el tipo o versión de Prometheus.
+Según la versión de Grafana, puede aparecer una opción para indicar el tipo o la versión de Prometheus.
 
 Seleccionar la opción compatible con la instalación del laboratorio.
 
@@ -582,7 +697,7 @@ Configurar el panel como:
 Visualization: Stat
 ```
 
-O como:
+o como:
 
 ```text
 Visualization: Table
@@ -638,7 +753,7 @@ Grafana dispone de un inspector que permite revisar:
 - Datos transformados.
 - Series devueltas.
 
-Abrir el inspector desde el panel y revisar la pestaña de consulta o datos.
+Abrir el inspector desde el panel y revisar las pestañas de consulta, datos o estadísticas.
 
 Esta función resulta útil para distinguir entre:
 
@@ -786,9 +901,25 @@ datasources:
 
 La URL depende de la red donde se encuentren los contenedores.
 
+## Comprobar errores de provisioning
+
+Consultar los registros:
+
+```bash
+sudo journalctl -u grafana-server \
+  --since "5 minutes ago" \
+  --no-pager
+```
+
+Revisar el fichero:
+
+```bash
+sudo cat /etc/grafana/provisioning/datasources/prometheus.yml
+```
+
 ---
 
-# Añadir la fuente de datos mediante la API
+# Añadir la fuente mediante la API
 
 Grafana proporciona una API HTTP para gestionar fuentes de datos.
 
@@ -798,6 +929,16 @@ El endpoint habitual es:
 /api/datasources
 ```
 
+## Crear un token
+
+La creación del token depende de la versión y del sistema de autenticación de Grafana.
+
+Guardar el token en una variable de entorno:
+
+```bash
+export GRAFANA_TOKEN="REEMPLAZAR_POR_UN_TOKEN"
+```
+
 ## Crear una fuente de datos
 
 Ejemplo conceptual:
@@ -805,7 +946,7 @@ Ejemplo conceptual:
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <TOKEN>" \
+  -H "Authorization: Bearer $GRAFANA_TOKEN" \
   http://localhost:3000/api/datasources \
   -d '{
     "name": "Prometheus",
@@ -817,29 +958,21 @@ curl -X POST \
   }'
 ```
 
-Sustituir:
+Sustituir el valor de:
 
 ```text
-<TOKEN>
+GRAFANA_TOKEN
 ```
 
-por un token válido de Grafana.
+por un token válido con permisos suficientes.
 
 > No guardar tokens en scripts públicos ni en repositorios. Utilizar variables de entorno o un sistema seguro de gestión de secretos.
 
 ## Consultar las fuentes existentes
 
 ```bash
-curl \
-  -H "Authorization: Bearer <TOKEN>" \
-  http://localhost:3000/api/datasources
-```
-
-Mostrar con formato legible:
-
-```bash
 curl -s \
-  -H "Authorization: Bearer <TOKEN>" \
+  -H "Authorization: Bearer $GRAFANA_TOKEN" \
   http://localhost:3000/api/datasources \
   | jq
 ```
@@ -848,14 +981,18 @@ curl -s \
 
 ```bash
 curl -s \
-  -H "Authorization: Bearer <TOKEN>" \
+  -H "Authorization: Bearer $GRAFANA_TOKEN" \
   http://localhost:3000/api/datasources/uid/prometheus \
   | jq
 ```
 
-## Probar una fuente mediante la API
+## Eliminar la variable del token
 
-La ruta exacta puede variar según la versión de Grafana. Para tareas administrativas es preferible utilizar la interfaz, el provisioning o la documentación de la API de la versión instalada.
+```bash
+unset GRAFANA_TOKEN
+```
+
+> La ruta exacta y los permisos necesarios pueden variar según la versión y la configuración de seguridad de Grafana.
 
 ---
 
@@ -892,9 +1029,7 @@ Utilizar:
 - Gestores de credenciales.
 - Permisos restrictivos.
 
-## Permisos del fichero
-
-Comprobar:
+## Comprobar los permisos del fichero
 
 ```bash
 sudo stat \
@@ -934,7 +1069,7 @@ Debe utilizarse únicamente para prácticas concretas y documentarse claramente.
 
 # Diagnóstico de problemas
 
-## Error: connection refused
+## Error: `connection refused`
 
 Síntoma habitual:
 
@@ -960,6 +1095,12 @@ Probar desde el servidor de Grafana:
 curl http://localhost:9090/-/healthy
 ```
 
+Si Grafana y Prometheus están separados, probar con la dirección real:
+
+```bash
+curl http://IP_DEL_SERVIDOR_PROMETHEUS:9090/-/healthy
+```
+
 Posibles causas:
 
 - Prometheus está detenido.
@@ -968,8 +1109,9 @@ Posibles causas:
 - Grafana y Prometheus están en servidores distintos.
 - El firewall bloquea el acceso.
 - Los contenedores no comparten red.
+- Prometheus solo escucha en `127.0.0.1`.
 
-## Error: no route to host
+## Error: `no route to host`
 
 Posibles causas:
 
@@ -980,10 +1122,10 @@ Posibles causas:
 - Firewall.
 - Dirección IP incorrecta.
 
-Probar:
+Probar la conectividad:
 
 ```bash
-ping <IP-DE-PROMETHEUS>
+ping IP_DEL_SERVIDOR_PROMETHEUS
 ```
 
 Comprobar la ruta:
@@ -995,10 +1137,10 @@ ip route
 Probar el puerto:
 
 ```bash
-nc -vz <IP-DE-PROMETHEUS> 9090
+nc -vz IP_DEL_SERVIDOR_PROMETHEUS 9090
 ```
 
-## Error: DNS
+## Error de DNS
 
 Comprobar la resolución:
 
@@ -1062,6 +1204,7 @@ Posibles causas:
 - El rango temporal es incorrecto.
 - El panel utiliza una fuente de datos distinta.
 - La consulta contiene un filtro incorrecto.
+- El dashboard tiene variables con valores incorrectos.
 
 ## Error de permisos o autenticación
 
@@ -1095,12 +1238,12 @@ Puede haberse creado:
 
 Consultar las fuentes configuradas desde la interfaz o la API.
 
-Revisar:
+Revisar los ficheros de provisioning:
 
 ```bash
 sudo find /etc/grafana/provisioning/datasources \
-  -type f \
   -maxdepth 1 \
+  -type f \
   -print
 ```
 
@@ -1210,7 +1353,7 @@ http://localhost:3000
 ```text
 Name: Prometheus
 URL: http://localhost:9090
-Access: Server
+Access: Server o Proxy
 ```
 
 7. Activar la opción de fuente predeterminada.
@@ -1447,6 +1590,12 @@ curl -s \
   | jq
 ```
 
+Eliminar la variable al terminar:
+
+```bash
+unset GRAFANA_TOKEN
+```
+
 ### Actividades
 
 1. Consulta las fuentes configuradas.
@@ -1455,11 +1604,6 @@ curl -s \
 4. Identifica la URL.
 5. Identifica el UID.
 6. Comprueba si es la fuente predeterminada.
-7. Elimina la variable al terminar:
-
-```bash
-unset GRAFANA_TOKEN
-```
 
 ---
 
@@ -1725,7 +1869,7 @@ Configuración:
 ```text
 Name: Prometheus
 URL: http://localhost:9090
-Access: Server
+Access: Server o Proxy
 Default: Yes
 ```
 
@@ -1782,7 +1926,7 @@ Añadir Prometheus como fuente de datos en Grafana y crear un dashboard de verif
 3. Acceder a Grafana.
 4. Crear una fuente de datos de tipo Prometheus.
 5. Introducir la URL correcta.
-6. Seleccionar el modo de acceso `Server`.
+6. Seleccionar el modo de acceso `Server` o `Proxy`.
 7. Establecer Prometheus como fuente predeterminada.
 8. Ejecutar **Save & test**.
 9. Crear un panel con la consulta `up`.
@@ -1811,7 +1955,7 @@ Evidencias: guardadas
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -1836,9 +1980,9 @@ Evidencias: guardadas
 - Grafana necesita una fuente de datos para consultar métricas.
 - Prometheus será la fuente de datos utilizada en este laboratorio.
 - La URL debe ser accesible desde Grafana.
-- `localhost` hace referencia al equipo donde se realiza la conexión.
+- `localhost` hace referencia al equipo desde el que se realiza la conexión.
 - Si Grafana y Prometheus están en contenedores, puede ser necesario utilizar el nombre del servicio.
-- El modo `Server` es el más apropiado para esta práctica.
+- El modo `Server` o `Proxy` es el más apropiado para esta práctica.
 - **Save & test** comprueba la comunicación con Prometheus.
 - Una conexión correcta no garantiza que todas las consultas devuelvan datos.
 - La consulta `up` es una buena prueba inicial.
@@ -1904,7 +2048,7 @@ La práctica se considera completada cuando el alumno puede:
 - Consultar los registros de Grafana.
 - Guardar evidencias reproducibles.
 
-La comprobación final puede realizarse con:
+## Comprobación final
 
 ```bash
 printf '%-40s %s\n' \
@@ -1917,6 +2061,7 @@ printf '%-40s %s\n' \
 
 printf '%-40s ' \
   "Prometheus saludable"
+
 curl -fsS http://localhost:9090/-/healthy \
   >/dev/null \
   && echo "sí" \
@@ -1924,6 +2069,7 @@ curl -fsS http://localhost:9090/-/healthy \
 
 printf '%-40s ' \
   "API de Grafana disponible"
+
 curl -fsS http://localhost:3000/api/health \
   >/dev/null \
   && echo "sí" \
@@ -1931,6 +2077,7 @@ curl -fsS http://localhost:3000/api/health \
 
 printf '%-40s ' \
   "Consulta up disponible"
+
 curl -fsS http://localhost:9090/api/v1/query \
   --get \
   --data-urlencode 'query=up' \

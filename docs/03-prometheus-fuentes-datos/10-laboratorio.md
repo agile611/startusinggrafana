@@ -1,6 +1,6 @@
-# Laboratorio - Prometheus, Node Exporter y fuentes de datos
+# Laboratorio: Prometheus, Node Exporter y Grafana
 
-Este laboratorio integra los componentes principales de la plataforma de monitorización:
+Este laboratorio integra los componentes principales de una plataforma de monitorización:
 
 - **Prometheus**: recopila y almacena métricas.
 - **Node Exporter**: expone métricas del sistema operativo.
@@ -53,6 +53,7 @@ Al finalizar este laboratorio, el alumno podrá:
 - Crear paneles de disponibilidad, CPU, memoria y almacenamiento.
 - Diagnosticar objetivos en estado `DOWN`.
 - Identificar errores de conectividad entre Grafana y Prometheus.
+- Configurar una fuente de datos mediante *provisioning*.
 - Guardar evidencias de la instalación y configuración.
 - Documentar el resultado final del laboratorio.
 
@@ -157,20 +158,26 @@ http://localhost:3000
 Antes de comenzar, comprobar que se dispone de:
 
 - Un servidor Linux.
-- Usuario con permisos de `sudo`.
+- Un usuario con permisos de `sudo`.
 - Conectividad de red.
 - Prometheus instalado.
 - Node Exporter instalado.
 - Grafana instalado.
 - Un navegador web.
 - Al menos 2 GB de memoria disponible.
-- Puertos `9090`, `9100` y `3000` disponibles.
-- Hora del sistema sincronizada.
+- Los puertos `9090`, `9100` y `3000` disponibles.
+- La hora del sistema sincronizada.
 
 ## Comprobar la distribución
 
 ```bash
 lsb_release -ds
+```
+
+También puede utilizarse:
+
+```bash
+cat /etc/os-release
 ```
 
 ## Comprobar la arquitectura
@@ -229,7 +236,7 @@ echo "$GRAFANA_URL"
 
 # Comprobación inicial de los servicios
 
-## Prometheus
+## Comprobar Prometheus
 
 ```bash
 systemctl is-active prometheus
@@ -241,7 +248,7 @@ Resultado esperado:
 active
 ```
 
-Comprobar la salud:
+Comprobar el endpoint de salud:
 
 ```bash
 curl "$PROMETHEUS_URL/-/healthy"
@@ -253,7 +260,7 @@ Resultado esperado:
 Prometheus is Healthy.
 ```
 
-Comprobar la preparación:
+Comprobar el endpoint de preparación:
 
 ```bash
 curl "$PROMETHEUS_URL/-/ready"
@@ -265,16 +272,18 @@ Resultado esperado:
 Prometheus is Ready.
 ```
 
-## Node Exporter
+## Comprobar Node Exporter
+
+Si Node Exporter se instaló manualmente:
 
 ```bash
 systemctl is-active node_exporter
 ```
 
-Resultado esperado:
+Si se instaló mediante un paquete de Ubuntu:
 
-```text
-active
+```bash
+systemctl is-active prometheus-node-exporter
 ```
 
 Comprobar el endpoint:
@@ -289,7 +298,7 @@ Resultado esperado:
 HTTP/1.1 200 OK
 ```
 
-## Grafana
+## Comprobar Grafana
 
 ```bash
 systemctl is-active grafana-server
@@ -325,15 +334,23 @@ Resultado conceptual:
 
 Verificar que los tres componentes están instalados y activos.
 
-### Comandos
+## Comprobar los servicios
 
 ```bash
 systemctl is-active prometheus
+```
+
+```bash
 systemctl is-active node_exporter
+```
+
+```bash
 systemctl is-active grafana-server
 ```
 
-Consultar las versiones:
+> Si Node Exporter se instaló mediante APT, el servicio puede llamarse `prometheus-node-exporter`.
+
+## Consultar las versiones
 
 ```bash
 prometheus --version
@@ -343,17 +360,20 @@ prometheus --version
 node_exporter --version
 ```
 
+Consultar la versión de Grafana mediante la API:
+
 ```bash
-curl -s "$GRAFANA_URL/api/health" | jq
+curl -s "$GRAFANA_URL/api/health" \
+  | jq -r '.version'
 ```
 
-Consultar los puertos:
+## Consultar los puertos
 
 ```bash
 sudo ss -lntp | grep -E ':(3000|9090|9100)'
 ```
 
-### Actividades
+## Actividades
 
 1. Anota el estado de cada servicio.
 2. Anota las versiones.
@@ -377,13 +397,14 @@ Completar:
 
 Comprobar que Node Exporter expone métricas del sistema operativo.
 
-### Consultar las primeras líneas
+## Consultar las primeras líneas
 
 ```bash
-curl -s "$NODE_EXPORTER_URL/metrics" | head -n 20
+curl -s "$NODE_EXPORTER_URL/metrics" \
+  | head -n 20
 ```
 
-### Buscar métricas de CPU
+## Buscar métricas de CPU
 
 ```bash
 curl -s "$NODE_EXPORTER_URL/metrics" \
@@ -391,7 +412,7 @@ curl -s "$NODE_EXPORTER_URL/metrics" \
   | head
 ```
 
-### Buscar métricas de memoria
+## Buscar métricas de memoria
 
 ```bash
 curl -s "$NODE_EXPORTER_URL/metrics" \
@@ -399,7 +420,7 @@ curl -s "$NODE_EXPORTER_URL/metrics" \
   | head
 ```
 
-### Buscar métricas de almacenamiento
+## Buscar métricas de almacenamiento
 
 ```bash
 curl -s "$NODE_EXPORTER_URL/metrics" \
@@ -407,7 +428,7 @@ curl -s "$NODE_EXPORTER_URL/metrics" \
   | head
 ```
 
-### Buscar métricas de red
+## Buscar métricas de red
 
 ```bash
 curl -s "$NODE_EXPORTER_URL/metrics" \
@@ -415,7 +436,7 @@ curl -s "$NODE_EXPORTER_URL/metrics" \
   | head
 ```
 
-### Actividades
+## Actividades
 
 1. Localiza una métrica de CPU.
 2. Localiza una métrica de memoria.
@@ -453,6 +474,7 @@ sudo cp \
 
 ```bash
 sudo tee /etc/prometheus/prometheus.yml > /dev/null <<'EOF'
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -491,6 +513,8 @@ Resultado esperado:
 SUCCESS
 ```
 
+El texto exacto puede variar según la versión de Prometheus.
+
 ## Reiniciar Prometheus
 
 ```bash
@@ -519,7 +543,7 @@ sudo journalctl -u prometheus \
 
 Comprobar que Prometheus ha cargado los objetivos y puede consultarlos.
 
-## Desde la interfaz web
+## Comprobar desde la interfaz web
 
 Abrir:
 
@@ -546,10 +570,11 @@ Ambos deben aparecer como:
 UP
 ```
 
-## Desde la API
+## Comprobar mediante la API
 
 ```bash
-curl -s "$PROMETHEUS_URL/api/v1/targets" | jq
+curl -s "$PROMETHEUS_URL/api/v1/targets" \
+  | jq
 ```
 
 Mostrar un resumen:
@@ -569,7 +594,7 @@ curl -s "$PROMETHEUS_URL/api/v1/targets" \
   '
 ```
 
-Resultado esperado:
+Resultado conceptual:
 
 ```text
 prometheus      localhost:9090  up  http://localhost:9090/metrics
@@ -580,7 +605,7 @@ node_exporter   localhost:9100  up  http://localhost:9100/metrics
 
 1. Anota los jobs.
 2. Anota las instancias.
-3. Comprueba la URL de scraping.
+3. Comprueba la URL de *scraping*.
 4. Comprueba el estado.
 5. Comprueba que no hay errores.
 6. Comprueba que aparecen las etiquetas personalizadas.
@@ -593,7 +618,7 @@ node_exporter   localhost:9100  up  http://localhost:9100/metrics
 
 Utilizar PromQL para comprobar la disponibilidad de los objetivos.
 
-## Consulta desde la interfaz web
+## Consultar todos los objetivos
 
 ```promql
 up
@@ -675,7 +700,7 @@ prometheus_build_info
 ```
 
 ```promql
-process_resident_memory_bytes
+process_resident_memory_bytes{job="prometheus"}
 ```
 
 ```promql
@@ -683,7 +708,7 @@ prometheus_tsdb_head_series
 ```
 
 ```promql
-rate(process_cpu_seconds_total[5m])
+rate(process_cpu_seconds_total{job="prometheus"}[5m])
 ```
 
 ## Métricas de memoria
@@ -802,7 +827,7 @@ Consultar el uso de CPU en Prometheus y detener los procesos:
 pkill yes
 ```
 
-### Actividades
+## Actividades
 
 1. Ejecuta la consulta de uso de CPU.
 2. Visualízala como gráfico.
@@ -866,7 +891,7 @@ node_memory_MemTotal_bytes
 free -h
 ```
 
-### Actividades
+## Actividades
 
 1. Ejecuta las consultas.
 2. Compara los resultados con `free -h`.
@@ -936,7 +961,7 @@ df -h /
 ) > 80
 ```
 
-### Actividades
+## Actividades
 
 1. Identifica el sistema de ficheros raíz.
 2. Excluye `tmpfs`.
@@ -1001,7 +1026,7 @@ sum by (instance) (
 ip -s link
 ```
 
-### Actividades
+## Actividades
 
 1. Identifica las interfaces disponibles.
 2. Excluye `lo`.
@@ -1026,7 +1051,7 @@ Abrir:
 http://localhost:3000
 ```
 
-## Crear la fuente
+## Crear la fuente de datos
 
 Acceder a:
 
@@ -1045,7 +1070,7 @@ Configurar:
 ```text
 Name: Prometheus
 URL: http://localhost:9090
-Access: Server
+Access: Server o Proxy
 ```
 
 Activar:
@@ -1064,7 +1089,7 @@ Save & test
 
 Grafana debe mostrar un mensaje indicando que la API de Prometheus responde correctamente.
 
-### Actividades
+## Actividades
 
 1. Anota el nombre de la fuente.
 2. Anota la URL.
@@ -1083,9 +1108,7 @@ Crear un dashboard con información de disponibilidad y recursos.
 
 Crear un dashboard nuevo y añadir los siguientes paneles.
 
----
-
-## Panel 1: disponibilidad de los objetivos
+## Panel de disponibilidad de los objetivos
 
 Consulta:
 
@@ -1105,9 +1128,7 @@ Título:
 Estado de los objetivos
 ```
 
----
-
-## Panel 2: uso de CPU
+## Panel de uso de CPU
 
 Consulta:
 
@@ -1137,9 +1158,7 @@ Título:
 Uso de CPU
 ```
 
----
-
-## Panel 3: uso de memoria
+## Panel de uso de memoria
 
 Consulta:
 
@@ -1170,9 +1189,7 @@ Título:
 Uso de memoria
 ```
 
----
-
-## Panel 4: uso del sistema de ficheros
+## Panel de uso del sistema de ficheros
 
 Consulta:
 
@@ -1209,9 +1226,7 @@ Título:
 Uso del sistema de ficheros raíz
 ```
 
----
-
-## Panel 5: carga del sistema
+## Panel de carga del sistema
 
 Consulta:
 
@@ -1231,9 +1246,7 @@ Título:
 Carga del sistema
 ```
 
----
-
-## Panel 6: tráfico recibido
+## Panel de tráfico recibido
 
 Consulta:
 
@@ -1263,6 +1276,15 @@ Título:
 Tráfico recibido
 ```
 
+## Actividades
+
+1. Crea los seis paneles.
+2. Selecciona Prometheus como fuente.
+3. Configura las unidades.
+4. Guarda el dashboard.
+5. Comprueba que los paneles muestran datos.
+6. Anota el nombre del dashboard.
+
 ---
 
 # Sesión 13: probar un objetivo en estado `DOWN`
@@ -1271,9 +1293,7 @@ Tráfico recibido
 
 Comprobar cómo detecta Prometheus la caída de Node Exporter.
 
-## Estado inicial
-
-Comprobar:
+## Comprobar el estado inicial
 
 ```promql
 up{job="node_exporter"}
@@ -1287,8 +1307,16 @@ Resultado esperado:
 
 ## Detener Node Exporter
 
+Si se instaló manualmente:
+
 ```bash
 sudo systemctl stop node_exporter
+```
+
+Si se instaló mediante APT:
+
+```bash
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar más de un intervalo de *scraping*.
@@ -1317,17 +1345,25 @@ curl -s "$PROMETHEUS_URL/api/v1/targets" \
 
 ## Iniciar Node Exporter
 
+Si se instaló manualmente:
+
 ```bash
 sudo systemctl start node_exporter
 ```
 
-Comprobar:
+Si se instaló mediante APT:
+
+```bash
+sudo systemctl start prometheus-node-exporter
+```
+
+Comprobar el servicio:
 
 ```bash
 systemctl is-active node_exporter
 ```
 
-Esperar al siguiente scraping.
+Esperar al siguiente *scraping*.
 
 ## Verificar la recuperación
 
@@ -1341,7 +1377,7 @@ Resultado esperado:
 1
 ```
 
-### Actividades
+## Actividades
 
 1. Anota el estado inicial.
 2. Anota el error durante la interrupción.
@@ -1401,7 +1437,7 @@ En un panel ejecutar:
 metrica_que_no_existe
 ```
 
-Esta consulta puede no devolver datos, pero la fuente de datos puede estar funcionando correctamente.
+Esta consulta puede no devolver datos, pero la fuente puede estar funcionando correctamente.
 
 ## Probar una consulta válida
 
@@ -1409,7 +1445,7 @@ Esta consulta puede no devolver datos, pero la fuente de datos puede estar funci
 up
 ```
 
-### Actividades
+## Actividades
 
 1. Compara el error de conexión con una consulta vacía.
 2. Explica cómo se diagnostica cada caso.
@@ -1419,19 +1455,19 @@ up
 
 ---
 
-# Configurar mediante provisioning
+# Configurar la fuente mediante provisioning
 
 ## Objetivo
 
-Crear la fuente de datos automáticamente.
+Crear la fuente de datos automáticamente mediante un fichero YAML.
 
-Crear el directorio:
+## Crear el directorio
 
 ```bash
 sudo mkdir -p /etc/grafana/provisioning/datasources
 ```
 
-Crear el fichero:
+## Crear el fichero
 
 ```bash
 sudo tee /etc/grafana/provisioning/datasources/prometheus.yml > /dev/null <<'EOF'
@@ -1448,7 +1484,7 @@ datasources:
 EOF
 ```
 
-Reiniciar Grafana:
+## Reiniciar Grafana
 
 ```bash
 sudo systemctl restart grafana-server
@@ -1472,7 +1508,7 @@ Comprobar que aparece:
 Prometheus
 ```
 
-### Actividades
+## Actividades
 
 1. Crea el fichero de provisioning.
 2. Reinicia Grafana.
@@ -1480,6 +1516,20 @@ Prometheus
 4. Comprueba su UID.
 5. Comprueba que es la fuente predeterminada.
 6. Consulta los registros de Grafana.
+
+## Consultar errores de provisioning
+
+```bash
+sudo journalctl -u grafana-server \
+  --since "5 minutes ago" \
+  --no-pager
+```
+
+Revisar el fichero:
+
+```bash
+sudo cat /etc/grafana/provisioning/datasources/prometheus.yml
+```
 
 ---
 
@@ -1493,7 +1543,7 @@ Comprobar:
 sudo systemctl status prometheus
 ```
 
-Consultar registros:
+Consultar los registros:
 
 ```bash
 sudo journalctl -u prometheus \
@@ -1501,7 +1551,7 @@ sudo journalctl -u prometheus \
   -n 100
 ```
 
-Validar configuración:
+Validar la configuración:
 
 ```bash
 promtool check config /etc/prometheus/prometheus.yml
@@ -1515,13 +1565,19 @@ sudo ss -lntp | grep ':9090'
 
 ## Node Exporter no está activo
 
-Comprobar:
+Comprobar una instalación manual:
 
 ```bash
 sudo systemctl status node_exporter
 ```
 
-Consultar registros:
+Comprobar una instalación mediante APT:
+
+```bash
+sudo systemctl status prometheus-node-exporter
+```
+
+Consultar los registros de una instalación manual:
 
 ```bash
 sudo journalctl -u node_exporter \
@@ -1576,6 +1632,7 @@ Posibles causas:
 - Error de YAML.
 - Prometheus no se ha reiniciado.
 - Node Exporter escucha solo en otra interfaz.
+- Grafana y Prometheus utilizan redes diferentes.
 
 ## Grafana no conecta con Prometheus
 
@@ -1588,13 +1645,13 @@ curl http://localhost:9090/-/healthy
 Si están en servidores separados:
 
 ```bash
-curl http://<IP-DE-PROMETHEUS>:9090/-/healthy
+curl http://IP_DEL_SERVIDOR_PROMETHEUS:9090/-/healthy
 ```
 
-Comprobar conectividad:
+Comprobar la conectividad:
 
 ```bash
-nc -vz <IP-DE-PROMETHEUS> 9090
+nc -vz IP_DEL_SERVIDOR_PROMETHEUS 9090
 ```
 
 Consultar los registros:
@@ -1670,7 +1727,7 @@ mkdir -p ~/laboratorio-grafana/evidencias/laboratorio-integrador
   ~/laboratorio-grafana/evidencias/laboratorio-integrador/sistema.txt
 ```
 
-## Guardar estados de servicios
+## Guardar los estados de los servicios
 
 ```bash
 {
@@ -1688,6 +1745,8 @@ mkdir -p ~/laboratorio-grafana/evidencias/laboratorio-integrador
 } | tee \
   ~/laboratorio-grafana/evidencias/laboratorio-integrador/servicios.txt
 ```
+
+> Si Node Exporter se instaló mediante APT, sustituir `node_exporter` por `prometheus-node-exporter`.
 
 ## Guardar los puertos
 
@@ -1738,7 +1797,7 @@ curl -s "$NODE_EXPORTER_URL/metrics" \
   > ~/laboratorio-grafana/evidencias/laboratorio-integrador/node-exporter-sample.txt
 ```
 
-## Guardar registros
+## Guardar los registros
 
 ```bash
 sudo journalctl -u prometheus \
@@ -1747,8 +1806,19 @@ sudo journalctl -u prometheus \
   > ~/laboratorio-grafana/evidencias/laboratorio-integrador/prometheus.log
 ```
 
+Para una instalación manual de Node Exporter:
+
 ```bash
 sudo journalctl -u node_exporter \
+  --since "30 minutes ago" \
+  --no-pager \
+  > ~/laboratorio-grafana/evidencias/laboratorio-integrador/node-exporter.log
+```
+
+Para una instalación mediante APT:
+
+```bash
+sudo journalctl -u prometheus-node-exporter \
   --since "30 minutes ago" \
   --no-pager \
   > ~/laboratorio-grafana/evidencias/laboratorio-integrador/node-exporter.log
@@ -1802,7 +1872,14 @@ check_http() {
 }
 
 check_service prometheus
-check_service node_exporter
+
+if systemctl list-unit-files \
+    | grep -q '^node_exporter.service'; then
+  check_service node_exporter
+else
+  check_service prometheus-node-exporter
+fi
+
 check_service grafana-server
 
 check_http "Prometheus saludable" \
@@ -1875,7 +1952,7 @@ node_exporter                      ACTIVO
 grafana-server                     ACTIVO
 Prometheus saludable               OK
 Prometheus preparado               OK
-Node Exporter /metrics              OK
+Node Exporter /metrics             OK
 API de Grafana                     OK
 Configuración Prometheus           VÁLIDA
 Consulta up                        OK
@@ -1902,7 +1979,8 @@ Prometheus is Healthy.
 $ curl -I http://localhost:9100/metrics
 HTTP/1.1 200 OK
 
-$ curl -s http://localhost:3000/api/health | jq -r '.database'
+$ curl -s http://localhost:3000/api/health \
+    | jq -r '.database'
 ok
 
 $ promtool check config /etc/prometheus/prometheus.yml
@@ -1934,7 +2012,7 @@ En Grafana se crea una fuente de datos:
 ```text
 Name: Prometheus
 URL: http://localhost:9090
-Access: Server
+Access: Server o Proxy
 Default: Yes
 ```
 
@@ -1957,16 +2035,14 @@ Tráfico recibido
 
 Construir una plataforma funcional de monitorización con Prometheus, Node Exporter y Grafana.
 
-## Tareas
-
-### Parte 1: servicios
+## Parte 1: servicios
 
 1. Comprobar el estado de Prometheus.
 2. Comprobar el estado de Node Exporter.
 3. Comprobar el estado de Grafana.
 4. Comprobar los puertos `3000`, `9090` y `9100`.
 
-### Parte 2: Node Exporter
+## Parte 2: Node Exporter
 
 5. Consultar `/metrics`.
 6. Localizar métricas de CPU.
@@ -1974,7 +2050,7 @@ Construir una plataforma funcional de monitorización con Prometheus, Node Expor
 8. Localizar métricas de disco.
 9. Localizar métricas de red.
 
-### Parte 3: Prometheus
+## Parte 3: Prometheus
 
 10. Configurar el job `prometheus`.
 11. Configurar el job `node_exporter`.
@@ -1984,7 +2060,7 @@ Construir una plataforma funcional de monitorización con Prometheus, Node Expor
 15. Comprobar los objetivos.
 16. Consultar la métrica `up`.
 
-### Parte 4: PromQL
+## Parte 4: PromQL
 
 17. Consultar el uso de CPU.
 18. Consultar el uso de memoria.
@@ -1992,7 +2068,7 @@ Construir una plataforma funcional de monitorización con Prometheus, Node Expor
 20. Consultar el tráfico recibido.
 21. Consultar la carga del sistema.
 
-### Parte 5: Grafana
+## Parte 5: Grafana
 
 22. Añadir Prometheus como fuente de datos.
 23. Probar la conexión.
@@ -2002,7 +2078,7 @@ Construir una plataforma funcional de monitorización con Prometheus, Node Expor
 27. Configurar las unidades.
 28. Guardar el dashboard.
 
-### Parte 6: diagnóstico
+## Parte 6: diagnóstico
 
 29. Detener Node Exporter.
 30. Observar el estado `DOWN`.
@@ -2089,16 +2165,16 @@ laboratorio-prometheus-grafana/
 - Prometheus utiliza normalmente el puerto `9090`.
 - Node Exporter utiliza normalmente el puerto `9100`.
 - Grafana utiliza normalmente el puerto `3000`.
-- La configuración de scraping se encuentra en `prometheus.yml`.
+- La configuración de *scraping* se encuentra en `prometheus.yml`.
 - `promtool check config` permite validar la configuración.
-- La sección **Targets** muestra el estado del scraping.
-- La métrica `up` indica si el último scraping fue correcto.
+- La sección **Targets** muestra el estado del *scraping*.
+- La métrica `up` indica si el último *scraping* fue correcto.
 - Los contadores suelen requerir `rate()` para calcular velocidades.
 - Las métricas de CPU, memoria, disco y red pueden transformarse mediante PromQL.
 - Grafana necesita una fuente de datos configurada.
 - La URL de Prometheus debe ser accesible desde Grafana.
 - `localhost` depende del equipo o contenedor que realiza la conexión.
-- El modo de acceso `Server` es adecuado para este laboratorio.
+- El modo de acceso `Server` o `Proxy` es adecuado para este laboratorio.
 - El inspector de Grafana ayuda a diagnosticar consultas.
 - Una buena documentación debe incluir configuración, evidencias y resultados.
 
@@ -2109,7 +2185,7 @@ laboratorio-prometheus-grafana/
 1. ¿Qué función cumple Node Exporter?
 2. ¿Qué función cumple Prometheus?
 3. ¿Qué función cumple Grafana?
-4. ¿Qué componente inicia normalmente el scraping?
+4. ¿Qué componente inicia normalmente el *scraping*?
 5. ¿Qué endpoint expone Node Exporter?
 6. ¿Qué puerto utiliza normalmente Prometheus?
 7. ¿Qué puerto utiliza normalmente Node Exporter?
@@ -2140,7 +2216,7 @@ laboratorio-prometheus-grafana/
 |---|---:|
 | Comprobación inicial de los servicios | 1 punto |
 | Instalación y verificación de Node Exporter | 1 punto |
-| Configuración correcta de scraping | 2 puntos |
+| Configuración correcta de *scraping* | 2 puntos |
 | Validación y diagnóstico en Prometheus | 1 punto |
 | Consultas PromQL | 2 puntos |
 | Configuración de Grafana | 1 punto |
@@ -2181,7 +2257,7 @@ node_exporter                      ACTIVO
 grafana-server                     ACTIVO
 Prometheus saludable               OK
 Prometheus preparado               OK
-Node Exporter /metrics              OK
+Node Exporter /metrics             OK
 API de Grafana                     OK
 Configuración Prometheus           VÁLIDA
 Consulta up                        OK

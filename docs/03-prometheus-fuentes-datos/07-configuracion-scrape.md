@@ -1,12 +1,12 @@
-# Configuración de scraping
+# Configuración de scraping en Prometheus
 
 La configuración de *scraping* define cómo Prometheus descubre y consulta los objetivos que proporcionan métricas.
 
-En este bloque se configurará Prometheus para consultar:
+En esta práctica se configurará Prometheus para consultar:
 
 - El propio Prometheus.
 - Node Exporter.
-- Uno o varios servidores adicionales, como ejercicio opcional.
+- Uno o varios servidores adicionales como ejercicio opcional.
 
 El flujo será:
 
@@ -48,6 +48,7 @@ Al finalizar esta práctica, el alumno podrá:
 - Diagnosticar errores de conexión y configuración.
 - Configurar objetivos locales y remotos.
 - Comprender el uso básico de `relabel_configs`.
+- Diferenciar `relabel_configs` de `metric_relabel_configs`.
 - Documentar la configuración aplicada.
 
 ---
@@ -65,8 +66,10 @@ Esta información se define normalmente en:
 Una configuración sencilla puede ser:
 
 ```yaml
+---
 global:
   scrape_interval: 15s
+  evaluation_interval: 15s
 
 scrape_configs:
   - job_name: prometheus
@@ -89,9 +92,9 @@ En este ejemplo:
 
 ---
 
-# Conceptos fundamentales
+## Conceptos fundamentales
 
-## Scraping
+### Scraping
 
 El *scraping* es el proceso mediante el cual Prometheus solicita métricas a un objetivo.
 
@@ -100,7 +103,7 @@ Prometheus ---- GET /metrics ----> Node Exporter
 Prometheus <--- métricas ---------- Node Exporter
 ```
 
-La respuesta contiene métricas en formato compatible con Prometheus:
+La respuesta contiene métricas en un formato compatible con Prometheus:
 
 ```text
 # HELP node_memory_MemAvailable_bytes Memory information field.
@@ -108,7 +111,7 @@ La respuesta contiene métricas en formato compatible con Prometheus:
 node_memory_MemAvailable_bytes 2.414534656e+09
 ```
 
-## Job
+### Job
 
 Un `job` agrupa objetivos relacionados.
 
@@ -120,7 +123,7 @@ job_name: node_exporter
 
 Este trabajo puede contener uno o varios servidores Linux.
 
-## Target
+### Target
 
 Un `target` es un endpoint concreto que Prometheus consulta.
 
@@ -131,7 +134,7 @@ targets:
   - localhost:9100
 ```
 
-La relación es:
+La relación puede representarse así:
 
 ```text
 Job: node_exporter
@@ -140,7 +143,7 @@ Job: node_exporter
 └── server-03:9100
 ```
 
-## Instance
+### Instance
 
 Prometheus añade normalmente la etiqueta `instance` para identificar el objetivo consultado.
 
@@ -150,7 +153,7 @@ Ejemplo:
 instance="localhost:9100"
 ```
 
-## Endpoint
+### Endpoint
 
 El endpoint habitual de métricas es:
 
@@ -172,7 +175,7 @@ http://localhost:9100/metrics
 
 ---
 
-# Fichero de configuración
+## Fichero de configuración
 
 El fichero principal se encuentra normalmente en:
 
@@ -202,11 +205,12 @@ sudo cp \
 
 ---
 
-# Estructura global
+## Estructura global
 
 Una configuración puede contener estas secciones:
 
 ```yaml
+---
 global:
   scrape_interval: 15s
   scrape_timeout: 10s
@@ -240,9 +244,9 @@ En las primeras prácticas se utilizarán principalmente:
 
 ---
 
-# Configuración global
+## Configuración global
 
-## `scrape_interval`
+### `scrape_interval`
 
 Define cada cuánto tiempo Prometheus consulta los objetivos.
 
@@ -251,7 +255,7 @@ global:
   scrape_interval: 15s
 ```
 
-Ejemplos de intervalos:
+Ejemplos:
 
 ```yaml
 scrape_interval: 5s
@@ -273,7 +277,7 @@ Un intervalo corto proporciona datos más frecuentes, pero puede aumentar:
 - El número de muestras almacenadas.
 - El consumo de red.
 
-## `scrape_timeout`
+### `scrape_timeout`
 
 Define cuánto tiempo espera Prometheus una respuesta:
 
@@ -292,7 +296,7 @@ global:
   scrape_timeout: 15s
 ```
 
-## `evaluation_interval`
+### `evaluation_interval`
 
 Define cada cuánto tiempo se evalúan las reglas:
 
@@ -308,9 +312,9 @@ Estas reglas pueden ser:
 
 ---
 
-# Configuración de trabajos
+## Configuración de trabajos
 
-## Trabajo básico
+### Trabajo básico
 
 ```yaml
 scrape_configs:
@@ -320,7 +324,7 @@ scrape_configs:
           - localhost:9090
 ```
 
-## Trabajo para Node Exporter
+### Trabajo para Node Exporter
 
 ```yaml
 scrape_configs:
@@ -330,7 +334,7 @@ scrape_configs:
           - localhost:9100
 ```
 
-## Varios trabajos
+### Varios trabajos
 
 ```yaml
 scrape_configs:
@@ -350,15 +354,16 @@ scrape_configs:
           - localhost:3000
 ```
 
-> Grafana no expone necesariamente un endpoint de métricas en el puerto `3000`. Este ejemplo solo muestra la estructura de varios trabajos. Para monitorizar Grafana correctamente se debe configurar su endpoint de métricas correspondiente.
+> Grafana no expone necesariamente un endpoint de métricas en el puerto `3000`. Para monitorizarlo correctamente debe configurarse el endpoint de métricas correspondiente.
 
 ---
 
-# Configuración recomendada para el laboratorio
+## Configuración recomendada para el laboratorio
 
-La configuración mínima del laboratorio será:
+La configuración mínima será:
 
 ```yaml
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -379,6 +384,7 @@ Guardar la configuración:
 
 ```bash
 sudo tee /etc/prometheus/prometheus.yml > /dev/null <<'EOF'
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -398,11 +404,11 @@ EOF
 
 ---
 
-# Objetivos estáticos
+## Objetivos estáticos
 
 La sección `static_configs` permite definir objetivos manualmente.
 
-## Un objetivo
+### Un objetivo
 
 ```yaml
 - job_name: node_exporter
@@ -411,7 +417,7 @@ La sección `static_configs` permite definir objetivos manualmente.
         - localhost:9100
 ```
 
-## Varios objetivos
+### Varios objetivos
 
 ```yaml
 - job_name: linux_servers
@@ -422,7 +428,7 @@ La sección `static_configs` permite definir objetivos manualmente.
         - server-03.example.local:9100
 ```
 
-## Objetivos mediante direcciones IP
+### Objetivos mediante direcciones IP
 
 ```yaml
 - job_name: linux_servers
@@ -433,7 +439,7 @@ La sección `static_configs` permite definir objetivos manualmente.
         - 192.168.1.53:9100
 ```
 
-## Agrupar objetivos por etiquetas
+### Agrupar objetivos por etiquetas
 
 ```yaml
 - job_name: linux_servers
@@ -446,11 +452,11 @@ La sección `static_configs` permite definir objetivos manualmente.
         operating_system: linux
 ```
 
-La etiqueta se aplicará a los objetivos de ese grupo.
+La etiqueta se aplicará a todos los objetivos de ese grupo.
 
 ---
 
-# Etiquetas personalizadas
+## Etiquetas personalizadas
 
 Las etiquetas añaden información contextual a las métricas.
 
@@ -494,7 +500,7 @@ node_memory_MemAvailable_bytes{
 }
 ```
 
-## Recomendaciones para las etiquetas
+### Recomendaciones para las etiquetas
 
 Utilizar etiquetas para describir:
 
@@ -515,12 +521,15 @@ Evitar incluir como etiquetas:
 
 ---
 
-# Etiquetas externas
+## Etiquetas externas
 
 Las etiquetas externas identifican el servidor Prometheus o el entorno desde el que se generan las métricas.
 
 ```yaml
 global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
   external_labels:
     environment: laboratorio
     region: madrid
@@ -532,31 +541,13 @@ Estas etiquetas se utilizan especialmente en:
 - Federación.
 - Alertmanager.
 - Entornos con varios servidores Prometheus.
-- Identificación de origen.
-
-Ejemplo completo:
-
-```yaml
-global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
-
-  external_labels:
-    environment: laboratorio
-    region: madrid
-
-scrape_configs:
-  - job_name: prometheus
-    static_configs:
-      - targets:
-          - localhost:9090
-```
+- Identificación del origen de las métricas.
 
 ---
 
-# Rutas y protocolos
+## Rutas y protocolos
 
-## Ruta predeterminada
+### Ruta predeterminada
 
 La ruta habitual es:
 
@@ -579,7 +570,7 @@ equivale normalmente a:
 http://localhost:9100/metrics
 ```
 
-## Definir una ruta personalizada
+### Definir una ruta personalizada
 
 Algunas aplicaciones exponen las métricas en otra ruta:
 
@@ -597,7 +588,7 @@ La URL consultada será:
 http://localhost:8080/prometheus
 ```
 
-## Utilizar HTTPS
+### Utilizar HTTPS
 
 ```yaml
 - job_name: aplicacion_https
@@ -607,7 +598,7 @@ http://localhost:8080/prometheus
         - app.example.local:8443
 ```
 
-## Utilizar parámetros
+### Utilizar parámetros
 
 ```yaml
 - job_name: blackbox
@@ -622,11 +613,11 @@ http://localhost:8080/prometheus
 
 ---
 
-# Validar la configuración
+## Validar la configuración
 
 La configuración debe validarse antes de reiniciar Prometheus.
 
-## Validación básica
+### Validación básica
 
 ```bash
 promtool check config /etc/prometheus/prometheus.yml
@@ -639,7 +630,9 @@ Checking /etc/prometheus/prometheus.yml
  SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
 ```
 
-## Validar una copia temporal
+El texto exacto puede variar según la versión.
+
+### Validar una copia temporal
 
 ```bash
 cp /etc/prometheus/prometheus.yml /tmp/prometheus.yml
@@ -649,7 +642,7 @@ cp /etc/prometheus/prometheus.yml /tmp/prometheus.yml
 promtool check config /tmp/prometheus.yml
 ```
 
-## Mostrar los errores de sintaxis
+### Mostrar errores de sintaxis
 
 Si existe un error, mostrar el fichero con números de línea:
 
@@ -662,7 +655,7 @@ Revisar especialmente:
 - Indentación.
 - Guiones de las listas.
 - Dos puntos.
-- Nombres de las propiedades.
+- Nombres de propiedades.
 - Comillas.
 - Espacios.
 - Anidamiento de `static_configs`.
@@ -670,14 +663,14 @@ Revisar especialmente:
 
 ---
 
-# Aplicar los cambios
+## Aplicar los cambios
 
 Existen dos métodos habituales:
 
 - Reiniciar Prometheus.
 - Recargar la configuración.
 
-## Reiniciar el servicio
+### Reiniciar el servicio
 
 ```bash
 sudo systemctl restart prometheus
@@ -697,36 +690,35 @@ sudo journalctl -u prometheus \
   --no-pager
 ```
 
-## Recargar mediante la API
+### Recargar mediante la API
 
-Si Prometheus se ha iniciado con la opción adecuada, puede recargarse la configuración mediante:
-
-```bash
-curl -X POST http://localhost:9090/-/reload
-```
-
-También puede utilizarse:
-
-```bash
-curl -X POST http://localhost:9090/-/reload \
-  -i
-```
-
-El endpoint de recarga debe estar habilitado con:
+Si Prometheus se ha iniciado con la opción:
 
 ```text
 --web.enable-lifecycle
 ```
 
-Consultar las opciones del servicio:
+puede recargarse la configuración mediante:
+
+```bash
+curl -X POST \
+  http://localhost:9090/-/reload \
+  -i
+```
+
+Comprobar si la opción está habilitada:
 
 ```bash
 systemctl show prometheus -p ExecStart
 ```
 
-Si la opción no está presente, utilizar `systemctl restart`.
+Si la opción no está presente, utilizar:
 
-## Recargar mediante `systemctl reload`
+```bash
+sudo systemctl restart prometheus
+```
+
+### Recargar mediante `systemctl`
 
 Dependiendo de la unidad de servicio, puede existir una acción de recarga:
 
@@ -742,7 +734,7 @@ sudo systemctl restart prometheus
 
 ---
 
-# Comprobar la configuración cargada
+## Comprobar la configuración cargada
 
 Consultar la configuración que Prometheus está utilizando:
 
@@ -773,9 +765,9 @@ systemctl show prometheus -p ExecStart
 
 ---
 
-# Consultar los objetivos
+## Consultar los objetivos
 
-## Desde la interfaz web
+### Desde la interfaz web
 
 Abrir:
 
@@ -783,13 +775,13 @@ Abrir:
 http://localhost:9090
 ```
 
-Acceder a la sección:
+Acceder a:
 
 ```text
 Status → Targets
 ```
 
-## Desde la API
+### Desde la API
 
 ```bash
 curl -s http://localhost:9090/api/v1/targets | jq
@@ -819,7 +811,7 @@ prometheus      localhost:9090  up  http://localhost:9090/metrics  null
 node_exporter   localhost:9100  up  http://localhost:9100/metrics  null
 ```
 
-## Mostrar solo los objetivos activos
+### Mostrar solo los objetivos activos
 
 ```bash
 curl -s http://localhost:9090/api/v1/targets \
@@ -834,7 +826,7 @@ curl -s http://localhost:9090/api/v1/targets \
   '
 ```
 
-## Mostrar los objetivos caídos
+### Mostrar los objetivos caídos
 
 ```bash
 curl -s http://localhost:9090/api/v1/targets \
@@ -853,9 +845,9 @@ curl -s http://localhost:9090/api/v1/targets \
 
 ---
 
-# Estados de los objetivos
+## Estados de los objetivos
 
-## `up`
+### Estado `up`
 
 El objetivo respondió correctamente al último *scraping*.
 
@@ -865,7 +857,7 @@ Ejemplo:
 node_exporter localhost:9100 up
 ```
 
-## `down`
+### Estado `down`
 
 Prometheus no pudo recopilar correctamente las métricas.
 
@@ -881,7 +873,7 @@ Posibles causas:
 - Protocolo incorrecto.
 - Error TLS.
 
-## `unknown`
+### Estado `unknown`
 
 Prometheus todavía no dispone de información suficiente sobre el objetivo.
 
@@ -894,7 +886,7 @@ Esto puede ocurrir:
 
 ---
 
-# Métrica `up`
+## Métrica `up`
 
 La métrica `up` permite consultar el resultado del último *scraping*.
 
@@ -926,7 +918,7 @@ Contar objetivos:
 count(up)
 ```
 
-Porcentaje de objetivos disponibles:
+Calcular el porcentaje de objetivos disponibles:
 
 ```promql
 100 * avg(up)
@@ -940,9 +932,9 @@ up{environment="laboratorio"}
 
 ---
 
-# Relabeling básico
+## Relabeling básico
 
-`relabel_configs` permite modificar etiquetas antes de que las métricas se almacenen.
+`relabel_configs` permite modificar etiquetas antes de que se realice el *scraping*.
 
 Se utiliza para:
 
@@ -952,22 +944,20 @@ Se utiliza para:
 - Filtrar objetivos.
 - Transformar información de descubrimiento.
 
-## Añadir una etiqueta fija
+### Añadir una etiqueta fija
 
 ```yaml
 - job_name: node_exporter
   static_configs:
     - targets:
         - localhost:9100
-      labels:
-        environment: laboratorio
 
   relabel_configs:
     - target_label: team
       replacement: sistemas
 ```
 
-## Cambiar el nombre del job
+### Cambiar el nombre del servicio
 
 ```yaml
 - job_name: node_exporter
@@ -980,7 +970,7 @@ Se utiliza para:
       replacement: linux-node
 ```
 
-## Eliminar un target mediante `drop`
+### Eliminar un objetivo mediante `drop`
 
 ```yaml
 - job_name: linux_servers
@@ -999,13 +989,13 @@ Se utiliza para:
 
 En este ejemplo, `server-03:9100` no será consultado.
 
-> El relabeling es potente, pero una regla incorrecta puede eliminar objetivos o modificar etiquetas inesperadamente. Debe validarse siempre mediante la sección **Targets**.
+> El *relabeling* es potente, pero una regla incorrecta puede eliminar objetivos o modificar etiquetas inesperadamente. Debe validarse siempre mediante la sección **Targets**.
 
 ---
 
-# `relabel_configs` y `metric_relabel_configs`
+## Diferencia entre los tipos de relabeling
 
-## `relabel_configs`
+### `relabel_configs`
 
 Se ejecuta sobre los objetivos antes de realizar el *scraping*.
 
@@ -1017,7 +1007,7 @@ Puede cambiar:
 - Las etiquetas del objetivo.
 - La inclusión o exclusión del target.
 
-## `metric_relabel_configs`
+### `metric_relabel_configs`
 
 Se ejecuta sobre las métricas después del *scraping* y antes de almacenarlas.
 
@@ -1038,11 +1028,11 @@ Ejemplo:
 
 Esta configuración descartaría las métricas cuyo nombre empiece por `node_network_`.
 
-No se debe utilizar para resolver problemas de forma indiscriminada, porque una regla puede eliminar datos necesarios para dashboards o alertas.
+No se debe utilizar de forma indiscriminada, porque una regla puede eliminar datos necesarios para dashboards o alertas.
 
 ---
 
-# Configuración de un objetivo remoto
+## Configuración de un objetivo remoto
 
 Si Node Exporter se encuentra en otro servidor:
 
@@ -1063,6 +1053,9 @@ Si la prueba funciona:
 
 ```bash
 promtool check config /etc/prometheus/prometheus.yml
+```
+
+```bash
 sudo systemctl restart prometheus
 ```
 
@@ -1082,7 +1075,7 @@ curl -s http://localhost:9090/api/v1/targets \
   '
 ```
 
-## Importante sobre `localhost`
+### Importante sobre `localhost`
 
 Si Prometheus está en el servidor `monitoring-01` y Node Exporter está en `server-02`, esta configuración es incorrecta:
 
@@ -1109,7 +1102,7 @@ targets:
 
 ---
 
-# Configuración con nombres DNS
+## Configuración con nombres DNS
 
 ```yaml
 - job_name: linux_servers
@@ -1179,11 +1172,12 @@ curl -s http://localhost:9090/api/v1/status/config \
 
 ### Objetivo
 
-Configurar el scraping de Node Exporter.
+Configurar el *scraping* de Node Exporter.
 
 ### Configuración
 
 ```yaml
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -1261,7 +1255,7 @@ Reiniciar:
 sudo systemctl restart prometheus
 ```
 
-Consultar el último scraping:
+Consultar el último *scraping*:
 
 ```bash
 curl -s http://localhost:9090/api/v1/targets \
@@ -1277,7 +1271,7 @@ curl -s http://localhost:9090/api/v1/targets \
   '
 ```
 
-Después restaurar el valor habitual:
+Después, restaurar el valor habitual:
 
 ```yaml
 global:
@@ -1350,8 +1344,16 @@ Observar el comportamiento de Prometheus cuando un objetivo deja de responder.
 
 ### Detener Node Exporter
 
+Si se instaló manualmente:
+
 ```bash
 sudo systemctl stop node_exporter
+```
+
+Si se instaló mediante APT:
+
+```bash
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar más de un intervalo de *scraping*.
@@ -1391,7 +1393,7 @@ Comprobar:
 systemctl is-active node_exporter
 ```
 
-Esperar al siguiente scraping y volver a consultar:
+Esperar al siguiente *scraping* y volver a consultar:
 
 ```promql
 up{job="node_exporter"}
@@ -1403,7 +1405,7 @@ up{job="node_exporter"}
 2. Anota el estado durante la interrupción.
 3. Copia el mensaje de error.
 4. Anota el tiempo necesario para recuperar el estado `UP`.
-5. Explica la relación entre el intervalo de scraping y la detección del fallo.
+5. Explica la relación entre el intervalo de *scraping* y la detección del fallo.
 
 ---
 
@@ -1416,7 +1418,7 @@ Configurar un Node Exporter situado en otro equipo.
 ### Comprobar desde Prometheus
 
 ```bash
-curl http://<IP-DEL-SERVIDOR-REMOTO>:9100/metrics
+curl http://IP_DEL_SERVIDOR_REMOTO:9100/metrics
 ```
 
 Ejemplo:
@@ -1477,7 +1479,7 @@ curl -s http://localhost:9090/api/v1/targets \
 
 ### Objetivo
 
-Comprender cómo se puede excluir un objetivo antes del scraping.
+Comprender cómo se puede excluir un objetivo antes del *scraping*.
 
 ### Configuración
 
@@ -1604,6 +1606,8 @@ scrape_configs:
           - localhost:9100
 ```
 
+---
+
 ## Target `DOWN`
 
 ### Comprobar el endpoint directamente
@@ -1614,8 +1618,16 @@ curl http://localhost:9100/metrics
 
 ### Comprobar el servicio
 
+Para una instalación manual:
+
 ```bash
 systemctl is-active node_exporter
+```
+
+Para una instalación mediante APT:
+
+```bash
+systemctl is-active prometheus-node-exporter
 ```
 
 ### Comprobar el puerto
@@ -1642,6 +1654,8 @@ curl -s http://localhost:9090/api/v1/targets \
   '
 ```
 
+---
+
 ## Target inexistente
 
 Si el objetivo no aparece en **Targets**, revisar:
@@ -1652,6 +1666,8 @@ Si el objetivo no aparece en **Targets**, revisar:
 - La configuración cargada.
 - Si Prometheus se ha reiniciado o recargado.
 - La ruta que utiliza `ExecStart`.
+
+---
 
 ## `localhost` apunta al equipo equivocado
 
@@ -1678,6 +1694,8 @@ Utilizar la IP o el nombre DNS del servidor remoto:
 targets:
   - 192.168.1.60:9100
 ```
+
+---
 
 ## La configuración no se ha aplicado
 
@@ -1714,7 +1732,7 @@ sudo journalctl -u prometheus \
 
 - Realizar una copia antes de editar.
 - Validar siempre con `promtool`.
-- Aplicar cambios de forma controlada.
+- Aplicar los cambios de forma controlada.
 - Comprobar la configuración cargada.
 - Revisar la sección **Targets**.
 - Consultar la métrica `up`.
@@ -1816,6 +1834,7 @@ $ sudo cp /etc/prometheus/prometheus.yml \
     /etc/prometheus/prometheus.yml.bak
 
 $ sudo tee /etc/prometheus/prometheus.yml > /dev/null <<'EOF'
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -1903,7 +1922,7 @@ Objetivo recuperado: sí
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
@@ -1933,7 +1952,7 @@ Objetivo recuperado: sí
 - `scrape_timeout` define el tiempo máximo de espera.
 - La ruta habitual de métricas es `/metrics`.
 - La métrica `up` indica el resultado del último *scraping*.
-- Una configuración debe validarse antes de reiniciar Prometheus.
+- La configuración debe validarse antes de reiniciar Prometheus.
 - `promtool check config` detecta errores de configuración.
 - La sección **Targets** permite revisar el estado de los objetivos.
 - La API `/api/v1/targets` permite consultar los objetivos desde la terminal.
@@ -1962,7 +1981,7 @@ Objetivo recuperado: sí
 11. ¿Qué comando permite validar la configuración?
 12. ¿Qué comando permite consultar los objetivos?
 13. ¿Qué diferencia existe entre reiniciar y recargar Prometheus?
-14. ¿Qué significa `localhost` en una configuración de scraping?
+14. ¿Qué significa `localhost` en una configuración de *scraping*?
 15. ¿Cómo configurarías un Node Exporter remoto?
 16. ¿Para qué sirven las etiquetas personalizadas?
 17. ¿Qué riesgo tienen las etiquetas de alta cardinalidad?
@@ -1998,10 +2017,11 @@ La práctica se considera completada cuando:
 - Se han revisado los registros.
 - Se han guardado las evidencias.
 
-La comprobación final puede ejecutarse con:
+## Comprobación final
 
 ```bash
 printf '%-40s ' "Configuración válida"
+
 promtool check config /etc/prometheus/prometheus.yml \
   >/dev/null 2>&1 \
   && echo "sí" \
@@ -2012,12 +2032,14 @@ printf '%-40s %s\n' \
   "$(systemctl is-active prometheus)"
 
 printf '%-40s ' "Node Exporter accesible"
+
 curl -fsS http://localhost:9100/metrics \
   >/dev/null \
   && echo "sí" \
   || echo "no"
 
 printf '%-40s ' "Target node_exporter"
+
 curl -fsS http://localhost:9090/api/v1/query \
   --get \
   --data-urlencode 'query=up{job="node_exporter"}' \
@@ -2027,6 +2049,7 @@ curl -fsS http://localhost:9090/api/v1/query \
   || echo "no disponible"
 
 printf '%-40s ' "Configuración cargada"
+
 curl -fsS http://localhost:9090/api/v1/status/config \
   | jq -e '.data.yaml != null' \
   >/dev/null \
