@@ -11,6 +11,9 @@ http://localhost:9100/metrics
 El recorrido será:
 
 ```text
+Comprobación del sistema
+        |
+        v
 Descarga del binario
         |
         v
@@ -30,6 +33,9 @@ Comprobación del endpoint /metrics
         |
         v
 Configuración de Prometheus
+        |
+        v
+Validación del scraping
 ```
 
 Node Exporter no almacena métricas ni crea dashboards. Su función es **recopilar información del sistema y exponerla** para que Prometheus pueda realizar el *scraping*.
@@ -55,6 +61,7 @@ Al finalizar esta práctica, el alumno podrá:
 - Diagnosticar errores básicos de instalación.
 - Configurar Prometheus para consultar Node Exporter.
 - Comprobar el estado del objetivo mediante la métrica `up`.
+- Utilizar el *textfile collector*.
 - Documentar las evidencias de la instalación.
 
 ---
@@ -63,7 +70,7 @@ Al finalizar esta práctica, el alumno podrá:
 
 Prometheus necesita consultar endpoints que expongan métricas. Node Exporter proporciona ese endpoint para el sistema operativo Linux.
 
-La arquitectura será:
+### Arquitectura del laboratorio
 
 ```text
 +---------------------+
@@ -80,7 +87,7 @@ La arquitectura será:
 +---------------------+
 ```
 
-El flujo de datos es:
+### Flujo de datos
 
 ```text
 Sistema operativo
@@ -99,12 +106,13 @@ Grafana
 
 Node Exporter consulta información del sistema mediante interfaces como:
 
-- `/proc`
-- `/sys`
-- Sistemas de ficheros montados
-- Información del kernel
-- Interfaces de red
-- Estadísticas de procesos y dispositivos
+- `/proc`.
+- `/sys`.
+- Sistemas de ficheros montados.
+- Información del kernel.
+- Interfaces de red.
+- Estadísticas de procesos.
+- Estadísticas de dispositivos.
 
 Después transforma esa información en métricas con nombres como:
 
@@ -117,9 +125,9 @@ node_network_receive_bytes_total
 
 ---
 
-# Métricas proporcionadas
+## Métricas proporcionadas
 
-## CPU
+### CPU
 
 ```text
 node_cpu_seconds_total
@@ -141,7 +149,7 @@ node_cpu_seconds_total{
 } 12345.67
 ```
 
-## Memoria
+### Memoria
 
 Memoria total:
 
@@ -161,7 +169,7 @@ Memoria libre:
 node_memory_MemFree_bytes
 ```
 
-## Sistemas de ficheros
+### Sistemas de ficheros
 
 Tamaño total:
 
@@ -181,7 +189,7 @@ Espacio libre:
 node_filesystem_free_bytes
 ```
 
-## Red
+### Red
 
 Bytes recibidos:
 
@@ -201,7 +209,7 @@ Estado de una interfaz:
 node_network_up
 ```
 
-## Sistema
+### Sistema
 
 Tiempo de actividad:
 
@@ -223,25 +231,31 @@ node_uname_info
 
 ---
 
-# Requisitos previos
+## Requisitos previos
 
 Antes de comenzar, comprobar que:
 
 - Ubuntu está instalado.
-- El sistema tiene arquitectura compatible.
+- El sistema tiene una arquitectura compatible.
 - Se dispone de un usuario con `sudo`.
 - Existe conectividad a Internet.
 - El puerto `9100` está disponible.
 - Prometheus está instalado o se instalará posteriormente.
 - La hora del sistema está sincronizada.
 
-## Comprobar el sistema operativo
+### Comprobar el sistema operativo
 
 ```bash
 lsb_release -ds
 ```
 
-## Comprobar la arquitectura
+También puede utilizarse:
+
+```bash
+cat /etc/os-release
+```
+
+### Comprobar la arquitectura
 
 ```bash
 uname -m
@@ -269,13 +283,13 @@ En esta práctica se utilizará principalmente:
 linux-amd64
 ```
 
-## Comprobar permisos administrativos
+### Comprobar permisos administrativos
 
 ```bash
 sudo -v
 ```
 
-## Comprobar el puerto
+### Comprobar el puerto
 
 ```bash
 sudo ss -lntp | grep ':9100' || true
@@ -283,15 +297,27 @@ sudo ss -lntp | grep ':9100' || true
 
 Si no aparece ninguna salida, el puerto probablemente está disponible.
 
-## Comprobar la hora
+### Comprobar la hora
 
 ```bash
 timedatectl status
 ```
 
+Comprobar la sincronización:
+
+```bash
+timedatectl show -p NTPSynchronized --value
+```
+
+Resultado esperado:
+
+```text
+yes
+```
+
 ---
 
-# Preparar las variables
+## Preparar las variables de instalación
 
 La versión debe ser la indicada para el curso o laboratorio. En el siguiente ejemplo se utiliza una variable para evitar repetir el número de versión.
 
@@ -301,6 +327,7 @@ export NODE_EXPORTER_ARCH="amd64"
 export NODE_EXPORTER_PLATFORM="linux-${NODE_EXPORTER_ARCH}"
 export NODE_EXPORTER_PACKAGE="node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_PLATFORM}.tar.gz"
 export NODE_EXPORTER_URL="https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/${NODE_EXPORTER_PACKAGE}"
+export NODE_EXPORTER_DIR="/tmp/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_PLATFORM}"
 ```
 
 Comprobar los valores:
@@ -310,6 +337,7 @@ echo "$NODE_EXPORTER_VERSION"
 echo "$NODE_EXPORTER_PLATFORM"
 echo "$NODE_EXPORTER_PACKAGE"
 echo "$NODE_EXPORTER_URL"
+echo "$NODE_EXPORTER_DIR"
 ```
 
 Ejemplo:
@@ -319,20 +347,20 @@ $ echo "$NODE_EXPORTER_PACKAGE"
 node_exporter-1.8.2.linux-amd64.tar.gz
 ```
 
-Comprobar la URL:
+### Comprobar la URL
 
 ```bash
 curl -I "$NODE_EXPORTER_URL"
 ```
 
-Descargar el paquete:
+### Descargar el paquete
 
 ```bash
 cd /tmp
 curl -fLO "$NODE_EXPORTER_URL"
 ```
 
-Comprobar el archivo:
+### Comprobar el archivo descargado
 
 ```bash
 ls -lh "/tmp/$NODE_EXPORTER_PACKAGE"
@@ -342,18 +370,20 @@ ls -lh "/tmp/$NODE_EXPORTER_PACKAGE"
 
 ---
 
-# Crear el usuario de servicio
+## Crear el usuario de servicio
 
 Node Exporter debe ejecutarse con un usuario específico y sin acceso interactivo.
 
-Crear el usuario:
+Crear el usuario únicamente si todavía no existe:
 
 ```bash
-sudo useradd \
-  --system \
-  --no-create-home \
-  --shell /usr/sbin/nologin \
-  node_exporter
+if ! getent passwd node_exporter >/dev/null; then
+  sudo useradd \
+    --system \
+    --no-create-home \
+    --shell /usr/sbin/nologin \
+    node_exporter
+fi
 ```
 
 Comprobar que existe:
@@ -381,7 +411,7 @@ Ejemplo:
 uid=995(node_exporter) gid=995(node_exporter) groups=995(node_exporter)
 ```
 
-## Explicación de las opciones
+### Explicación de las opciones
 
 | Opción | Función |
 |---|---|
@@ -403,7 +433,7 @@ Resultado esperado:
 
 ---
 
-# Extraer el paquete
+## Extraer el paquete
 
 Extraer el archivo descargado:
 
@@ -412,13 +442,7 @@ cd /tmp
 tar -xzf "$NODE_EXPORTER_PACKAGE"
 ```
 
-Definir el directorio extraído:
-
-```bash
-export NODE_EXPORTER_DIR="/tmp/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_PLATFORM}"
-```
-
-Comprobarlo:
+Comprobar el directorio extraído:
 
 ```bash
 ls -ld "$NODE_EXPORTER_DIR"
@@ -443,7 +467,7 @@ NOTICE
 
 ---
 
-# Instalar el binario
+## Instalar el binario
 
 Instalar el binario en `/usr/local/bin`:
 
@@ -493,7 +517,7 @@ node_exporter --help
 
 ---
 
-# Crear el servicio systemd
+## Crear el servicio de systemd
 
 Crear la unidad:
 
@@ -524,7 +548,7 @@ WantedBy=multi-user.target
 EOF
 ```
 
-## Explicación de la unidad
+### Explicación de la unidad
 
 | Directiva | Función |
 |---|---|
@@ -545,7 +569,7 @@ systemctl cat node_exporter
 
 ---
 
-# Recargar systemd e iniciar el servicio
+## Recargar systemd e iniciar el servicio
 
 Después de crear la unidad:
 
@@ -568,7 +592,7 @@ sudo systemctl start node_exporter
 Consultar el estado:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status node_exporter --no-pager
 ```
 
 Comprobar con un comando breve:
@@ -597,45 +621,45 @@ enabled
 
 ---
 
-# Gestionar el servicio
+## Gestionar el servicio
 
-## Iniciar
+### Iniciar
 
 ```bash
 sudo systemctl start node_exporter
 ```
 
-## Detener
+### Detener
 
 ```bash
 sudo systemctl stop node_exporter
 ```
 
-## Reiniciar
+### Reiniciar
 
 ```bash
 sudo systemctl restart node_exporter
 ```
 
-## Consultar el estado
+### Consultar el estado
 
 ```bash
 sudo systemctl status node_exporter
 ```
 
-## Comprobar si está activo
+### Comprobar si está activo
 
 ```bash
 systemctl is-active node_exporter
 ```
 
-## Comprobar si está habilitado
+### Comprobar si está habilitado
 
 ```bash
 systemctl is-enabled node_exporter
 ```
 
-## Consultar el usuario de ejecución
+### Consultar el usuario de ejecución
 
 ```bash
 systemctl show node_exporter \
@@ -652,7 +676,7 @@ Group=node_exporter
 
 ---
 
-# Comprobar el puerto
+## Comprobar el puerto
 
 Node Exporter utiliza normalmente el puerto `9100`.
 
@@ -677,14 +701,14 @@ ps -ef | grep '[n]ode_exporter'
 Identificar el proceso que utiliza el puerto:
 
 ```bash
-sudo lsof -iTCP:9100 -sTCP:LISTEN
+sudo lsof -nP -iTCP:9100 -sTCP:LISTEN
 ```
 
 ---
 
-# Consultar el endpoint de métricas
+## Consultar el endpoint de métricas
 
-## Comprobar la respuesta HTTP
+### Comprobar la respuesta HTTP
 
 ```bash
 curl -I http://localhost:9100/metrics
@@ -697,7 +721,7 @@ HTTP/1.1 200 OK
 Content-Type: text/plain; version=0.0.4; charset=utf-8
 ```
 
-## Consultar las primeras líneas
+### Consultar las primeras líneas
 
 ```bash
 curl -s http://localhost:9100/metrics | head -n 20
@@ -727,13 +751,13 @@ Las métricas del sistema suelen comenzar por:
 node_
 ```
 
-## Contar las líneas de métricas
+### Contar las líneas de métricas
 
 ```bash
 curl -s http://localhost:9100/metrics | wc -l
 ```
 
-## Mostrar únicamente nombres de métricas
+### Mostrar únicamente nombres de métricas
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -746,9 +770,9 @@ curl -s http://localhost:9100/metrics \
 
 ---
 
-# Consultar métricas del sistema
+## Consultar métricas del sistema
 
-## CPU
+### CPU
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -756,7 +780,7 @@ curl -s http://localhost:9100/metrics \
   | head
 ```
 
-## Memoria
+### Memoria
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -764,7 +788,7 @@ curl -s http://localhost:9100/metrics \
   | head
 ```
 
-## Sistemas de ficheros
+### Sistemas de ficheros
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -772,7 +796,7 @@ curl -s http://localhost:9100/metrics \
   | head
 ```
 
-## Red
+### Red
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -780,14 +804,14 @@ curl -s http://localhost:9100/metrics \
   | head
 ```
 
-## Carga del sistema
+### Carga del sistema
 
 ```bash
 curl -s http://localhost:9100/metrics \
   | grep '^node_load'
 ```
 
-## Tiempo de actividad
+### Tiempo de actividad
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -796,9 +820,9 @@ curl -s http://localhost:9100/metrics \
 
 ---
 
-# Consultar métricas concretas
+## Consultar métricas concretas
 
-## Memoria total
+### Memoria total
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -811,14 +835,14 @@ Ejemplo:
 node_memory_MemTotal_bytes 4.10437632e+09
 ```
 
-## Memoria disponible
+### Memoria disponible
 
 ```bash
 curl -s http://localhost:9100/metrics \
   | grep '^node_memory_MemAvailable_bytes'
 ```
 
-## Interfaces de red
+### Interfaces de red
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -832,7 +856,7 @@ node_network_up{device="ens33"} 1
 node_network_up{device="lo"} 1
 ```
 
-## Sistemas de ficheros montados
+### Sistemas de ficheros montados
 
 ```bash
 curl -s http://localhost:9100/metrics \
@@ -842,13 +866,13 @@ curl -s http://localhost:9100/metrics \
 
 Las etiquetas más importantes suelen ser:
 
-- `device`
-- `fstype`
-- `mountpoint`
+- `device`.
+- `fstype`.
+- `mountpoint`.
 
 ---
 
-# Coleccionistas de Node Exporter
+## Collectors de Node Exporter
 
 Node Exporter organiza sus métricas mediante *collectors*.
 
@@ -876,7 +900,7 @@ Algunos colectores habituales son:
 
 La mayoría están habilitados por defecto.
 
-## Activar un collector
+### Activar un collector
 
 Para activar un collector concreto, se puede añadir una opción a `ExecStart`.
 
@@ -894,7 +918,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart node_exporter
 ```
 
-## Desactivar un collector
+### Desactivar un collector
 
 Ejemplo:
 
@@ -903,11 +927,11 @@ ExecStart=/usr/local/bin/node_exporter \
   --no-collector.arp
 ```
 
-No se deben desactivar colectores sin comprender qué métricas dejarán de estar disponibles.
+No se deben desactivar collectors sin comprender qué métricas dejarán de estar disponibles.
 
 ---
 
-# Escuchar en una dirección concreta
+## Configurar la dirección de escucha
 
 Por defecto, Node Exporter suele escuchar en todas las interfaces disponibles.
 
@@ -948,11 +972,11 @@ sudo ss -lntp | grep ':9100'
 
 ---
 
-# Textfile collector
+## Configurar el textfile collector
 
 Node Exporter puede leer métricas adicionales desde ficheros de texto mediante el *textfile collector*.
 
-Crear el directorio:
+### Crear el directorio
 
 ```bash
 sudo mkdir -p /var/lib/node_exporter/textfile_collector
@@ -966,7 +990,15 @@ sudo chown -R \
   /var/lib/node_exporter
 ```
 
-Modificar la unidad:
+### Modificar la unidad
+
+Editar la unidad:
+
+```bash
+sudo systemctl edit --full node_exporter
+```
+
+Cambiar `ExecStart` por:
 
 ```ini
 ExecStart=/usr/local/bin/node_exporter \
@@ -980,14 +1012,24 @@ sudo systemctl daemon-reload
 sudo systemctl restart node_exporter
 ```
 
-Crear una métrica de ejemplo:
+### Crear una métrica de ejemplo
+
+Crear primero un fichero temporal:
 
 ```bash
-sudo tee /var/lib/node_exporter/textfile_collector/laboratorio.prom > /dev/null <<'EOF'
+cat > /tmp/laboratorio.prom.tmp <<'EOF'
 # HELP laboratorio_estado Estado del laboratorio.
 # TYPE laboratorio_estado gauge
 laboratorio_estado 1
 EOF
+```
+
+Moverlo al directorio definitivo:
+
+```bash
+sudo mv \
+  /tmp/laboratorio.prom.tmp \
+  /var/lib/node_exporter/textfile_collector/laboratorio.prom
 ```
 
 Comprobar que aparece:
@@ -1003,7 +1045,7 @@ Resultado esperado:
 laboratorio_estado 1
 ```
 
-## Recomendaciones para el textfile collector
+### Recomendaciones para el textfile collector
 
 - Escribir primero en un fichero temporal.
 - Moverlo después al directorio definitivo.
@@ -1012,35 +1054,40 @@ laboratorio_estado 1
 - Mantener una sintaxis válida.
 - No incluir secretos ni contraseñas.
 
-Ejemplo de escritura segura:
+### Consultar la métrica desde Prometheus
 
-```bash
-cat > /tmp/laboratorio.prom.tmp <<'EOF'
-# HELP laboratorio_comprobacion Resultado de una comprobacion.
-# TYPE laboratorio_comprobacion gauge
-laboratorio_comprobacion 1
-EOF
-
-sudo mv \
-  /tmp/laboratorio.prom.tmp \
-  /var/lib/node_exporter/textfile_collector/laboratorio.prom
+```promql
+laboratorio_estado
 ```
 
 ---
 
-# Configurar Prometheus
+## Configurar Prometheus
 
 Una vez instalado Node Exporter, Prometheus debe configurarse para consultarlo.
 
-Editar la configuración:
+### Crear una copia de seguridad
+
+```bash
+sudo cp \
+  /etc/prometheus/prometheus.yml \
+  "/etc/prometheus/prometheus.yml.$(date +%Y%m%d-%H%M%S).bak"
+```
+
+### Editar la configuración
 
 ```bash
 sudo nano /etc/prometheus/prometheus.yml
 ```
 
-Añadir:
+La configuración puede quedar así:
 
 ```yaml
+---
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
 scrape_configs:
   - job_name: prometheus
     static_configs:
@@ -1053,25 +1100,25 @@ scrape_configs:
           - localhost:9100
 ```
 
-Validar la configuración:
+### Validar la configuración
 
 ```bash
 promtool check config /etc/prometheus/prometheus.yml
 ```
 
-Reiniciar Prometheus:
+### Reiniciar Prometheus
 
 ```bash
 sudo systemctl restart prometheus
 ```
 
-Comprobar el estado:
+### Comprobar el estado
 
 ```bash
 systemctl is-active prometheus
 ```
 
-Consultar los objetivos:
+### Consultar los objetivos
 
 ```bash
 curl -s http://localhost:9090/api/v1/targets \
@@ -1094,7 +1141,7 @@ prometheus      localhost:9090  up
 node_exporter   localhost:9100  up
 ```
 
-Consultar desde PromQL:
+### Consultar desde PromQL
 
 ```promql
 up{job="node_exporter"}
@@ -1106,18 +1153,20 @@ Resultado esperado:
 1
 ```
 
+> Si Node Exporter se ejecuta en otro equipo, sustituye `localhost:9100` por la dirección IP o el nombre DNS del servidor donde se ejecuta.
+
 ---
 
-# Verificar la integración
+## Verificar la integración
 
-## Comprobar Node Exporter directamente
+### Comprobar Node Exporter directamente
 
 ```bash
 curl -s http://localhost:9100/metrics \
   | grep '^node_memory_MemAvailable_bytes'
 ```
 
-## Comprobar el objetivo en Prometheus
+### Comprobar el objetivo en Prometheus
 
 ```bash
 curl -s http://localhost:9090/api/v1/targets \
@@ -1135,7 +1184,7 @@ curl -s http://localhost:9090/api/v1/targets \
   '
 ```
 
-## Consultar una métrica desde Prometheus
+### Consultar una métrica desde Prometheus
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -1143,7 +1192,7 @@ curl -sG http://localhost:9090/api/v1/query \
   | jq
 ```
 
-## Consultar `up`
+### Consultar `up`
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -1183,6 +1232,10 @@ sudo ss -lntp | grep ':9100' || true
 df -h /
 ```
 
+```bash
+timedatectl show -p NTPSynchronized --value
+```
+
 ### Actividades
 
 1. Anota la distribución.
@@ -1190,7 +1243,8 @@ df -h /
 3. Comprueba que tienes permisos de `sudo`.
 4. Comprueba si el puerto `9100` está disponible.
 5. Comprueba el espacio libre.
-6. Explica qué problemas pueden producirse si el puerto ya está ocupado.
+6. Comprueba la sincronización horaria.
+7. Explica qué problemas pueden producirse si el puerto ya está ocupado.
 
 ---
 
@@ -1203,11 +1257,13 @@ Crear un usuario dedicado para Node Exporter.
 ### Comandos
 
 ```bash
-sudo useradd \
-  --system \
-  --no-create-home \
-  --shell /usr/sbin/nologin \
-  node_exporter
+if ! getent passwd node_exporter >/dev/null; then
+  sudo useradd \
+    --system \
+    --no-create-home \
+    --shell /usr/sbin/nologin \
+    node_exporter
+fi
 ```
 
 ```bash
@@ -1242,6 +1298,7 @@ export NODE_EXPORTER_ARCH="amd64"
 export NODE_EXPORTER_PLATFORM="linux-${NODE_EXPORTER_ARCH}"
 export NODE_EXPORTER_PACKAGE="node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_PLATFORM}.tar.gz"
 export NODE_EXPORTER_URL="https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/${NODE_EXPORTER_PACKAGE}"
+export NODE_EXPORTER_DIR="/tmp/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_PLATFORM}"
 ```
 
 ```bash
@@ -1251,10 +1308,6 @@ curl -fLO "$NODE_EXPORTER_URL"
 
 ```bash
 tar -xzf "$NODE_EXPORTER_PACKAGE"
-```
-
-```bash
-export NODE_EXPORTER_DIR="/tmp/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_PLATFORM}"
 ```
 
 ```bash
@@ -1283,13 +1336,13 @@ node_exporter --version
 
 ---
 
-## Sesión 4: crear el servicio systemd
+## Sesión 4: crear el servicio de systemd
 
 ### Objetivo
 
 Crear una unidad que permita gestionar Node Exporter.
 
-### Comando
+### Crear la unidad
 
 ```bash
 sudo tee /etc/systemd/system/node_exporter.service > /dev/null <<'EOF'
@@ -1343,7 +1396,7 @@ systemctl is-active node_exporter
 ```
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status node_exporter --no-pager
 ```
 
 ### Actividades
@@ -1474,24 +1527,24 @@ uptime
 
 Configurar Prometheus para consultar Node Exporter.
 
+### Crear una copia de seguridad
+
+```bash
+sudo cp \
+  /etc/prometheus/prometheus.yml \
+  "/etc/prometheus/prometheus.yml.$(date +%Y%m%d-%H%M%S).bak"
+```
+
 ### Editar la configuración
 
 ```bash
 sudo nano /etc/prometheus/prometheus.yml
 ```
 
-Añadir:
-
-```yaml
-  - job_name: node_exporter
-    static_configs:
-      - targets:
-          - localhost:9100
-```
-
 La configuración completa puede ser:
 
 ```yaml
+---
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -1570,7 +1623,7 @@ up == 0
 
 ### Prueba controlada
 
-Detener Node Exporter:
+Detener temporalmente Node Exporter:
 
 ```bash
 sudo systemctl stop node_exporter
@@ -1636,7 +1689,7 @@ sudo chown -R \
 
 ### Modificar la unidad
 
-Editar:
+Editar la unidad:
 
 ```bash
 sudo systemctl edit --full node_exporter
@@ -1751,7 +1804,7 @@ sudo journalctl -u node_exporter \
 Consultar el estado:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status node_exporter --no-pager
 ```
 
 Consultar los registros:
@@ -1790,6 +1843,8 @@ Posibles causas:
 - Permisos insuficientes.
 - Arquitectura incorrecta.
 
+---
+
 ## El puerto `9100` está ocupado
 
 Identificar el proceso:
@@ -1801,10 +1856,33 @@ sudo ss -lntp | grep ':9100'
 También:
 
 ```bash
-sudo lsof -iTCP:9100 -sTCP:LISTEN
+sudo lsof -nP -iTCP:9100 -sTCP:LISTEN
 ```
 
-No detener un proceso desconocido sin identificarlo antes.
+No detengas un proceso desconocido sin identificarlo antes.
+
+Una causa habitual es tener dos instalaciones simultáneas:
+
+```text
+node_exporter.service
+prometheus-node-exporter.service
+```
+
+Si Node Exporter se instaló manualmente, debe utilizarse la unidad:
+
+```text
+node_exporter.service
+```
+
+Si se instaló mediante APT, normalmente debe utilizarse:
+
+```text
+prometheus-node-exporter.service
+```
+
+No deben ejecutarse ambas unidades al mismo tiempo en el mismo puerto.
+
+---
 
 ## El endpoint `/metrics` no responde
 
@@ -1833,6 +1911,8 @@ sudo journalctl -u node_exporter \
   --no-pager \
   -n 50
 ```
+
+---
 
 ## Prometheus muestra Node Exporter como `DOWN`
 
@@ -1879,6 +1959,10 @@ Posibles causas:
 - Cortafuegos.
 - Prometheus no se ha reiniciado.
 - Error de indentación YAML.
+- Node Exporter escucha únicamente en `127.0.0.1`.
+- Prometheus y Node Exporter están en equipos distintos.
+
+---
 
 ## El usuario de servicio no puede iniciar Node Exporter
 
@@ -1905,6 +1989,8 @@ sudo -u node_exporter \
   --version
 ```
 
+---
+
 ## El textfile collector no muestra la métrica
 
 Comprobar la opción:
@@ -1923,7 +2009,7 @@ Comprobar permisos:
 
 ```bash
 sudo -u node_exporter \
-  test -r /var/lib/node_exporter/textfile_collector/laboratorio_estado.prom \
+  test -r /var/lib/node_exporter/textfile_collector/laboratorio.prom \
   && echo "Lectura permitida" \
   || echo "Lectura no permitida"
 ```
@@ -1931,14 +2017,14 @@ sudo -u node_exporter \
 Comprobar la sintaxis:
 
 ```bash
-cat /var/lib/node_exporter/textfile_collector/laboratorio_estado.prom
+cat /var/lib/node_exporter/textfile_collector/laboratorio.prom
 ```
 
 ---
 
 # Seguridad
 
-## Usuario sin privilegios
+## Ejecutar con un usuario sin privilegios
 
 Node Exporter debe ejecutarse con:
 
@@ -1974,10 +2060,12 @@ sudo ufw status verbose
 Si el laboratorio requiere permitir el acceso únicamente desde Prometheus:
 
 ```bash
-sudo ufw allow from <IP-DE-PROMETHEUS> to any port 9100 proto tcp
+sudo ufw allow from IP_DE_PROMETHEUS \
+  to any port 9100 \
+  proto tcp
 ```
 
-Sustituir `<IP-DE-PROMETHEUS>` por la dirección real del servidor de Prometheus.
+Sustituir `IP_DE_PROMETHEUS` por la dirección real del servidor de Prometheus.
 
 > Las reglas del cortafuegos deben adaptarse al entorno. No se deben ejecutar de forma automática en un servidor remoto sin conocer previamente el acceso disponible.
 
@@ -2004,12 +2092,12 @@ Generar un informe:
   echo "Arquitectura: $(uname -m)"
   echo "Kernel: $(uname -r)"
   echo
-  echo "===== VERSION ====="
+  echo "===== VERSIÓN ====="
   node_exporter --version 2>&1
   echo
   echo "===== SERVICIO ====="
-  systemctl is-enabled node_exporter
-  systemctl is-active node_exporter
+  echo "Inicio automático: $(systemctl is-enabled node_exporter 2>/dev/null || echo no-disponible)"
+  echo "Estado: $(systemctl is-active node_exporter 2>/dev/null || echo no-disponible)"
   echo
   echo "===== USUARIO ====="
   systemctl show node_exporter -p User -p Group
@@ -2035,7 +2123,7 @@ curl -s http://localhost:9100/metrics \
   > ~/laboratorio-grafana/evidencias/node-exporter-metrics.txt
 ```
 
-Guardar solo métricas del sistema:
+Guardar solo las métricas del sistema:
 
 ```bash
 grep '^node_' \
@@ -2141,7 +2229,7 @@ Inicio automático: habilitado
 Puerto: 9100
 Endpoint /metrics: accesible
 Target en Prometheus: up
-Métricas de sistema: disponibles
+Métricas del sistema: disponibles
 ```
 
 ---
@@ -2157,17 +2245,18 @@ Métricas de sistema: disponibles
 - El usuario de servicio no debe tener acceso interactivo.
 - `systemd` permite iniciar y controlar Node Exporter.
 - `curl` permite comprobar el endpoint HTTP.
-- Las métricas de sistema suelen comenzar por `node_`.
+- Las métricas del sistema suelen comenzar por `node_`.
 - `node_cpu_seconds_total` es una métrica acumulativa de CPU.
-- `node_memory_MemAvailable_bytes` representa memoria disponible.
-- `node_filesystem_avail_bytes` representa espacio disponible.
-- `node_network_receive_bytes_total` representa bytes recibidos.
+- `node_memory_MemAvailable_bytes` representa la memoria disponible.
+- `node_filesystem_avail_bytes` representa el espacio disponible.
+- `node_network_receive_bytes_total` representa los bytes recibidos.
 - El estado `up` permite comprobar el resultado del *scraping*.
 - El puerto `9100` debe protegerse mediante red o cortafuegos.
 - La configuración de Prometheus debe validarse antes de reiniciar.
 - El *textfile collector* permite exponer métricas personalizadas.
 - Los registros de `systemd` ayudan a diagnosticar errores.
 - Una métrica visible directamente en Node Exporter puede tardar unos segundos en aparecer en Prometheus.
+- No deben ejecutarse simultáneamente dos servicios de Node Exporter en el puerto `9100`.
 
 ---
 
@@ -2198,6 +2287,8 @@ Métricas de sistema: disponibles
 23. ¿Qué debes hacer después de modificar una unidad de `systemd`?
 24. ¿Por qué se valida la configuración de Prometheus antes de reiniciarlo?
 25. ¿Qué diferencia existe entre consultar directamente Node Exporter y consultar Prometheus?
+26. ¿Qué diferencia existe entre `node_exporter.service` y `prometheus-node-exporter.service`?
+27. ¿Qué problema aparece si ambos servicios intentan utilizar el puerto `9100`?
 
 ---
 
@@ -2226,7 +2317,7 @@ La práctica se considera completada cuando:
 - La consulta `up{job="node_exporter"}` devuelve `1`.
 - Se han guardado las evidencias de la instalación.
 
-La comprobación final puede ejecutarse con:
+## Comprobación final
 
 ```bash
 printf '%-40s %s\n' \
@@ -2239,10 +2330,14 @@ printf '%-40s %s\n' \
 
 printf '%-40s ' \
   "Usuario de ejecución"
-systemctl show node_exporter -p User --value
+
+systemctl show node_exporter \
+  -p User \
+  --value
 
 printf '%-40s ' \
   "Endpoint /metrics"
+
 curl -fsS http://localhost:9100/metrics \
   >/dev/null \
   && echo "accesible" \
@@ -2250,6 +2345,7 @@ curl -fsS http://localhost:9100/metrics \
 
 printf '%-40s ' \
   "Puerto 9100"
+
 sudo ss -lnt '( sport = :9100 )' \
   | grep -q LISTEN \
   && echo "en escucha" \
@@ -2257,6 +2353,7 @@ sudo ss -lnt '( sport = :9100 )' \
 
 printf '%-40s ' \
   "Métrica de memoria"
+
 curl -fsS http://localhost:9100/metrics \
   | grep -q '^node_memory_MemAvailable_bytes' \
   && echo "disponible" \
