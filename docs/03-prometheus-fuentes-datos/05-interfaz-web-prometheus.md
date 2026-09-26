@@ -8,7 +8,7 @@ Durante esta práctica se utilizará la interfaz web para:
 - Ejecutar consultas sencillas.
 - Consultar métricas en formato tabla.
 - Representar métricas como gráficos.
-- Revisar los objetivos configurados.
+- Revisar los objetivos de *scraping*.
 - Comprobar el estado de los *targets*.
 - Consultar la configuración cargada.
 - Revisar información de ejecución y compilación.
@@ -85,11 +85,11 @@ Series temporales almacenadas
 
 ---
 
-# Requisitos previos
+## Requisitos previos
 
 Antes de comenzar, Prometheus debe estar instalado y activo.
 
-## Comprobar el servicio
+### Comprobar el servicio
 
 ```bash
 systemctl is-active prometheus
@@ -101,13 +101,13 @@ Resultado esperado:
 active
 ```
 
-## Comprobar el puerto
+### Comprobar el puerto
 
 ```bash
 sudo ss -lntp | grep ':9090'
 ```
 
-## Comprobar el endpoint de salud
+### Comprobar el endpoint de salud
 
 ```bash
 curl http://localhost:9090/-/healthy
@@ -119,7 +119,7 @@ Resultado esperado:
 Prometheus is Healthy.
 ```
 
-## Comprobar el endpoint de preparación
+### Comprobar el endpoint de preparación
 
 ```bash
 curl http://localhost:9090/-/ready
@@ -131,7 +131,7 @@ Resultado esperado:
 Prometheus is Ready.
 ```
 
-## Comprobar la consulta `up`
+### Comprobar la consulta `up`
 
 ```bash
 curl -sG http://localhost:9090/api/v1/query \
@@ -148,9 +148,9 @@ curl -sG http://localhost:9090/api/v1/query \
 
 ---
 
-# Acceso a la interfaz web
+## Acceso a la interfaz web
 
-## Desde el propio servidor
+### Desde el propio servidor
 
 Abrir un navegador y acceder a:
 
@@ -158,7 +158,7 @@ Abrir un navegador y acceder a:
 http://localhost:9090
 ```
 
-## Desde otro equipo
+### Desde otro equipo
 
 Consultar la dirección IP del servidor:
 
@@ -178,7 +178,7 @@ Acceder desde el navegador:
 http://192.168.1.50:9090
 ```
 
-## Problemas de acceso remoto
+### Problemas de acceso remoto
 
 Si la interfaz funciona con `localhost` pero no desde otro equipo, comprobar:
 
@@ -214,7 +214,7 @@ Prometheus acepta conexiones IPv4 desde las interfaces disponibles, siempre que 
 
 ---
 
-# Elementos principales de la interfaz
+## Elementos principales de la interfaz
 
 La interfaz puede variar ligeramente según la versión instalada, pero normalmente incluye las siguientes áreas:
 
@@ -233,7 +233,7 @@ La interfaz puede variar ligeramente según la versión instalada, pero normalme
 
 ---
 
-# Área de consultas
+## Área de consultas
 
 La sección de consultas permite introducir expresiones PromQL y observar los resultados.
 
@@ -252,67 +252,67 @@ up{instance="localhost:9090", job="prometheus"}       1
 up{instance="localhost:9100", job="node_exporter"}    1
 ```
 
-## Resultado `1`
+### Resultado `1`
 
 Indica que Prometheus pudo recopilar correctamente métricas del objetivo.
 
-## Resultado `0`
+### Resultado `0`
 
 Indica que Prometheus no pudo recopilar correctamente métricas del objetivo.
 
 ---
 
-# Primeras consultas PromQL
+## Primeras consultas PromQL
 
-## Consultar todos los objetivos
+### Consultar todos los objetivos
 
 ```promql
 up
 ```
 
-## Consultar únicamente Prometheus
+### Consultar únicamente Prometheus
 
 ```promql
 up{job="prometheus"}
 ```
 
-## Consultar únicamente Node Exporter
+### Consultar únicamente Node Exporter
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Consultar objetivos caídos
+### Consultar objetivos caídos
 
 ```promql
 up == 0
 ```
 
-## Consultar información de compilación
+### Consultar información de compilación
 
 ```promql
 prometheus_build_info
 ```
 
-## Consultar memoria utilizada por el proceso de Prometheus
+### Consultar memoria utilizada por el proceso de Prometheus
 
 ```promql
 process_resident_memory_bytes
 ```
 
-## Consultar el tiempo de inicio del proceso
+### Consultar el tiempo de inicio del proceso
 
 ```promql
 process_start_time_seconds
 ```
 
-## Consultar el número de series en memoria
+### Consultar el número de series en memoria
 
 ```promql
 prometheus_tsdb_head_series
 ```
 
-## Consultar muestras añadidas
+### Consultar muestras añadidas
 
 ```promql
 prometheus_tsdb_head_samples_appended_total
@@ -320,7 +320,7 @@ prometheus_tsdb_head_samples_appended_total
 
 ---
 
-# Vista de tabla
+## Vista de tabla
 
 La vista de tabla muestra el resultado actual de una consulta.
 
@@ -346,7 +346,7 @@ La vista de tabla es útil para:
 - Confirmar que una métrica existe.
 - Detectar valores inesperados.
 
-## Actividad
+### Actividad
 
 Ejecutar:
 
@@ -370,7 +370,7 @@ Completar:
 
 ---
 
-# Vista gráfica
+## Vista gráfica
 
 La vista gráfica representa la evolución de una métrica a lo largo del tiempo.
 
@@ -405,9 +405,9 @@ rate(prometheus_tsdb_head_samples_appended_total[5m])
 
 ---
 
-# Consultas instantáneas y consultas temporales
+## Consultas instantáneas y consultas temporales
 
-## Consulta instantánea
+### Consulta instantánea
 
 Una consulta instantánea devuelve el valor más reciente disponible.
 
@@ -423,7 +423,7 @@ Resultado conceptual:
 up = 1
 ```
 
-## Consulta temporal
+### Consulta temporal
 
 Una consulta temporal devuelve los valores de una métrica durante un intervalo.
 
@@ -435,7 +435,7 @@ process_resident_memory_bytes
 
 Al visualizarla como gráfico, se observa su evolución en el tiempo.
 
-## Seleccionar el rango temporal
+### Seleccionar el rango temporal
 
 En la interfaz se puede seleccionar un rango como:
 
@@ -450,23 +450,23 @@ El rango temporal debe ser coherente con la frecuencia de recopilación. Si el i
 
 ---
 
-# Consultas con etiquetas
+## Consultas con etiquetas
 
 Las etiquetas permiten filtrar las series.
 
-## Filtrar por `job`
+### Filtrar por `job`
 
 ```promql
 up{job="node_exporter"}
 ```
 
-## Filtrar por `instance`
+### Filtrar por `instance`
 
 ```promql
 up{instance="localhost:9100"}
 ```
 
-## Filtrar por varias etiquetas
+### Filtrar por varias etiquetas
 
 ```promql
 node_cpu_seconds_total{
@@ -475,7 +475,7 @@ node_cpu_seconds_total{
 }
 ```
 
-## Excluir una etiqueta
+### Excluir una etiqueta
 
 ```promql
 node_network_receive_bytes_total{
@@ -483,7 +483,7 @@ node_network_receive_bytes_total{
 }
 ```
 
-## Utilizar expresiones regulares
+### Utilizar expresiones regulares
 
 ```promql
 node_network_receive_bytes_total{
@@ -491,7 +491,7 @@ node_network_receive_bytes_total{
 }
 ```
 
-## Excluir mediante una expresión regular
+### Excluir mediante una expresión regular
 
 ```promql
 node_network_receive_bytes_total{
@@ -501,11 +501,11 @@ node_network_receive_bytes_total{
 
 ---
 
-# Consultas de Node Exporter
+## Consultas de Node Exporter
 
 Estas consultas requieren que Node Exporter esté instalado, activo y configurado como objetivo de Prometheus.
 
-## Métricas de CPU
+### Métricas de CPU
 
 Consultar todas las métricas de CPU:
 
@@ -531,7 +531,7 @@ Calcular el uso aproximado de CPU:
 )
 ```
 
-## Métricas de memoria
+### Métricas de memoria
 
 Consultar la memoria total:
 
@@ -556,7 +556,7 @@ Calcular el porcentaje de memoria utilizado:
 )
 ```
 
-## Métricas del sistema de ficheros
+### Métricas del sistema de ficheros
 
 Consultar el espacio disponible:
 
@@ -598,7 +598,7 @@ Calcular el porcentaje utilizado:
 )
 ```
 
-## Métricas de red
+### Métricas de red
 
 Consultar bytes recibidos:
 
@@ -630,7 +630,7 @@ rate(node_network_transmit_bytes_total{
 }[5m])
 ```
 
-## Métrica de disponibilidad
+### Métrica de disponibilidad
 
 ```promql
 up{job="node_exporter"}
@@ -638,7 +638,7 @@ up{job="node_exporter"}
 
 ---
 
-# Sección Targets
+## Sección Targets
 
 La sección **Targets** muestra los objetivos configurados y el resultado del último *scraping*.
 
@@ -660,13 +660,13 @@ Ejemplo conceptual:
 | prometheus | `localhost:9090` | UP | `/metrics` | Ninguno |
 | node_exporter | `localhost:9100` | UP | `/metrics` | Ninguno |
 
-## Estados habituales
+### Estados habituales
 
-### UP
+#### UP
 
 El objetivo respondió correctamente y Prometheus pudo recopilar sus métricas.
 
-### DOWN
+#### DOWN
 
 Prometheus no pudo realizar correctamente el *scraping*.
 
@@ -681,11 +681,11 @@ Posibles causas:
 - Error de configuración.
 - Protocolo incorrecto.
 
-### UNKNOWN
+#### UNKNOWN
 
 El estado todavía no se ha determinado o no existe información suficiente.
 
-## Actividad
+### Actividad
 
 1. Abrir la sección **Targets**.
 2. Localizar el job `prometheus`.
@@ -697,7 +697,7 @@ El estado todavía no se ha determinado o no existe información suficiente.
 
 ---
 
-# Sección Service Discovery
+## Sección Service Discovery
 
 La sección **Service Discovery** muestra la información obtenida durante el descubrimiento de servicios.
 
@@ -714,11 +714,11 @@ En un laboratorio con objetivos estáticos, el alumno debe identificar:
 - El job configurado.
 - El target descubierto.
 - Las etiquetas asociadas.
-- Las etiquetas antes y después del proceso de relabeling, si procede.
+- Las etiquetas antes y después del proceso de *relabeling*, si procede.
 
 ---
 
-# Sección Rules
+## Sección Rules
 
 La sección **Rules** muestra las reglas configuradas en Prometheus.
 
@@ -729,13 +729,13 @@ Las reglas pueden ser:
 
 En una instalación inicial puede no existir ninguna regla.
 
-## Consultar reglas mediante la API
+### Consultar reglas mediante la API
 
 ```bash
 curl -s http://localhost:9090/api/v1/rules | jq
 ```
 
-## Consultar alertas activas
+### Consultar alertas activas
 
 ```bash
 curl -s http://localhost:9090/api/v1/alerts | jq
@@ -745,7 +745,7 @@ Si no hay reglas configuradas, el resultado será vacío o no contendrá reglas 
 
 ---
 
-# Sección Configuration
+## Sección Configuration
 
 La sección **Configuration** muestra la configuración que Prometheus tiene cargada.
 
@@ -781,7 +781,7 @@ sudo cat /etc/prometheus/prometheus.yml
 
 ---
 
-# Sección Status
+## Sección Status
 
 La sección **Status** proporciona información sobre el estado interno de Prometheus.
 
@@ -797,7 +797,7 @@ Puede incluir accesos a:
 
 ---
 
-# Runtime & Build Information
+## Runtime & Build Information
 
 Esta sección muestra información de compilación y ejecución.
 
@@ -834,7 +834,7 @@ Ejemplo conceptual:
 
 ---
 
-# Command-Line Flags
+## Command-Line Flags
 
 Esta sección muestra las opciones con las que se inició Prometheus.
 
@@ -860,7 +860,7 @@ Estas opciones permiten comprobar:
 
 ---
 
-# TSDB Status
+## TSDB Status
 
 La sección **TSDB Status** muestra información sobre la base de datos de series temporales.
 
@@ -890,11 +890,11 @@ Una cantidad excesiva de series puede incrementar el uso de memoria y almacenami
 
 ---
 
-# API HTTP de Prometheus
+## API HTTP de Prometheus
 
 La interfaz web utiliza la API HTTP para consultar información.
 
-## Consulta instantánea
+### Consulta instantánea
 
 Endpoint:
 
@@ -926,7 +926,7 @@ curl -sG http://localhost:9090/api/v1/query \
   '
 ```
 
-## Consulta de rango temporal
+### Consulta de rango temporal
 
 Endpoint:
 
@@ -948,26 +948,26 @@ curl -sG http://localhost:9090/api/v1/query_range \
   | jq
 ```
 
-## Consultar objetivos
+### Consultar objetivos
 
 ```bash
 curl -s http://localhost:9090/api/v1/targets | jq
 ```
 
-## Consultar la configuración
+### Consultar la configuración
 
 ```bash
 curl -s http://localhost:9090/api/v1/status/config \
   | jq -r '.data.yaml'
 ```
 
-## Consultar reglas
+### Consultar reglas
 
 ```bash
 curl -s http://localhost:9090/api/v1/rules | jq
 ```
 
-## Consultar alertas
+### Consultar alertas
 
 ```bash
 curl -s http://localhost:9090/api/v1/alerts | jq
@@ -1272,7 +1272,7 @@ Relacionar la interfaz **Targets** con la métrica `up`.
 1. Abrir la sección **Targets**.
 2. Localizar el job `prometheus`.
 3. Localizar el job `node_exporter`.
-4. Anotar la URL de scraping.
+4. Anotar la URL de *scraping*.
 5. Anotar el estado.
 6. Consultar:
 
@@ -1290,7 +1290,7 @@ Detener temporalmente Node Exporter:
 sudo systemctl stop node_exporter
 ```
 
-Esperar varios intervalos de scraping y consultar:
+Esperar varios intervalos de *scraping* y consultar:
 
 ```promql
 up{job="node_exporter"}
@@ -1309,6 +1309,13 @@ systemctl is-active node_exporter
 ```
 
 Esperar a que el objetivo vuelva a aparecer como `UP`.
+
+> Si Node Exporter se instaló mediante el paquete de Ubuntu, la unidad puede llamarse `prometheus-node-exporter`. En ese caso, utiliza:
+
+```bash
+sudo systemctl stop prometheus-node-exporter
+sudo systemctl start prometheus-node-exporter
+```
 
 ---
 
@@ -1424,6 +1431,8 @@ Consultar los registros:
 sudo journalctl -u prometheus --no-pager -n 50
 ```
 
+---
+
 ## La página carga, pero una consulta no devuelve datos
 
 Comprobar primero:
@@ -1464,7 +1473,9 @@ Posibles causas:
 - Etiqueta incorrecta.
 - Rango temporal demasiado corto.
 - Node Exporter detenido.
-- Prometheus todavía no ha realizado el primer scraping.
+- Prometheus todavía no ha realizado el primer *scraping*.
+
+---
 
 ## La métrica existe en Node Exporter, pero no en Prometheus
 
@@ -1495,6 +1506,8 @@ Revisar:
 - Tiempo transcurrido desde el reinicio.
 - Logs de Prometheus.
 
+---
+
 ## La vista gráfica no muestra líneas
 
 Comprobar:
@@ -1505,6 +1518,8 @@ Comprobar:
 - Que la métrica es adecuada para una consulta temporal.
 - Que no se ha seleccionado un rango futuro.
 - Que el objetivo está disponible.
+
+---
 
 ## La interfaz funciona en el servidor, pero no remotamente
 
@@ -1669,7 +1684,7 @@ curl -sG http://localhost:9090/api/v1/query \
 
 ---
 
-# Tabla de resultados
+## Tabla de resultados
 
 | Comprobación | Resultado | Observaciones |
 |---|---|---|
