@@ -79,12 +79,6 @@ Se documenta el sistema donde se realizarán las prácticas:
 - Conectividad de red.
 - Sincronización horaria.
 
-Documento:
-
-```text
-02-entorno-laboratorio.md
-```
-
 ### 2. Arquitectura de Prometheus
 
 Se estudian los elementos que forman la plataforma:
@@ -101,12 +95,6 @@ Se estudian los elementos que forman la plataforma:
 - PromQL.
 - Grafana.
 
-Documento:
-
-```text
-03-arquitectura-prometheus.md
-```
-
 ### 3. Instalación de Prometheus
 
 Se instala Prometheus como servicio del sistema:
@@ -121,12 +109,6 @@ Se instala Prometheus como servicio del sistema:
 - Comprobación del puerto `9090`.
 - Consulta de registros.
 
-Documento:
-
-```text
-04-instalacion-prometheus.md
-```
-
 ### 4. Interfaz web de Prometheus
 
 Se aprende a utilizar la interfaz web para:
@@ -138,12 +120,6 @@ Se aprende a utilizar la interfaz web para:
 - Consultar la configuración.
 - Consultar información de ejecución.
 - Revisar el estado de los objetivos.
-
-Documento:
-
-```text
-05-interfaz-web-prometheus.md
-```
 
 ### 5. Instalación de Node Exporter
 
@@ -157,12 +133,6 @@ Se instala Node Exporter para exponer métricas del servidor:
 - Kernel.
 - Tiempo de actividad.
 
-Documento:
-
-```text
-06-instalacion-node-exporter.md
-```
-
 ### 6. Configuración del scraping
 
 Se configura Prometheus para consultar Node Exporter:
@@ -175,12 +145,6 @@ Se configura Prometheus para consultar Node Exporter:
 - Etiquetas.
 - Reinicio del servicio.
 - Verificación de objetivos.
-
-Documento:
-
-```text
-07-configuracion-scrape.md
-```
 
 ### 7. Consultas PromQL
 
@@ -196,12 +160,6 @@ Se introducen las consultas PromQL:
 - Uso de `rate()`.
 - Agrupación con `by`.
 
-Documento:
-
-```text
-08-consultas-promql.md
-```
-
 ### 8. Añadir Prometheus como fuente de datos
 
 Se conecta Grafana con Prometheus:
@@ -212,12 +170,6 @@ Se conecta Grafana con Prometheus:
 - Ejecución de consultas.
 - Errores frecuentes.
 - Diferencia entre `localhost` y una dirección IP.
-
-Documento:
-
-```text
-09-anadir-fuente-datos.md
-```
 
 ### 9. Laboratorio integrador
 
@@ -232,12 +184,6 @@ Se crea un dashboard operativo con:
 - Paneles de Grafana.
 - Umbrales.
 - Evidencias.
-
-Documento:
-
-```text
-10-laboratorio.md
-```
 
 ---
 
