@@ -59,6 +59,8 @@ Al finalizar este laboratorio, el alumno podrá:
 
 ---
 
+# Arquitectura y componentes
+
 ## Introducción
 
 Una plataforma de monitorización está formada por varias piezas especializadas.
@@ -122,9 +124,7 @@ http://localhost:3000
 6. Grafana representa los resultados.
 ```
 
----
-
-# Arquitectura del laboratorio
+## Arquitectura del laboratorio
 
 ```text
 +----------------------------------------------------------+
@@ -280,7 +280,7 @@ Si Node Exporter se instaló manualmente:
 systemctl is-active node_exporter
 ```
 
-Si se instaló mediante un paquete de Ubuntu:
+Si se instaló mediante el paquete de Ubuntu:
 
 ```bash
 systemctl is-active prometheus-node-exporter
@@ -340,15 +340,23 @@ Verificar que los tres componentes están instalados y activos.
 systemctl is-active prometheus
 ```
 
+Para una instalación manual de Node Exporter:
+
 ```bash
 systemctl is-active node_exporter
 ```
 
+Para una instalación mediante APT:
+
+```bash
+systemctl is-active prometheus-node-exporter
+```
+
+Comprobar Grafana:
+
 ```bash
 systemctl is-active grafana-server
 ```
-
-> Si Node Exporter se instaló mediante APT, el servicio puede llamarse `prometheus-node-exporter`.
 
 ## Consultar las versiones
 
@@ -821,7 +829,7 @@ Comprobar los procesos:
 pgrep yes
 ```
 
-Consultar el uso de CPU en Prometheus y detener los procesos:
+Detener los procesos:
 
 ```bash
 pkill yes
@@ -1363,6 +1371,12 @@ Comprobar el servicio:
 systemctl is-active node_exporter
 ```
 
+Si se utiliza APT:
+
+```bash
+systemctl is-active prometheus-node-exporter
+```
+
 Esperar al siguiente *scraping*.
 
 ## Verificar la recuperación
@@ -1565,13 +1579,13 @@ sudo ss -lntp | grep ':9090'
 
 ## Node Exporter no está activo
 
-Comprobar una instalación manual:
+Para una instalación manual:
 
 ```bash
 sudo systemctl status node_exporter
 ```
 
-Comprobar una instalación mediante APT:
+Para una instalación mediante APT:
 
 ```bash
 sudo systemctl status prometheus-node-exporter
@@ -1581,6 +1595,14 @@ Consultar los registros de una instalación manual:
 
 ```bash
 sudo journalctl -u node_exporter \
+  --no-pager \
+  -n 100
+```
+
+Consultar los registros de una instalación mediante APT:
+
+```bash
+sudo journalctl -u prometheus-node-exporter \
   --no-pager \
   -n 100
 ```
@@ -1735,9 +1757,13 @@ mkdir -p ~/laboratorio-grafana/evidencias/laboratorio-integrador
   systemctl is-active prometheus
   systemctl is-enabled prometheus
   echo
-  echo "===== NODE EXPORTER ====="
-  systemctl is-active node_exporter
-  systemctl is-enabled node_exporter
+  echo "===== NODE EXPORTER MANUAL ====="
+  systemctl is-active node_exporter 2>/dev/null || true
+  systemctl is-enabled node_exporter 2>/dev/null || true
+  echo
+  echo "===== NODE EXPORTER APT ====="
+  systemctl is-active prometheus-node-exporter 2>/dev/null || true
+  systemctl is-enabled prometheus-node-exporter 2>/dev/null || true
   echo
   echo "===== GRAFANA ====="
   systemctl is-active grafana-server
@@ -1745,8 +1771,6 @@ mkdir -p ~/laboratorio-grafana/evidencias/laboratorio-integrador
 } | tee \
   ~/laboratorio-grafana/evidencias/laboratorio-integrador/servicios.txt
 ```
-
-> Si Node Exporter se instaló mediante APT, sustituir `node_exporter` por `prometheus-node-exporter`.
 
 ## Guardar los puertos
 
@@ -1835,7 +1859,9 @@ sudo journalctl -u grafana-server \
 
 # Script de comprobación final
 
-Crear el script:
+El siguiente script detecta automáticamente si Node Exporter utiliza la unidad manual o la unidad instalada mediante APT.
+
+## Crear el script
 
 ```bash
 cat > /tmp/comprobar-laboratorio.sh <<'EOF'
@@ -1873,8 +1899,7 @@ check_http() {
 
 check_service prometheus
 
-if systemctl list-unit-files \
-    | grep -q '^node_exporter.service'; then
+if systemctl is-active --quiet node_exporter; then
   check_service node_exporter
 else
   check_service prometheus-node-exporter
@@ -1921,7 +1946,11 @@ printf '%-35s ' "Target node_exporter"
 if curl -fsS -G \
     http://localhost:9090/api/v1/query \
     --data-urlencode 'query=up{job="node_exporter"}' \
-    | jq -e '.data.result[0].value[1] == "1"' \
+    | jq -e '
+        .data.result
+        | length > 0
+        and .[0].value[1] == "1"
+      ' \
     >/dev/null 2>&1; then
   echo "UP"
 else
@@ -1930,13 +1959,13 @@ fi
 EOF
 ```
 
-Dar permisos:
+## Dar permisos de ejecución
 
 ```bash
 chmod +x /tmp/comprobar-laboratorio.sh
 ```
 
-Ejecutar:
+## Ejecutar el script
 
 ```bash
 /tmp/comprobar-laboratorio.sh
@@ -2096,7 +2125,7 @@ Construir una plataforma funcional de monitorización con Prometheus, Node Expor
 El alumno debe entregar:
 
 - Fichero `prometheus.yml`.
-- Captura o evidencia de los servicios activos.
+- Evidencia de los servicios activos.
 - Evidencia del endpoint `/metrics`.
 - Evidencia de los objetivos en estado `UP`.
 - Resultado de la consulta `up`.
@@ -2215,8 +2244,8 @@ laboratorio-prometheus-grafana/
 | Criterio | Puntuación |
 |---|---:|
 | Comprobación inicial de los servicios | 1 punto |
-| Instalación y verificación de Node Exporter | 1 punto |
-| Configuración correcta de *scraping* | 2 puntos |
+| Verificación de Node Exporter | 1 punto |
+| Configuración correcta del *scraping* | 2 puntos |
 | Validación y diagnóstico en Prometheus | 1 punto |
 | Consultas PromQL | 2 puntos |
 | Configuración de Grafana | 1 punto |
