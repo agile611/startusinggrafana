@@ -1,10 +1,3 @@
-Aquí tienes una página Markdown completa, lista para guardar como:
-
-```text
-docs/02-grafana/04-acceso-grafana.md
-```
-
-```markdown
 # Acceso a Grafana
 
 ## Objetivos
