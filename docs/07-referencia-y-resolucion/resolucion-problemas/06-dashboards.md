@@ -1,4 +1,3 @@
-```markdown
 # Problemas con dashboards
 
 Esta página explica cómo diagnosticar y resolver los problemas más habituales relacionados con los dashboards de Grafana.
