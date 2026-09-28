@@ -985,7 +985,7 @@ Ejemplo:
 http://192.168.1.50:3000
 ```
 
-Después de iniciar sesión, cambia la contraseña predeterminada si la instalación la utiliza.
+Después de iniciar sesión (user admin y password admin en el primer login), cambia la contraseña predeterminada si la instalación la utiliza.
 
 ---
 
