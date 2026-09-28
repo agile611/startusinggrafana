@@ -1553,7 +1553,7 @@ node_exporter   localhost:9100  up
 También puede abrirse la página de objetivos:
 
 ```text
-http://localhost:9090/targets
+http://localhost:9090/classic/targets
 ```
 
 ### Interpretar el estado
