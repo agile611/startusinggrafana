@@ -1608,7 +1608,7 @@ Consultar métricas almacenadas en Prometheus.
 Las consultas pueden ejecutarse desde:
 
 ```text
-http://localhost:9090/graph
+http://localhost:9090/classic/graph
 ```
 
 También pueden ejecutarse mediante la API de Prometheus.
