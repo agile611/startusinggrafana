@@ -1,10 +1,3 @@
-Aquí tienes una página Markdown completa, lista para guardar como:
-
-```text
-docs/02-grafana/09-laboratorio.md
-```
-
-```markdown
 # Laboratorio - Instalación y primeros pasos con Grafana
 
 ## Objetivos
