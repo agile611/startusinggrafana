@@ -236,7 +236,7 @@ ls -lh /var/log/kern.log
 Estas variables se utilizarán durante el procedimiento:
 
 ```bash
-export LOKI_VERSION="3.5.0"
+export LOKI_VERSION="3.7.8"
 export ALLOY_VERSION="1.10.2"
 export INSTALL_DIR="/opt/observabilidad"
 ```
