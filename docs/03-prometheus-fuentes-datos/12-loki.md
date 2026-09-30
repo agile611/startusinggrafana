@@ -439,16 +439,14 @@ sudo nano /etc/loki/config.yml
 Contenido:
 
 ```yaml
----
 auth_enabled: false
 
 server:
-  http_listen_address: 127.0.0.1
   http_listen_port: 3100
-  grpc_listen_address: 127.0.0.1
   grpc_listen_port: 9096
 
 common:
+  instance_addr: 127.0.0.1
   path_prefix: /var/lib/loki
 
   storage:
@@ -459,21 +457,12 @@ common:
   replication_factor: 1
 
   ring:
-    instance_addr: 127.0.0.1
-    instance_interface_names:
-      - ens18
     kvstore:
       store: inmemory
 
-memberlist:
-  bind_addr:
-    - 127.0.0.1
-  advertise_addr: 127.0.0.1
-  bind_port: 7946
-
 schema_config:
   configs:
-    - from: 2024-04-01
+    - from: 2024-01-01
       store: tsdb
       object_store: filesystem
       schema: v13
@@ -485,23 +474,19 @@ storage_config:
   filesystem:
     directory: /var/lib/loki/chunks
 
-compactor:
-  working_directory: /var/lib/loki/compactor
-  retention_enabled: true
-  delete_request_store: filesystem
-
 limits_config:
-  retention_period: 168h
-  allow_structured_metadata: true
+  allow_structured_metadata: false
   volume_enabled: true
 
+compactor:
+  working_directory: /var/lib/loki/compactor
+  retention_enabled: false
+
+analytics:
+  reporting_enabled: false
+
 ruler:
-  enable_api: true
-  rule_path: /var/lib/loki/rules
-  storage:
-    type: local
-    local:
-      directory: /var/lib/loki/rules
+  alertmanager_url: http://localhost:9093
 ```
 
 Esta configuración establece:
