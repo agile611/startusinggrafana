@@ -439,6 +439,7 @@ sudo nano /etc/loki/config.yml
 Contenido:
 
 ```yaml
+---
 auth_enabled: false
 
 server:
