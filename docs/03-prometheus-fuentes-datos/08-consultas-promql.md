@@ -70,13 +70,13 @@ Cada serie está formada por:
 - Un valor.
 - Una marca temporal.
 
-Ejemplo:
+Ejempl (atención a los filtros de los elementos de la petición PromQL):
 
 ```text
 node_memory_MemAvailable_bytes{
   instance="localhost:9100",
   job="node_exporter"
-} 2414534656
+}
 ```
 
 En este ejemplo:
@@ -84,7 +84,6 @@ En este ejemplo:
 - `node_memory_MemAvailable_bytes` es el nombre de la métrica.
 - `instance` identifica el objetivo.
 - `job` identifica el trabajo.
-- `2414534656` es el valor actual.
 - Prometheus asocia el valor a una marca temporal.
 
 Una consulta PromQL puede devolver:
