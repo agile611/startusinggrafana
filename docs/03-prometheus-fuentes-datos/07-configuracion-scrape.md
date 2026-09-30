@@ -90,6 +90,95 @@ En este ejemplo:
 - La consulta se realiza cada 15 segundos.
 - Cada grupo de objetivos se identifica mediante un `job_name`.
 
+Para el laboratorio, podemos hacer scraping de las máquinas que tenemos visibilidad, ejemplo de `prometheus.yml`:
+```yaml
+---
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: node_exporter_00
+    static_configs:
+      - targets:
+          - 185.142.62.160:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_01
+    static_configs:
+      - targets:
+          - 185.142.62.161:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_02
+    static_configs:
+      - targets:
+          - 185.142.62.162:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_03
+    static_configs:
+      - targets:
+          - 185.142.62.163:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_04
+    static_configs:
+      - targets:
+          - 185.142.62.164:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_05
+    static_configs:
+      - targets:
+          - 185.142.62.165:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_06
+    static_configs:
+      - targets:
+          - 185.142.62.166:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_07
+    static_configs:
+      - targets:
+          - 185.142.62.167:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_08
+    static_configs:
+      - targets:
+          - 185.142.62.168:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+
+  - job_name: node_exporter_09
+    static_configs:
+      - targets:
+          - 185.142.62.169:9100
+        labels:
+          environment: laboratorio
+          role: servidor
+```
+
 ---
 
 ## Conceptos fundamentales
