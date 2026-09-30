@@ -233,6 +233,12 @@ ls -lh /var/log/kern.log
 
 ## Definir variables de instalación
 
+Crear este directorio primero:
+
+```bash
+sudo mkdir -p /opt/observabilidad
+```
+
 Estas variables se utilizarán durante el procedimiento:
 
 ```bash
