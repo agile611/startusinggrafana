@@ -299,7 +299,7 @@ El grupo `adm` suele tener permisos de lectura sobre muchos logs del sistema:
 ls -l /var/log/auth.log
 ```
 
-Resultado habitual:
+Resultado habitua (para que se vea el grupo y el propietario del fichero):
 
 ```text
 -rw-r----- 1 syslog adm ...
