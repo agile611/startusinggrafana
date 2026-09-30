@@ -191,16 +191,6 @@ Se crea un dashboard operativo con:
 
 La arquitectura básica del laboratorio es la siguiente:
 
-```mermaid
-flowchart LR
-    SO[Servidor Ubuntu] --> NE[Node Exporter<br/>Puerto 9100]
-    P[Prometheus<br/>Puerto 9090] -->|Scraping HTTP| NE
-    G[Grafana<br/>Puerto 3000] -->|Consultas PromQL| P
-    U[Usuario] -->|Navegador web| G
-```
-
-También puede representarse de forma simplificada:
-
 ```text
 +---------------------+
 |   Servidor Ubuntu   |
