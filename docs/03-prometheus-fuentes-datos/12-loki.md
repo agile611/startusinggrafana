@@ -445,6 +445,7 @@ auth_enabled: false
 server:
   http_listen_address: 127.0.0.1
   http_listen_port: 3100
+  grpc_listen_address: 127.0.0.1
   grpc_listen_port: 9096
 
 common:
@@ -459,8 +460,16 @@ common:
 
   ring:
     instance_addr: 127.0.0.1
+    instance_interface_names:
+      - ens18
     kvstore:
       store: inmemory
+
+memberlist:
+  bind_addr:
+    - 127.0.0.1
+  advertise_addr: 127.0.0.1
+  bind_port: 7946
 
 schema_config:
   configs:
