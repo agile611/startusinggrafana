@@ -149,7 +149,7 @@ def generate_random_value(minimum=0.05, maximum=120.0):
 
     if distribution == "small":
         value = random.lognormvariate(
-            mean=-1.2,
+            mu=-1.2,
             sigma=0.9,
         )
 
