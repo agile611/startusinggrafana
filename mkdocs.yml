@@ -139,6 +139,7 @@ nav:
       - Laboratorio: 03-prometheus-fuentes-datos/10-laboratorio.md
       - Más fuentes de datos: 03-prometheus-fuentes-datos/11-mas-fuentes-datos.md
       - Loki: 03-prometheus-fuentes-datos/12-loki.md
+      - Crear datos personalizados: 03-prometheus-fuentes-datos/13-datos-personalizados.md
 
   - Dashboards y visualización:
       - Introducción: 04-dashboards-visualizacion/01-index.md
