@@ -243,7 +243,7 @@ Estas variables se utilizarán durante el procedimiento:
 
 ```bash
 export LOKI_VERSION="3.7.8"
-export ALLOY_VERSION="1.10.2"
+export ALLOY_VERSION="1.20.1"
 export INSTALL_DIR="/opt/observabilidad"
 ```
 
