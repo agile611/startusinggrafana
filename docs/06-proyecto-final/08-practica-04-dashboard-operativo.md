@@ -1716,7 +1716,7 @@ Valor esperado:
 Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar al siguiente scrape y actualizar el dashboard.
@@ -1740,7 +1740,7 @@ Anotación visible:
 ### Recuperar
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprobar:

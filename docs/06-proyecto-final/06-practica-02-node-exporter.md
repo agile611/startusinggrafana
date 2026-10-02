@@ -378,7 +378,7 @@ Determinar si Node Exporter ya está disponible.
 ### Comprobar el servicio
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 En algunos entornos, el servicio puede utilizar otro nombre:
@@ -677,7 +677,7 @@ sudo systemctl status prometheus-node-exporter
 En algunas distribuciones, el nombre del servicio puede ser:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ### RHEL, Rocky, AlmaLinux o Fedora
@@ -697,7 +697,7 @@ sudo dnf install node_exporter
 Comprobar el servicio:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ### Registro
@@ -834,13 +834,13 @@ sudo systemctl enable node_exporter
 Iniciar el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprobar el estado:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ### Resultado esperado
@@ -1647,7 +1647,7 @@ para observar el estado del target en Prometheus.
 ### Detener el servicio
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Comprobar el endpoint
@@ -1699,7 +1699,7 @@ Resultado:
 ### Recuperar el servicio
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprobar:
@@ -1816,7 +1816,7 @@ Prometheus muestra el target de Node Exporter como DOWN.
 #### Comprobar el servicio
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 #### Comprobar el proceso
@@ -1948,7 +1948,7 @@ El servicio no puede iniciar o no puede acceder a un recurso.
 ### Revisar el estado
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ### Revisar logs
@@ -2283,13 +2283,13 @@ inactive
 Revisar el servicio:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Iniciar el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprobar:

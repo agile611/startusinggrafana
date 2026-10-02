@@ -207,7 +207,7 @@ systemctl status prometheus
 Para consultar Node Exporter:
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 La salida incluye información como:
@@ -326,7 +326,7 @@ sudo systemctl start prometheus
 ```
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Detener un servicio
@@ -340,7 +340,7 @@ sudo systemctl stop prometheus
 ```
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 > Detén servicios únicamente en el entorno de laboratorio. Prometheus y Grafana dependen de Node Exporter para completar algunas comprobaciones del curso.
@@ -356,7 +356,7 @@ sudo systemctl restart prometheus
 ```
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Habilitar el inicio automático
@@ -1217,7 +1217,7 @@ curl -s -o /dev/null \
 ### Detener Node Exporter
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Comprobar el estado después de detenerlo
@@ -1261,7 +1261,7 @@ sudo journalctl -u node_exporter -n 50 --no-pager
 ### Iniciar de nuevo el servicio
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Verificar la recuperación
@@ -1727,7 +1727,7 @@ Causa identificada:
 El servicio node_exporter estaba detenido.
 
 Corrección aplicada:
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 
 Resultado posterior:
 El endpoint responde y Prometheus muestra el target como UP.

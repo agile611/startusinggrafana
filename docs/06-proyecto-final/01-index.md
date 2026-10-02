@@ -305,7 +305,7 @@ Verificar que todos los componentes necesarios están disponibles.
 Comprobar Node Exporter:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Comprobar Prometheus:
@@ -1320,7 +1320,7 @@ Normal
 Detener Node Exporter únicamente en la máquina de laboratorio:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Observar el ciclo:
@@ -1354,7 +1354,7 @@ Contacto utilizado:
 ### Recuperar el servicio
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Observar:
@@ -1516,7 +1516,7 @@ Prueba de silenciamiento asociada al proyecto final.
 ### Activar la alerta
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Comprobar:
@@ -1531,7 +1531,7 @@ La notificación queda suprimida.
 ### Recuperar el servicio
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Registro
@@ -1838,7 +1838,7 @@ Antes de guardar las capturas:
 ### Comprobación de Node Exporter
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ### Comprobación de la métrica

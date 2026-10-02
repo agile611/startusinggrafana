@@ -637,7 +637,7 @@ Verificar que Node Exporter expone métricas del sistema.
 Comprobar el estado:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Comprobar el puerto:
@@ -1316,7 +1316,7 @@ EOF
 Comprobar Node Exporter:
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 Probar directamente el endpoint:

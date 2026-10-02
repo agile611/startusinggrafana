@@ -1834,7 +1834,7 @@ En el entorno de laboratorio:
 3. Detén Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 4. Espera varios intervalos de scraping.
@@ -1848,7 +1848,7 @@ up{job="node_exporter"}
 7. Inicia el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 8. Espera a que Prometheus vuelva a realizar scraping.

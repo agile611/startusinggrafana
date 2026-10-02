@@ -1235,7 +1235,7 @@ no responde a Prometheus.
 9. Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 10. Esperar la evaluación.
@@ -1243,7 +1243,7 @@ sudo systemctl stop node_exporter
 12. Iniciar el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 13. Comprobar la recuperación.

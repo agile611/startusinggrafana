@@ -1710,7 +1710,7 @@ sum(up)
 4. Detén temporalmente Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 5. Si utilizas el paquete de Ubuntu, ejecuta:
@@ -1729,7 +1729,7 @@ up{job="node_exporter"}
 8. Inicia de nuevo el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 9. Si utilizas el paquete de Ubuntu:

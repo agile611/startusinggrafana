@@ -1101,7 +1101,7 @@ Una alerta debe probarse en un entorno controlado.
 Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Consultar:
@@ -1115,7 +1115,7 @@ Esperar el periodo de evaluación.
 Iniciar de nuevo:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ## Prueba de CPU

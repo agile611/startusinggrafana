@@ -1705,7 +1705,7 @@ sudo grep -n -A 8 -B 3 \
 ### Corregir el servicio si está detenido
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Comprobar de nuevo

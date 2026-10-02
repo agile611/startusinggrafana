@@ -1115,7 +1115,7 @@ Prometheus muestra el target node_exporter como DOWN.
 Ejecuta:
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 ```bash
@@ -1274,7 +1274,7 @@ Consulta:
 Si el servicio está detenido:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Después:

@@ -280,7 +280,7 @@ EOF
 Comprobar el estado del servicio:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Comprobar el endpoint de métricas:
@@ -1281,7 +1281,7 @@ NodeExporterDown-Laboratory.
 Detener Node Exporter únicamente en el laboratorio:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Observar:
@@ -1315,7 +1315,7 @@ Instancia afectada:
 Recuperar el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Observar:
@@ -1704,7 +1704,7 @@ Revisar antes de entregar:
 Comprobar Node Exporter:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Comprobar la métrica:

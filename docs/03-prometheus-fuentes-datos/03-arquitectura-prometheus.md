@@ -1142,7 +1142,7 @@ count(up)
 3. Detén temporalmente Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 4. Espera varios intervalos de scraping.
@@ -1155,7 +1155,7 @@ up{job="node_exporter"}
 6. Inicia de nuevo el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 7. Comprueba cuándo vuelve a aparecer como disponible.
@@ -1339,7 +1339,7 @@ Devuelve un error de conexión.
 ### Comprobaciones
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 ```bash

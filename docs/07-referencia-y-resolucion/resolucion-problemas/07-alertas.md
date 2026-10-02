@@ -1890,7 +1890,7 @@ curl -s http://localhost:9090/api/v1/rules \
 ### Detener Node Exporter
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Consultar el estado
@@ -1923,7 +1923,7 @@ firing
 ### Recuperar Node Exporter
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Comprobar la recuperación
@@ -2135,7 +2135,7 @@ curl -s http://localhost:9093/api/v2/alerts \
 Detén Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Consultar Prometheus
@@ -2155,7 +2155,7 @@ curl -s http://localhost:9093/api/v2/alerts \
 ### Recuperar el servicio
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Preguntas de análisis
@@ -2191,7 +2191,7 @@ groups:
 ### Detener Node Exporter
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Consultar la alerta
@@ -2204,7 +2204,7 @@ curl -s http://localhost:9090/api/v1/alerts \
 ### Iniciar Node Exporter antes de cinco minutos
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Observar el resultado
@@ -2216,7 +2216,7 @@ La alerta debería volver a `inactive` sin llegar a `firing`.
 Detén Node Exporter y espera más de cinco minutos:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Consultar
@@ -2229,7 +2229,7 @@ curl -s http://localhost:9090/api/v1/alerts \
 ### Recuperar
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ## Sesión práctica 6: diagnosticar una regla que nunca se activa

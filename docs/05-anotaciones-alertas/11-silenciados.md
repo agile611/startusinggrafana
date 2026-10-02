@@ -1970,7 +1970,7 @@ Revisar cuidadosamente el alcance antes de guardar.
 Detener el servicio en el entorno de laboratorio:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Observar:
@@ -2011,7 +2011,7 @@ Comprobar:
 Iniciar Node Exporter:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprobar:

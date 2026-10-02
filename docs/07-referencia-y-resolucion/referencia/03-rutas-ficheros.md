@@ -784,7 +784,7 @@ sudo systemctl daemon-reload
 Después, reinicia el servicio si es necesario:
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ## Permisos y propietarios

@@ -954,7 +954,7 @@ environment = laboratory
 4. Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 5. Esperar el cambio a `Pending`.
@@ -963,7 +963,7 @@ sudo systemctl stop node_exporter
 8. Iniciar Node Exporter:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 9. Esperar la recuperación.
@@ -1867,7 +1867,7 @@ no responde a Prometheus.
 2. Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 3. Esperar el estado `Pending`.
@@ -1882,7 +1882,7 @@ sudo systemctl stop node_exporter
 1. Iniciar Node Exporter:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 2. Esperar la recuperación.

@@ -888,7 +888,7 @@ node_exporter --version
 ### Comprobar el servicio
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 ```bash
@@ -2263,7 +2263,7 @@ promtool check config \
 | APT está bloqueado | `ps aux \| grep apt` | `lsof` sobre el lock |
 | Grafana no inicia | `systemctl status grafana-server` | `journalctl` |
 | Prometheus no inicia | `promtool check config` | `journalctl` |
-| Node Exporter no inicia | `systemctl status node_exporter` | Arquitectura y permisos |
+| Node Exporter no inicia | `systemctl status prometheus-node-exporter` | Arquitectura y permisos |
 | Puerto ocupado | `sudo ss -lntp` | `lsof` |
 | Endpoint no responde | `curl -v URL` | Servicio y firewall |
 | Target `DOWN` | `up` y API de targets | Endpoint del exporter |

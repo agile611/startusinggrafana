@@ -1798,7 +1798,7 @@ resource = availability
 2. Detener el servicio:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 3. Esperar el estado `Alerting`.
@@ -1807,7 +1807,7 @@ sudo systemctl stop node_exporter
 6. Iniciar el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 7. Comprobar la actualización o resolución.

@@ -1004,7 +1004,7 @@ Diferenciar entre un problema de Grafana, un problema de Prometheus y un problem
 ## Detener Node Exporter
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar más de un intervalo de scraping.
@@ -1040,7 +1040,7 @@ curl -s http://localhost:9090/api/v1/targets \
 ## Recuperar el servicio
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Esperar al siguiente scraping y volver a consultar:

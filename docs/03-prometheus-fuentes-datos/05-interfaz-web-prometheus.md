@@ -1287,7 +1287,7 @@ up
 Detener temporalmente Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar varios intervalos de *scraping* y consultar:
@@ -1299,7 +1299,7 @@ up{job="node_exporter"}
 Después iniciar de nuevo:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprobar el estado:

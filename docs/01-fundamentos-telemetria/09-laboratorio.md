@@ -229,13 +229,13 @@ sudo systemctl enable node_exporter
 Inicia Node Exporter:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprueba el estado:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Comprueba que escucha en el puerto `9100`:
@@ -286,7 +286,7 @@ El resultado esperado es:
 Si no responde, revisa:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ```bash
@@ -1117,7 +1117,7 @@ description: El objetivo {{ $labels.instance }} no responde.
 Para probar la alerta, detén temporalmente Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Comprueba desde Prometheus:
@@ -1137,13 +1137,13 @@ Después de que transcurra la duración configurada, la alerta debería activars
 Vuelve a iniciar Node Exporter:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprueba el estado:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Verifica que el objetivo vuelve a estar disponible:
@@ -1261,7 +1261,7 @@ curl http://DIRECCION_IP:9100/metrics
 Comprueba el estado del servicio:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Consulta los logs:

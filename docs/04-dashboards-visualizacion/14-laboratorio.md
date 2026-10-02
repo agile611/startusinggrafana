@@ -171,7 +171,7 @@ sudo systemctl status prometheus
 ```
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ### Comprobar Node Exporter
@@ -1456,7 +1456,7 @@ Todas las pruebas deben ejecutarse en un entorno autorizado.
 Detener:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar al menos un intervalo de scraping y revisar:
@@ -1482,7 +1482,7 @@ Comprobar:
 Iniciar de nuevo:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ---
@@ -1908,7 +1908,7 @@ Uno de los objetivos deja de estar disponible.
 1. Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 2. Esperar el siguiente intervalo de scraping.
@@ -1925,13 +1925,13 @@ up
 8. Revisar el servicio:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 9. Iniciar el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 10. Confirmar la recuperación.

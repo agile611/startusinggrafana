@@ -592,7 +592,7 @@ systemctl status prometheus
 ```
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 ### Comprobar si un servicio está activo
@@ -1182,7 +1182,7 @@ Observar el ciclo completo de diagnóstico:
 ### Detener Node Exporter
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Comprobar el estado
@@ -1226,7 +1226,7 @@ sudo journalctl -u node_exporter -n 50 --no-pager
 ### Recuperar el servicio
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Verificar la recuperación
@@ -1499,7 +1499,7 @@ curl -s http://localhost:9090/api/v1/targets | jq
 Consultar el estado:
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 Consultar los registros:

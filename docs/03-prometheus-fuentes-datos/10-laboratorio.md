@@ -1318,7 +1318,7 @@ Resultado esperado:
 Si se instaló manualmente:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Si se instaló mediante APT:
@@ -1356,7 +1356,7 @@ curl -s "$PROMETHEUS_URL/api/v1/targets" \
 Si se instaló manualmente:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Si se instaló mediante APT:
@@ -1582,7 +1582,7 @@ sudo ss -lntp | grep ':9090'
 Para una instalación manual:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Para una instalación mediante APT:

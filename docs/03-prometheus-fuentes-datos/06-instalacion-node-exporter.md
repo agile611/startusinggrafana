@@ -586,13 +586,13 @@ sudo systemctl enable node_exporter
 Iniciar el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Consultar el estado:
 
 ```bash
-sudo systemctl status node_exporter --no-pager
+sudo systemctl status prometheus-node-exporter --no-pager
 ```
 
 Comprobar con un comando breve:
@@ -626,25 +626,25 @@ enabled
 ### Iniciar
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Detener
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Reiniciar
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Consultar el estado
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ### Comprobar si está activo
@@ -915,7 +915,7 @@ Después de modificar la unidad:
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Desactivar un collector
@@ -959,7 +959,7 @@ Después de cambiar la dirección:
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 Comprobar:
@@ -1009,7 +1009,7 @@ Aplicar los cambios:
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Crear una métrica de ejemplo
@@ -1382,7 +1382,7 @@ sudo systemctl enable node_exporter
 ```
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Comprobaciones
@@ -1396,7 +1396,7 @@ systemctl is-active node_exporter
 ```
 
 ```bash
-sudo systemctl status node_exporter --no-pager
+sudo systemctl status prometheus-node-exporter --no-pager
 ```
 
 ### Actividades
@@ -1626,7 +1626,7 @@ up == 0
 Detener temporalmente Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar al menos un intervalo de *scraping* y consultar:
@@ -1650,7 +1650,7 @@ curl -s http://localhost:9090/api/v1/targets \
 Iniciar de nuevo el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprobar:
@@ -1706,7 +1706,7 @@ Aplicar:
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Crear una métrica
@@ -1804,7 +1804,7 @@ sudo journalctl -u node_exporter \
 Consultar el estado:
 
 ```bash
-sudo systemctl status node_exporter --no-pager
+sudo systemctl status prometheus-node-exporter --no-pager
 ```
 
 Consultar los registros:
@@ -2162,7 +2162,7 @@ node_exporter, version 1.8.2
 
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable node_exporter
-$ sudo systemctl start node_exporter
+$ sudo systemctl start prometheus-node-exporter
 
 $ systemctl is-active node_exporter
 active

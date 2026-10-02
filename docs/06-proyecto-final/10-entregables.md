@@ -1783,7 +1783,7 @@ Dejar el laboratorio en un estado estable.
 ### Comprobar Node Exporter
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ### Comprobar Prometheus

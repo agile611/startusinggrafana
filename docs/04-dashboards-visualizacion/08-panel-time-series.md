@@ -1087,7 +1087,7 @@ La interpolación escalonada representa mejor los cambios discretos entre `0` y 
 Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar al siguiente scraping y observar el cambio.
@@ -1095,7 +1095,7 @@ Esperar al siguiente scraping y observar el cambio.
 Volver a iniciar:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Observar la recuperación.
@@ -1482,7 +1482,7 @@ Leyenda: {{instance}}
 5. Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 6. Esperar al siguiente ciclo de scraping.
@@ -1490,7 +1490,7 @@ sudo systemctl stop node_exporter
 8. Iniciar Node Exporter:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 9. Observar el cambio a `1`.

@@ -467,7 +467,7 @@ node_exporter --version
 Consultar el estado:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Comprobar el puerto:
@@ -1286,7 +1286,7 @@ curl http://localhost:9090/-/healthy
 Comprobar el servicio:
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 Consultar los registros:

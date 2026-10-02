@@ -819,7 +819,7 @@ runbook_url = https://example.com/runbooks/target-down
 3. Detén Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 4. Espera el periodo de evaluación.
@@ -827,7 +827,7 @@ sudo systemctl stop node_exporter
 6. Inicia Node Exporter:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 7. Comprueba la recuperación.
@@ -1607,7 +1607,7 @@ team = systems
 ### 7. Probar la alerta de disponibilidad
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar la activación y registrar el resultado.
@@ -1615,7 +1615,7 @@ Esperar la activación y registrar el resultado.
 Iniciar de nuevo:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### 8. Probar la alerta de CPU

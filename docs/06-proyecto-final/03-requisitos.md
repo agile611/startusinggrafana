@@ -108,7 +108,7 @@ El alumno debe poder ejecutar las operaciones necesarias para consultar el entor
 Ejemplos:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 sudo systemctl status prometheus
 sudo systemctl status grafana-server
 ```
@@ -202,7 +202,7 @@ Node Exporter debe estar instalado en el servidor que se desea supervisar.
 Comprobar el servicio:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Comprobar el endpoint de métricas:
@@ -969,7 +969,7 @@ Verificar que los servicios principales están disponibles.
 ### Procedimiento
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 sudo systemctl status prometheus
 sudo systemctl status grafana-server
 ```

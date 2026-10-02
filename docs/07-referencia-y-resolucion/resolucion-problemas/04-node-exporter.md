@@ -336,7 +336,7 @@ Resultado: incompatible
 Si el servicio se llama `node_exporter`:
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 Si se llama `prometheus-node-exporter`:
@@ -372,19 +372,19 @@ enabled
 ### Iniciar Node Exporter
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Reiniciar Node Exporter
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Detener Node Exporter
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Activar el inicio automático
@@ -410,7 +410,7 @@ sudo systemctl daemon-reload
 Después:
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ## Consultar la unidad de systemd
@@ -1084,7 +1084,7 @@ sudo systemctl daemon-reload
 ```
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Comprobar el resultado
@@ -1589,7 +1589,7 @@ systemctl is-active node_exporter
 ### Consultar el estado detallado
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 ### Consultar los registros
@@ -1609,7 +1609,7 @@ sudo ss -lntp | grep ':9100'
 ### Iniciar el servicio
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Validar
@@ -1767,7 +1767,7 @@ Determina si:
 Después de resolver el conflicto:
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Validar
@@ -1810,13 +1810,13 @@ sudo chmod 644 /usr/local/bin/node_exporter
 ### Reiniciar el servicio
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ### Consultar el estado
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 ### Consultar los registros
@@ -1836,7 +1836,7 @@ sudo chmod 755 /usr/local/bin/node_exporter
 ### Validar
 
 ```bash
-sudo systemctl restart node_exporter
+sudo systemctl restart prometheus-node-exporter
 ```
 
 ```bash
@@ -2039,7 +2039,7 @@ Observar el ciclo completo de recuperación.
 ### Detener Node Exporter
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ### Consultar el endpoint
@@ -2076,7 +2076,7 @@ curl -s http://localhost:9090/api/v1/targets \
 ### Iniciar Node Exporter
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ### Comprobar el endpoint
@@ -2360,7 +2360,7 @@ chmod +x diagnostico-node-exporter.sh
 - El endpoint principal es `/metrics`.
 - Node Exporter no almacena las métricas.
 - Prometheus consulta y almacena las métricas expuestas.
-- `systemctl status node_exporter` muestra el estado del servicio.
+- `systemctl status prometheus-node-exporter` muestra el estado del servicio.
 - `journalctl -u node_exporter` muestra los registros.
 - `ss -lntp` permite comprobar el puerto y el proceso.
 - `curl` permite probar el endpoint sin utilizar el navegador.

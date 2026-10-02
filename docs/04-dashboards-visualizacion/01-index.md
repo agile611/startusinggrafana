@@ -842,7 +842,7 @@ Comprobar cómo cambia el dashboard cuando Node Exporter deja de responder.
 Detener Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Esperar varios intervalos de recopilación.
@@ -864,7 +864,7 @@ Comprobar los paneles:
 Iniciar de nuevo el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Esperar al siguiente scraping.

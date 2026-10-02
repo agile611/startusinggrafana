@@ -525,7 +525,7 @@ Verificar que la infraestructura del laboratorio está disponible.
 Node Exporter:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Prometheus:
@@ -978,7 +978,7 @@ Normal
 Detener el servicio en el laboratorio:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Observar:
@@ -1012,7 +1012,7 @@ Instancia afectada:
 Recuperar el servicio:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Observar:
@@ -1430,7 +1430,7 @@ Dejar el entorno en un estado estable y documentado.
 Comprobar Node Exporter:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Comprobar la métrica:

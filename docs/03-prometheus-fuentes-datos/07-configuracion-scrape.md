@@ -1436,7 +1436,7 @@ Observar el comportamiento de Prometheus cuando un objetivo deja de responder.
 Si se instaló manualmente:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Si se instaló mediante APT:
@@ -1473,7 +1473,7 @@ up{job="node_exporter"}
 ### Iniciar Node Exporter
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Comprobar:

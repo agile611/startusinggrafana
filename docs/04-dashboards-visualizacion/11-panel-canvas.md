@@ -1381,7 +1381,7 @@ Prometheus
 1. Detén Node Exporter:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 2. Espera al siguiente scraping.
@@ -1389,7 +1389,7 @@ sudo systemctl stop node_exporter
 4. Inicia Node Exporter:
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 5. Comprueba la recuperación.

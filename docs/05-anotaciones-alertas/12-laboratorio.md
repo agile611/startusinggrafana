@@ -222,7 +222,7 @@ No detener servicios ni generar carga en sistemas reales.
 Incorrecto:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 sobre un servidor de producción.
@@ -338,7 +338,7 @@ Verificar que Grafana, Prometheus y Node Exporter funcionan antes de crear regla
 En la máquina de laboratorio:
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 Si el servicio utiliza otro nombre, consultar el procedimiento del entorno.
@@ -1361,7 +1361,7 @@ Normal
 Ejecutar únicamente en la máquina de laboratorio:
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 ## Observar el ciclo
@@ -1390,7 +1390,7 @@ Comprobar:
 ## Iniciar Node Exporter
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 Observar:
@@ -1694,7 +1694,7 @@ Se valida el silenciamiento de NodeExporterDown-Laboratory.
 ## Activar la alerta
 
 ```bash
-sudo systemctl stop node_exporter
+sudo systemctl stop prometheus-node-exporter
 ```
 
 Comprobar:
@@ -1709,7 +1709,7 @@ La notificación queda suprimida.
 ## Recuperar
 
 ```bash
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 ```
 
 ## Registrar
@@ -2140,7 +2140,7 @@ Al finalizar:
 ## Comprobar el servicio
 
 ```bash
-sudo systemctl status node_exporter
+sudo systemctl status prometheus-node-exporter
 ```
 
 ## Comprobar la consulta

@@ -488,7 +488,7 @@ Causa:
 El servicio node_exporter estaba detenido.
 
 Corrección:
-sudo systemctl start node_exporter
+sudo systemctl start prometheus-node-exporter
 
 Resultado posterior:
 El endpoint responde con HTTP 200 y el target aparece como UP.

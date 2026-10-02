@@ -423,7 +423,7 @@ Un bloque de código puede documentar:
 
 ````markdown
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 ````
 
@@ -731,7 +731,7 @@ systemctl status prometheus
 ### 2. Comprobar Node Exporter
 
 ```bash
-systemctl status node_exporter
+systemctl status prometheus-node-exporter
 ```
 
 ### 3. Comprobar conectividad
